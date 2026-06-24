@@ -260,3 +260,58 @@
 
     update();
 })();
+/* ----------------------------------------------------------------------
+   Hash Scrolling Handler for Lenis / Native
+   ---------------------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    function scrollToHash(hash) {
+        if (!hash) return;
+        try {
+            const target = document.querySelector(hash);
+            if (target) {
+                // Account for fixed header height
+                const headerOffset = 100;
+                if (window.lenis) {
+                    window.lenis.scrollTo(target, { offset: -headerOffset });
+                } else {
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        } catch(e) {}
+    }
+
+    // Scroll on page load
+    if (window.location.hash) {
+        setTimeout(() => scrollToHash(window.location.hash), 500);
+    }
+
+    // Intercept hash changes
+    window.addEventListener('hashchange', () => {
+        scrollToHash(window.location.hash);
+    });
+
+    // Intercept clicks on anchor tags pointing to the same page
+    document.querySelectorAll('a[href^="about-us.html#"], a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            let targetHash = '';
+            
+            if (href.startsWith('#')) {
+                targetHash = href;
+            } else if (href.startsWith('about-us.html#') && window.location.pathname.includes('about-us.html')) {
+                targetHash = href.replace('about-us.html', '');
+            }
+
+            if (targetHash) {
+                e.preventDefault();
+                history.pushState(null, null, targetHash);
+                scrollToHash(targetHash);
+            }
+        });
+    });
+});

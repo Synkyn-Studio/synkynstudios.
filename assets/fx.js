@@ -46,10 +46,10 @@
     inset: '0',
     width: '100%',
     height: '100%',
-    zIndex: '4',
+    zIndex: '2',
     pointerEvents: 'none',
-    mixBlendMode: 'screen',   // only adds light → never "overlaps" content
-    opacity: '0',        // fade in once initialised
+    mixBlendMode: 'screen',
+    opacity: '0',
     transition: 'opacity 1.2s ease'
   });
   document.body.appendChild(canvas);
@@ -101,8 +101,8 @@
   var PALETTE = ['#f2c200', '#ffd84d', '#ffe375', '#e8b800', '#fff4a3'];
 
   // Interaction radii (CSS px).
-  var REPEL_R = 130;   // push away
-  var GLOW_R = 170;   // brighten / enlarge
+  var REPEL_R = 250;   // push away (increased for stronger reaction)
+  var GLOW_R = 250;   // brighten / enlarge
 
   function Crystal(scatter) { this.reset(scatter); }
 
@@ -110,15 +110,15 @@
     this.depth = 0.35 + Math.random() * 0.65;          // 0.35 (far) → 1 (near)
     var d = this.depth;
 
-    // mobile: much smaller crystals (~0.6–2.6px); desktop: ~1.2–6px
-    this.size = IS_MOBILE ? (0.6 + d * 2.0) : (1.2 + d * 4.8);
+    // mobile: reduced by half per request; desktop: ~1.2–6px
+    this.size = IS_MOBILE ? (0.3 + d * 1.0) : (1.2 + d * 4.8);
 
     this.x = Math.random() * W;
     this.y = scatter ? Math.random() * H : H + this.size + 6;
 
-    // gentle upward drift; nearer crystals drift a touch faster
-    this.vx = (Math.random() - 0.5) * 0.22;
-    this.vy = -(0.04 + Math.random() * 0.16) * (0.6 + d * 0.7);
+    // fast diagonal upward drift
+    this.vx = (1.5 + Math.random() * 1.0) * (0.8 + d);
+    this.vy = -(1.5 + Math.random() * 1.0) * (0.8 + d);
 
     this.rot = Math.random() * Math.PI * 2;
     this.rotV = (Math.random() - 0.5) * 0.009;
@@ -159,20 +159,22 @@
         this.boost = Math.max(this.boost, g * (0.6 + d * 0.6));
       }
       if (dist < REPEL_R && dist > 0.001) {
-        // soft repel, scaled by depth so the field has parallax weight
+        // strong repel, scaled by depth so the field has parallax weight
         var f = ((REPEL_R - dist) / REPEL_R);
         f = f * f;                       // ease — strongest only when close
-        this.vx += (dx / dist) * f * 0.45 * d;
-        this.vy += (dy / dist) * f * 0.45 * d;
+        this.vx += (dx / dist) * f * 2.5 * d; // increased force multiplier
+        this.vy += (dy / dist) * f * 2.5 * d;
       }
     }
 
     // ease the boost back down
     this.boost *= 0.92;
 
-    // damping + restore upward bias
-    this.vx *= 0.94;
-    this.vy = this.vy * 0.94 - 0.0016 * (0.6 + d * 0.7);
+    // damping + restore diagonal upward bias
+    this.vx *= 0.92;
+    this.vy *= 0.92;
+    this.vx += 0.12 * (0.8 + d);
+    this.vy -= 0.12 * (0.8 + d);
 
     // respawn once fully off-screen (account for parallax offset)
     var m = this.size + 16;
