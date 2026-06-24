@@ -1,0 +1,365 @@
+/* ==========================================================================
+   Synkyn Studios — Premium Navigation System
+   Desktop styles are preserved. The mobile experience (<= 1279.98px) is a
+   dedicated, app-style navigation: top-attached black header + slide-down panel.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   DESKTOP (>= 1280px) — keep the existing floating pill behaviour untouched
+   -------------------------------------------------------------------------- */
+.header-two {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    will-change: transform;
+    z-index: 99999 !important;
+}
+
+/* Desktop hidden state: translated upward out of view, keeping centering */
+.header-two.nav-hidden {
+    transform: translate3d(-50%, -200px, 0) !important;
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE + TABLET REDESIGN (<= 1279.98px)
+   Matches the HTML `xl:` breakpoint where the desktop nav appears.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1279.98px) {
+
+    :root {
+        --nav-height: 72px;
+        --nav-accent: #ffd84d;
+        /* Synkyn theme yellow */
+        --nav-bg: #000000;
+        /* pure black header / panel */
+        --nav-border: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ---------- HEADER (CLOSED STATE) ------------------------------------ */
+    /* Full-width, flush to the top of the viewport. No pill, no margin. */
+    .header-two {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: translate3d(0, 0, 0) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: var(--nav-height) !important;
+        margin: 0 !important;
+        margin-top: -33px !important;
+        border-radius: 0 0 24px 24px !important;
+        padding: 0 1.25rem !important;
+        border: none !important;
+        border-bottom: 1px solid var(--nav-border) !important;
+        background-color: transparent !important;
+        /* subtle dark-glass depth */
+        -webkit-backdrop-filter: blur(14px) saturate(120%);
+        backdrop-filter: blur(14px) saturate(120%);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+        z-index: 100000 !important;
+        /* always above content + panel */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 0 !important;
+    }
+
+    /* Hidden state — slide the whole bar up out of view (no display:none) */
+    .header-two.nav-hidden {
+        transform: translate3d(0, -100%, 0) !important;
+    }
+
+    /* Logo — clear, correctly sized, left aligned */
+    .header-two figure.max-w-\[52px\] {
+        max-width: 110px !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .header-two figure.max-w-\[52px\] img {
+        max-height: 42px !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+
+    /* Remove leftover desktop CTA spacing on the right cluster */
+    .header-two>.flex.items-center.gap-2 {
+        gap: 0 !important;
+    }
+
+    /* ---------- HAMBURGER ------------------------------------------------- */
+    .nav-hamburger {
+        background: transparent !important;
+        border: none !important;
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        cursor: pointer !important;
+        position: relative !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    .nav-hamburger .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .nav-hamburger span:not(.sr-only) {
+        width: 1.5rem !important;
+        height: 2px !important;
+        border-radius: 9999px !important;
+        background-color: #ffffff !important;
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.2s ease !important;
+        transform-origin: center !important;
+        display: block !important;
+    }
+
+    /* Morph the three bars into an "X" when the panel is open.
+       child(1) is the .sr-only label, so bars are children 2, 3, 4. */
+    body.mobile-menu-active .nav-hamburger span:nth-child(2) {
+        transform: translateY(8px) rotate(45deg) !important;
+    }
+
+    body.mobile-menu-active .nav-hamburger span:nth-child(3) {
+        opacity: 0 !important;
+        transform: scaleX(0.2) !important;
+    }
+
+    body.mobile-menu-active .nav-hamburger span:nth-child(4) {
+        transform: translateY(-8px) rotate(-45deg) !important;
+    }
+
+    /* ---------- DIM / BLUR BACKDROP ------------------------------------- */
+    .nav-overlay {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 99980 !important;
+        /* under the panel, over the page */
+        background: rgba(0, 0, 0, 0.55) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+        backdrop-filter: blur(4px) !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transition: opacity 0.4s ease, visibility 0.4s ease !important;
+    }
+
+    .nav-overlay.show-overlay {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* ---------- MENU PANEL (OPEN STATE) --------------------------------- */
+    /* Full screen panel that slides from the right, matching the reference image. */
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        margin: 0 !important;
+        background-color: #0b0b0b !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: -10px 0 60px rgba(0, 0, 0, 0.6) !important;
+        z-index: 100005 !important;
+        /* ABOVE the header-two */
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior: contain !important;
+        transform: translate3d(100%, 0, 0) !important;
+        opacity: 1 !important;
+        visibility: hidden !important;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            visibility 0.5s ease !important;
+        will-change: transform;
+    }
+
+    .sidebar.show-sidebar {
+        transform: translate3d(0, 0, 0) !important;
+        visibility: visible !important;
+    }
+
+    /* Hide the legacy in-sidebar close button just in case */
+    .sidebar .nav-hamburger-close {
+        display: none !important;
+    }
+
+    /* ---------- INJECTED PANEL CONTENT ---------------------------------- */
+    .mobile-menu-inner {
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 100% !important;
+        padding: 1.5rem 1.5rem 2rem 1.5rem !important;
+    }
+
+    .mobile-menu-top {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        margin-bottom: 3rem !important;
+    }
+
+    .mobile-menu-logo {
+        max-width: 110px !important;
+        height: auto !important;
+    }
+
+    .mobile-menu-close {
+        background: transparent !important;
+        border: none !important;
+        padding: 0.5rem !important;
+        margin-right: -0.5rem !important;
+        cursor: pointer !important;
+        color: #ffffff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .mobile-menu-links {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        margin-bottom: 4rem !important;
+    }
+
+    .mobile-menu-link {
+        font-family: 'Inter Tight', system-ui, sans-serif !important;
+        font-size: 2.75rem !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.04em !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        line-height: 1 !important;
+        transition: opacity 0.2s ease !important;
+    }
+
+    .mobile-menu-link:active,
+    .mobile-menu-link:hover {
+        opacity: 0.7 !important;
+        transform: none !important;
+    }
+
+    .mobile-menu-divider {
+        height: 1px !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        margin: 0 -1.5rem 3rem -1.5rem !important;
+    }
+
+    .mobile-menu-footer-block {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        margin-bottom: 2.5rem !important;
+    }
+
+    .mobile-menu-label {
+        font-family: 'Inter Tight', system-ui, sans-serif !important;
+        font-size: 0.85rem !important;
+        color: rgba(255, 255, 255, 0.6) !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    .mobile-menu-email {
+        font-family: 'Inter Tight', system-ui, sans-serif !important;
+        font-size: 1.6rem !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.02em !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+
+    .mobile-menu-email .plus-icon {
+        font-weight: 400 !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .mobile-menu-location {
+        font-family: 'Inter Tight', system-ui, sans-serif !important;
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+        color: #ffffff !important;
+        display: flex !important;
+        gap: 0.75rem !important;
+        margin-top: 0.5rem !important;
+    }
+
+    .mobile-menu-location .time-placeholder {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .mobile-menu-socials {
+        display: flex !important;
+        gap: 1.5rem !important;
+    }
+
+    .mobile-menu-socials a {
+        color: #ffffff !important;
+        transition: opacity 0.2s ease !important;
+    }
+
+    .mobile-menu-socials a:hover {
+        opacity: 0.7 !important;
+    }
+
+    .mobile-menu-bottom-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.25rem !important;
+        margin-top: auto !important;
+        padding-top: 2rem !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .bottom-links {
+        display: flex !important;
+        gap: 2rem !important;
+    }
+
+    .bottom-links a {
+        font-family: 'Inter Tight', system-ui, sans-serif !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+    }
+
+    .bottom-copyright {
+        font-family: 'Inter Tight', system-ui, sans-serif !important;
+        font-size: 0.85rem !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+}
+
+/* Body scroll-lock while the mobile menu is open */
+body.overflow-hidden {
+    overflow: hidden !important;
+    height: 100% !important;
+    touch-action: none !important;
+}

@@ -44,7 +44,7 @@
     <meta name="msapplication-tooltip" content="Synkyn Studios" />
     <meta name="msapplication-starturl" content="/" />
     <link rel="icon" type="image/png" href="./images/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./iamges/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
     <link rel="shortcut icon" href="./images/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
     <link rel="preload" href="./fonts/inter-tight-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
@@ -104,6 +104,7 @@
     <link rel="modulepreload" href="./assets/main.js" />
     <link rel="preload" href="./assets/main.css" as="style" />
     <link rel="stylesheet" href="./assets/main.css">
+    <link rel="stylesheet" href="./assets/navbar.css?v=6">
     <link rel="stylesheet" href="./assets/about-us.css">
 
     <style id="synkyn-theme">
@@ -594,7 +595,7 @@ Header
         <div data-ns-animate data-direction="up" data-offset="20"
             class="header-two header-two-at-rest lp:!max-w-[1290px] {=$class} fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0">
             <div>
-                <a href="./index.html" class="flex min-w-0 shrink-0 items-center gap-2">
+                <a href="./" class="flex min-w-0 shrink-0 items-center gap-2">
                     <!-- Desktop logo -->
                     <figure class="m-0 hidden lg:block lg:max-w-[112px]">
                         <img src="./images/logo.png" alt="Synkyn Studios" class="w-[80px] h-auto object-contain" />
@@ -608,7 +609,7 @@ Header
             <nav class="hidden items-center xl:flex">
                 <ul class="flex items-center">
                     <li class="nav-item relative cursor-pointer py-2.5">
-                        <a href="./index.html"
+                        <a href="./"
                             class="hover:text-accent hover:border-accent dark:hover:border-stroke-7 text-tagline-1 text-accent/60 dark:text-accent/60 dark:hover:text-accent group flex items-center gap-1 rounded-full border border-transparent px-4 py-2 font-normal transition-all duration-200">
                             <span>Home</span>
 
@@ -616,9 +617,9 @@ Header
                     </li>
 
                     <li class="nav-item relative cursor-pointer py-2.5">
-                        <a href="./why-retrofit.html"
+                        <a href="./about-us.html"
                             class="hover:text-accent hover:border-accent dark:hover:border-stroke-7 text-tagline-1 text-accent/60 dark:text-accent/60 dark:hover:text-accent group flex items-center gap-1 rounded-full border border-transparent px-4 py-2 font-normal transition-all duration-200">
-                            <span>Retrofit Advantage</span>
+                            <span>About Us</span>
 
                         </a>
                     </li>
@@ -782,8 +783,7 @@ Header
                                 <div class="flex-1 space-y-3">
                                     <ul class="space-y-2">
                                         <li>
-                                            <a href="./index.html#features"
-                                                class="group relative flex items-start gap-2 p-3">
+                                            <a href="./#features" class="group relative flex items-start gap-2 p-3">
                                                 <div
                                                     class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-background-3 dark:bg-background-7 opacity-0 group-hover:opacity-100 rounded-[10px] z-0 transition-all duration-400 {=$class}">
                                                 </div>
@@ -811,40 +811,6 @@ Header
                                             </a>
                                         </li>
 
-                                        <li>
-                                            <a href="./why-retrofit.html"
-                                                class="group relative flex items-start gap-2 p-3">
-                                                <div
-                                                    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-background-3 dark:bg-background-7 opacity-0 group-hover:opacity-100 rounded-[10px] z-0 transition-all duration-400 {=$class}">
-                                                </div>
-
-                                                <div
-                                                    class="border-stroke-1 relative z-10 mt-1 flex size-7 shrink-0 items-center justify-center rounded-lg border p-1 dark:border-white/10">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                        viewBox="0 0 20 20" fill="none">
-                                                        <path
-                                                            d="M10 13.75C12.0711 13.75 13.75 12.0711 13.75 10C13.75 7.92893 12.0711 6.25 10 6.25C7.92893 6.25 6.25 7.92893 6.25 10C6.25 12.0711 7.92893 13.75 10 13.75Z"
-                                                            class="stroke-secondary dark:stroke-accent {=$class}"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M9.59975 3.4495L8.12557 2.34419C8.04647 2.28469 7.95437 2.24484 7.85685 2.22792C7.75933 2.211 7.65918 2.2175 7.56467 2.24688C7.1081 2.38985 6.66515 2.57312 6.24103 2.79452C6.15323 2.84057 6.07765 2.90685 6.02051 2.98787C5.96338 3.06889 5.92633 3.16233 5.91242 3.26049L5.65182 5.08478C5.55248 5.17284 5.45523 5.26442 5.36007 5.35953C5.26493 5.45467 5.17332 5.55195 5.08525 5.65136L5.08521 5.65139L3.26124 5.91223C3.16324 5.92608 3.06993 5.96303 2.98901 6.02002C2.90809 6.07702 2.84187 6.15242 2.79581 6.24003C2.57407 6.66397 2.39044 7.10678 2.2471 7.56323C2.21759 7.65787 2.211 7.75818 2.22789 7.85587C2.24478 7.95356 2.28466 8.04584 2.34423 8.12508L3.44993 9.59932C3.44195 9.73182 3.43794 9.86535 3.4379 9.9999C3.4379 10.1344 3.44191 10.268 3.44993 10.4006L3.44993 10.4006L2.34462 11.8748C2.28512 11.9539 2.24527 12.046 2.22835 12.1435C2.21143 12.241 2.21793 12.3412 2.2473 12.4357C2.39028 12.8923 2.57355 13.3352 2.79495 13.7593C2.841 13.8471 2.90727 13.9227 2.98829 13.9799C3.06931 14.037 3.16276 14.074 3.26092 14.088L5.08521 14.3486C5.17326 14.4479 5.26484 14.5451 5.35996 14.6403C5.45509 14.7354 5.55237 14.827 5.65179 14.9151L5.65182 14.9152L5.91265 16.7391C5.92651 16.8371 5.96345 16.9304 6.02045 17.0114C6.07744 17.0923 6.15285 17.1585 6.24046 17.2046C6.66439 17.4263 7.1072 17.6099 7.56365 17.7533C7.6583 17.7828 7.7586 17.7894 7.8563 17.7725C7.95399 17.7556 8.04626 17.7157 8.1255 17.6561L9.59974 16.5504C9.73225 16.5584 9.86577 16.5624 10.0003 16.5625C10.1349 16.5625 10.2684 16.5585 10.401 16.5504L10.4011 16.5504L11.8752 17.6558C11.9543 17.7153 12.0464 17.7551 12.144 17.772C12.2415 17.7889 12.3416 17.7824 12.4361 17.7531C12.8927 17.6101 13.3357 17.4268 13.7598 17.2054C13.8476 17.1594 13.9232 17.0931 13.9803 17.0121C14.0374 16.9311 14.0745 16.8376 14.0884 16.7395L14.349 14.9152C14.4483 14.8271 14.5456 14.7355 14.6407 14.6404C14.7359 14.5453 14.8275 14.448 14.9156 14.3486L14.9156 14.3486L16.7396 14.0877C16.8376 14.0739 16.9309 14.0369 17.0118 13.9799C17.0927 13.9229 17.1589 13.8475 17.205 13.7599C17.4267 13.336 17.6104 12.8932 17.7537 12.4367C17.7832 12.3421 17.7898 12.2418 17.7729 12.1441C17.756 12.0464 17.7161 11.9541 17.6566 11.8749L16.5509 10.4006C16.5589 10.2681 16.5629 10.1346 16.5629 10.0001C16.5629 9.86551 16.5589 9.73195 16.5509 9.59937L16.5509 9.59932L17.6562 8.12514C17.7157 8.04605 17.7555 7.95394 17.7725 7.85642C17.7894 7.7589 17.7829 7.65876 17.7535 7.56424C17.6105 7.10767 17.4273 6.66472 17.2059 6.2406C17.1598 6.15281 17.0935 6.07722 17.0125 6.02008C16.9315 5.96295 16.838 5.9259 16.7399 5.91199L14.9156 5.65139C14.8275 5.55206 14.736 5.45481 14.6408 5.35964C14.5457 5.2645 14.4484 5.1729 14.349 5.08482L14.349 5.08478L14.0881 3.26082C14.0743 3.16281 14.0373 3.06951 13.9804 2.98858C13.9234 2.90766 13.848 2.84144 13.7603 2.79539C13.3364 2.57364 12.8936 2.39002 12.4371 2.24668C12.3425 2.21716 12.2422 2.21057 12.1445 2.22746C12.0468 2.24435 11.9545 2.28423 11.8753 2.34381L10.4011 3.4495C10.2685 3.44152 10.135 3.43751 10.0005 3.43747C9.86593 3.43747 9.73237 3.44148 9.5998 3.4495L9.59975 3.4495Z"
-                                                            class="stroke-secondary dark:stroke-accent {=$class}"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-
-                                                </div>
-                                                <div class="relative z-10">
-                                                    <p
-                                                        class="text-tagline-1 text-secondary dark:text-accent font-normal">
-                                                        Retrofit Advantage
-                                                    </p>
-                                                    <p
-                                                        class="text-tagline-2 text-secondary/60 dark:text-accent/60 font-normal">
-                                                        Our services and offerings
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </li>
                                         <li>
                                             <a href="./contact.html" class="group relative flex items-start gap-2 p-3">
                                                 <div
@@ -1015,13 +981,13 @@ Mobile Menu - Synkyn Studios
                     </p>
                     <ul class="space-y-2">
                         <li>
-                            <a href="./index.html"
+                            <a href="./"
                                 class="text-tagline-1 text-secondary dark:text-accent block py-2.5 text-left font-normal transition-all duration-200">Home</a>
                         </li>
                         <li>
-                            <a href="./why-retrofit.html"
-                                class="text-tagline-1 text-secondary dark:text-accent block py-2.5 text-left font-normal transition-all duration-200">Retrofit
-                                Advantage</a>
+                            <a href="./about-us.html"
+                                class="text-tagline-1 text-secondary dark:text-accent block py-2.5 text-left font-normal transition-all duration-200">About
+                                Us</a>
                         </li>
                         <li class="space-y-2">
                             <button
@@ -1055,14 +1021,9 @@ Mobile Menu - Synkyn Studios
                                         class="text-tagline-1 text-secondary dark:text-accent ml-4 block py-2.5 text-left font-normal transition-all duration-200">Store</a>
                                 </li>
                                 <li>
-                                    <a href="./index.html#features"
+                                    <a href="./#features"
                                         class="text-tagline-1 text-secondary dark:text-accent ml-4 block py-2.5 text-left font-normal transition-all duration-200">Our
                                         Product</a>
-                                </li>
-                                <li>
-                                    <a href="./why-retrofit.html"
-                                        class="text-tagline-1 text-secondary dark:text-accent ml-4 block py-2.5 text-left font-normal transition-all duration-200">Retrofit
-                                        Advantage</a>
                                 </li>
                                 <li>
                                     <a href="./terms.html"
@@ -1189,7 +1150,8 @@ Hero section
                             </li>
                             <li data-ns-animate data-delay="0.9" data-direction="left" data-offset="50"
                                 data-orion-obstacle class="w-full sm:w-auto pointer-events-auto">
-                                <a href="./contact.html" class="btn btn-dark btn-xl hover:btn-secondary sm:w-auto w-[85%]">
+                                <a href="./contact.html"
+                                    class="btn btn-dark btn-xl hover:btn-secondary sm:w-auto w-[85%]">
                                     <span>Connect</span>
                                 </a>
                             </li>
@@ -2263,332 +2225,10 @@ Leadership Team section
 
                         </div>
                     </div>
-
-                </div>
-        </section>
-        <!-- =========================
-Teams section
-===========================-->
-        <section class="xl:py-[160px] lg:py-[90px] md:py-20 py-16">
-            <div class="main-container md:space-y-[70px] space-y-10">
-                <div class="text-center space-y-5">
-                    <span data-ns-animate data-delay="0.1" class="badge badge-gradient-helix">Our team</span>
-                    <div class="max-w-[620px] mx-auto space-y-3">
-                        <h2 data-ns-animate data-delay="0.2" class="max-md:text-[38px] max-md:leading-[1.1]">Advisory
-                            Board</h2>
-                        <p data-ns-animate data-delay="0.3">
-                            Our advisors bring world-class expertise across aerospace, HVAC, mechanical engineering,
-                            entrepreneurship, and climate technology.
-                        </p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-wrap justify-center md:gap-8 sm:gap-5 gap-y-4 max-md:gap-x-3 max-md:gap-y-3 *:w-[calc(50%-6px)] sm:*:w-[calc(50%-10px)] lg:*:w-[calc(33.333%-14px)] xl:*:w-[calc(20%-26px)]">
-                    <div data-ns-animate data-delay="0.4">
-                        <a href="https://www.linkedin.com/in/addison-stark/" target="_blank" rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Addison-Stark.png" alt="Addison Stark, PhD"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5 grayscale" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Addison Stark, PhD
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    CEO & co-founder of AtmosZero. Former ARPA-E Fellow & Associate Director at the
-                                    Bipartisan Policy Center.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="0.5">
-                        <a href="https://www.linkedin.com/in/andreweil/" target="_blank" rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Andrew-Eil.png" alt="Andrew Eil"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Andrew Eil
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    Former partner at Climate Finance Advisors, PLLC, Head of Climate Risk at Tata
-                                    Consultancy Services.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="0.6">
-                        <a href="https://www.linkedin.com/in/buddy-doll-408ba09/" target="_blank"
-                            rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Buddy-Doll.png" alt="Buddy Doll"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5 grayscale" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Buddy Doll
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    Former CEO of Soler & Palau North America. Executive roles at Nortek Air Solutions &
-                                    Johnson Controls.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="0.7">
-                        <a href="https://www.linkedin.com/in/christian-weeks-5972a21/" target="_blank"
-                            rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Christian-Weeks.png" alt="Christian Weeks"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5 grayscale" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Christian Weeks
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    CEO of enVerid Systems. Leader in sorbent ventilation & HVAC energy efficiency for
-                                    commercial buildings.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="0.8">
-                        <a href="https://www.linkedin.com/in/djpreston/#" target="_blank" rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/daniel_preston.png" alt="Daniel J. Preston, PhD"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Daniel J. Preston, PhD
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    Professor at Rice University, former Postdoctoral researcher at the Whitesides
-                                    Research Group.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="0.9">
-                        <a href="https://www.linkedin.com/in/david-j-neff/" target="_blank" rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/David-Neff.png" alt="David J. Neff"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    David J. Neff
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    2x exits (acquisitions by Accenture and PwC), and former Venture Partner.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="1.0">
-                        <a href="https://www.linkedin.com/in/gary-wipfler-3338a7/" target="_blank"
-                            rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/GaryWipfler.png" alt="Gary Wipfler"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Gary Wipfler
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    VP & Corporate Treasurer at Apple for 25 years & Foundation Advisory Council at
-                                    Naval
-                                    Post Graduate School.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="1.1">
-                        <a href="https://www.linkedin.com/in/greg-powers-83a6468/" target="_blank"
-                            rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Gene.png" alt="Greg Powers, PhD"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Greg Powers, PhD
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    Seasoned executive. Former CTO at Carrier & former CTO at Haliburton.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="1.2">
-                        <a href="https://www.linkedin.com/in/wakeford/" target="_blank" rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Kent-Wakeford.png" alt="Kent Wakeford"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5 grayscale" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Kent Wakeford
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    Serial entrepreneur & executive. Former COO at Kabam & co-founder of Integral Ad
-                                    Science.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="1.3">
-                        <a href="https://www.linkedin.com/in/kevin-w-murphy/" target="_blank" rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Kevin-Murphy-2.png" alt="Kevin Murphy"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Kevin Murphy
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    VP of Business Development at the Hunton Group. 30+ year HVAC veteran in sales &
-                                    distribution.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="1.4">
-                        <a href="https://www.linkedin.com/in/kylejudah/" target="_blank" rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Kyle-Judah.png" alt="Kyle Judah"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5 grayscale" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Kyle Judah
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    Executive Director, Liu Idea Lab for Innovation & Entrepreneurship (Lilie) at Rice
-                                    University
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="1.5">
-                        <a href="https://www.linkedin.com/in/nenad-miljkovic-16726932/" target="_blank"
-                            rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Nenad-Miljkovic-headshot.png"
-                                    alt="Nenad Miljkovic, PhD"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Nenad Miljkovic, PhD
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    Founder Professor at UIUC & Director of the Air Conditioning & Refrigeration Center.
-                                    Former PhD student of Dr. Evelyn Wang.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="1.6">
-                        <a href="https://www.linkedin.com/in/pat-sapinsley-81245612/" target="_blank"
-                            rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/SapinsleyHeadshot-1.png" alt="Pat Sapinsley"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Pat Sapinsley
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    Director at Building Energy Exchange, former Managing Director of the Urban Future
-                                    Lab, & former CEO at Watt Not.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-ns-animate data-delay="1.7">
-                        <a href="https://www.linkedin.com/in/tomteynor2/" target="_blank" rel="noopener noreferrer"
-                            class="relative z-10 group block bg-white dark:bg-background-8 rounded-[20px] overflow-hidden p-3 max-md:p-2">
-                            <figure class="lg:max-w-[408px] mx-auto overflow-hidden">
-                                <img src="./images/advisory-board/Tom-Teynor.png" alt="Tom Teynor"
-                                    class="w-full h-full object-cover bg-background-1 rounded-2xl dark:bg-background-5" />
-                            </figure>
-                            <div
-                                class="absolute z-20 bottom-3 left-3 right-3 px-4 py-3 lg:py-4 max-md:bottom-2 max-md:left-2 max-md:right-2 max-md:px-3 max-md:py-2 rounded-xl bg-white/95 dark:bg-helix-blue-dark-2/90 shadow-1 backdrop-blur-sm transition-all duration-[400ms] ease-team-ease-1">
-                                <h3
-                                    class="text-center text-base font-medium text-secondary dark:text-accent leading-tight max-md:text-sm">
-                                    Tom Teynor
-                                </h3>
-                                <p
-                                    class="mt-2 text-tagline-2 font-normal text-secondary/40 dark:text-accent/40 max-md:text-[11px] max-md:leading-[1.35] max-h-24 opacity-100 translate-y-0 overflow-hidden transition-all duration-[400ms] ease-team-ease-1 lg:mt-0 lg:max-h-0 lg:opacity-0 lg:translate-y-2 lg:group-hover:mt-2 lg:group-hover:max-h-24 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 max-md:mt-0 max-md:max-h-0 max-md:opacity-0 max-md:translate-y-2 max-md:group-hover:mt-2 max-md:group-hover:max-h-24 max-md:group-hover:opacity-100 max-md:group-hover:translate-y-0">
-                                    President & CEO at Bell Heating and Plumbing. Exited Coolerado, an evaporative
-                                    cooling
-                                    HVAC company.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
                 </div>
             </div>
         </section>
+
 
         <section class="py-10 sm:py-12 md:py-16 lg:py-22 xl:py-28">
             <div class="main-container w-full min-w-0 max-w-full">
@@ -2775,509 +2415,7 @@ Teams section
             </div>
         </section>
 
-        <!-- =========================
-Awards & Recognition section
-===========================-->
-        <section class="relative py-18 md:py-24 lg:py-30 xl:py-36">
-            <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-                <div class="absolute left-[8%] top-8 h-56 w-56 rounded-full"></div>
-            </div>
-
-            <div class="main-container relative z-10">
-                <div class="grid grid-cols-12 gap-8 lg:gap-12">
-                    <div class="col-span-12 lg:col-span-4 lg:sticky lg:top-28 lg:self-start h-fit space-y-4 lg:pt-2">
-                        <span data-ns-animate data-delay="0.1" class="badge badge-gradient-helix">Awards &
-                            recognition</span>
-                        <h2 data-ns-animate data-delay="0.2"
-                            class="max-w-[15ch] max-md:text-[38px] max-md:leading-[1.1]">
-                            Built loud. Recognized globally.
-                        </h2>
-                        <p data-ns-animate data-delay="0.3" class="max-w-[38ch]">
-                            A curated wall of milestones across entrepreneurship, climate innovation, and engineering
-                            leadership.
-                        </p>
-                    </div>
-
-                    <div class="col-span-12 lg:col-span-8 space-y-10 md:space-y-14">
-                        <section data-ns-animate data-delay="0.35"
-                            class="grid grid-cols-12 items-start gap-4 md:gap-8 lg:gap-10 md:items-stretch">
-                            <div class="relative col-span-12 overflow-visible md:col-span-3 md:min-h-0 md:self-stretch">
-                                <p
-                                    class="text-[42px] leading-none font-semibold tracking-tight text-secondary/20 dark:text-accent/20 md:absolute md:right-0 md:top-0 md:text-[104px] md:-translate-x-7 md:-rotate-90 md:origin-top-right lg:-translate-x-12 whitespace-nowrap">
-                                    2025
-                                </p>
-                            </div>
-                            <div class="col-span-12 md:col-span-9 md:pl-2 lg:pl-4 grid grid-cols-1 gap-4">
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixmicrasoloflipped.png"
-                                        alt="Cleantech 50 to Watch recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        Cleantech 50 to Watch
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixretailcool.png"
-                                        alt="Pepperdine Graziadio Most Fundable Companies recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <div class="relative z-10">
-                                        <h3
-                                            class="text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            Pepperdine Graziadio Business School&apos;s Most Fundable Companies of 2025
-                                        </h3>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixofficedark.png"
-                                        alt="GRIT Award Best Energy Startup recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        GRIT Award Winner: Best Energy Startup
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixspacestation.png" alt="NSF SBIR Phase II recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        NSF SBIR Phase II
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixmicrasolo.png" alt="SXSW Pitch Winner recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <div class="relative z-10">
-                                        <h3
-                                            class="text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            SXSW Pitch Winner
-                                        </h3>
-                                        <p
-                                            class="mt-1 text-secondary/70 transition-colors duration-500 group-hover:text-white/85 dark:text-accent/70">
-                                            Smart Cities, Transportation &amp; Sustainability
-                                        </p>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixofficedark.png"
-                                        alt="GRIT Award Entrepreneur recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        GRIT Award Winner: Entrepreneur Award
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/Rawand.png" alt="Forbes 30 Under 30 recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <div class="relative z-10">
-                                        <h3
-                                            class="text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            Forbes 30 Under 30
-                                        </h3>
-                                        <p
-                                            class="mt-1 text-secondary/70 transition-colors duration-500 group-hover:text-white/85 dark:text-accent/70">
-                                            Energy &amp; Green Tech
-                                        </p>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixofficedark.png"
-                                        alt="Pioneers and Power Players Tech Trends Report visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <div class="relative z-10">
-                                        <h3
-                                            class="text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            Pioneers &amp; Power Players List
-                                        </h3>
-                                        <p
-                                            class="mt-1 text-secondary/70 transition-colors duration-500 group-hover:text-white/85 dark:text-accent/70">
-                                            Tech Trends Report
-                                        </p>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/humidityhvac.png"
-                                        alt="ASME Mechanical Engineering Watch List recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        ASME&apos;s 2025 Mechanical Engineering Watch List
-                                    </h3>
-                                </article>
-                            </div>
-                        </section>
-
-                        <section data-ns-animate data-delay="0.4"
-                            class="grid grid-cols-12 items-start gap-4 md:gap-8 lg:gap-10 md:items-stretch">
-                            <div class="relative col-span-12 overflow-visible md:col-span-3 md:min-h-0 md:self-stretch">
-                                <p
-                                    class="text-[42px] leading-none font-semibold tracking-tight text-secondary/20 dark:text-accent/20 md:absolute md:right-0 md:top-0 md:text-[104px] md:-translate-x-7 md:-rotate-90 md:origin-top-right lg:-translate-x-12 whitespace-nowrap">
-                                    2024
-                                </p>
-                            </div>
-                            <div
-                                class="col-span-12 md:col-span-9 md:pl-2 lg:pl-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10 md:col-span-2">
-                                    <img src="./images/orion.png" alt="Clean Tech Pitch Contest recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-fuchsia-700/85 via-indigo-700/75 to-cyan-700/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        Clean Tech Pitch Contest, 1st place
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/icons/US-Dept-Energy.svg" alt="DOE Epic Prize recognition visual"
-                                        class="absolute inset-0 h-full w-full object-contain bg-white p-7 opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-fuchsia-700/85 via-indigo-700/75 to-cyan-700/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        DOE Epic Prize, 2nd place
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/icons/Enless.svg"
-                                        alt="Endless Frontier Labs Acceleration Program recognition visual"
-                                        class="absolute inset-0 h-full w-full object-contain bg-white p-7 opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-fuchsia-700/85 via-indigo-700/75 to-cyan-700/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        Endless Frontier Labs Acceleration Program, Graduate
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixhotelcool.png"
-                                        alt="High Performance Computing for Energy Innovation Grant recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-fuchsia-700/85 via-indigo-700/75 to-cyan-700/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        High Performance Computing for Energy Innovation Grant Award
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/humidityhvac.png" alt="Phase I SBIR Grant recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-fuchsia-700/85 via-indigo-700/75 to-cyan-700/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        Phase I SBIR Grant
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10 md:col-span-2">
-                                    <img src="./images/helixrestaurantwarm.png"
-                                        alt="Urban Future Lab Future Solutions Prize recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-fuchsia-700/85 via-indigo-700/75 to-cyan-700/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        Urban Future Lab Future Solutions Prize
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/Rawand.png" alt="ACHR 40 Under 40 recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-fuchsia-700/85 via-indigo-700/75 to-cyan-700/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <div class="relative z-10">
-                                        <h3
-                                            class="text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            ACHR 40 Under 40
-                                        </h3>
-                                        <p
-                                            class="mt-1 text-secondary/70 transition-colors duration-500 group-hover:text-white/85 dark:text-accent/70">
-                                            HVACR Professionals List
-                                        </p>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixspacestation.png"
-                                        alt="Chain Reaction Innovations Fellowship visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-fuchsia-700/85 via-indigo-700/75 to-cyan-700/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        Chain Reaction Innovations Fellowship
-                                    </h3>
-                                </article>
-                            </div>
-                        </section>
-
-                        <section data-ns-animate data-delay="0.45"
-                            class="grid grid-cols-12 items-start gap-4 md:gap-8 lg:gap-10 md:items-stretch">
-                            <div class="relative col-span-12 overflow-visible md:col-span-3 md:min-h-0 md:self-stretch">
-                                <p
-                                    class="text-[42px] leading-none font-semibold tracking-tight text-secondary/20 dark:text-accent/20 md:absolute md:right-0 md:top-0 md:text-[104px] md:-translate-x-7 md:-rotate-90 md:origin-top-right lg:-translate-x-12 whitespace-nowrap">
-                                    2023
-                                </p>
-                            </div>
-                            <div class="col-span-12 md:col-span-9 md:pl-2 lg:pl-4 grid grid-cols-1 gap-4">
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl p-[1px] bg-gradient-to-r from-cyan-400/50 via-fuchsia-400/40 to-blue-500/40">
-                                    <div class="relative rounded-2xl bg-white/95 p-5 dark:bg-helix-blue-dark-1">
-                                        <img src="./images/helixretailcadwarm.png"
-                                            alt="Greentown Labs news coverage visual"
-                                            class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 ease-team-ease-1 group-hover:opacity-100" />
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-r from-helix-blue/90 via-helix-blue/75 to-cyan-600/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                        </div>
-                                        <h3
-                                            class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            Greentown Labs News Coverage
-                                        </h3>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl p-[1px] bg-gradient-to-r from-cyan-400/50 via-fuchsia-400/40 to-blue-500/40">
-                                    <div class="relative rounded-2xl bg-white/95 p-5 dark:bg-helix-blue-dark-1">
-                                        <img src="./images/helixofficewarm.png"
-                                            alt="MIT Climate and Energy Prize recognition visual"
-                                            class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 ease-team-ease-1 group-hover:opacity-100" />
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-r from-helix-blue/90 via-helix-blue/75 to-cyan-600/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                        </div>
-                                        <h3
-                                            class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            MIT Climate &amp; Energy Prize, Semi-Finalist
-                                        </h3>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl p-[1px] bg-gradient-to-r from-cyan-400/50 via-fuchsia-400/40 to-blue-500/40">
-                                    <div class="relative rounded-2xl bg-white/95 p-5 dark:bg-helix-blue-dark-1">
-                                        <img src="./images/helixofficewarm.png"
-                                            alt="Texas Entrepreneur Exchange for Energy first place visual"
-                                            class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 ease-team-ease-1 group-hover:opacity-100" />
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-r from-helix-blue/90 via-helix-blue/75 to-cyan-600/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                        </div>
-                                        <div class="relative z-10 flex items-start justify-between gap-4">
-                                            <div>
-                                                <h3
-                                                    class="text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                                    Texas Entrepreneur Exchange for Energy (TEX-E) 1st Place
-                                                </h3>
-                                            </div>
-                                            <span
-                                                class="hidden rounded-full bg-secondary/5 px-3 py-1 text-xs font-medium text-secondary/70 md:inline-flex group-hover:bg-white/20 group-hover:text-white dark:bg-accent/10 dark:text-accent/70">Award</span>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </section>
-
-                        <section data-ns-animate data-delay="0.5"
-                            class="grid grid-cols-12 items-start gap-4 md:gap-8 lg:gap-10 md:items-stretch">
-                            <div class="relative col-span-12 overflow-visible md:col-span-3 md:min-h-0 md:self-stretch">
-                                <p
-                                    class="text-[42px] leading-none font-semibold tracking-tight text-secondary/20 dark:text-accent/20 md:absolute md:right-0 md:top-0 md:text-[44px] md:-translate-x-7 md:-rotate-90 md:origin-top-right lg:-translate-x-1 whitespace-nowrap">
-                                    2022
-                                </p>
-                            </div>
-                            <div
-                                class="col-span-12 md:col-span-9 md:pl-2 lg:pl-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixmicrasolo.png"
-                                        alt="H. Albert Napier Rice Launch Challenge recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        H. Albert Napier Rice Launch Challenge, 1st place
-                                    </h3>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/Rawand.png"
-                                        alt="Hershel M. Rich Invention Award recognition visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        Hershel M. Rich Invention Award
-                                    </h3>
-                                </article>
-                            </div>
-                        </section>
-
-                        <section data-ns-animate data-delay="0.55"
-                            class="grid grid-cols-12 items-start gap-4 md:gap-8 lg:gap-10 md:items-stretch">
-                            <div class="relative col-span-12 overflow-visible md:col-span-3 md:min-h-0 md:self-stretch">
-                                <p
-                                    class="text-[42px] leading-none font-semibold tracking-tight text-secondary/20 dark:text-accent/20 md:absolute md:right-0 md:top-0 md:text-[104px] md:-translate-x-7 md:-rotate-90 md:origin-top-right lg:-translate-x-12 whitespace-nowrap">
-                                    2021
-                                </p>
-                            </div>
-                            <div class="col-span-12 md:col-span-9 md:pl-2 lg:pl-4 grid grid-cols-1 gap-4">
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl p-[1px] bg-gradient-to-r from-cyan-400/50 via-fuchsia-400/40 to-blue-500/40">
-                                    <div class="relative rounded-2xl bg-white/95 p-5 dark:bg-helix-blue-dark-1">
-                                        <img src="./images/icons/US-Dept-Energy.svg"
-                                            alt="DOE IBUILD Graduate Fellowship visual"
-                                            class="absolute inset-0 h-full w-full object-contain bg-white p-7 opacity-0 transition duration-500 ease-team-ease-1 group-hover:opacity-100" />
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-r from-helix-blue/90 via-helix-blue/75 to-cyan-600/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                        </div>
-                                        <h3
-                                            class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            DOE IBUILD Graduate Fellowship
-                                        </h3>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl p-[1px] bg-gradient-to-r from-cyan-400/50 via-fuchsia-400/40 to-blue-500/40">
-                                    <div class="relative rounded-2xl bg-white/95 p-5 dark:bg-helix-blue-dark-1">
-                                        <img src="./images/helixretailcadwarm.png"
-                                            alt="Smalley Curl Institute Student Training Award visual"
-                                            class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 ease-team-ease-1 group-hover:opacity-100" />
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-r from-helix-blue/90 via-helix-blue/75 to-cyan-600/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                        </div>
-                                        <h3
-                                            class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            Smalley Curl Institute Student Training Award
-                                        </h3>
-                                    </div>
-                                </article>
-
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl p-[1px] bg-gradient-to-r from-cyan-400/50 via-fuchsia-400/40 to-blue-500/40">
-                                    <div class="relative rounded-2xl bg-white/95 p-5 dark:bg-helix-blue-dark-1">
-                                        <img src="./images/helixofficewarm.png"
-                                            alt="Rice Innovation Fellows Award visual"
-                                            class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 ease-team-ease-1 group-hover:opacity-100" />
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-r from-helix-blue/90 via-helix-blue/75 to-cyan-600/70 opacity-0 transition duration-500 group-hover:opacity-100">
-                                        </div>
-                                        <h3
-                                            class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                            Rice Innovation Fellows Award
-                                        </h3>
-                                    </div>
-                                </article>
-                            </div>
-                        </section>
-
-                        <section data-ns-animate data-delay="0.65"
-                            class="grid grid-cols-12 items-start gap-4 md:gap-8 lg:gap-10 md:items-stretch">
-                            <div class="relative col-span-12 overflow-visible md:col-span-3 md:min-h-0 md:self-stretch">
-                                <p
-                                    class="text-[42px] leading-none font-semibold tracking-tight text-secondary/20 dark:text-accent/20 md:absolute md:right-0 md:top-0 md:text-[44px] md:-translate-x-7 md:-rotate-90 md:origin-top-right lg:-translate-x-1 whitespace-nowrap">
-                                    2017
-                                </p>
-                            </div>
-                            <div class="col-span-12 md:col-span-9 md:pl-2 lg:pl-4 grid grid-cols-1 gap-4">
-                                <article
-                                    class="group relative isolate overflow-hidden rounded-2xl bg-white/90 p-5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-helix-blue-dark-1 dark:ring-white/10">
-                                    <img src="./images/helixspacestation.png"
-                                        alt="NASA Space Technology Research Fellowship visual"
-                                        class="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" />
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-orange-600/80 via-red-600/70 to-fuchsia-600/75 opacity-0 transition duration-500 group-hover:opacity-100">
-                                    </div>
-                                    <h3
-                                        class="relative z-10 text-lg font-medium text-secondary transition-colors duration-500 group-hover:text-white dark:text-accent">
-                                        NASA Space Technology Research Fellowship
-                                    </h3>
-                                </article>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- < src="src/components/pages/about-page-03/map-area.htm" /> -->
     </main>
-
-    <!-- =========================
-Footer 
-===========================-->
     <footer class="bg-secondary dark:bg-background-8 {=$class} relative overflow-hidden">
         <style></style>
 
@@ -3403,7 +2541,6 @@ Footer
                         d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
                 </svg>
             </span>
-            </button>
 
         </div>
         <!-- Vendor scripts (root paths so Vite does not bundle them; files live in public/vendor/) -->
@@ -3491,6 +2628,7 @@ Footer
             }
         })();
     </script>
+    <script defer src="./assets/navbar.js?v=6"></script>
 </body>
 
 </html>
