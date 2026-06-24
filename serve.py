@@ -1,6 +1,6 @@
 import http.server, socketserver
 
-PORT = 8000
+PORT = 8005
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def send_error(self, code, message=None, explain=None):

@@ -29,6 +29,9 @@
   var REDUCED = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Mobile detection for smaller crystals
+  var IS_MOBILE = window.innerWidth < 768;
+
   /* ============================================================
      1. CANVAS — fixed ambient layer.
         z-index sits above opaque page sections (~1) so the glow
@@ -107,8 +110,8 @@
     this.depth = 0.35 + Math.random() * 0.65;          // 0.35 (far) → 1 (near)
     var d = this.depth;
 
-    // "small small" crystals: ~1.2px (far) up to ~6px (near)
-    this.size = 1.2 + d * 4.8;
+    // mobile: much smaller crystals (~0.6–2.6px); desktop: ~1.2–6px
+    this.size = IS_MOBILE ? (0.6 + d * 2.0) : (1.2 + d * 4.8);
 
     this.x = Math.random() * W;
     this.y = scatter ? Math.random() * H : H + this.size + 6;
@@ -120,8 +123,11 @@
     this.rot = Math.random() * Math.PI * 2;
     this.rotV = (Math.random() - 0.5) * 0.009;
 
-    // base opacity tied to depth (far = fainter) — kept low for ambience
-    this.baseA = (0.05 + Math.random() * 0.20) * (0.45 + d * 0.55);
+    // base opacity tied to depth (far = fainter) — kept low so crystals
+    // never obscure text. Mobile gets even lower opacity.
+    this.baseA = IS_MOBILE
+      ? (0.03 + Math.random() * 0.10) * (0.35 + d * 0.45)
+      : (0.04 + Math.random() * 0.16) * (0.40 + d * 0.50);
     this.a = this.baseA;
 
     this.color = PALETTE[(Math.random() * PALETTE.length) | 0];
@@ -182,7 +188,7 @@
     var glowPulse = this.glow ? (0.7 + 0.3 * pulse) : 1;
     var alpha = (this.a * glowPulse) + this.boost * 0.5;
     if (alpha <= 0.004) return;
-    if (alpha > 0.85) alpha = 0.85;
+    if (alpha > (IS_MOBILE ? 0.40 : 0.55)) alpha = IS_MOBILE ? 0.40 : 0.55;
 
     var s = this.size * (1 + this.boost * 0.35);
 
@@ -234,11 +240,12 @@
   }
 
   function targetCount() {
-    // sparse: roughly one crystal per ~17k css px², clamped
-    return Math.max(34, Math.min(90, Math.floor((W * H) / 17000)));
+    // 2× population: one crystal per ~8.5k css px², clamped
+    return Math.max(68, Math.min(180, Math.floor((W * H) / 8500)));
   }
 
   function build() {
+    IS_MOBILE = window.innerWidth < 768; // re-check on resize/build
     sizeCanvas();
     var n = targetCount();
     crystals = [];
