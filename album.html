@@ -1065,11 +1065,11 @@
           'md:col-span-2 lg:col-span-1 lg:row-span-4 min-h-[250px]',
           'lg:col-span-1 lg:row-span-1 min-h-[200px]',
           'lg:col-span-1 lg:row-span-1 min-h-[200px]',
-          'md:col-span-2 lg:col-span-1 lg:row-span-3 lg:min-h-[361px]',
-          'md:col-span-3 lg:col-span-2 lg:row-span-6 lg:min-h-[452px]',
-          'lg:col-span-1 lg:row-span-2 lg:min-h-[226px]',
+          'md:col-span-2 lg:col-span-1 lg:row-span-3 min-h-[250px] lg:min-h-[361px]',
+          'md:col-span-3 lg:col-span-2 lg:row-span-6 min-h-[300px] md:min-h-[400px] lg:min-h-[452px]',
+          'lg:col-span-1 lg:row-span-2 min-h-[200px] lg:min-h-[226px]',
           'md:col-span-2 lg:col-span-1 lg:row-span-4 min-h-[250px]',
-          'lg:col-span-1 lg:row-span-3 lg:min-h-[361px]',
+          'lg:col-span-1 lg:row-span-3 min-h-[250px] lg:min-h-[361px]',
           'lg:col-span-1 lg:row-span-1 min-h-[200px]',
           'lg:col-span-1 lg:row-span-1 min-h-[200px]'
         ];
@@ -1238,9 +1238,9 @@
               mediaHtml = ytId
                 ? `
             <iframe
-              src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&controls=0&modestbranding=1&playsinline=1"
+              src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1"
               class="absolute inset-0 w-full h-full pointer-events-none"
-              style="border:none; transform:scale(1.35);"
+              style="border:none; transform:scale(1.7); transform-origin:center;"
               allow="autoplay; encrypted-media"
             ></iframe>`
                 : `<div class="absolute inset-0 w-full h-full" style="background:linear-gradient(135deg,#ff0000 0%,#8b0000 100%);"></div>`;
