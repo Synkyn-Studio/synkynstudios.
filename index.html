@@ -886,21 +886,20 @@
     </header>
     <main>
         <section aria-label="Hero"
-            class="flex flex-col flex-none place-content-center items-center w-full overflow-hidden relative"
-            id="hero" style="padding: 0; height: 100dvh;">
+            class="flex flex-col flex-none place-content-center items-center w-full overflow-hidden relative" id="hero"
+            style="padding: 0; height: 100dvh;">
             <div class="relative w-full h-full p-0 sm:p-3 md:p-4 lg:p-6">
-                <div class="relative rounded-none sm:rounded-[24px] md:rounded-[28px] overflow-hidden mx-auto w-full h-full hero-inner"
-                    style="background-color: #000">
+                <div class="relative overflow-hidden mx-auto w-full h-full hero-inner" style="background-color: #000">
 
                     <!-- BACKGROUND: Vimeo cover-fill (background=1 crops to fill, autoplays, loops, muted) -->
                     <div class="absolute inset-0 -z-0 overflow-hidden hero-video-bg" aria-hidden="true">
                         <iframe class="hero-bg-iframe hero-bg-desktop"
-                            data-src="https://player.vimeo.com/video/1205019967?background=1&autopause=0&muted=1&dnt=1&h=54d20a4071"
+                            src="https://player.vimeo.com/video/1205019967?background=1&autopause=0&muted=1&dnt=1&h=54d20a4071"
                             title="Synkyn Studios background" tabindex="-1" frameborder="0"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                         <iframe class="hero-bg-iframe hero-bg-mobile"
-                            data-src="https://player.vimeo.com/video/1205020750?background=1&autopause=0&muted=1&dnt=1"
+                            src="https://player.vimeo.com/video/1205020750?background=1&autopause=0&muted=1&dnt=1"
                             title="Synkyn Studios background (mobile)" tabindex="-1" frameborder="0"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
@@ -1038,6 +1037,30 @@
             }
         </style>
         <style>
+            .hero-inner {
+                border-radius: 0;
+            }
+
+            @media (min-width: 640px) {
+                .hero-inner {
+                    border-radius: 24px;
+                }
+            }
+
+            @media (min-width: 768px) {
+                .hero-inner {
+                    border-radius: 40px;
+                    border: 12px solid #000;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .hero-inner {
+                    border-radius: 64px;
+                    border: 16px solid #000;
+                }
+            }
+
             .hero-video-bg {
                 pointer-events: none;
                 background: #000;
@@ -1047,8 +1070,10 @@
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                width: 100%;
-                height: 100%;
+                width: 100vw;
+                height: 56.25vw;
+                min-height: 100vh;
+                min-width: 177.77vh;
                 transform: translate(-50%, -50%);
                 border: 0;
                 pointer-events: none;
@@ -1257,22 +1282,18 @@
                 }
 
                 .road-node {
-                    width: 54%;
-                    background: rgba(14, 14, 14, .72);
-                    border: 1px solid rgba(255, 216, 77, .14);
-                    backdrop-filter: blur(10px);
-                    -webkit-backdrop-filter: blur(10px);
-                    border-radius: 14px;
-                    padding: 14px 16px;
+                    width: 45%;
                 }
 
                 .road-node[data-side="left"] {
-                    left: 8px;
+                    left: 0;
+                    text-align: left;
                     transform: translate(0, -50%)
                 }
 
                 .road-node[data-side="right"] {
-                    right: 8px;
+                    right: 0;
+                    text-align: right;
                     transform: translate(0, -50%)
                 }
 
@@ -1393,7 +1414,19 @@
                 var fill = document.getElementById('trackFill');
                 var comet = document.getElementById('comet');
                 var nodes = Array.prototype.slice.call(document.querySelectorAll('.road-node'));
+                var trackBase = document.getElementById('trackBase');
                 if (!stage || !fill) return;
+
+                var desktopPath = "M300,24 C300,127 525,127 525,230 C525,350 75,350 75,470 C75,590 525,590 525,710 C525,830 75,830 75,950 C75,1070 525,1070 525,1190 C525,1310 75,1310 75,1430 C75,1520 300,1520 300,1610";
+                var mobilePath = "M300,24 L300,1610";
+
+                function updatePathsForScreenSize() {
+                    var isMobile = window.innerWidth <= 760;
+                    var pathD = isMobile ? mobilePath : desktopPath;
+                    if (trackBase) trackBase.setAttribute('d', pathD);
+                    if (fill) fill.setAttribute('d', pathD);
+                }
+                updatePathsForScreenSize();
 
                 var L = fill.getTotalLength();
                 fill.style.strokeDasharray = L;
@@ -1407,17 +1440,20 @@
 
                 // find the path length at each node's y (so it activates as the dot passes)
                 var SAMPLES = 500;
-                nodes.forEach(function (n) {
-                    var ty = parseFloat(n.getAttribute('data-y'));
-                    var best = 0, bestD = Infinity;
-                    for (var i = 0; i <= SAMPLES; i++) {
-                        var len = L * i / SAMPLES;
-                        var p = fill.getPointAtLength(len);
-                        var d = Math.abs(p.y - ty);
-                        if (d < bestD) { bestD = d; best = len; }
-                    }
-                    n.__at = best / L;            // 0..1 progress at which this node is reached
-                });
+                function calcNodesAt() {
+                    nodes.forEach(function (n) {
+                        var ty = parseFloat(n.getAttribute('data-y'));
+                        var best = 0, bestD = Infinity;
+                        for (var i = 0; i <= SAMPLES; i++) {
+                            var len = L * i / SAMPLES;
+                            var p = fill.getPointAtLength(len);
+                            var d = Math.abs(p.y - ty);
+                            if (d < bestD) { bestD = d; best = len; }
+                        }
+                        n.__at = best / L;            // 0..1 progress at which this node is reached
+                    });
+                }
+                calcNodesAt();
 
                 var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 if (reduce) {
@@ -1435,9 +1471,10 @@
                     var rect = stage.getBoundingClientRect();
                     var vh = window.innerHeight;
 
-                    // progress: starts when stage top hits 72% of viewport,
-                    // completes after scrolling ~78% of the stage height past it.
-                    var progress = (vh * 0.72 - rect.top) / (rect.height * 0.78);
+                    // progress: starts when stage top hits 50% of viewport,
+                    // completes after scrolling the entire stage height.
+                    // This keeps the dot perfectly centered on screen.
+                    var progress = (vh * 0.5 - rect.top) / rect.height;
                     progress = Math.max(0, Math.min(1, progress));
 
                     // draw line
@@ -1459,8 +1496,10 @@
 
                 window.addEventListener('scroll', onScroll, { passive: true });
                 window.addEventListener('resize', function () {
+                    updatePathsForScreenSize();
                     L = fill.getTotalLength();
                     fill.style.strokeDasharray = L;
+                    calcNodesAt();
                     update();
                 }, { passive: true });
                 update();
@@ -1766,202 +1805,7 @@
                 </div>
             </div>
         </section>
-        <section class="pt-32 pb-14 sm:pt-36 md:pt-42 md:pb-16 lg:pb-[88px] xl:pt-[180px] xl:pb-[100px]">
-            <div class="main-container" fetchpriority="high">
-                <div class="text-center space-y-5 mb-[70px] max-md:mb-12">
-                    <span class="badge badge-gradient-purple" data-delay="0.1" data-ns-animate="">Technology</span>
-                    <div class="space-y-3" data-delay="0.2" data-ns-animate="">
-                        <h2
-                            class="xl:text-heading-1 text-transparent bg-clip-text bg-gradient-to-r from-helix-blue to-cyan-500 max-md:text-[38px] max-md:leading-[1.1]">
-                            How It Works</h2>
-                        <p class="max-w-[610px] mx-auto" data-delay="0.3" data-ns-animate="">
-                            We follow a systematic process to deliver high-quality product.
-                        </p>
-                    </div>
-                </div>
-                <div class="process-steps" data-delay="0.4" data-ns-animate="">
-                    <div class="max-w-[1160px] xl:max-w-[1280px] mx-auto mb-[100px] max-md:space-y-14">
-                        <div class="grid lg:grid-cols-[1fr_auto_1fr] gap-x-6 lg:gap-x-10 items-center max-lg:flex max-lg:flex-col max-lg:gap-6 rounded-lg overflow-hidden"
-                            id="hero">
-                            <div
-                                class="flex flex-col justify-center items-center lg:items-end order-2 lg:order-1 max-w-[480px] lg:max-w-[520px] xl:max-w-none w-full mx-auto lg:mx-0">
-                                <div class="card-item w-full space-y-3 lg:bg-none dark:bg-background-6 lg:dark:bg-transparent lg:p-0 lg:rounded-none p-6 rounded-[20px] max-sm:bg-background-4"
-                                    data-delay="0.3" data-instant="" data-ns-animate="">
-                                    <p class="text-md text-helix-blue">STEP 1</p>
-                                    <div class="space-y-2">
-                                        <h3 class="text-heading-6 lg:text-heading-5">Separate Humidity from Cooling</h3>
-                                        <p>
-                                            Traditional HVAC forces your compressor and coils to cool humid air, wasting
-                                            massive energy
-                                            overcooling
-                                            air just to fight moisture.
-                                            <br />
-                                            <br />
-                                            Synkyn Studios removes humidity first. Dry air flows to your cooling system.
-                                            Your AC finally does the one
-                                            job it was designed to do, instead of two.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center order-1 lg:order-2 max-md:hidden">
-                                <div
-                                    class="size-[34px] flex items-center justify-center rounded-full bg-white drop-shadow-2xl dark:bg-gradient-to-r from-blue-500 to-cyan-500">
-                                    <figure class="size-7">
-                                        <div class="size-7 bg-helix-blue rounded-full"></div>
-                                    </figure>
-                                </div>
-                                <div class="h-[400px] lg:h-[460px] w-1 bg-stroke-2 dark:bg-stroke-6"
-                                    data-line-height="460">
-                                    <svg class="w-1 h-[0px] step-line" fill="none" viewbox="0 0 2 222"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 1L0.99999 221" stroke="url(#paint0_linear_1182_24963_step1)"
-                                            stroke-linecap="round" stroke-width="2"></path>
-                                        <defs>
-                                            <lineargradient gradientunits="userSpaceOnUse"
-                                                id="paint0_linear_1182_24963_step1" x1="0.5" x2="0.49999" y1="1"
-                                                y2="221">
-                                                <stop offset="0" stop-color="var(--color-helix-blue)"></stop>
-                                            </lineargradient>
-                                        </defs>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div
-                                class="relative flex flex-col justify-center items-center lg:items-start order-3 max-w-[480px] lg:max-w-[520px] xl:max-w-none w-full mx-auto lg:mx-0 rounded-lg overflow-hidden border-6 border-secondary max-md:order-first">
-                                <div class="absolute pointer-events-none animate-noise-drift will-change-transform"
-                                    style="background: url('./images/noise.webp'); opacity: 0.05; inset: -200%; width: 400%; height: 400%; z-index: 1">
-                                </div>
-                                <video autoplay="" class="process-step-video w-full h-full object-cover grayscale-50"
-                                    data-segment-end="18" data-segment-start="5" muted="" playsinline=""
-                                    src="./video/micraexplainervid.mp4"></video>
-                            </div>
-                        </div>
-                        <!-- STEP 2 — optional content left, card right -->
-                        <div class="grid lg:grid-cols-[1fr_auto_1fr] gap-x-6 lg:gap-x-10 items-center max-lg:flex max-lg:flex-col max-lg:gap-6 rounded-lg overflow-hidden"
-                            id="hero">
-                            <div
-                                class="relative flex flex-col justify-center items-center lg:items-end order-2 lg:order-1 max-w-[480px] lg:max-w-[520px] xl:max-w-none w-full mx-auto lg:mx-0 rounded-lg overflow-hidden border-6 border-secondary">
-                                <div class="absolute pointer-events-none animate-noise-drift will-change-transform"
-                                    style="background: url('./images/noise.webp'); opacity: 0.05; inset: -200%; width: 400%; height: 400%; z-index: 1">
-                                </div>
-                                <video autoplay="" class="process-step-video w-full h-full object-cover grayscale-50"
-                                    data-segment-end="35" data-segment-start="22" muted="" playsinline=""
-                                    src="./video/micraexplainervid.mp4"></video>
-                            </div>
-                            <div class="flex flex-col items-center order-1 lg:order-2 max-md:hidden">
-                                <div
-                                    class="size-[34px] flex items-center justify-center rounded-full bg-white drop-shadow-2xl dark:bg-gradient-to-r from-blue-500 to-cyan-500">
-                                    <figure class="size-7">
-                                        <div class="size-7 bg-helix-blue rounded-full"></div>
-                                    </figure>
-                                </div>
-                                <div class="h-[400px] lg:h-[460px] w-1 bg-stroke-2 dark:bg-stroke-6"
-                                    data-line-height="460">
-                                    <svg class="w-1 h-[0px] step-line" fill="none" viewbox="0 0 2 222"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 1L0.99999 221" stroke="url(#paint0_linear_1182_24963_step2)"
-                                            stroke-linecap="round" stroke-width="2"></path>
-                                        <defs>
-                                            <lineargradient gradientunits="userSpaceOnUse"
-                                                id="paint0_linear_1182_24963_step2" x1="0.5" x2="0.49999" y1="1"
-                                                y2="221">
-                                                <stop offset="0" stop-color="var(--color-helix-blue)"></stop>
-                                            </lineargradient>
-                                        </defs>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div
-                                class="flex flex-col justify-center items-center lg:items-start order-3 max-w-[480px] lg:max-w-[520px] xl:max-w-none w-full mx-auto lg:mx-0">
-                                <div class="card-item w-full space-y-3 lg:bg-none dark:bg-background-6 lg:dark:bg-transparent lg:p-0 lg:rounded-none p-6 rounded-[20px] max-sm:bg-background-4"
-                                    data-delay="0.3" data-ns-animate="">
-                                    <p class="text-md text-helix-blue">STEP 2</p>
-                                    <div class="space-y-2">
-                                        <h3 class="text-heading-6 lg:text-heading-5 max-w-[293px]">The Synkyn MICRA
-                                            Filter</h3>
-                                        <p>Our patented filter is unlike anything commercial HVAC has ever seen.</p>
-                                        <p><span class="font-bold">What makes it different:</span><br />
-                                            Synkyn MICRA filter is a rigid material embedded with helical channels.
-                                            Think of it as a
-                                            precision-engineered sponge that spins liquid droplets out of airflow and
-                                            captures them instantly,
-                                            with
-                                            no moving parts.</p>
-                                        <ul
-                                            class="list-disc list-inside text-tagline-1 text-secondary/60 dark:text-accent/60 indent-4">
-                                            <li>Liquid desiccant sprays into incoming humid air</li>
-                                            <li>Desiccant absorbs moisture on contact</li>
-                                            <li>Synkyn MICRA filter separates desiccant droplets with moisture from dry
-                                                air with minimal pressure
-                                                drop</li>
-                                            <li>Unique design virtually eliminates carryover</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid lg:grid-cols-[1fr_auto_1fr] gap-x-6 lg:gap-x-10 items-center max-lg:flex max-lg:flex-col max-lg:gap-6"
-                            id="hero">
-                            <div
-                                class="flex flex-col justify-center items-center lg:items-end order-2 lg:order-1 max-w-[480px] lg:max-w-[520px] xl:max-w-none w-full mx-auto lg:mx-0">
-                                <div class="card-item w-full space-y-3 lg:bg-none dark:bg-background-6 lg:dark:bg-transparent lg:p-0 lg:rounded-none p-6 rounded-[20px] max-sm:bg-background-4"
-                                    data-delay="0.4" data-ns-animate="">
-                                    <p class="text-md text-helix-blue">STEP 3</p>
-                                    <div class="space-y-2">
-                                        <h3 class="text-heading-6 lg:text-heading-5 max-w-[236px]">Closed-Loop
-                                            Regeneration</h3>
-                                        <ul
-                                            class="list-disc list-inside text-tagline-1 text-secondary/60 dark:text-accent/60 indent-4">
-                                            <li>Our regenerator removes the water from the desiccant</li>
-                                            <li>Dry, cooled air flows to your HVAC system</li>
-                                            <li>Warm, humid air vents to the outdoors</li>
-                                        </ul>
-                                        <p><span class="font-bold">The result:</span></p>
-                                        <ul
-                                            class="list-disc list-inside text-tagline-1 text-secondary/60 dark:text-accent/60 indent-4">
-                                            <li>Compact, lightweight systems that fit where others can’t</li>
-                                            <li>No drains. No plumbing.</li>
-                                            <li>Continuous operation with minimal maintenance</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center order-1 lg:order-2 max-md:hidden">
-                                <div
-                                    class="size-[34px] flex items-center justify-center rounded-full bg-white drop-shadow-2xl dark:bg-gradient-to-r from-blue-500 to-cyan-500">
-                                    <figure class="size-7">
-                                        <div class="size-7 bg-helix-blue rounded-full"></div>
-                                    </figure>
-                                </div>
-                                <div class="h-[400px] lg:h-[460px] w-1 bg-stroke-2 dark:bg-stroke-6"
-                                    data-line-height="460">
-                                    <svg class="w-1 h-[0px] step-line" fill="none" viewbox="0 0 2 222"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 1L0.99999 221" stroke="url(#paint0_linear_1182_24963_step3)"
-                                            stroke-linecap="round" stroke-width="2"></path>
-                                        <defs>
-                                            <lineargradient gradientunits="userSpaceOnUse"
-                                                id="paint0_linear_1182_24963_step3" x1="0.5" x2="0.49999" y1="1"
-                                                y2="221">
-                                                <stop offset="0" stop-color="var(--color-helix-blue)"></stop>
-                                            </lineargradient>
-                                        </defs>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div
-                                class="relative flex flex-col justify-center items-center lg:items-start order-3 max-w-[480px] lg:max-w-[520px] xl:max-w-none w-full mx-auto lg:mx-0 rounded-lg overflow-hidden border-6 border-secondary max-md:order-first">
-                                <div class="absolute pointer-events-none animate-noise-drift will-change-transform"
-                                    style="background: url('./images/noise.webp'); opacity: 0.05; inset: -200%; width: 400%; height: 400%; z-index: 1">
-                                </div>
-                                <video autoplay="" class="process-step-video w-full h-full object-cover grayscale-50"
-                                    data-segment-end="46" data-segment-start="37" muted="" playsinline=""
-                                    src="./video/micraexplainervid.mp4"></video>
-                            </div>
-                        </div>
-                    </div>
-        </section>
+
     </main>
     <footer class="site-footer">
         <figure class="footer-blob footer-blob--right" aria-hidden="true">
@@ -2359,6 +2203,97 @@
     </script>
     <script defer="" src="./assets/navbar.js?v=6"></script>
     <script defer="" src="./assets/footer.js?v=2"></script>
+
+    <!-- HOW IT WORKS ANIMATION LOGIC -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+            gsap.registerPlugin(ScrollTrigger);
+            if (typeof MotionPathPlugin !== 'undefined') {
+                gsap.registerPlugin(MotionPathPlugin);
+            }
+
+            const isMobile = () => window.innerWidth < 1024;
+
+            const initRoadmap = () => {
+                ScrollTrigger.getAll().filter(st => st.vars.id === "roadmap").forEach(st => st.kill());
+                const cards = document.querySelectorAll('.step-card');
+
+                cards.forEach((card, index) => {
+                    ScrollTrigger.create({
+                        id: "roadmap",
+                        trigger: card,
+                        start: "top center",
+                        end: "bottom center",
+                        toggleClass: "is-active",
+                        // markers: true // for debugging
+                    });
+                });
+
+                if (isMobile() && typeof MotionPathPlugin !== 'undefined') {
+                    // Mobile S-Curve Generation
+                    const container = document.getElementById('process-steps-cards');
+                    const svg = document.getElementById('mobile-s-curve-svg');
+                    const path = document.getElementById('mobile-s-curve-path');
+                    const dot = document.getElementById('mobile-glowing-dot');
+
+                    if (!container || !path || !dot) return;
+
+                    // Calculate path points
+                    const elems = document.querySelectorAll('.mobile-card-elem');
+                    let points = [];
+                    const containerRect = container.getBoundingClientRect();
+
+                    elems.forEach((el, i) => {
+                        const rect = el.getBoundingClientRect();
+                        const x = (rect.left - containerRect.left) + rect.width / 2;
+                        const y = (rect.top - containerRect.top) + rect.height / 2;
+                        points.push({ x, y });
+                    });
+
+                    // Build SVG bezier path
+                    let d = `M ${points[0].x} ${points[0].y}`;
+                    for (let i = 0; i < points.length - 1; i++) {
+                        const p1 = points[i];
+                        const p2 = points[i + 1];
+                        const midY = (p1.y + p2.y) / 2;
+                        d += ` C ${p1.x} ${midY}, ${p2.x} ${midY}, ${p2.x} ${p2.y}`;
+                    }
+                    path.setAttribute('d', d);
+
+                    // Fade in dot
+                    gsap.to(dot, { opacity: 1, duration: 0.5 });
+
+                    // Animate dot along path
+                    gsap.to(dot, {
+                        scrollTrigger: {
+                            id: "roadmap",
+                            trigger: container,
+                            start: "top center",
+                            end: "bottom center",
+                            scrub: 0.5,
+                        },
+                        motionPath: {
+                            path: path,
+                            align: path,
+                            alignOrigin: [0.5, 0.5],
+                        },
+                        ease: "none"
+                    });
+                }
+            };
+
+            // Run on load and debounced resize
+            setTimeout(initRoadmap, 100);
+            let timeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(timeout);
+                timeout = setTimeout(initRoadmap, 200);
+            });
+        });
+    </script>
+
 </body>
 
 </html>

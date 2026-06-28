@@ -118,6 +118,15 @@ footer.site-footer {
     padding-bottom: 3rem;
 }
 
+@media (min-width: 768px) {
+    .site-footer .footer-grid {
+        grid-template-columns: 1fr 1.5fr;
+        gap: 0 3rem;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+
 @media (min-width: 1024px) {
     .site-footer .footer-grid {
         grid-template-columns: 1.5fr 2fr;
@@ -199,6 +208,13 @@ footer.site-footer {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem 1rem;
     margin-top: 106px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .site-footer .footer-links-grid {
+        margin-top: 107px;
+        gap: 1.5rem 1rem;
+    }
 }
 
 @media (max-width: 767px) {

@@ -22,7 +22,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   MOBILE + TABLET REDESIGN (<= 1279.98px)
+   MOBILE & TABLET REDESIGN (<= 1279.98px)
    Matches the HTML `xl:` breakpoint where the desktop nav appears.
    -------------------------------------------------------------------------- */
 @media (max-width: 1279.98px) {
@@ -48,12 +48,12 @@
         max-width: 100% !important;
         height: var(--nav-height) !important;
         margin: 0 !important;
-        margin-top: -34px !important;
+        margin-top: 0px !important; /* default for tablet */
         border-radius: 0 0 24px 24px !important;
         padding: 0 1.25rem !important;
         border: none !important;
         border-bottom: 1px solid var(--nav-border) !important;
-        background-color: transparent !important;
+        background-color: rgba(0, 0, 0, 0.7) !important;
         /* subtle dark-glass depth */
         -webkit-backdrop-filter: blur(14px) saturate(120%);
         backdrop-filter: blur(14px) saturate(120%);
@@ -85,6 +85,11 @@
         width: auto !important;
         height: auto !important;
         object-fit: contain !important;
+    }
+
+    /* Force hide desktop logo on mobile/tablet to fix double-logo issue */
+    .header-two figure.lg\:block {
+        display: none !important;
     }
 
     /* Remove leftover desktop CTA spacing on the right cluster */
@@ -368,5 +373,10 @@
 body.overflow-hidden {
     overflow: hidden !important;
     height: 100% !important;
-    touch-action: none !important;
+}
+
+@media (max-width: 767.98px) {
+    body header .header-two {
+        margin-top: -34px !important;
+    }
 }
