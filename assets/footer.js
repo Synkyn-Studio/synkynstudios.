@@ -62,3 +62,23 @@
     observer.observe(footer);
 })();
 
+/* ── Disable footer links pointing to the current page ── */
+(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        var currentUrl = window.location.href.split('#')[0];
+        var currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        
+        var links = document.querySelectorAll('.footer-link');
+        links.forEach(function (link) {
+            var href = link.getAttribute('href');
+            if (!href || href === '#') return;
+            
+            // Match absolute URL or exact relative filename (ignoring hash)
+            if (link.href.split('#')[0] === currentUrl || href.replace('./', '').split('#')[0] === currentPath) {
+                link.removeAttribute('href');
+                link.style.cursor = 'default';
+                link.style.opacity = '0.5';
+            }
+        });
+    });
+})();
