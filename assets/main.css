@@ -9162,7 +9162,7 @@ body {
     }
 
     .to-helix-blue {
-        --tw-gradient-to: var(--color-helix-blue);
+        --tw-gradient-to: #693c22;
         --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from)var(--tw-gradient-from-position), var(--tw-gradient-to)var(--tw-gradient-to-position))
     }
 
@@ -20886,11 +20886,14 @@ html:not(.dark) .header-two.header-home:not(.header-two-scroll) nav a[aria-curre
 
 /* ── Custom Selection Color ── */
 ::selection {
-    background-color: rgba(255, 235, 59, 0.3); /* slight yellowish color */
+    background-color: rgba(255, 235, 59, 0.3);
+    /* slight yellowish color */
     color: inherit;
 }
+
 ::-moz-selection {
-    background-color: rgba(255, 235, 59, 0.3); /* slight yellowish color */
+    background-color: rgba(255, 235, 59, 0.3);
+    /* slight yellowish color */
     color: inherit;
 }
 

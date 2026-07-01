@@ -9,7 +9,7 @@
     height: 100svh;
     width: 100%;
     z-index: 0;
-    background-color: #000
+    background-color: transparent
 }
 
 .about-hero-origin-stack__sticky-bg .particle-effect-container {

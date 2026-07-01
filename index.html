@@ -108,8 +108,10 @@
 }
 </script>
     <link href="https://synkynstudios.com/" rel="canonical" />
+    <link rel="preconnect" href="https://player.vimeo.com" crossorigin />
+    <link rel="preconnect" href="https://f.vimeocdn.com" crossorigin />
+    <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin />
     <link as="image" fetchpriority="high" href="./images/HEHomeVid-poster.webp" rel="preload" />
-    <link as="video" href="./video/HEHomeVid.mp4" rel="preload" type="video/mp4" />
     <link as="image" fetchpriority="low" href="./images/noise.webp" rel="preload" />
     <title>Synkyn Studios | From Space to Your Rooftop</title>
     <link href="./assets/main.js" rel="modulepreload" />
@@ -887,12 +889,12 @@
                     <!-- BACKGROUND: Vimeo cover-fill (background=1 crops to fill, autoplays, loops, muted) -->
                     <div class="absolute inset-0 -z-0 overflow-hidden hero-video-bg" aria-hidden="true">
                         <iframe class="hero-bg-iframe hero-bg-desktop"
-                            src="https://player.vimeo.com/video/1205019967?background=1&autopause=0&muted=1&dnt=1&h=54d20a4071"
+                            data-src="https://player.vimeo.com/video/1205019967?background=1&autopause=0&muted=1&dnt=1&h=54d20a4071&quality=1080p"
                             title="Synkyn Studios background" tabindex="-1" frameborder="0"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                         <iframe class="hero-bg-iframe hero-bg-mobile"
-                            src="https://player.vimeo.com/video/1205020750?background=1&autopause=0&muted=1&dnt=1"
+                            data-src="https://player.vimeo.com/video/1205020750?background=1&autopause=0&muted=1&dnt=1&quality=1080p"
                             title="Synkyn Studios background (mobile)" tabindex="-1" frameborder="0"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
@@ -980,41 +982,64 @@
 
                 <!-- Video Modal -->
                 <style>
-                    #video-modal.is-open { display: flex !important; }
+                    #video-modal.is-open {
+                        display: flex !important;
+                    }
+
                     .cinematic-backdrop {
-                        background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%);
+                        background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%);
                         backdrop-filter: blur(20px);
                         -webkit-backdrop-filter: blur(20px);
                     }
+
                     .modal-card {
-                        width: 100vw; height: 100dvh; max-height: none; border-radius: 0; box-shadow: none;
+                        width: 100vw;
+                        height: 100dvh;
+                        max-height: none;
+                        border-radius: 0;
+                        box-shadow: none;
                     }
+
                     @media (min-width: 640px) {
-                        .modal-card { width: 95vw; height: 85vh; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); }
+                        .modal-card {
+                            width: 95vw;
+                            height: 85vh;
+                            border-radius: 16px;
+                            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+                        }
                     }
+
                     @media (min-width: 1024px) {
-                        .modal-card { width: 100%; max-width: 1200px; height: auto; aspect-ratio: 16/9; max-height: 85vh; }
+                        .modal-card {
+                            width: 100%;
+                            max-width: 1200px;
+                            height: auto;
+                            aspect-ratio: 16/9;
+                            max-height: 85vh;
+                        }
                     }
                 </style>
-                <div id="video-modal" class="fixed inset-0 hidden flex-col items-center justify-center p-0 sm:p-6" style="z-index: 2147483647;" role="dialog" aria-modal="true" onclick="if(event.target === this) closeVideoModal()">
+                <div id="video-modal" class="fixed inset-0 hidden flex-col items-center justify-center p-0 sm:p-6"
+                    style="z-index: 2147483647;" role="dialog" aria-modal="true"
+                    onclick="if(event.target === this) closeVideoModal()">
                     <div id="modal-backdrop"
-                        class="absolute inset-0 cinematic-backdrop transition-opacity duration-500 cursor-pointer" style="opacity: 0;"
-                        onclick="closeVideoModal()" aria-hidden="true"></div>
+                        class="absolute inset-0 cinematic-backdrop transition-opacity duration-500 cursor-pointer"
+                        style="opacity: 0;" onclick="closeVideoModal()" aria-hidden="true"></div>
                     <div id="modal-content"
                         class="relative bg-black overflow-hidden ring-1 ring-white/10 flex flex-col pointer-events-auto modal-card"
                         style="transform-origin: center; will-change: transform, opacity, border-radius; backface-visibility: hidden; transform: translateZ(0);">
                         <button id="modal-close-btn" onclick="closeVideoModal()"
-                            class="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/40 text-white/90 hover:bg-black/60 hover:text-white transition-all backdrop-blur-md border border-white/10 group cursor-pointer" style="opacity: 0;"
-                            aria-label="Close modal">
+                            class="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/40 text-white/90 hover:bg-black/60 hover:text-white transition-all backdrop-blur-md border border-white/10 group cursor-pointer"
+                            style="opacity: 0;" aria-label="Close modal">
                             <svg fill="none" height="24" viewBox="0 0 24 24" width="24"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path stroke="#ffffff" d="M6 6l12 12M18 6L6 18"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path stroke="#ffffff" d="M6 6l12 12M18 6L6 18" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </button>
                         <video id="modal-video" class="w-full h-full object-cover outline-none" playsinline="" controls
                             controlsList="nodownload noplaybackrate" disablePictureInPicture
-                            oncontextmenu="return false" preload="auto">
+                            oncontextmenu="return false" preload="none">
                             <source src="https://websitemain-tau.vercel.app/videos/herovideo.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
@@ -2206,20 +2231,20 @@
 
                 lockScroll();
                 if (thumbVideo) thumbVideo.pause(); // save resources
-                
+
                 videoModal.classList.remove("hidden");
-                videoModal.classList.add("is-open"); 
-                
+                videoModal.classList.add("is-open");
+
                 if (navbar) {
                     navbar.style.transition = "opacity 0.4s ease, filter 0.4s ease";
                     navbar.style.filter = "blur(10px)";
                     navbar.style.opacity = "0";
                     navbar.style.pointerEvents = "none";
                 }
-                
-                const startRect = opener ? opener.getBoundingClientRect() : { left: window.innerWidth/2, top: window.innerHeight/2, width: 0, height: 0 };
+
+                const startRect = opener ? opener.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0, height: 0 };
                 const finalRect = modalContent.getBoundingClientRect();
-                
+
                 const tx = startRect.left + startRect.width / 2 - (finalRect.left + finalRect.width / 2);
                 const ty = startRect.top + startRect.height / 2 - (finalRect.top + finalRect.height / 2);
                 const sx = finalRect.width > 0 ? startRect.width / finalRect.width : 1;
@@ -2234,9 +2259,9 @@
 
                 requestAnimationFrame(() => {
                     backdrop.style.opacity = "1";
-                    
+
                     if (closeBtn) {
-                        closeBtn.style.transition = `opacity 0.3s ease ${DUR/2}ms`;
+                        closeBtn.style.transition = `opacity 0.3s ease ${DUR / 2}ms`;
                         closeBtn.style.opacity = "1";
                     }
 
@@ -2248,12 +2273,12 @@
 
                 setTimeout(() => {
                     isAnimating = false;
-                    try { modalVideo.play().catch(()=>{}); } catch(e) {}
+                    try { modalVideo.play().catch(() => { }); } catch (e) { }
                     if (closeBtn) closeBtn.focus({ preventScroll: true });
                 }, DUR + 50);
             };
 
-            const originalClose = window.closeVideoModal || function(){};
+            const originalClose = window.closeVideoModal || function () { };
             window.closeVideoModal = function () {
                 if (isAnimating) return;
                 isAnimating = true;
@@ -2263,14 +2288,14 @@
                     closeBtn.style.transition = "opacity 0.2s ease";
                     closeBtn.style.opacity = "0";
                 }
-                
+
                 if (navbar) {
                     navbar.style.filter = "";
                     navbar.style.opacity = "1";
                     navbar.style.pointerEvents = "";
                 }
 
-                const startRect = opener ? opener.getBoundingClientRect() : { left: window.innerWidth/2, top: window.innerHeight/2, width: 0, height: 0 };
+                const startRect = opener ? opener.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0, height: 0 };
                 const finalRect = modalContent.getBoundingClientRect();
                 const tx = startRect.left + startRect.width / 2 - (finalRect.left + finalRect.width / 2);
                 const ty = startRect.top + startRect.height / 2 - (finalRect.top + finalRect.height / 2);
@@ -2284,7 +2309,7 @@
                     if (window.innerWidth >= 640) modalContent.style.borderRadius = "16px";
                 });
 
-                try { modalVideo.pause(); } catch(e) {}
+                try { modalVideo.pause(); } catch (e) { }
                 unlockScroll();
 
                 setTimeout(() => {
@@ -2293,7 +2318,7 @@
                     modalContent.style.transition = "none";
                     modalContent.style.transform = "none";
                     modalContent.style.opacity = "1";
-                    if (thumbVideo) thumbVideo.play().catch(()=>{});
+                    if (thumbVideo) thumbVideo.play().catch(() => { });
                     isAnimating = false;
                     if (opener) opener.focus({ preventScroll: true });
                 }, DUR + 50);
