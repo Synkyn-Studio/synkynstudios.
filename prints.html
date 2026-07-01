@@ -115,6 +115,7 @@
             --pf-muted: rgba(255, 255, 255, .6);
             --pf-muted-2: rgba(255, 255, 255, .42);
             --pf-radius: 22px;
+            --pf-gap: clamp(8px, 1.1vw, 16px);
             --pf-ease: cubic-bezier(.22, .68, 0, 1.04);
 
             position: relative;
@@ -476,6 +477,10 @@
             border-radius: var(--pf-radius);
             border: 1px solid var(--pf-line);
             cursor: pointer;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            text-align: left;
             background: var(--pf-surface);
             transition: transform .5s var(--pf-ease), border-color .4s ease, box-shadow .5s var(--pf-ease);
         }
@@ -612,7 +617,7 @@
             right: 0;
             bottom: 0;
             z-index: 5;
-            padding: clamp(16px, 2vw, 26px);
+            padding: clamp(14px, 1.6vw, 22px);
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
@@ -625,7 +630,7 @@
 
         .pf-cap__title {
             margin: 0;
-            font-size: clamp(16px, 1.5vw, 23px);
+            font-size: clamp(15px, 1.4vw, 22px);
             font-weight: 700;
             letter-spacing: -.01em;
             color: #fff;
@@ -634,7 +639,7 @@
 
         .pf-cap__desc {
             margin: 6px 0 0;
-            font-size: 13.5px;
+            font-size: 13px;
             line-height: 1.5;
             color: rgba(255, 255, 255, .66);
             display: -webkit-box;
@@ -646,8 +651,8 @@
 
         .pf-arrow {
             flex: 0 0 auto;
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             display: grid;
             place-items: center;
@@ -675,6 +680,11 @@
         .pf-feat-card:hover .pf-arrow svg,
         .pf-card:hover .pf-arrow svg {
             transform: translate(3px, -3px);
+        }
+
+        /* On the compact justified tiles, hide the 2-line description to keep them clean */
+        .pf-card .pf-cap__desc {
+            display: none;
         }
 
         /* ===================== CONTROLS: search + sticky filters ===================== */
@@ -835,36 +845,38 @@
             font-weight: 600;
         }
 
-        /* ===================== MASONRY ===================== */
-        .pf-masonry {
-            column-count: 1;
-            column-gap: clamp(12px, 1.4vw, 22px);
+        /* ===================== JUSTIFIED GRID (Google-Photos style) ===================== */
+        .pf-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--pf-gap);
+        }
+
+        .pf-row {
+            display: flex;
+            gap: var(--pf-gap);
+            width: 100%;
         }
 
         .pf-card {
             position: relative;
-            display: inline-block;
-            width: 100%;
-            margin: 0 0 clamp(12px, 1.4vw, 22px);
-            border-radius: var(--pf-radius);
+            flex: 0 0 auto;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            text-align: left;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--pf-line);
             background: var(--pf-surface);
             cursor: pointer;
-            break-inside: avoid;
-            -webkit-column-break-inside: avoid;
-            transition: transform .5s var(--pf-ease), border-color .4s ease, box-shadow .5s var(--pf-ease);
+            transition: transform .45s var(--pf-ease), border-color .4s ease, box-shadow .45s var(--pf-ease);
         }
 
         .pf-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             border-color: var(--pf-line-strong);
-            box-shadow: 0 28px 56px -26px rgba(0, 0, 0, .9), 0 0 0 1px rgba(242, 212, 0, .12);
-        }
-
-        .pf-card .pf-media {
-            aspect-ratio: var(--ar, 4 / 3);
-            height: auto;
+            box-shadow: 0 24px 50px -26px rgba(0, 0, 0, .9), 0 0 0 1px rgba(242, 212, 0, .12);
         }
 
         /* Empty state */
@@ -1355,37 +1367,6 @@
         .pf-toast.show {
             opacity: 1;
             transform: translate(-50%, 0);
-        }
-
-        /* ===================== RESPONSIVE COLUMNS ===================== */
-        @media (min-width: 600px) {
-            .pf-masonry {
-                column-count: 2;
-            }
-        }
-
-        @media (min-width: 900px) {
-            .pf-masonry {
-                column-count: 3;
-            }
-        }
-
-        @media (min-width: 1280px) {
-            .pf-masonry {
-                column-count: 4;
-            }
-        }
-
-        @media (min-width: 1600px) {
-            .pf-masonry {
-                column-count: 5;
-            }
-        }
-
-        @media (min-width: 1920px) {
-            .pf-masonry {
-                column-count: 6;
-            }
         }
 
         /* Featured — tablet */
@@ -2003,7 +1984,7 @@
             </div>
         </div>
 
-        <!-- ===================== MASONRY GALLERY ===================== -->
+        <!-- ===================== JUSTIFIED GALLERY ===================== -->
         <section class="pf-section" id="pf-gallery" style="padding-top: clamp(28px,4vw,56px);">
             <div class="pf-wrap">
                 <div class="pf-head pf-reveal" style="margin-bottom: clamp(18px,3vw,34px);">
@@ -2013,7 +1994,7 @@
                     </div>
                 </div>
                 <p class="pf-result-line" id="pf-result-line"></p>
-                <div class="pf-masonry" id="pf-masonry" aria-live="polite"><!-- JS --></div>
+                <div class="pf-grid" id="pf-grid" aria-live="polite"><!-- JS --></div>
                 <div class="pf-empty" id="pf-empty">
                     <div class="pf-empty__icon">
                         <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor"
@@ -2089,13 +2070,6 @@
                             </svg>
                             <span>Share</span>
                         </button>
-                        <a class="pf-lb__act" id="pf-lb-download" download>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-                            </svg>
-                            <span>Download</span>
-                        </a>
                     </div>
 
                     <div class="pf-lb__projnav">
@@ -2258,8 +2232,9 @@
                 .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-            // aspect ratios cycled to create an organic masonry even before real images load
-            const ratios = ['4 / 5', '1 / 1', '4 / 3', '3 / 4', '16 / 11', '5 / 6', '3 / 2', '1 / 1', '4 / 5', '4 / 3'];
+            // aspect ratios cycled to create an organic Google-Photos-style justified grid
+            // even before real images load. Stored as width/height numbers.
+            const ratios = [1.33, 0.8, 1.5, 0.75, 1.45, 1.0, 1.6, 0.83, 1.25, 1.4];
             // featured size pattern
             const featSizes = ['s-hero', 's-portrait', 's-half', 's-half', 's-wide'];
 
@@ -2293,7 +2268,7 @@
                 const els = $$('.pf-reveal', scope);
                 if (!revealIO) { els.forEach((el) => el.classList.add('is-in')); return; }
                 els.forEach((el, i) => {
-                    if (el.dataset.stagger == null) el.style.transitionDelay = Math.min(i * 60, 320) + 'ms';
+                    if (el.dataset.stagger == null) el.style.transitionDelay = Math.min(i * 45, 320) + 'ms';
                     revealIO.observe(el);
                 });
             }
@@ -2307,7 +2282,7 @@
             let query = '';
             let filtered = projects.slice();
 
-            const grid = $('#pf-masonry');
+            const grid = $('#pf-grid');
             const featuredGrid = $('#pf-featured-grid');
             const featuredSection = $('#pf-featured');
             const filtersWrap = $('#pf-filters');
@@ -2317,7 +2292,7 @@
             const searchClear = $('#pf-search-clear');
 
             /* =====================================================================
-               RENDER: card markup (shared by featured + masonry)
+               RENDER: card markup (shared by featured + justified grid)
                ===================================================================== */
             function mediaMarkup(p) {
                 const first = p.images && p.images[0] ? p.images[0] : '';
@@ -2413,23 +2388,88 @@
                 });
             }
 
-            function renderMasonry(list) {
+            /* =====================================================================
+               JUSTIFIED GRID (Google Photos style):
+               rows of consistent height that keep each image's aspect ratio and
+               fill the container width; the final row is left-aligned (not stretched).
+               ===================================================================== */
+            let gridCards = []; // { p, el, ar }
+
+            function currentGap() {
+                const cs = getComputedStyle(grid);
+                const g = parseFloat(cs.rowGap || cs.gap || '12');
+                return isNaN(g) ? 12 : g;
+            }
+
+            function targetRowHeight() {
+                const w = window.innerWidth;
+                if (w < 480) return 150;
+                if (w < 768) return 185;
+                if (w < 1200) return 225;
+                if (w < 1700) return 260;
+                return 290;
+            }
+
+            function buildGridCards(list) {
+                gridCards = list.map((p, i) => {
+                    const el = makeCard(p, { className: 'pf-card pf-reveal' });
+                    return { p: p, el: el, ar: ratios[i % ratios.length] };
+                });
+            }
+
+            function layoutGrid() {
+                if (!gridCards.length) { grid.innerHTML = ''; return; }
+                const containerWidth = grid.clientWidth;
+                if (containerWidth <= 0) return;
+                const gap = currentGap();
+                const target = targetRowHeight();
+
+                // greedily pack cards into rows
+                const rows = [];
+                let row = [];
+                let arSum = 0;
+                gridCards.forEach((c) => {
+                    row.push(c);
+                    arSum += c.ar;
+                    const rowW = arSum * target + gap * (row.length - 1);
+                    if (rowW >= containerWidth) {
+                        rows.push({ items: row, arSum: arSum, last: false });
+                        row = [];
+                        arSum = 0;
+                    }
+                });
+                if (row.length) rows.push({ items: row, arSum: arSum, last: true });
+
+                // rebuild DOM with computed dimensions
                 grid.innerHTML = '';
                 const frag = document.createDocumentFragment();
-                list.forEach((p, i) => {
-                    const card = makeCard(p, {
-                        className: 'pf-card pf-reveal',
-                        style: '--ar:' + ratios[i % ratios.length] + ';transition-delay:' + Math.min(i * 45, 360) + 'ms;'
+                rows.forEach((r) => {
+                    const gaps = gap * (r.items.length - 1);
+                    let h = (containerWidth - gaps) / r.arSum;
+                    if (r.last && h > target * 1.30) h = target; // don't overstretch a sparse last row
+                    const rowEl = document.createElement('div');
+                    rowEl.className = 'pf-row';
+                    r.items.forEach((c) => {
+                        const w = Math.max(60, c.ar * h);
+                        c.el.style.flex = '0 0 ' + w + 'px';
+                        c.el.style.width = w + 'px';
+                        c.el.style.height = h + 'px';
+                        rowEl.appendChild(c.el);
                     });
-                    frag.appendChild(card);
+                    frag.appendChild(rowEl);
                 });
                 grid.appendChild(frag);
+            }
+
+            function renderGrid(list) {
+                buildGridCards(list);
+                layoutGrid();
                 observeReveals(grid);
             }
 
             function applyFilter() {
                 filtered = computeFiltered();
-                renderMasonry(filtered);
+                renderGrid(filtered);
 
                 const searching = query.trim().length > 0 || activeCat !== 'All';
                 featuredSection.style.display = searching ? 'none' : '';
@@ -2445,6 +2485,13 @@
                     resultLine.innerHTML = txt;
                 }
             }
+
+            // re-flow the justified grid on resize (debounced)
+            let resizeTimer = null;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(layoutGrid, 140);
+            }, { passive: true });
 
             // search input (debounced)
             let searchTimer = null;
@@ -2476,7 +2523,6 @@
             const lbCurrent = $('#pf-lb-current');
             const lbTotal = $('#pf-lb-total');
             const lbThumbs = $('#pf-lb-thumbs');
-            const lbDownload = $('#pf-lb-download');
             const lbZoomHint = $('#pf-lb-zoomhint');
             const prevProjBtn = $('#pf-lb-prevproj');
             const nextProjBtn = $('#pf-lb-nextproj');
@@ -2502,7 +2548,7 @@
 
             function preload(src) { if (src) { const im = new Image(); im.src = src; } }
 
-            function setImage(animateDir) {
+            function setImage() {
                 const imgs = curProject.images || [];
                 const src = imgs[curIndex] || '';
                 resetZoom();
@@ -2521,8 +2567,6 @@
                 // counter + panel
                 lbCounter.textContent = (curIndex + 1) + ' / ' + imgs.length;
                 lbCurrent.innerHTML = '<b>' + (curIndex + 1) + '</b> / ' + imgs.length;
-                lbDownload.href = src || '#';
-                lbDownload.setAttribute('download', (curProject.id || 'image') + '-' + (curIndex + 1) + '.jpg');
                 // active thumb
                 $$('.pf-lb__thumb', lbThumbs).forEach((t, i) => t.classList.toggle('is-active', i === curIndex));
                 const active = lbThumbs.children[curIndex];
@@ -2782,8 +2826,6 @@
             lbStage.addEventListener('pointerup', endPointer);
             lbStage.addEventListener('pointercancel', endPointer);
 
-            // tile click via image counter etc handled by card buttons already
-
             /* =====================================================================
                HERO — canvas particles + parallax
                ===================================================================== */
@@ -2889,6 +2931,9 @@
             initParticles();
             initParallax();
 
+            // Re-flow once fonts settle (in case container width shifts after load)
+            window.addEventListener('load', () => { layoutGrid(); });
+
             // Deep-link: open a project directly via #project-id
             if (location.hash) {
                 const id = location.hash.slice(1);
@@ -2943,7 +2988,6 @@
                         <ul class="footer-nav" role="list">
                             <li><a href="./album.html" class="footer-link">Album</a></li>
                             <li><a href="./prints.html" class="footer-link active">Prints</a></li>
-                            </li>
                         </ul>
                     </div>
                     <div>
