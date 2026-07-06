@@ -1308,6 +1308,26 @@
               to   { transform: scaleY(1.08) scaleX(0.96); }
             }
 
+            /* floating clouds */
+            .pipeline-section .cloud {
+              will-change: transform;
+              transform-origin: center;
+            }
+            .pipeline-section .cloud.drift-a {
+              animation: cloud-drift-a 18s ease-in-out infinite alternate;
+            }
+            .pipeline-section .cloud.drift-b {
+              animation: cloud-drift-b 22s ease-in-out infinite alternate;
+            }
+            @keyframes cloud-drift-a {
+              from { transform: translate3d(0, 0, 0) scale(1); }
+              to   { transform: translate3d(24px, -12px, 0) scale(1.03); }
+            }
+            @keyframes cloud-drift-b {
+              from { transform: translate3d(0, 0, 0) scale(1); }
+              to   { transform: translate3d(-24px, 12px, 0) scale(1.03); }
+            }
+
             /* milestone node rings */
             .pipeline-section .node { opacity: 0.32; transition: opacity 0.7s ease; }
             .pipeline-section .node .node-glow { opacity: 0; transition: opacity 0.9s ease; }
@@ -1545,38 +1565,8 @@
                         </linearGradient>
 
                         <!-- ————— volumetric cloud ————— -->
-                        <symbol id="s-cloud" viewBox="0 0 420 400" overflow="visible">
-                            <g filter="url(#f-cloud-back)">
-                                <ellipse cx="210" cy="222" rx="225" ry="116" fill="url(#g-cloud-deep)"/>
-                                <ellipse cx="92"  cy="258" rx="146" ry="88"  fill="url(#g-cloud-deep)"/>
-                                <ellipse cx="336" cy="268" rx="156" ry="92"  fill="url(#g-cloud-deep)"/>
-                                <ellipse cx="210" cy="328" rx="252" ry="106" fill="url(#g-cloud-deep)"/>
-                            </g>
-                            <g filter="url(#f-cloud-mid)">
-                                <ellipse cx="152" cy="198" rx="116" ry="68" fill="url(#g-cloud-mid)"/>
-                                <ellipse cx="282" cy="213" rx="126" ry="70" fill="url(#g-cloud-mid)"/>
-                                <ellipse cx="72"  cy="283" rx="106" ry="64" fill="url(#g-cloud-mid)"/>
-                                <ellipse cx="348" cy="298" rx="116" ry="68" fill="url(#g-cloud-mid)"/>
-                                <ellipse cx="210" cy="298" rx="166" ry="84" fill="url(#g-cloud-mid)"/>
-                            </g>
-                            <g filter="url(#f-cloud-front)">
-                                <ellipse cx="178" cy="164" rx="74" ry="45" fill="url(#g-cloud-lit)"/>
-                                <ellipse cx="254" cy="180" rx="68" ry="41" fill="url(#g-cloud-lit)"/>
-                                <ellipse cx="122" cy="220" rx="64" ry="39" fill="url(#g-cloud-lit)"/>
-                                <ellipse cx="310" cy="236" rx="72" ry="43" fill="url(#g-cloud-lit)"/>
-                                <ellipse cx="210" cy="250" rx="98" ry="53" fill="url(#g-cloud-lit)"/>
-                            </g>
-                            <g filter="url(#f-cloud-wisp)" opacity=".85">
-                                <ellipse cx="196" cy="140" rx="30" ry="10" fill="url(#g-cloud-wisp)"/>
-                                <ellipse cx="246" cy="152" rx="22" ry="8"  fill="url(#g-cloud-wisp)"/>
-                                <ellipse cx="150" cy="172" rx="18" ry="7"  fill="url(#g-cloud-wisp)"/>
-                                <ellipse cx="288" cy="182" rx="20" ry="7"  fill="url(#g-cloud-wisp)"/>
-                            </g>
-                            <g filter="url(#f-rim)">
-                                <ellipse cx="190" cy="142" rx="68" ry="15" fill="url(#g-gold-rim)"/>
-                                <ellipse cx="260" cy="158" rx="54" ry="12" fill="url(#g-gold-rim)" opacity=".82"/>
-                                <ellipse cx="130" cy="196" rx="46" ry="10" fill="url(#g-gold-rim)" opacity=".58"/>
-                            </g>
+                        <symbol id="s-cloud" viewBox="0 0 600 360" overflow="visible">
+                            <image href="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/vecteezy_a-dark-cumulus-cloud-contrasts-sharply-against-a-bright_57176514.png" width="600" height="360" preserveAspectRatio="xMidYMid contain"/>
                         </symbol>
 
                         <!-- ————— NASA-style rocket ————— -->
@@ -1615,12 +1605,18 @@
 
                     <!-- ————— cloudscape ————— -->
                     <g class="clouds">
-                        <use href="#s-cloud" class="cloud drift-a" x="-170" y="-20"  width="560" height="533" opacity=".85"/>
-                        <use href="#s-cloud" class="cloud drift-b" x="830"  y="1050" width="500" height="476" opacity=".7"/>
-                        <use href="#s-cloud" class="cloud drift-a" x="-150" y="1980" width="520" height="495" opacity=".7"/>
-                        <use href="#s-cloud" class="cloud drift-b" x="820"  y="2900" width="540" height="514" opacity=".75"/>
-                        <use href="#s-cloud" class="cloud drift-a" x="-120" y="3620" width="500" height="476" opacity=".7"/>
-                        <use href="#s-cloud" class="cloud drift-b" x="360"  y="4000" width="760" height="724" opacity=".95"/>
+                        <use href="#s-cloud" class="cloud drift-a" x="-150" y="-40" width="600" height="360" opacity=".85"/>
+                        <use href="#s-cloud" class="cloud drift-b" x="750"  y="-40" width="600" height="360" opacity=".85"/>
+                        <use href="#s-cloud" class="cloud drift-b" x="-150" y="800" width="600" height="360" opacity=".75"/>
+                        <use href="#s-cloud" class="cloud drift-a" x="750"  y="800" width="600" height="360" opacity=".75"/>
+                        <use href="#s-cloud" class="cloud drift-a" x="-150" y="1700" width="600" height="360" opacity=".75"/>
+                        <use href="#s-cloud" class="cloud drift-b" x="750"  y="1700" width="600" height="360" opacity=".75"/>
+                        <use href="#s-cloud" class="cloud drift-b" x="-150" y="2600" width="600" height="360" opacity=".75"/>
+                        <use href="#s-cloud" class="cloud drift-a" x="750"  y="2600" width="600" height="360" opacity=".75"/>
+                        <use href="#s-cloud" class="cloud drift-a" x="-150" y="3400" width="600" height="360" opacity=".8"/>
+                        <use href="#s-cloud" class="cloud drift-b" x="750"  y="3400" width="600" height="360" opacity=".8"/>
+                        <use href="#s-cloud" class="cloud drift-b" x="-100" y="4000" width="650" height="390" opacity=".9"/>
+                        <use href="#s-cloud" class="cloud drift-a" x="650"  y="4000" width="650" height="390" opacity=".9"/>
                         <g class="node-clouds"></g>
                     </g>
 
@@ -1800,16 +1796,20 @@
             const pt = geo.getPointAtLength(len);
 
             if (nodeCloudLayer) {
-              const cloud = document.createElementNS(SVG_NS, "use");
-              cloud.setAttribute("href", "#s-cloud");
-              cloud.setAttribute("x", (pt.x - 250).toFixed(1));
-              cloud.setAttribute("y", (pt.y - 235).toFixed(1));
-              cloud.setAttribute("width", "500");
-              cloud.setAttribute("height", "476");
-              cloud.setAttribute("opacity", "0.9");
-              cloud.setAttribute("class", "cloud " + (i % 2 ? "drift-b" : "drift-a"));
-              cloud.style.animationDelay = `${(i * 2.7).toFixed(1)}s`;
-              nodeCloudLayer.appendChild(cloud);
+              const createCloud = (xPos, cls) => {
+                const cloud = document.createElementNS(SVG_NS, "use");
+                cloud.setAttribute("href", "#s-cloud");
+                cloud.setAttribute("x", xPos);
+                cloud.setAttribute("y", (pt.y - 180).toFixed(1));
+                cloud.setAttribute("width", "600");
+                cloud.setAttribute("height", "360");
+                cloud.setAttribute("opacity", "0.85");
+                cloud.setAttribute("class", `cloud ${cls}`);
+                cloud.style.animationDelay = `${(i * 1.5).toFixed(1)}s`;
+                nodeCloudLayer.appendChild(cloud);
+              };
+              createCloud("-150", i % 2 ? "drift-b" : "drift-a");
+              createCloud("750", i % 2 ? "drift-a" : "drift-b");
             }
 
             const g = document.createElementNS(SVG_NS, "g");
@@ -1845,7 +1845,7 @@
 
             const clampedLen = Math.min(Math.max(drawn, 0.5), L - 0.5);
             const pt = geo.getPointAtLength(clampedLen);
-            const rot = rocketRotation(clampedLen) + (travelDirection < 0 ? 180 : 0);
+            const rot = rocketRotation(clampedLen);
 
             rocketTraveler.setAttribute("transform", `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)})`);
             rocketTraveler.setAttribute("opacity", p > 0.004 && p < 0.996 ? "1" : "0");

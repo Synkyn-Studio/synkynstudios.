@@ -1472,6 +1472,24 @@
             }
             #research-sponsors .logo-carousel-track {
                 gap: clamp(1.5rem, 5vw, 3.5rem);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform: translate3d(0, 0, 0);
+            }
+            #research-sponsors .logo-carousel-row--left .logo-carousel-track {
+                animation: synkyn-scroll-left 50s linear infinite !important;
+            }
+            #research-sponsors .logo-carousel-row--right .logo-carousel-track {
+                animation: synkyn-scroll-right 45s linear infinite !important;
+            }
+            @keyframes synkyn-scroll-left {
+                0% { transform: translate3d(0, 0, 0); }
+                100% { transform: translate3d(-33.333%, 0, 0); }
+            }
+            @keyframes synkyn-scroll-right {
+                0% { transform: translate3d(-33.333%, 0, 0); }
+                100% { transform: translate3d(0, 0, 0); }
             }
         </style>
         <section class="py-10 sm:py-12 md:py-16 lg:py-22 xl:py-28" id="research-sponsors">
