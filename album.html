@@ -1244,6 +1244,7 @@
       .media-modal__slide iframe.instagram-media,
       .media-modal__slide iframe.instagram-media-rendered {
         background: #0d0d0d !important;
+        background-color: #0d0d0d !important;
         border: 1px solid rgba(242, 212, 0, 0.15) !important;
         border-radius: 12px !important;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
@@ -1295,11 +1296,12 @@
           {
             id: 'work-ig-1',
             sources: [
-              { type: 'instagram', src: 'https://www.instagram.com/reel/DZCmDTOhcIK/', thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png' }
+              { type: 'instagram', src: 'https://www.instagram.com/reel/DZCmDTOhcIK/' }
             ],
-            title: 'Hospitality Integration',
-            category: 'Hotel Portfolio',
-            description: 'Hotels face unique challenges with varying room occupancies. Our solution provided localized, smart humidity control that adapted in real-time to guest presence.',
+            title: 'skromanautomation',
+            category: 'reels',
+            thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png',
+            description: 'Your home should be as smart as your smartphone ✨<br><br>Imagine controlling your lights, security, curtains & appliances with just one tap or voice command.<br><br>Welcome to the future with Skroman Smart Home Automation.<br><br>🔥 Smart Lighting<br>🔐 Advanced Home Security<br>🎙 Voice & App Control<br>⚡ Energy Saving Automation<br>🏠 Luxury Smart Living Experience<br><br>Turn your ordinary home into an intelligent lifestyle.<br><br>Comfort. Security. Convenience. All automated.',
             tag: 'Insta'
           },
           {
@@ -1395,11 +1397,12 @@
           {
             id: 'work-ig-1',
             sources: [
-              { type: 'instagram', src: 'https://www.instagram.com/reel/DZCmDTOhcIK/', thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png' }
+              { type: 'instagram', src: 'https://www.instagram.com/reel/DZCmDTOhcIK/' }
             ],
-            title: 'Hospitality Integration',
-            category: 'Hotel Portfolio',
-            description: 'Hotels face unique challenges with varying room occupancies. Our solution provided localized, smart humidity control that adapted in real-time to guest presence.',
+            title: 'skromanautomation',
+            category: 'reels',
+            thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png',
+            description: 'Your home should be as smart as your smartphone ✨<br><br>Imagine controlling your lights, security, curtains & appliances with just one tap or voice command.<br><br>Welcome to the future with Skroman Smart Home Automation.<br><br>🔥 Smart Lighting<br>🔐 Advanced Home Security<br>🎙 Voice & App Control<br>⚡ Energy Saving Automation<br>🏠 Luxury Smart Living Experience<br><br>Turn your ordinary home into an intelligent lifestyle.<br><br>Comfort. Security. Convenience. All automated.',
             tag: 'Insta'
           },
           {
@@ -1536,28 +1539,46 @@
             let badge = '';
             let mediaHtml = '';
             const firstSource = work.sources[0];
+            const customThumbnail = work.thumbnail || firstSource.thumbnail;
 
-            if (firstSource.type === 'youtube') {
-              const ytId = getYouTubeId(firstSource.src);
-              badge = work.tag || 'YouTube';
-              const thumbUrl = getYouTubeThumbnail(ytId);
-              mediaHtml = ytId
-                ? `<img src="${thumbUrl}" alt="${work.title}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />`
-                : `<div class="absolute inset-0 w-full h-full" style="background:linear-gradient(135deg,#ff0000 0%,#8b0000 100%);"></div>`;
+            if (customThumbnail) {
+              if (firstSource.type === 'youtube') {
+                badge = work.tag || 'YouTube';
+              } else if (firstSource.type === 'instagram') {
+                badge = work.tag || 'Instagram';
+              } else if (firstSource.type === 'video') {
+                badge = work.tag || 'Video';
+              } else {
+                badge = work.tag || 'Photo';
+              }
 
-            } else if (firstSource.type === 'instagram') {
-              badge = work.tag || 'Instagram';
-              const thumbUrl = firstSource.thumbnail || 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png';
-              mediaHtml = `<img src="${thumbUrl}" alt="${work.title}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>`;
-
-            } else if (firstSource.type === 'video') {
-              badge = work.tag || 'Video';
-              mediaHtml = `<video src="${firstSource.src}" autoplay loop muted playsinline preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>`;
-
+              mediaHtml = `<img src="${customThumbnail}" alt="${work.title}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />`;
+              if (firstSource.type === 'instagram') {
+                mediaHtml += `<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>`;
+              }
             } else {
-              badge = work.tag || 'Photo';
-              mediaHtml = `<img src="${firstSource.src}" alt="${work.title}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />`;
+              if (firstSource.type === 'youtube') {
+                const ytId = getYouTubeId(firstSource.src);
+                badge = work.tag || 'YouTube';
+                const thumbUrl = getYouTubeThumbnail(ytId);
+                mediaHtml = ytId
+                  ? `<img src="${thumbUrl}" alt="${work.title}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />`
+                  : `<div class="absolute inset-0 w-full h-full" style="background:linear-gradient(135deg,#ff0000 0%,#8b0000 100%);"></div>`;
+
+              } else if (firstSource.type === 'instagram') {
+                badge = work.tag || 'Instagram';
+                const thumbUrl = 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png';
+                mediaHtml = `<img src="${thumbUrl}" alt="${work.title}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />
+              <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>`;
+
+              } else if (firstSource.type === 'video') {
+                badge = work.tag || 'Video';
+                mediaHtml = `<video src="${firstSource.src}" autoplay loop muted playsinline preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>`;
+
+              } else {
+                badge = work.tag || 'Photo';
+                mediaHtml = `<img src="${firstSource.src}" alt="${work.title}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />`;
+              }
             }
 
             if (work.sources.length > 1) {
@@ -1681,7 +1702,7 @@
               hasInstagram = true;
               const shortcode = getInstagramShortcode(srcObj.src);
               mediaHtml = `<div style="width:100%;height:100%;overflow-y:auto;display:flex;align-items:center;justify-content:center;padding:20px;">
-                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/${shortcode}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#0d0d0d; border:1px solid rgba(242,212,0,0.15); border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.5); margin: 1px; max-width:480px; min-width:280px; padding:0; width:100%;">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/${shortcode}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#0d0d0d; border:1px solid rgba(242,212,0,0.15); border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.5); margin: 1px; max-width:480px; min-width:280px; padding:0; width:100%;">
                   <div style="padding:16px;">
                     <a href="https://www.instagram.com/reel/${shortcode}/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#0d0d0d; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%; display:block;" target="_blank">
                       <div style="display: flex; flex-direction: row; align-items: center;">
