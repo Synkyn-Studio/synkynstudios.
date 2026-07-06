@@ -1434,6 +1434,46 @@
                 </div>
             </div>
         </section>
+                      <style>
+            #research-sponsors .logo-carousel-item {
+                width: clamp(7rem, 22vw, 14rem);
+                height: clamp(4rem, 12vw, 7rem);
+            }
+            @media (min-width: 480px) {
+                #research-sponsors .logo-carousel-item {
+                    width: clamp(8rem, 18vw, 14rem);
+                    height: clamp(4.5rem, 10vw, 7rem);
+                }
+            }
+            @media (min-width: 768px) {
+                #research-sponsors .logo-carousel-item {
+                    width: 11rem;
+                    height: 6rem;
+                }
+            }
+            @media (min-width: 1024px) {
+                #research-sponsors .logo-carousel-item {
+                    width: 14rem;
+                    height: 7rem;
+                }
+            }
+            @media (min-width: 1280px) {
+                #research-sponsors .logo-carousel-item {
+                    width: 16rem;
+                    height: 7.5rem;
+                }
+            }
+            #research-sponsors .logo-carousel-item-img {
+                filter: none !important;
+                -webkit-filter: none !important;
+                max-height: 90%;
+                max-width: 90%;
+                object-fit: contain;
+            }
+            #research-sponsors .logo-carousel-track {
+                gap: clamp(1.5rem, 5vw, 3.5rem);
+            }
+        </style>
         <section class="py-10 sm:py-12 md:py-16 lg:py-22 xl:py-28" id="research-sponsors">
             <div class="main-container w-full min-w-0 max-w-full">
                 <div
@@ -1449,36 +1489,90 @@
                                 <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--right"></div>
                                 <div class="logo-carousel-track-wrap">
                                     <div class="logo-carousel-track">
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="TATA" class="logo-carousel-item-img dark:invert"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="TATA" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="RedBus" class="logo-carousel-item-img invert dark:invert-0"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="RedBus" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="SKROMAN" class="logo-carousel-item-img dark:invert"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="SKROMAN" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="NSF" class="logo-carousel-item-img invert dark:invert-0"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="NSF" class="logo-carousel-item-img"
                                                 src="./images/icons/NSF.svg" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="NASA" class="logo-carousel-item-img dark:invert"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="NASA" class="logo-carousel-item-img"
                                                 src="./images/icons/NASA.svg" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="Argonne" class="logo-carousel-item-img invert dark:invert-0"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="Argonne" class="logo-carousel-item-img"
                                                 src="./images/icons/Argonne.svg" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="Chain Reaction Innovations"
-                                                class="logo-carousel-item-img dark:invert"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="Chain Reaction Innovations" class="logo-carousel-item-img"
                                                 src="./images/icons/Chain-Reation-Innovations.svg" />
                                         </figure>
-
+                                        <figure class="logo-carousel-item">
+                                            <img alt="TATA" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="RedBus" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="SKROMAN" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="NSF" class="logo-carousel-item-img"
+                                                src="./images/icons/NSF.svg" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="NASA" class="logo-carousel-item-img"
+                                                src="./images/icons/NASA.svg" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="Argonne" class="logo-carousel-item-img"
+                                                src="./images/icons/Argonne.svg" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="Chain Reaction Innovations" class="logo-carousel-item-img"
+                                                src="./images/icons/Chain-Reation-Innovations.svg" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="TATA" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="RedBus" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="SKROMAN" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="NSF" class="logo-carousel-item-img"
+                                                src="./images/icons/NSF.svg" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="NASA" class="logo-carousel-item-img"
+                                                src="./images/icons/NASA.svg" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="Argonne" class="logo-carousel-item-img"
+                                                src="./images/icons/Argonne.svg" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="Chain Reaction Innovations" class="logo-carousel-item-img"
+                                                src="./images/icons/Chain-Reation-Innovations.svg" />
+                                        </figure>
                                     </div>
                                 </div>
                             </div>
@@ -1493,27 +1587,66 @@
                                 <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--right"></div>
                                 <div class="logo-carousel-track-wrap">
                                     <div class="logo-carousel-track">
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="LEO" class="logo-carousel-item-img dark:invert invert"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="LEO" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="MINIKIM" class="logo-carousel-item-img invert dark:invert-0"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MINIKIM" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="MYTRI" class="logo-carousel-item-img dark:invert"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MYTRI" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="OGILVY" class="logo-carousel-item-img dark:invert invert"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="OGILVY" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
                                         </figure>
-                                        <figure class="logo-carousel-item grayscale">
-                                            <img alt="VRIDDHI" class="logo-carousel-item-img invert dark:invert-0"
+                                        <figure class="logo-carousel-item">
+                                            <img alt="VRIDDHI" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
                                         </figure>
-
+                                        <figure class="logo-carousel-item">
+                                            <img alt="LEO" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MINIKIM" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MYTRI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="OGILVY" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="VRIDDHI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="LEO" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MINIKIM" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MYTRI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="OGILVY" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="VRIDDHI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
+                                        </figure>
                                     </div>
                                 </div>
                             </div>
