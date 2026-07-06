@@ -1687,6 +1687,9 @@
     <script defer="" src="./vendor/motionpathplugin.min.js"></script>
     <script defer="" src="./vendor/lenis.min.js"></script>
     <script defer="" src="./vendor/springer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="./assets/main5.js" type="module"></script>
     <script src="./assets/main.js" type="module"></script>
     <script src="./assets/fx.js?v=3"></script>
@@ -1781,6 +1784,123 @@
     </script>
     <script defer="" src="./assets/navbar.js?v=6"></script>
     <script defer="" src="./assets/footer.js?v=2"></script>
+    <script>
+        (function () {
+            const container = document.getElementById('sk3dCore');
+            if (!container) return;
+
+            function init3D() {
+                if (typeof THREE === 'undefined' || typeof THREE.STLLoader === 'undefined' || typeof THREE.OrbitControls === 'undefined') {
+                    setTimeout(init3D, 100);
+                    return;
+                }
+
+                // Clear fallback markup (CSS rotor and gem)
+                container.innerHTML = '';
+
+                let width = container.clientWidth || 320;
+                let height = container.clientHeight || 320;
+
+                const scene = new THREE.Scene();
+
+                const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+                camera.position.set(0, 0, 8);
+
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                renderer.setSize(width, height);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                container.appendChild(renderer.domElement);
+
+                // Setup OrbitControls for mouse interaction
+                const controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+                controls.enableZoom = false; // Prevents page scrolling hijack
+                controls.enablePan = false;  // Keeps model centered
+
+                // Lock OrbitControls to horizontal (Y-axis) rotation only
+                controls.minPolarAngle = Math.PI / 2;
+                controls.maxPolarAngle = Math.PI / 2;
+
+                let isInteracting = false;
+                controls.addEventListener('start', () => {
+                    isInteracting = true;
+                });
+                controls.addEventListener('end', () => {
+                    setTimeout(() => {
+                        isInteracting = false;
+                    }, 1000);
+                });
+
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+                scene.add(ambientLight);
+
+                const dirLight1 = new THREE.DirectionalLight(0xffd84d, 1.5);
+                dirLight1.position.set(5, 5, 5);
+                scene.add(dirLight1);
+
+                const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+                dirLight2.position.set(-5, -5, 5);
+                scene.add(dirLight2);
+
+                const loader = new THREE.STLLoader();
+                let model = null;
+
+                loader.load('./images/3ds/hf_20260224_190358_f6a416bd-50ea-43d9-99b6-edc8ca167973-removebg-preview.stl', function (geometry) {
+                    const material = new THREE.MeshPhongMaterial({
+                        color: 0xf2d400,
+                        specular: 0xffffff,
+                        shininess: 100,
+                        flatShading: false,
+                        side: THREE.DoubleSide
+                    });
+                    const mesh = new THREE.Mesh(geometry, material);
+                    model = mesh;
+
+                    // Center geometry & compute bounding box
+                    geometry.computeBoundingBox();
+                    geometry.center();
+
+                    const box = geometry.boundingBox;
+                    const size = new THREE.Vector3();
+                    box.getSize(size);
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const scaleFactor = 3.6 / maxDim;
+                    mesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+                    scene.add(mesh);
+                }, undefined, function (error) {
+                    console.error('An error happened loading the 3D model:', error);
+                });
+
+                function animate() {
+                    requestAnimationFrame(animate);
+
+                    if (model && !isInteracting) {
+                        // Rotate only around Y-axis
+                        model.rotation.y += 0.015;
+                    }
+
+                    controls.update();
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                const resizeObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        width = entry.contentRect.width || width;
+                        height = entry.contentRect.height || height;
+                        camera.aspect = width / height;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(width, height);
+                    }
+                });
+                resizeObserver.observe(container);
+            }
+
+            init3D();
+        })();
+    </script>
 </body>
 
 </html>
