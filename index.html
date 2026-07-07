@@ -1429,6 +1429,7 @@
             }
 
             @media (prefers-reduced-motion: reduce) {
+
                 .pipeline-section .rocket-traveler .rt-flame-outer,
                 .pipeline-section .rocket-traveler .rt-flame-core,
                 .rt-flame-outer,
@@ -1442,6 +1443,7 @@
             }
 
             @keyframes rim-shimmer {
+
                 0%,
                 100% {
                     opacity: .25;
@@ -1656,29 +1658,6 @@
                 .pipeline-section .desc {
                     font-size: 12.5px;
                     line-height: 1.65;
-                }
-            }
-
-            @media (max-width: 768px), (hover: none) and (pointer: coarse) {
-                /* Mobile GPU performance optimizations: eliminate heavy SVG blur filters & continuous background compositing */
-                .pipeline-section .trail-halo {
-                    filter: none !important;
-                    stroke-width: 24px !important;
-                    opacity: 0.15 !important;
-                }
-                .pipeline-section .trail-glow {
-                    filter: none !important;
-                    stroke-width: 12px !important;
-                    opacity: 0.35 !important;
-                }
-                .pipeline-section .cloud {
-                    animation: none !important;
-                }
-                .pipeline-section .flecks .fleck {
-                    display: none !important;
-                }
-                .pipeline-section .rocket-traveler {
-                    will-change: transform, opacity;
                 }
             }
 
@@ -2034,12 +2013,10 @@
                 /* ————————————————————————————————
                    Ambient flecks (triangles + dust)
                 ———————————————————————————————— */
-                const isMobileDevice = window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0;
                 const fleckLayer = document.querySelector(".pipeline-section .flecks");
                 if (fleckLayer) {
                     const frag = document.createDocumentFragment();
-                    const maxFlecks = isMobileDevice ? 12 : 64;
-                    for (let i = 0; i < maxFlecks; i++) {
+                    for (let i = 0; i < 64; i++) {
                         const isTri = Math.random() < 0.6;
                         let el;
                         if (isTri) {
@@ -2090,34 +2067,6 @@
                     el.style.strokeDashoffset = `${L}`;
                 });
 
-                /* Fast Lookup Table (LUT) to eliminate CPU lag and stutter on mobile devices */
-                const NUM_SAMPLES = 1500;
-                const pathLUT = new Array(NUM_SAMPLES + 1);
-                for (let i = 0; i <= NUM_SAMPLES; i++) {
-                    const len = (i / NUM_SAMPLES) * L;
-                    const pt = geo.getPointAtLength(len);
-                    const a = geo.getPointAtLength(Math.max(0, len - 4));
-                    const b = geo.getPointAtLength(Math.min(L, len + 4));
-                    const rot = Math.atan2(b.y - a.y, b.x - a.x) * (180 / Math.PI) + 90;
-                    pathLUT[i] = { x: pt.x, y: pt.y, rot };
-                }
-
-                const samplePath = (len) => {
-                    const clamped = Math.min(Math.max(len, 0), L);
-                    const exact = (clamped / L) * NUM_SAMPLES;
-                    const idx = Math.min(NUM_SAMPLES - 1, Math.floor(exact));
-                    const t = exact - idx;
-                    const p1 = pathLUT[idx];
-                    const p2 = pathLUT[idx + 1];
-                    const x = p1.x + (p2.x - p1.x) * t;
-                    const y = p1.y + (p2.y - p1.y) * t;
-                    let rDiff = p2.rot - p1.rot;
-                    if (rDiff > 180) rDiff -= 360;
-                    if (rDiff < -180) rDiff += 360;
-                    const rot = p1.rot + rDiff * t;
-                    return { x, y, rot };
-                };
-
                 /* find the path length where the trail reaches a given y (monotonic in y) */
                 const lengthAtY = (targetY) => {
                     let lo = 0, hi = L;
@@ -2129,6 +2078,15 @@
                     return (lo + hi) / 2;
                 };
 
+                /* local direction of travel in degrees, standard SVG atan2 (0=+x, 90=+y/down, -90=-y/up) */
+                const travelAngle = (len) => {
+                    const a = geo.getPointAtLength(Math.max(0, len - 4));
+                    const b = geo.getPointAtLength(Math.min(L, len + 4));
+                    return Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+                };
+
+                const rocketRotation = (len) => travelAngle(len) + 90;
+
                 /* ————————————————————————————————
                    Milestone clouds + simple lit rings at each bend apex
                 ———————————————————————————————— */
@@ -2139,7 +2097,7 @@
                     const len = lengthAtY(y);
                     const pt = geo.getPointAtLength(len);
 
-                    if (nodeCloudLayer && !isMobileDevice) {
+                    if (nodeCloudLayer) {
                         const createCloud = (xPos, yPos, w, h, op, cls, delay) => {
                             const cloud = document.createElementNS(SVG_NS, "use");
                             cloud.setAttribute("href", "#s-cloud");
@@ -2200,11 +2158,12 @@
                     layers.forEach((el) => { el.style.strokeDashoffset = offset; });
 
                     const clampedLen = Math.min(Math.max(drawn, 0.5), L - 0.5);
-                    const { x, y, rot } = samplePath(clampedLen);
+                    const pt = geo.getPointAtLength(clampedLen);
+                    const rot = rocketRotation(clampedLen);
 
-                    rocketTraveler.setAttribute("transform", `translate(${x.toFixed(2)} ${y.toFixed(2)})`);
+                    rocketTraveler.setAttribute("transform", `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)})`);
                     rocketTraveler.setAttribute("opacity", p > 0.004 && p < 0.996 ? "1" : "0");
-                    if (rocketAssembly) rocketAssembly.setAttribute("transform", `rotate(${rot.toFixed(2)})`);
+                    if (rocketAssembly) rocketAssembly.setAttribute("transform", `rotate(${rot.toFixed(1)})`);
 
                     nodes.forEach((n) => {
                         const lit = drawn >= n.len - 6;
@@ -2244,9 +2203,8 @@
 
                 const loop = () => {
                     const diff = target - current;
-                    const lerpSpeed = isMobileDevice ? 0.25 : 0.09;
                     if (Math.abs(diff) > 0.0004) {
-                        current += diff * lerpSpeed;
+                        current += diff * 0.09;
                         setProgress(current);
                         requestAnimationFrame(loop);
                     } else if (current !== target) {
