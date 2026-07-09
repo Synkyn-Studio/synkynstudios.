@@ -1148,6 +1148,25 @@
         display: none !important;
       }
 
+      /* Instagram specific height styling on mobile views to prevent cutoffs */
+      @media (max-width: 767.98px) {
+        .media-modal--instagram .media-modal__media-wrapper {
+          height: 62vh !important;
+          max-height: 70vh !important;
+          min-height: 440px !important;
+          aspect-ratio: auto !important;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .media-modal--instagram .media-modal__media-wrapper {
+          height: 60vh !important;
+          max-height: 68vh !important;
+          min-height: 400px !important;
+          aspect-ratio: auto !important;
+        }
+      }
+
       /* ============================================================
          CUSTOM VIMEO PLAYER (inside modal) — our bar, not Vimeo's
          ============================================================ */
@@ -1811,7 +1830,7 @@
           const clickL = slide.querySelector('.vmo-click');
           const controls = slide.querySelector('.vmo-controls');
 
-          let duration = 0, isPlaying = false, isMuted = true, scrubbing = false, hideT = null;
+          let duration = 0, isPlaying = false, isMuted = false, scrubbing = false, hideT = null;
 
           function renderTime(cur) { if (timeEl) timeEl.innerHTML = fmtTime(cur) + '&nbsp;/&nbsp;' + fmtTime(duration); }
           function setPlayed(f) {
@@ -1832,7 +1851,7 @@
           setPlayIcon(); setMuteIcon(); setFsIcon(); renderTime(0);
 
           player.setLoop(true).catch(() => { });
-          player.setMuted(true).catch(() => { });
+          player.setMuted(false).catch(() => { });
           player.getDuration().then(function (d) { duration = d || 0; renderTime(0); }).catch(() => { });
           player.on('loaded', function () { player.getDuration().then(function (d) { duration = d || 0; renderTime(0); }).catch(() => { }); });
           player.on('timeupdate', function (data) { if (scrubbing) return; duration = data.duration || duration; setPlayed(data.percent); renderTime(data.seconds); });
@@ -1927,7 +1946,7 @@
 
             let mediaHtml = '';
             if (srcObj.type === 'video') {
-              mediaHtml = `<video src="${srcObj.src}" loop playsinline muted controls controlslist="nodownload" ${idx === 0 ? 'autoplay' : ''} preload="auto"></video>`;
+              mediaHtml = `<video src="${srcObj.src}" loop playsinline controls controlslist="nodownload" ${idx === 0 ? 'autoplay' : ''} preload="auto"></video>`;
             } else if (srcObj.type === 'youtube') {
               const ytId = getYouTubeId(srcObj.src);
               mediaHtml = `<iframe src="https://www.youtube.com/embed/${ytId}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="iframe-swipe-overlay" onclick="this.style.pointerEvents='none'"></div>`;
@@ -1935,7 +1954,7 @@
               const vid = getVimeoId(srcObj.src);
               mediaHtml = `
                 <div class="vmo-stage">
-                  <iframe class="vmo-frame" src="https://player.vimeo.com/video/${vid}?controls=0&loop=1&autoplay=1&muted=1&dnt=1&title=0&byline=0&portrait=0&badge=0&playsinline=1&autopause=0" title="${work.title}" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen></iframe>
+                  <iframe class="vmo-frame" src="https://player.vimeo.com/video/${vid}?controls=0&loop=1&autoplay=1&muted=0&dnt=1&title=0&byline=0&portrait=0&badge=0&playsinline=1&autopause=0" title="${work.title}" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen></iframe>
                   <button class="vmo-click" type="button" aria-label="Play or pause"></button>
                   <div class="vmo-controls" role="group" aria-label="Video controls">
                     <button class="vmo-btn vmo-play" type="button" aria-label="Play"></button>
@@ -1975,6 +1994,12 @@
             if (srcObj.type === 'vimeo') initVimeoSlide(slide);
           });
 
+          if (hasInstagram) {
+            modal.classList.add('media-modal--instagram');
+          } else {
+            modal.classList.remove('media-modal--instagram');
+          }
+
           modal.classList.add('show');
           modal.setAttribute('aria-hidden', 'false');
           requestAnimationFrame(() => { modal.classList.add('fade-in'); mediaContainer.scrollLeft = 0; });
@@ -1999,6 +2024,7 @@
           if (fs) { (document.exitFullscreen || document.webkitExitFullscreen || function () { }).call(document); }
           setTimeout(() => {
             modal.classList.remove('show');
+            modal.classList.remove('media-modal--instagram');
             document.body.style.overflow = '';
             document.body.classList.remove('modal-open');
             destroyVimeoPlayers();
