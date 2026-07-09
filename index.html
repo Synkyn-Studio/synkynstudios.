@@ -349,8 +349,8 @@
         /* Tablet */
         @media (min-width: 768px) and (max-width: 1023px) {
             .hero-brand {
-                font-size: clamp(3.2rem, 12vw, 7rem) !important;
-                line-height: .92 !important;
+                font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
+                line-height: .95 !important;
             }
 
             .hero-services {
@@ -367,12 +367,12 @@
         /* Phones (iPhone + Android) */
         @media (max-width: 767px) {
             #hero .hero-top-layout {
-                gap: 1.15rem !important;
+                gap: 1.5rem !important;
             }
 
             .hero-brand {
-                font-size: clamp(2.5rem, 15.5vw, 4rem) !important;
-                line-height: .9 !important;
+                font-size: clamp(2rem, 10vw, 3rem) !important;
+                line-height: .95 !important;
                 letter-spacing: -.02em !important;
             }
 
@@ -408,7 +408,7 @@
         /* iPhone 12/13/14/15, most Androids (390–430px) */
         @media (max-width: 430px) {
             .hero-brand {
-                font-size: clamp(2.35rem, 15vw, 3.65rem) !important;
+                font-size: clamp(1.8rem, 9.5vw, 2.5rem) !important;
             }
 
             .hero-services {
@@ -423,7 +423,7 @@
         /* Small Androids / iPhone SE (<=360px) */
         @media (max-width: 360px) {
             .hero-brand {
-                font-size: clamp(2rem, 14.5vw, 3.15rem) !important;
+                font-size: clamp(1.6rem, 9vw, 2.2rem) !important;
             }
 
             .hero-services {
@@ -2991,7 +2991,11 @@
             }
             ["mousemove", "pointerdown", "touchstart"].forEach(function (ev) { modalContent.addEventListener(ev, showControls, { passive: true }); });
 
-            var isAnimating = false, scrollY = 0; var DUR = 450;
+            var isAnimating = false, scrollY = 0;
+            var DUR = 450;                                   // open (grow) duration
+            var CLOSE_DUR = 780;                             // close flight — slower, like the loader
+            var FILM = "cubic-bezier(.76,0,.24,1)";          // same film ease the loader logo uses
+            var SETTLE = 230;                                // gentle fade once it lands in the container
             function lockScroll() {
                 if (window.lenis) window.lenis.stop();
                 scrollY = window.scrollY || document.documentElement.scrollTop;
@@ -3083,26 +3087,21 @@
 
             window.closeVideoModal = function () {
                 if (isAnimating) return; isAnimating = true;
-                backdrop.style.opacity = "0";
+
+                // Leave native fullscreen first so we measure the real card rect
+                var fs = document.fullscreenElement || document.webkitFullscreenElement;
+                if (fs) { (document.exitFullscreen || document.webkitExitFullscreen || function () { }).call(document); }
+
                 if (closeBtn) { closeBtn.style.transition = "opacity 0.2s ease"; closeBtn.style.opacity = "0"; }
+                if (controls) controls.classList.add("hidden-ui");   // hide the bar during the flight
                 if (navbar) { navbar.style.filter = ""; navbar.style.opacity = "1"; navbar.style.pointerEvents = ""; }
 
-                var startRect = opener ? opener.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0, height: 0 };
-                var finalRect = modalContent.getBoundingClientRect();
-                var tx = startRect.left + startRect.width / 2 - (finalRect.left + finalRect.width / 2);
-                var ty = startRect.top + startRect.height / 2 - (finalRect.top + finalRect.height / 2);
-                var sx = finalRect.width > 0 ? startRect.width / finalRect.width : 1;
-                var sy = finalRect.height > 0 ? startRect.height / finalRect.height : 1;
+                // Backdrop clears over the flight so the page (and the small container) reappears
+                backdrop.style.transition = "opacity " + CLOSE_DUR + "ms ease";
+                backdrop.style.opacity = "0";
 
-                requestAnimationFrame(function () {
-                    modalContent.style.transition = "transform " + DUR + "ms cubic-bezier(0.32, 0, 0.67, 0), opacity " + DUR + "ms ease, border-radius " + DUR + "ms ease";
-                    modalContent.style.transform = "translate(" + tx + "px, " + ty + "px) scale(" + sx + ", " + sy + ")";
-                    modalContent.style.opacity = "0";
-                    if (window.innerWidth >= 640) modalContent.style.borderRadius = "16px";
-                });
-
-                // stop sound the moment the popup starts closing, and hand the exact
-                // frame back to the little muted preview so it feels like one video
+                // Hand the exact frame back to the muted preview so the shot is continuous,
+                // then silence the popup — sound lives ONLY inside the popup.
                 var p = ensurePlayer();
                 var tpClose = getThumbPlayer();
                 if (p) {
@@ -3111,20 +3110,44 @@
                             tpClose.setCurrentTime(t || 0).catch(function () { });
                             tpClose.setMuted(true).catch(function () { });
                             tpClose.play().catch(function () { });
-                        }).catch(function () {
-                            tpClose.play().catch(function () { });
-                        });
+                        }).catch(function () { tpClose.play().catch(function () { }); });
                     }
-                    p.pause().catch(function () { });
                     p.setMuted(true).catch(function () { });
                 } else if (tpClose) {
                     tpClose.play().catch(function () { });
                 }
 
-                var fs = document.fullscreenElement || document.webkitFullscreenElement;
-                if (fs) { (document.exitFullscreen || document.webkitExitFullscreen || function () { }).call(document); }
-
                 unlockScroll();
+
+                // Measure where the little Show Reel container sits on screen right now.
+                // The popup will FLY into that exact slot — same idea as the loader logo
+                // gliding into the navbar — staying fully visible for the whole flight.
+                var visibleOpener = (opener && opener.offsetParent !== null) ? opener : null;
+                var startRect = visibleOpener
+                    ? visibleOpener.getBoundingClientRect()
+                    : { left: window.innerWidth / 2, top: window.innerHeight * 0.62, width: 0, height: 0 };
+                var finalRect = modalContent.getBoundingClientRect();
+                var tx = startRect.left + startRect.width / 2 - (finalRect.left + finalRect.width / 2);
+                var ty = startRect.top + startRect.height / 2 - (finalRect.top + finalRect.height / 2);
+                var sx = finalRect.width > 0 ? startRect.width / finalRect.width : 0.28;
+                var sy = finalRect.height > 0 ? startRect.height / finalRect.height : 0.28;
+                var landRadius = visibleOpener ? "16px" : "24px";
+
+                requestAnimationFrame(function () {
+                    // Flight: geometry only — opacity stays 1 so it reads as the card
+                    // physically travelling into its home, not fading away.
+                    modalContent.style.transition =
+                        "transform " + CLOSE_DUR + "ms " + FILM + ", border-radius " + CLOSE_DUR + "ms " + FILM;
+                    modalContent.style.transform = "translate(" + tx + "px, " + ty + "px) scale(" + sx + ", " + sy + ")";
+                    modalContent.style.borderRadius = landRadius;
+                });
+
+                // Landed in the container → settle: a short fade reveals the live muted
+                // preview sitting underneath at the same frame (seamless handoff).
+                setTimeout(function () {
+                    modalContent.style.transition = "opacity " + SETTLE + "ms ease";
+                    modalContent.style.opacity = "0";
+                }, CLOSE_DUR);
 
                 setTimeout(function () {
                     videoModal.classList.add("hidden");
@@ -3132,12 +3155,14 @@
                     modalContent.style.transition = "none";
                     modalContent.style.transform = "none";
                     modalContent.style.opacity = "1";
+                    modalContent.style.borderRadius = "";
+                    backdrop.style.transition = "";
                     if (controls) controls.classList.remove("hidden-ui");
                     var pp = ensurePlayer();
                     if (pp) pp.pause().catch(function () { });
                     isAnimating = false;
-                    if (opener) opener.focus({ preventScroll: true });
-                }, DUR + 50);
+                    if (visibleOpener) visibleOpener.focus({ preventScroll: true });
+                }, CLOSE_DUR + SETTLE + 40);
             };
 
             document.addEventListener("keydown", function (e) {
