@@ -466,8 +466,8 @@
         /* ===================== FEATURED SHOWCASE ===================== */
         .pf-feat {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-auto-rows: 200px;
+            grid-template-columns: repeat(10, 1fr);
+            grid-auto-rows: auto;
             gap: clamp(12px, 1.4vw, 22px);
         }
 
@@ -485,24 +485,20 @@
             transition: transform .5s var(--pf-ease), border-color .4s ease, box-shadow .5s var(--pf-ease);
         }
 
-        .pf-feat-card.s-hero {
-            grid-column: span 4;
-            grid-row: span 2;
-        }
-
-        .pf-feat-card.s-portrait {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .pf-feat-card.s-half {
-            grid-column: span 3;
-            grid-row: span 2;
-        }
-
-        .pf-feat-card.s-wide {
+        .pf-feat-card.s-row1-land {
             grid-column: span 6;
-            grid-row: span 1;
+        }
+
+        .pf-feat-card.s-row1-port {
+            grid-column: span 2;
+            aspect-ratio: 4 / 5;
+            height: auto;
+        }
+
+        .pf-feat-card.s-row2-land {
+            grid-column: span 5;
+            aspect-ratio: 21 / 9;
+            height: auto;
         }
 
         .pf-feat-card:hover {
@@ -998,7 +994,7 @@
         @media (max-width: 600px) {
             .pf-lb__img {
                 max-width: 98vw;
-                max-height: 50vh;
+                max-height: 75vh;
                 border-radius: 8px;
             }
 
@@ -1400,27 +1396,25 @@
         @media (max-width: 1023.98px) {
             .pf-feat {
                 grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 180px;
+                grid-auto-rows: auto;
             }
 
-            .pf-feat-card.s-hero {
+            .pf-feat-card.s-row1-land {
                 grid-column: span 2;
-                grid-row: span 2;
+                aspect-ratio: 21 / 9;
+                height: auto;
             }
 
-            .pf-feat-card.s-portrait {
+            .pf-feat-card.s-row1-port {
                 grid-column: span 1;
-                grid-row: span 2;
+                aspect-ratio: 4 / 5;
+                height: auto;
             }
 
-            .pf-feat-card.s-half {
+            .pf-feat-card.s-row2-land {
                 grid-column: span 1;
-                grid-row: span 2;
-            }
-
-            .pf-feat-card.s-wide {
-                grid-column: span 2;
-                grid-row: span 1;
+                aspect-ratio: 21 / 9;
+                height: auto;
             }
         }
 
@@ -1431,79 +1425,72 @@
                 gap: 14px;
             }
 
-            .pf-feat-card.s-hero,
-            .pf-feat-card.s-portrait,
-            .pf-feat-card.s-half,
-            .pf-feat-card.s-wide {
+            .pf-feat-card.s-row1-land,
+            .pf-feat-card.s-row1-port,
+            .pf-feat-card.s-row2-land {
                 grid-column: span 1;
                 grid-row: span 1;
             }
 
-            .pf-feat-card.s-hero {
-                grid-row: span 1;
+            .pf-feat-card.s-row1-land,
+            .pf-feat-card.s-row2-land {
                 aspect-ratio: 21 / 9;
-                min-height: 160px;
+                min-height: 140px;
             }
 
-            .pf-feat-card.s-portrait {
-                aspect-ratio: 3 / 4;
+            .pf-feat-card.s-row1-port {
+                aspect-ratio: 4 / 5;
                 min-height: 280px;
             }
-
-            .pf-feat-card.s-half {
-                aspect-ratio: 16 / 9;
-                min-height: 200px;
-            }
-
-            .pf-feat-card.s-wide {
-                aspect-ratio: 21 / 9;
-                min-height: 160px;
-            }
-
-            .pf-media img {
-                object-fit: cover;
-                object-position: center;
-            }
-
-            .pf-controls {
-                position: static;
-            }
-
-            .pf-search {
-                width: 100%;
-            }
-
-            .pf-filters {
-                flex: 1 1 100%;
-            }
-
-            .pf-cap__title {
-                font-size: 14px;
-            }
-
-            .pf-badge {
-                top: 10px;
-                left: 10px;
-                padding: 5px 10px;
-                font-size: 10px;
-            }
-
-            .pf-count {
-                top: 10px;
-                right: 10px;
-                padding: 5px 10px;
-                font-size: 10px;
-            }
-
-            .pf-arrow {
-                width: 36px;
-                height: 36px;
-            }
-
-            .pf-cap {
-                padding: 10px;
-            }
         }
+
+        .pf-media img {
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .pf-controls {
+            position: static;
+            padding: 16px 0;
+        }
+
+        .pf-search {
+            width: 100%;
+            padding: 0 clamp(18px, 4vw, 60px);
+        }
+
+        .pf-filters {
+            flex: 1 1 100%;
+            padding: 4px clamp(18px, 4vw, 60px);
+        }
+
+        .pf-cap__title {
+            font-size: 14px;
+        }
+
+        .pf-badge {
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            font-size: 10px;
+        }
+
+        .pf-count {
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            font-size: 10px;
+        }
+
+        .pf-arrow {
+            width: 36px;
+            height: 36px;
+        }
+
+        .pf-cap {
+            padding: 10px;
+        }
+
 
         @media (max-width: 1023.98px) {
             .pf-lb__nav {
@@ -2178,114 +2165,111 @@
                 {
                     id: 'project-1',
                     title: 'Zlade',
-                    category: 'Skincare',
-                    description: 'A bold new print campaign for Zlade – a men’s grooming brand that blends sharp design with clean formulas. Through striking visuals and a confident tone, we capture the essence of precision, performance, and modern self-care.',
+                    category: 'Grooming',
+                    description: 'A bold print campaign for Zlade – a men’s grooming brand that blends sharp design with clean formulas. Through striking visuals and a confident tone, we capture the essence of precision, performance, and modern self-care.',
                     featured: true,
+                    aspectRatio: 2.33,
                     images: [
                         'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Zlade_horizontal.png',
                         'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260704_062814_0edf2927-4afc-4ffa-801d-5803824143c6.png',
                         'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260706_110951_2529f6dd-cc1b-4900-aece-190f51613453.png',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260706_114824_431b8ca4-2b51-4fde-b83a-7eb9779ea840.png'
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260706_114824_431b8ca4-2b51-4fde-b83a-7eb9779ea840.png',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Zlade/6.png?updatedAt=1783525136871'
                     ]
                 },
                 {
                     id: 'project-2',
-                    title: 'Grand Auditorium',
-                    category: 'Commercial',
-                    description: 'High-density venue retrofit keeping latent heat and moisture in check even at maximum capacity.',
+                    title: 'Skroman',
+                    category: 'Smart Home',
+                    description: 'Magnific: A premium vertical product catalogue designed for Skroman Smart Home systems, presenting next-generation automation panels and switches in an elegant print layout.',
                     featured: true,
+                    aspectRatio: 0.8,
                     images: [
-                        './images/auditoriumbg.png',
-                        './images/auditoriumbg1.png',
-                        './images/seniorlivingbg.png'
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el02.png?updatedAt=1783594290438',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el01.png?updatedAt=1783594290985',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_kLI2XdZ16B.png?updatedAt=1783594309942',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el03.png?updatedAt=1783594290771',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_74Hp49HJAL.png?updatedAt=1783594310051',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific__a-premium-product-catalogue-post-vertical-45-compo__26798.png?updatedAt=1783594319873',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_fFTyRWjCDY.png?updatedAt=1783594310078',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_1stz7qhr4r.png?updatedAt=1783594310336',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/k12pro.png?updatedAt=1783594290518'
                     ]
                 },
                 {
                     id: 'project-3',
-                    title: 'Compliance Upgrade',
-                    category: 'Office',
-                    description: 'Brought a legacy building into strict ASHRAE 62.1 compliance without replacing existing equipment.',
+                    title: 'Porter',
+                    category: 'Delivery',
+                    description: 'A high-end product catalogue for Porter, India’s leading on-demand logistics platform. Designed to communicate speed, reliability, and efficiency through bold layouts and precision-driven graphics.',
                     featured: true,
+                    aspectRatio: 0.8,
                     images: [
-                        './images/codestightening.png',
-                        './images/airqualityworse.png'
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/11.png?updatedAt=1783525203490',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/10.png?updatedAt=1783525203309',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/12.png?updatedAt=1783525202054'
                     ]
                 },
                 {
                     id: 'project-4',
-                    title: 'Indoor Air Refresh',
-                    category: 'Educational',
-                    description: 'Purged stale air across a campus, eliminating building-related complaints and lifting air quality scores.',
+                    title: 'Visa',
+                    category: 'Cards',
+                    description: 'Premium metallic Visa credit cards with custom die-cut, foil stamping, and lenticular printing, designed for luxury banking clients.',
                     featured: true,
+                    aspectRatio: 2.33,
                     images: [
-                        './images/airqualityworse.png',
-                        './images/codestightening.png',
-                        './images/seniorlivingbg.png'
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/212221.png?updatedAt=1783514163848',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/visa1.png?updatedAt=1783525383204',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/15.png?updatedAt=1783537581123',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/16.png?updatedAt=1783537581053',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/visa4.png?updatedAt=1783544356080'
+
                     ]
                 },
                 {
                     id: 'project-5',
-                    title: 'Hospitality Integration',
-                    category: 'Hotels',
-                    description: 'Smart, room-by-room humidity control that adapts in real time to changing guest occupancy.',
+                    title: 'Comet',
+                    category: 'Shoes',
+                    description: 'A premium print catalogue for Comet, featuring bold, editorial layouts and dynamic product spreads that bring the brand’s energetic identity to life.',
+                    featured: true,
+                    aspectRatio: 2.33,
                     images: [
-                        './images/auditoriumbg1.png',
-                        './images/seniorlivingbg.png',
-                        './images/auditoriumbg.png'
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/10.png?updatedAt=1783513871971',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/2.png?updatedAt=1783514672985',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/3.png?updatedAt=1783514673418',
+                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/1.png?updatedAt=1783514673680'
                     ]
                 },
                 {
                     id: 'project-6',
-                    title: 'Industrial Plant Retrofit',
-                    category: 'Industrial',
-                    description: 'Heavy-duty moisture capture for a working production floor with zero downtime during install.',
+                    title: 'Zenith Timepieces',
+                    category: 'Editorial',
+                    description: 'Premium print catalogue and collector’s magazine insert for Zenith luxury mechanical watches, featuring minimalist editorial typography.',
+                    aspectRatio: 2.33,
                     images: [
-                        './images/project1.jpg',
-                        './images/project2.jpg',
-                        './images/project3.jpg'
+                        'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000',
+                        'https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=1000'
                     ]
                 },
                 {
                     id: 'project-7',
-                    title: 'Residential Tower',
-                    category: 'Residential',
-                    description: 'Quiet, efficient comfort across every floor of a high-rise residence.',
+                    title: 'Aura Cosmetics',
+                    category: 'Cosmetics',
+                    description: 'Minimalist brand lookbook and print advertisement series for Aura’s organic cosmetics line, showcasing clean design layouts.',
+                    aspectRatio: 0.8,
                     images: [
-                        './images/project4.jpg',
-                        './images/project5.jpg'
+                        'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1000',
+                        'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1000'
                     ]
                 },
                 {
                     id: 'project-8',
-                    title: 'Showroom Experience',
-                    category: 'Showrooms',
-                    description: 'Crisp, gallery-grade air for a flagship showroom — clean, cool and consistent.',
+                    title: 'Prism Paint Co.',
+                    category: 'Packaging',
+                    description: 'Vibrant packaging labels and swatches catalog for Prism’s new eco-friendly interior paint lineup.',
+                    aspectRatio: 0.8,
                     images: [
-                        './images/auditoriumbg.png',
-                        './images/codestightening.png'
-                    ]
-                },
-                {
-                    id: 'project-9',
-                    title: 'Conference & Events Hall',
-                    category: 'Events',
-                    description: 'Rapid-response conditioning for fluctuating crowds across back-to-back events.',
-                    images: [
-                        './images/auditoriumbg1.png',
-                        './images/auditoriumbg.png',
-                        './images/seniorlivingbg.png',
-                        './images/airqualityworse.png'
-                    ]
-                },
-                {
-                    id: 'project-10',
-                    title: 'Corporate Headquarters',
-                    category: 'Office',
-                    description: 'Halved CO₂ levels across a 50,000 sq ft office and measurably reduced sick days.',
-                    images: [
-                        './images/seniorlivingbg.png',
-                        './images/codestightening.png',
-                        './images/auditoriumbg.png'
+                        'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1000',
+                        'https://images.unsplash.com/photo-1562975078-0a018422ded3?q=80&w=1000'
                     ]
                 }
             ];
@@ -2300,9 +2284,8 @@
                 .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-            const ratios = [2.33, 0.8, 1.5, 0.75, 1.45, 1.0, 1.6, 0.83, 1.25, 1.4];
             // featured size pattern
-            const featSizes = ['s-hero', 's-portrait', 's-half', 's-half', 's-wide'];
+            const featSizes = ['s-row1-land', 's-row1-port', 's-row1-port', 's-row2-land', 's-row2-land'];
 
             const iconCount = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg>';
             const iconArrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>';
@@ -2415,7 +2398,14 @@
             function renderFilters() {
                 const counts = { All: projects.length };
                 projects.forEach((p) => { counts[p.category] = (counts[p.category] || 0) + 1; });
-                const cats = ['All'].concat(Object.keys(counts).filter((c) => c !== 'All').sort());
+                const cats = ['All'].concat(Object.keys(counts)
+                    .filter((c) => c !== 'All')
+                    .sort((a, b) => {
+                        const countDiff = counts[b] - counts[a];
+                        if (countDiff !== 0) return countDiff;
+                        return a.localeCompare(b);
+                    })
+                );
 
                 filtersWrap.innerHTML = '';
                 cats.forEach((cat) => {
@@ -2480,7 +2470,7 @@
             function buildGridCards(list) {
                 gridCards = list.map((p, i) => {
                     const el = makeCard(p, { className: 'pf-card pf-reveal' });
-                    return { p: p, el: el, ar: ratios[i % ratios.length] };
+                    return { p: p, el: el, ar: p.aspectRatio || 2.33 };
                 });
             }
 

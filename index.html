@@ -941,7 +941,8 @@
                                         <div class="absolute bottom-0 right-0 flex items-center justify-center px-4 py-2 rounded-tl-2xl border-t border-l z-10 overflow-hidden"
                                             style="background: linear-gradient(135deg, #ffe08a 0%, #f2d400 100%); border-color: rgba(255, 255, 255, 0.35); box-shadow: 0 -2px 18px rgba(242, 212, 0, 0.35);">
                                             <span class="micra-badge inline-block"
-                                                style="color: #0a0a0a; font-weight: 800; letter-spacing: .02em;">SHOWREEL 2026</span>
+                                                style="color: #0a0a0a; font-weight: 800; letter-spacing: .02em;">SHOWREEL
+                                                2026</span>
                                         </div>
                                     </button>
                                 </div>
@@ -1346,6 +1347,18 @@
                 font-family: var(--font-body);
                 -webkit-font-smoothing: antialiased;
                 padding: 0;
+            }
+
+            .pipeline-section::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 280px;
+                background: linear-gradient(to bottom, transparent 0%, #080808 100%);
+                z-index: 5;
+                pointer-events: none;
             }
 
             .pipeline-section .flecks {
@@ -1942,6 +1955,14 @@
                         <mask id="m-fade">
                             <rect x="-200" y="0" width="1600" height="4400" fill="url(#g-fade)" />
                         </mask>
+                        <linearGradient id="g-cloud-fade" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#fff" stop-opacity="1" />
+                            <stop offset="90%" stop-color="#fff" stop-opacity="1" />
+                            <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+                        </linearGradient>
+                        <mask id="m-cloud-fade">
+                            <rect x="-300" y="-200" width="1800" height="4800" fill="url(#g-cloud-fade)" />
+                        </mask>
                         <radialGradient id="g-cloud-deep" cx="50%" cy="42%" r="70%">
                             <stop offset="0%" stop-color="#222b40" />
                             <stop offset="55%" stop-color="#131826" />
@@ -2046,44 +2067,13 @@
                                 href="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/vecteezy_a-dark-cumulus-cloud-contrasts-sharply-against-a-bright_57176514.png"
                                 width="600" height="360" preserveAspectRatio="xMidYMid contain" />
                         </symbol>
-                        <symbol id="s-rocket-up" viewBox="0 0 64 170" overflow="visible">
-                            <path d="M25 148 L39 148 L43 163 L21 163 Z" fill="url(#g-nozzle)" />
-                            <ellipse cx="32" cy="161.5" rx="10" ry="3" fill="#ffdf9a" opacity=".9"
-                                filter="url(#f-blur-s)" />
-                            <rect x="23.4" y="143" width="17.2" height="6" rx="2" fill="#565d68" />
-                            <path d="M24.5 140 L9 161 L12.6 122 L24.5 116 Z" fill="url(#g-fin-l)" />
-                            <path d="M39.5 140 L55 161 L51.4 122 L39.5 116 Z" fill="url(#g-fin-r)" />
-                            <path d="M12 156 L14 126" stroke="#8f97a4" stroke-width="1" opacity=".55" fill="none" />
-                            <path d="M52 156 L50 126" stroke="#1c2027" stroke-width="1" opacity=".7" fill="none" />
-                            <path d="M24 144 L40 144 L40 62 C40 38 36.5 24 32 10 C27.5 24 24 38 24 62 Z"
-                                fill="url(#g-rocket)" />
-                            <path d="M28.4 142 L31 142 L31 48 C30 38 29.4 32 28.8 28 C28.5 38 28.4 44 28.4 52 Z"
-                                fill="#f7fafc" opacity=".55" />
-                            <rect x="24.6" y="122.9" width="14.8" height="1.1" fill="#12151b" opacity=".5" />
-                            <rect x="24.6" y="76.9" width="14.8" height="1.1" fill="#12151b" opacity=".45" />
-                            <rect x="24.8" y="57" width="14.2" height="1" fill="#12151b" opacity=".4" />
-                            <circle cx="32" cy="106" r="5.2" fill="#0d1118" stroke="#828b99" stroke-width="1.4" />
-                            <circle cx="30.4" cy="104.3" r="1.5" fill="#7d95b5" opacity=".8" />
-                            <circle cx="32" cy="88" r="3" fill="#0d1118" stroke="#6f7885" stroke-width="1.1" />
-                            <path
-                                d="M29.5 22 C30.4 17 31.2 13.5 32 10 C32.8 13.5 33.6 17 34.5 22 C33.6 20.6 30.4 20.6 29.5 22 Z"
-                                fill="#dfe4ec" />
-                            <path class="rocket-rim" d="M39.4 143 L39.4 64 C39.4 46 37 32 33.4 18" stroke="#ffd08a"
-                                stroke-width="1.4" fill="none" opacity=".35" stroke-linecap="round" />
-                            <path class="rocket-rim" d="M40 143 L52.6 159.6" stroke="#ffd08a" stroke-width="1.2"
-                                fill="none" opacity=".3" stroke-linecap="round" />
-                        </symbol>
-                        <symbol id="s-flame-down" viewBox="-20 -4 40 114" overflow="visible">
-                            <path class="rt-flame-outer" d="M0 -2 C -10 20 -12 52 0 104 C 12 52 10 20 0 -2 Z"
-                                fill="url(#g-flame-outer)" filter="url(#f-blur-m)" />
-                            <path class="rt-flame-outer" d="M0 -1 C -7 16 -8 44 0 82 C 8 44 7 16 0 -1 Z"
-                                fill="url(#g-flame-outer)" filter="url(#f-flame-glow)" />
-                            <path class="rt-flame-core" d="M0 0 C -3.6 12 -4 32 0 58 C 4 32 3.6 12 0 0 Z"
-                                fill="url(#g-flame-core)" filter="url(#f-blur-s)" />
+                        <symbol id="s-rocket-up" viewBox="0 0 132 171" overflow="visible">
+                            <image width="132" height="171"
+                                xlink:href="data:image/png;base64,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" />
                         </symbol>
                     </defs>
 
-                    <g class="clouds">
+                    <g class="clouds" mask="url(#m-cloud-fade)">
                         <use href="#s-cloud" class="cloud drift-a" x="-240" y="-80" width="750" height="450"
                             opacity=".5" />
                         <use href="#s-cloud" class="cloud drift-b" x="620" y="60" width="580" height="348"
@@ -2125,7 +2115,7 @@
                         <g class="node-clouds"></g>
                     </g>
 
-                    <g mask="url(#m-fade)">
+                    <g mask="url(#m-cloud-fade)">
                         <path id="trail-geo" class="trail-geo" fill="none" d="
                             M 600 -40
                             C 930 130, 930 490, 600 640
@@ -2154,7 +2144,7 @@
                             </g>
                         </g>
                     </g>
-                    <g class="clouds fg-clouds"></g>
+                    <g class="clouds fg-clouds" mask="url(#m-cloud-fade)"></g>
                 </svg>
 
                 <article class="stop left" data-stop="0" style="--top: 6.8%">
@@ -2441,37 +2431,7 @@
                 requestAnimationFrame(loop);
             })();
         </script>
-        <section
-            class="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden py-24 border-y border-white/5">
-            <div class="absolute inset-0 w-full h-full z-0">
-                <video autoplay="" class="object-cover w-full h-full opacity-80" loop="" muted="" playsinline=""
-                    poster="./images/HEHomeVid-poster.webp">
-                    <source src="./video/HEHomeVid.mp4" type="video/mp4" />
-                </video>
-                <div
-                    class="absolute inset-0 bg-gradient-to-b from-background-8/90 via-background-8/40 to-background-8/90">
-                </div>
-                <div class="absolute inset-0 bg-black/30"></div>
-            </div>
-            <div class="relative z-10 container mx-auto px-4 text-center">
-                <div data-delay="0.1" data-direction="up" data-ns-animate="">
-                    <h3
-                        class="text-[#f2d400] font-semibold tracking-[0.2em] uppercase text-sm md:text-base mb-6 drop-shadow-md">
-                        Helix MICRA&trade;</h3>
-                </div>
-                <div data-delay="0.2" data-direction="up" data-ns-animate="">
-                    <h2
-                        class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 drop-shadow-xl tracking-tight">
-                        The Retrofit Answer</h2>
-                </div>
-                <div data-delay="0.3" data-direction="up" data-ns-animate="">
-                    <p
-                        class="text-xl md:text-2xl lg:text-3xl text-white/80 max-w-4xl mx-auto leading-relaxed font-light">
-                        Our systems work alongside your existing HVAC, handling what it can&rsquo;t, <span
-                            class="text-white font-medium">so it can finally do what it does best.</span></p>
-                </div>
-            </div>
-        </section>
+
         <section class="max-[1920px]:px-5 py-14 md:py-24 lg:py-32 xl:py-40">
             <div class="mx-auto max-w-[1880px] py-12 md:px-5 md:py-24 xl:py-28">
                 <div class="main-container 2xl:!max-w-[1440px]">
