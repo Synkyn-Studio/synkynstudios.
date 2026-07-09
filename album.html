@@ -1002,9 +1002,9 @@
         .media-modal__media-wrapper {
           flex: 0 0 auto;
           width: 100%;
-          min-height: 240px;
-          height: 56vh;
-          max-height: 62vh;
+          min-height: 180px;
+          height: 35vh;
+          max-height: 40vh;
         }
 
         .media-modal__slide {
@@ -1055,9 +1055,9 @@
         }
 
         .media-modal__media-wrapper {
-          height: 54vh;
-          min-height: 220px;
-          max-height: 60vh;
+          height: 32vh;
+          min-height: 180px;
+          max-height: 38vh;
         }
 
         .media-modal__slide {
@@ -1123,6 +1123,12 @@
         border: 1px solid rgba(242, 212, 0, 0.15) !important;
         border-radius: 12px !important;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+      }
+
+      /* Hide the floating header/navbar completely when the modal popup is open */
+      body.modal-open header,
+      body.modal-open .header-two {
+        display: none !important;
       }
 
       /* ============================================================
@@ -1956,6 +1962,7 @@
           modal.setAttribute('aria-hidden', 'false');
           requestAnimationFrame(() => { modal.classList.add('fade-in'); mediaContainer.scrollLeft = 0; });
           document.body.style.overflow = 'hidden';
+          document.body.classList.add('modal-open');
           btnClose.focus();
 
           if (hasInstagram) {
@@ -1976,6 +1983,7 @@
           setTimeout(() => {
             modal.classList.remove('show');
             document.body.style.overflow = '';
+            document.body.classList.remove('modal-open');
             destroyVimeoPlayers();
             mediaContainer.querySelectorAll('.media-modal__slide').forEach(slide => mediaObserver.unobserve(slide));
             mediaContainer.innerHTML = '';
