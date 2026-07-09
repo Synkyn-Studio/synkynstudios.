@@ -980,6 +980,34 @@
                         }
                     }
 
+                    .v-header-title {
+                        position: absolute;
+                        top: 24px;
+                        left: 24px;
+                        z-index: 20;
+                        color: rgba(255, 255, 255, 0.95);
+                        font-family: inherit;
+                        font-weight: 800;
+                        font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+                        letter-spacing: 0.06em;
+                        pointer-events: none;
+                        transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+
+                    .v-header-title.hidden-ui {
+                        opacity: 0;
+                        transform: translateY(-12px);
+                    }
+
+                    @media (max-width: 640px) {
+                        .v-header-title {
+                            top: 16px;
+                            left: 16px;
+                        }
+                    }
+
                     /* ---- custom player stage ---- */
                     .v-stage {
                         position: absolute;
@@ -1180,6 +1208,7 @@
                     <div id="modal-content"
                         class="relative bg-black overflow-hidden ring-1 ring-white/10 flex flex-col pointer-events-auto modal-card"
                         style="transform-origin: center; will-change: transform, opacity, border-radius; backface-visibility: hidden; transform: translateZ(0);">
+                        <div id="v-title" class="v-header-title hidden-ui">SHOWREEL 2026</div>
                         <button id="modal-close-btn" onclick="closeVideoModal()"
                             class="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/40 text-white/90 hover:bg-black/60 hover:text-white transition-all backdrop-blur-md border border-white/10 group cursor-pointer"
                             style="opacity: 0;" aria-label="Close modal">
@@ -2870,6 +2899,7 @@
             var opener = document.getElementById("hero-how-it-works-btn");
             var navbar = document.querySelector(".header-two");
             var thumbIframe = document.getElementById("hero-thumbnail-video");
+            var vTitle = document.getElementById("v-title");
 
             if (!videoModal || !modalContent || !iframe) return;
 
@@ -2985,8 +3015,14 @@
             var hideT = null;
             function showControls() {
                 if (controls) controls.classList.remove("hidden-ui");
+                if (vTitle) vTitle.classList.remove("hidden-ui");
                 clearTimeout(hideT);
-                hideT = setTimeout(function () { if (isPlaying && !scrubbing && controls) controls.classList.add("hidden-ui"); }, 2800);
+                hideT = setTimeout(function () {
+                    if (isPlaying && !scrubbing) {
+                        if (controls) controls.classList.add("hidden-ui");
+                        if (vTitle) vTitle.classList.add("hidden-ui");
+                    }
+                }, 2800);
             }
             ["mousemove", "pointerdown", "touchstart"].forEach(function (ev) { modalContent.addEventListener(ev, showControls, { passive: true }); });
 
@@ -3096,6 +3132,7 @@
 
                 if (closeBtn) { closeBtn.style.transition = "opacity 0.2s ease"; closeBtn.style.opacity = "0"; }
                 if (controls) controls.classList.add("hidden-ui");   // hide the bar during the flight
+                if (vTitle) vTitle.classList.add("hidden-ui");
                 if (navbar) { navbar.style.filter = ""; navbar.style.opacity = "1"; navbar.style.pointerEvents = ""; }
 
                 // Backdrop clears over the flight so the page (and the small container) reappears
@@ -3160,6 +3197,7 @@
                     modalContent.style.borderRadius = "";
                     backdrop.style.transition = "";
                     if (controls) controls.classList.remove("hidden-ui");
+                    if (vTitle) vTitle.classList.add("hidden-ui");
                     var pp = ensurePlayer();
                     if (pp) pp.pause().catch(function () { });
                     isAnimating = false;
