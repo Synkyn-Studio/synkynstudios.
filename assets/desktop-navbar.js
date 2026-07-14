@@ -39,7 +39,7 @@ if (desktopNav) {
                                     </svg>
                                 </div>
                                 <div class="flex flex-col text-left">
-                                    <p class="text-[15px] font-medium text-white leading-tight">Album</p>
+                                    <p class="text-[15px] font-medium text-white leading-tight">Library</p>
                                     <p class="text-[12px] text-white/60 font-normal mt-0.5">Our Works — Skykyn</p>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@ if (desktopNav) {
                                     </svg>
                                 </div>
                                 <div class="flex flex-col text-left">
-                                    <p class="text-[15px] font-medium text-white leading-tight">Prints</p>
+                                    <p class="text-[15px] font-medium text-white leading-tight">Printalbum</p>
                                     <p class="text-[12px] text-white/60 font-normal mt-0.5">Discover our creative prints</p>
                                 </div>
                             </div>
