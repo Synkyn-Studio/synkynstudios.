@@ -191,21 +191,7 @@ if (desktopNav) {
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a class="group relative flex items-start gap-2 p-3" href="./privacy.html">
-                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-background-3 dark:bg-background-7 opacity-0 group-hover:opacity-100 rounded-[10px] z-0 transition-all duration-400"></div>
-                            <div class="border-stroke-1 relative z-10 mt-1 flex size-7 shrink-0 items-center justify-center rounded-lg border p-1 dark:border-white/10">
-                                <svg class="stroke-secondary dark:stroke-accent" fill="none" height="18" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-                                    <rect height="11" rx="2" ry="2" width="18" x="3" y="11"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-                            <div class="relative z-10">
-                                <p class="text-tagline-1 text-secondary dark:text-accent font-normal">Privacy Policy</p>
-                                <p class="text-tagline-2 text-secondary/60 dark:text-accent/60 font-normal">How we collect, use, and protect your data</p>
-                            </div>
-                        </a>
-                    </li>
+
                 </ul>
             </div>
 

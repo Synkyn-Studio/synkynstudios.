@@ -77,8 +77,7 @@
 
             <div class="mobile-menu-bottom-bar">
                 <div class="bottom-links">
-                    <a href="./privacy.html" data-path="privacy.html">Privacy Policy ↗</a>
-                    <a href="./terms.html" data-path="terms.html">Terms of Service ↗</a>
+                    <a href="./terms.html" data-path="terms.html">Terms & Conditions ↗</a>
                 </div>
                 <div class="bottom-copyright">© 2026 Synkyn® All rights reserved.</div>
             </div>

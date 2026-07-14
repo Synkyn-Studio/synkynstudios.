@@ -1,15 +1,15 @@
 @import 'cursors.css';
 
 @font-face {
-    font-family: 'Verve';
-    src: url('../fonts/Verve.ttf') format('truetype');
+    font-family: 'Impact';
+    src: url('../fonts/Impact.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
-.font-verve {
-    font-family: 'Verve', sans-serif !important;
+.font-impact {
+    font-family: 'Impact', sans-serif !important;
 }
 
 @layer properties {
