@@ -1,15 +1,27 @@
 @import 'cursors.css';
 
 @font-face {
-    font-family: 'Impact';
-    src: url('../fonts/Impact.ttf') format('truetype');
+    font-family: 'CreatoDisplay-Black';
+    src: url('../fonts/CreatoDisplay-Black.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
-.font-impact {
-    font-family: 'Impact', sans-serif !important;
+.font-creato {
+    font-family: 'CreatoDisplay-Black', sans-serif !important;
+}
+
+@font-face {
+    font-family: 'PerfectGirl-SansSerif';
+    src: url('../fonts/PerfectGirl-SansSerif.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.font-perfectgirl {
+    font-family: 'PerfectGirl-SansSerif', sans-serif !important;
 }
 
 @layer properties {
