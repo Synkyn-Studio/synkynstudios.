@@ -555,11 +555,26 @@
         gap: clamp(12px, 1.4vw, 22px);
       }
 
+      /* ── Mobile: single-column stack with exact aspect ratios ── */
       @media (max-width: 1023.98px) {
+        .bento-pattern-block {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
 
-        .bento-pattern-mid-col,
+        .bento-pattern-mid-col {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          width: 100%;
+        }
+
         .bento-pattern-squares {
-          display: contents;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          width: 100%;
         }
       }
 
@@ -588,13 +603,23 @@
         aspect-ratio: 16 / 9;
       }
 
+      /* Mobile: keep exact aspect ratios — 9:16, 16:9, 1:1 — no cutting */
       @media (max-width: 1023.98px) {
         .bento-ar--portrait {
-          aspect-ratio: 3 / 4;
+          aspect-ratio: 9 / 16;
         }
 
         .bento-ar--landscape {
-          aspect-ratio: 4 / 3;
+          aspect-ratio: 16 / 9;
+        }
+
+        .bento-ar--square {
+          aspect-ratio: 1 / 1;
+        }
+
+        .bento-item {
+          width: 100%;
+          align-self: stretch;
         }
       }
 

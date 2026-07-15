@@ -199,135 +199,11 @@
     </style>
     <style id="sk3d-styles">
         /* ============================================================
-   Synkyn — 3D additions (tilt cards + MICRA Core). Self-contained,
-   scoped under .sk3d-* so it never collides with main.css. Visible
-   by default; degrades gracefully without JS and respects
-   prefers-reduced-motion.
+   Synkyn — Story section (formerly "The Apparatus"). Self-contained,
+   scoped under .sk3d-* so it never collides with main.css. Degrades
+   gracefully without JS and respects prefers-reduced-motion.
 ============================================================ */
-        /* ── origin-story 3D tilt cards ── */
-        .sk3d-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.25rem;
-            max-width: 1120px;
-            margin: 2.5rem auto 0;
-            padding: 0 1.25rem;
-            perspective: 1100px;
-        }
 
-        .sk3d-card {
-            flex: 1 1 280px;
-            max-width: 340px;
-            min-width: 240px;
-            border-radius: 20px;
-            outline: none;
-            cursor: default;
-            transform-style: preserve-3d;
-            transition: transform 0.2s ease-out;
-            will-change: transform;
-        }
-
-        /* hidden ONLY after JS opts in, so cards stay visible if JS is disabled */
-        .sk3d-cards.sk3d-anim .sk3d-card {
-            opacity: 0;
-            translate: 0 28px;
-            transition:
-                opacity 0.7s ease,
-                translate 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
-                transform 0.2s ease-out;
-        }
-
-        .sk3d-cards.sk3d-anim .sk3d-card.is-in {
-            opacity: 1;
-            translate: 0 0;
-        }
-
-        .sk3d-card__inner {
-            position: relative;
-            height: 100%;
-            padding: 2rem 1.6rem;
-            border-radius: 20px;
-            background: linear-gradient(160deg,
-                    rgba(255, 255, 255, 0.055),
-                    rgba(255, 255, 255, 0.02));
-            border: 1px solid rgba(255, 216, 77, 0.16);
-            box-shadow:
-                0 12px 44px rgba(0, 0, 0, 0.45),
-                inset 0 1px 0 rgba(255, 216, 77, 0.08);
-            -webkit-backdrop-filter: blur(14px);
-            backdrop-filter: blur(14px);
-            transform-style: preserve-3d;
-            overflow: hidden;
-            transition:
-                border-color 0.35s ease,
-                box-shadow 0.35s ease;
-        }
-
-        .sk3d-card:hover .sk3d-card__inner,
-        .sk3d-card:focus-visible .sk3d-card__inner {
-            border-color: rgba(255, 216, 77, 0.34);
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.55),
-                inset 0 1px 0 rgba(255, 216, 77, 0.14);
-        }
-
-        .sk3d-card__glare {
-            position: absolute;
-            inset: -1px;
-            border-radius: inherit;
-            pointer-events: none;
-            background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%),
-                    rgba(255, 224, 130, 0.2),
-                    transparent 60%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .sk3d-card:hover .sk3d-card__glare,
-        .sk3d-card:focus-visible .sk3d-card__glare {
-            opacity: 1;
-        }
-
-        .sk3d-card__icon {
-            display: inline-flex;
-            width: 54px;
-            height: 54px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-            color: #f2c200;
-            margin-bottom: 1.15rem;
-            background: rgba(242, 196, 0, 0.1);
-            border: 1px solid rgba(242, 196, 0, 0.22);
-        }
-
-        .sk3d-card__icon svg {
-            width: 25px;
-            height: 25px;
-        }
-
-        .sk3d-card__title {
-            color: #fff;
-            font-size: 1.18rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            margin: 0 0 0.55rem;
-        }
-
-        .sk3d-card__copy {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-            line-height: 1.62;
-            margin: 0;
-        }
-
-        .sk3d-card:focus-visible {
-            outline: 2px solid rgba(242, 196, 0, 0.65);
-            outline-offset: 5px;
-        }
-
-        /* ── MICRA Core section ── */
         .sk3d-core-section {
             position: relative;
             overflow: hidden;
@@ -371,70 +247,116 @@
             color: rgba(255, 255, 255, 0.6);
             font-size: clamp(1rem, 1.7vw, 1.12rem);
             line-height: 1.75;
-            max-width: 48ch;
-            margin: 0 0 1.75rem;
+            max-width: 52ch;
+            margin: 0 0 1.15rem;
         }
 
-        .sk3d-chips {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            padding: 0;
-            margin: 0 0 2rem;
+        .sk3d-core-lead:last-child {
+            margin-bottom: 0;
         }
 
-        .sk3d-chips li {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.82);
-            padding: 0.42rem 0.9rem;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 216, 77, 0.2);
-            background: rgba(255, 216, 77, 0.05);
-        }
-
-        .sk3d-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem 2.5rem;
-            margin: 0;
-        }
-
-        .sk3d-stats dt {
-            font-size: 0.7rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.42);
-            margin-bottom: 0.3rem;
-        }
-
-        .sk3d-stats dd {
-            margin: 0;
-            font-size: 1.12rem;
-            font-weight: 600;
+        .sk3d-core-lead strong {
             color: #fff;
+            font-weight: 600;
         }
 
-        /* stage + crystal */
+        .sk3d-core-lead em {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .sk3d-accent {
+            background: linear-gradient(135deg, #ffd84d 0%, #f2c200 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* stage + logo */
         .sk3d-stage {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: clamp(320px, 40vw, 460px);
-            perspective: 1000px;
+            min-height: clamp(280px, 34vw, 420px);
         }
 
         .sk3d-stage__glow {
             position: absolute;
-            width: 68%;
+            width: 70%;
             aspect-ratio: 1/1;
             border-radius: 50%;
             background: radial-gradient(circle,
                     rgba(242, 196, 0, 0.22),
                     transparent 66%);
-            filter: blur(42px);
+            filter: blur(46px);
             pointer-events: none;
+            animation: sk3dGlowPulse 7s ease-in-out infinite;
+        }
+
+        @keyframes sk3dGlowPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.85;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 1;
+            }
+        }
+
+        .sk3d-logo-plate {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(230px, 30vw, 360px);
+            aspect-ratio: 1 / 1;
+            border-radius: 28px;
+            padding: clamp(2rem, 4vw, 3rem);
+            background: linear-gradient(160deg,
+                    rgba(255, 255, 255, 0.055),
+                    rgba(255, 255, 255, 0.015));
+            border: 1px solid rgba(255, 216, 77, 0.18);
+            box-shadow:
+                0 18px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 216, 77, 0.1);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+        }
+
+        .sk3d-logo-plate:hover {
+            border-color: rgba(255, 216, 77, 0.36);
+            box-shadow:
+                0 26px 70px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 216, 77, 0.16);
+            transform: translateY(-4px);
+        }
+
+        .sk3d-logo-plate img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+            animation: sk3dLogoFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes sk3dLogoFloat {
+
+            0%,
+            100% {
+                transform: translateY(-5px);
+            }
+
+            50% {
+                transform: translateY(5px);
+            }
         }
 
         .sk3d-stage__label {
@@ -448,131 +370,6 @@
             color: rgba(255, 255, 255, 0.32);
         }
 
-        .sk3d-core {
-            position: relative;
-            width: clamp(220px, 26vw, 320px);
-            height: clamp(220px, 26vw, 320px);
-            transform-style: preserve-3d;
-            transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-            transition: transform 0.25s ease-out;
-        }
-
-        .sk3d-rotor {
-            position: absolute;
-            inset: 0;
-            transform-style: preserve-3d;
-            animation: sk3dCoreSpin 24s linear infinite;
-        }
-
-        @keyframes sk3dCoreSpin {
-            from {
-                transform: rotateY(0);
-            }
-
-            to {
-                transform: rotateY(360deg);
-            }
-        }
-
-        .sk3d-ring {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 1.5px solid transparent;
-            --tilt: 72deg;
-            transform: rotateX(var(--tilt)) rotateZ(0deg);
-            animation: sk3dRingSpin 11s linear infinite;
-        }
-
-        @keyframes sk3dRingSpin {
-            to {
-                transform: rotateX(var(--tilt)) rotateZ(360deg);
-            }
-        }
-
-        .sk3d-ring--a {
-            --tilt: 72deg;
-            border-color: rgba(242, 196, 0, 0.55);
-            box-shadow: 0 0 24px rgba(242, 196, 0, 0.22);
-            animation-duration: 9s;
-        }
-
-        .sk3d-ring--b {
-            --tilt: 72deg;
-            inset: 9%;
-            border-color: rgba(255, 216, 77, 0.42);
-            animation-duration: 13s;
-            animation-direction: reverse;
-        }
-
-        .sk3d-ring--c {
-            --tilt: 26deg;
-            inset: 17%;
-            border-color: rgba(255, 243, 117, 0.34);
-            animation-duration: 17s;
-        }
-
-        .sk3d-orbit {
-            position: absolute;
-            inset: 0;
-            transform-style: preserve-3d;
-            transform: rotateX(68deg);
-        }
-
-        .sk3d-sat {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 11px;
-            height: 11px;
-            margin: -6px 0 0 -6px;
-            background: #ffe375;
-            clip-path: polygon(50% 0, 100% 100%, 0 100%);
-            box-shadow: 0 0 12px rgba(255, 216, 77, 0.85);
-            --r: 140px;
-        }
-
-        .sk3d-sat--1 {
-            transform: rotate(0deg) translateX(var(--r));
-        }
-
-        .sk3d-sat--2 {
-            transform: rotate(120deg) translateX(var(--r));
-        }
-
-        .sk3d-sat--3 {
-            transform: rotate(240deg) translateX(var(--r));
-        }
-
-        .sk3d-gem {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 40%;
-            height: 40%;
-            margin: 0;
-            background: linear-gradient(155deg,
-                    rgba(255, 243, 117, 0.96),
-                    rgba(242, 196, 0, 0.62) 55%,
-                    rgba(154, 115, 0, 0.55));
-            clip-path: polygon(50% 3%, 97% 97%, 3% 97%);
-            box-shadow: 0 0 30px rgba(242, 196, 0, 0.55);
-            filter: drop-shadow(0 0 12px rgba(255, 216, 77, 0.5));
-            animation: sk3dGemFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes sk3dGemFloat {
-
-            0%,
-            100% {
-                transform: translate(-50%, -54%) rotate(-4deg);
-            }
-
-            50% {
-                transform: translate(-50%, -46%) rotate(4deg);
-            }
-        }
-
         @media (max-width: 900px) {
             .sk3d-core-grid {
                 grid-template-columns: 1fr;
@@ -582,28 +379,95 @@
                 order: -1;
             }
 
-            .sk3d-sat {
-                --r: 104px;
+            .sk3d-core-lead {
+                max-width: none;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
 
-            .sk3d-rotor,
-            .sk3d-ring,
-            .sk3d-gem,
-            .sk3d-orbit {
+            .sk3d-logo-plate img,
+            .sk3d-stage__glow {
                 animation: none !important;
             }
 
-            .sk3d-core {
+            .sk3d-logo-plate {
+                transition: none !important;
+            }
+        }
+
+        /* ============================================================
+   Team card social links (bottom-right of each member container)
+============================================================ */
+        .chroma-social {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.9rem;
+            padding-top: 0.7rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .chroma-social__link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            text-decoration: none;
+            transition:
+                transform 0.25s ease,
+                color 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .chroma-social__link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .chroma-social__link:hover {
+            color: #0a0a0a;
+            background: var(--card-border, #f2c200);
+            border-color: var(--card-border, #f2c200);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+        }
+
+        .chroma-social__link:focus-visible {
+            outline: 2px solid var(--card-border, #f2c200);
+            outline-offset: 2px;
+        }
+
+        /* IMDb wordmark pill */
+        .chroma-social__link--imdb {
+            width: auto;
+            height: 32px;
+            padding: 0 0.62rem;
+            border-radius: 9px;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 0.07em;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .chroma-social__link {
                 transition: none !important;
             }
 
-            .sk3d-card {
-                opacity: 1 !important;
-                translate: none !important;
-                transition: none !important;
+            .chroma-social__link:hover {
+                transform: none !important;
             }
         }
     </style>
@@ -825,142 +689,44 @@
                         <div class="relative z-10 pointer-events-none"></div>
                     </div>
                 </section>
-                <section
-                    class="origin-story-section w-full max-w-none pt-32 pb-14 sm:pt-36 md:pt-42 md:pb-16 lg:pb-[0px] xl:pt-[180px] xl:pb-[0px]">
-                    <div class="w-full max-w-none space-y-14">
-                        <div
-                            class="origin-story-panel px-2 sm:px-0 lg:py-[100px] min-[425px]:py-[60px] rounded-4xl relative overflow-hidden bg-transparent py-8">
-                            <div class="text-center space-y-5 mb-10 relative z-10">
-                                <span class="badge badge-gradient-helix text-white" data-delay="0.1" data-ns-animate="">
-                                    Our Story
-                                </span>
-                                <div class="space-y-3 mx-1 sm:mx-0">
-                                    <h2 class="lg:max-w-[602px] sm:max-w-[500px] max-w-[400px] mx-auto text-white xl:text-heading-1 max-md:text-[38px] max-md:leading-[1.1]"
-                                        data-delay="0.2" data-ns-animate="">
-                                        Synkyn Studio Story
-                                    </h2>
-                                </div>
-                            </div>
-                            <div class="relative z-10 w-full py-6 md:py-10 flex items-center justify-center">
-                                <img alt="Synkyn Studios Logo" class="w-[160px] md:w-[220px] h-auto object-contain"
-                                    src="./images/logo.png" />
-                            </div>
-                            <div class="relative z-8 max-w-3xl mx-auto px-4 sm:px-6 rounded-4xl p-10 max-md:p-6">
-                                <div class="space-y-6 dark:text-accent/90 text-center">
-                                    <p class="text-tagline-1 sm:text-lg leading-relaxed text-accent/60"
-                                        data-delay="0.25" data-ns-animate="">
-                                        <strong class="text-white font-semibold">Dhiraj Kishore, our CEO</strong>,
-                                        founded
-                                        <strong class="text-white font-semibold">Synkyn Studios</strong>
-                                        with a bold vision — to build a
-                                        <span
-                                            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500 font-bold">
-                                            cinematic, AI-first creative studio</span>
-                                        right from Bengaluru, India.
-                                    </p>
-                                    <p class="text-tagline-1 sm:text-lg leading-relaxed text-accent/60" data-delay="0.3"
-                                        data-ns-animate="">
-                                        The challenge was clear: brands needed premium visuals
-                                        fast, but traditional production was slow, expensive,
-                                        and hard to scale. There had to be a better way.
-                                    </p>
-                                    <p class="text-tagline-1 sm:text-lg leading-relaxed text-accent/60"
-                                        data-delay="0.35" data-ns-animate="">
-                                        <strong class="text-white font-semibold">That's where
-                                            <span
-                                                class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-helix-blue">Synkyn
-                                                Studios</span> was born</strong> —
-                                        <span class="text-accent/50 italic">directing generative image and video
-                                            with a filmmaker's eye, powered by AI.</span>
-                                    </p>
-                                    <p class="text-tagline-1 sm:text-lg leading-relaxed text-accent/60" data-delay="0.4"
-                                        data-ns-animate="">
-                                        Today,
-                                        <strong class="text-white font-semibold">we help brands create immersive
-                                            visual experiences — from advertising campaigns to
-                                            full brand identities — at speeds that were never
-                                            possible before.</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <script>
-                        (function () {
-                            if (
-                                !window.matchMedia ||
-                                !window.matchMedia("(max-width: 767.98px)").matches
-                            )
-                                return;
-                            var root = document.querySelector(".origin-story-section");
-                            if (!root) return;
-                            root
-                                .querySelectorAll("[data-ns-animate]")
-                                .forEach(function (el) {
-                                    el.removeAttribute("data-ns-animate");
-                                    el.removeAttribute("data-delay");
-                                    el.removeAttribute("data-duration");
-                                    el.removeAttribute("data-offset");
-                                    el.removeAttribute("data-start");
-                                    el.removeAttribute("data-direction");
-                                    el.removeAttribute("data-spring");
-                                });
-                        })();
-                    </script>
-                </section>
             </div>
         </div>
-        <section aria-labelledby="sk3d-core-heading" class="sk3d-core-section">
+        <!-- ===== Our Story (logo stage on the right) ===== -->
+        <section aria-labelledby="sk3d-core-heading" class="sk3d-core-section" id="our-story">
             <div class="main-container">
                 <div class="sk3d-core-grid">
                     <div class="sk3d-core-copy">
-                        <span class="sk3d-eyebrow">The Apparatus</span>
+                        <span class="sk3d-eyebrow">Our Story</span>
                         <h2 class="sk3d-core-title" id="sk3d-core-heading">
-                            A core engineered in orbit,<br /><span>refined for Earth.</span>
+                            Synkyn Studio<br /><span>Story.</span>
                         </h2>
                         <p class="sk3d-core-lead">
-                            At the heart of every Synkyn MICRA unit sits a coalescence core:
-                            spinning geometry that draws particles out of the air by inertia
-                            alone. No membrane to clog, no element to swap — just a
-                            continuous, self‑clearing path for clean air.
+                            <strong>Dhiraj Kishore, our CEO</strong>, founded
+                            <strong>Synkyn Studios</strong> with a bold vision — to build a
+                            <span class="sk3d-accent">cinematic, AI-first creative studio</span>
+                            right from Bengaluru, India.
                         </p>
-                        <ul aria-label="Core characteristics" class="sk3d-chips">
-                            <li>No filter media</li>
-                            <li>Self‑clearing</li>
-                            <li>Inertial coalescence</li>
-                            <li>Low‑energy</li>
-                        </ul>
-                        <dl class="sk3d-stats">
-                            <div>
-                                <dt>Particle capture</dt>
-                                <dd>Instant</dd>
-                            </div>
-                            <div>
-                                <dt>Maintenance cycle</dt>
-                                <dd>None</dd>
-                            </div>
-                            <div>
-                                <dt>Origin</dt>
-                                <dd>NASA / Orion</dd>
-                            </div>
-                        </dl>
+                        <p class="sk3d-core-lead">
+                            The challenge was clear: brands needed premium visuals fast, but
+                            traditional production was slow, expensive, and hard to scale.
+                            There had to be a better way.
+                        </p>
+                        <p class="sk3d-core-lead">
+                            <strong>That's where <span class="sk3d-accent">Synkyn Studios</span> was born</strong> —
+                            <em>directing generative image and video with a filmmaker's eye, powered by AI.</em>
+                        </p>
+                        <p class="sk3d-core-lead">
+                            Today, <strong>we help brands create immersive visual experiences — from advertising
+                                campaigns to full brand identities — at speeds that were never possible
+                                before.</strong>
+                        </p>
                     </div>
-                    <div aria-hidden="true" class="sk3d-stage">
-                        <div class="sk3d-stage__glow"></div>
-                        <div class="sk3d-core" id="sk3dCore">
-                            <div class="sk3d-rotor">
-                                <span class="sk3d-ring sk3d-ring--a"></span>
-                                <span class="sk3d-ring sk3d-ring--b"></span>
-                                <span class="sk3d-ring sk3d-ring--c"></span>
-                                <span class="sk3d-orbit">
-                                    <i class="sk3d-sat sk3d-sat--1"></i>
-                                    <i class="sk3d-sat sk3d-sat--2"></i>
-                                    <i class="sk3d-sat sk3d-sat--3"></i>
-                                </span>
-                            </div>
-                            <span class="sk3d-gem"></span>
-                        </div>
-                        <span class="sk3d-stage__label">Coalescence core — live model</span>
+                    <div class="sk3d-stage">
+                        <div class="sk3d-stage__glow" aria-hidden="true"></div>
+                        <figure class="sk3d-logo-plate">
+                            <img alt="Synkyn Studios logo" src="./images/logo.png" />
+                        </figure>
+                        <span class="sk3d-stage__label" aria-hidden="true">Made in Bengaluru, India</span>
                     </div>
                 </div>
             </div>
@@ -1052,7 +818,7 @@
                                     </div>
                                 </div>
                                 <footer
-                                    class="chroma-info z-[1] grid grid-cols-1 items-start gap-x-3 gap-y-1 p-3 text-white min-[480px]:grid-cols-[1fr_auto]">
+                                    class="chroma-info z-[1] grid min-h-0 flex-1 grid-cols-1 content-start items-start gap-x-3 gap-y-1 p-3 text-white min-[480px]:grid-cols-[1fr_auto]">
                                     <h3 class="name m-0 text-base leading-5 text-white">
                                         Dhiraj Kishore
                                     </h3>
@@ -1066,6 +832,30 @@
                                         Director, producer, and screenwriter who founded
                                         Synkyn Studios to bring cinematic AI visuals to brands.
                                     </p>
+                                    <div class="chroma-social">
+                                        <a class="chroma-social__link" href="https://www.instagram.com/DHIRAJ_HANDLE/"
+                                            target="_blank" rel="noopener noreferrer"
+                                            aria-label="Dhiraj Kishore on Instagram" title="Instagram">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z" />
+                                            </svg>
+                                        </a>
+                                        <a class="chroma-social__link" href="https://www.linkedin.com/in/DHIRAJ_HANDLE/"
+                                            target="_blank" rel="noopener noreferrer"
+                                            aria-label="Dhiraj Kishore on LinkedIn" title="LinkedIn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+                                            </svg>
+                                        </a>
+                                        <a class="chroma-social__link chroma-social__link--imdb"
+                                            href="https://www.imdb.com/name/nmDHIRAJ_ID/" target="_blank"
+                                            rel="noopener noreferrer" aria-label="Dhiraj Kishore on IMDb"
+                                            title="IMDb">IMDb</a>
+                                    </div>
                                 </footer>
                                 <style>
                                     @media (max-width: 767.98px) {
@@ -1079,7 +869,7 @@
                                     data-position="bottom" data-show-on-scroll="50" data-strength="2" data-target="page"
                                     data-z-index="50" id="sticky-bar"></div>
                             </article>
-                            <!-- Card 2: Bhuvan Gowda – Assistant Director -->
+                            <!-- Card 2: Bhuvan Gowda – Cinematographer -->
                             <article
                                 class="chroma-card relative flex h-full min-h-0 w-full min-w-0 max-w-[400px] flex-col items-stretch overflow-visible rounded-[18px] border border-[#333] transition-colors duration-300 sm:rounded-[20px] [background:var(--card-gradient)] lg:max-w-none"
                                 style="
@@ -1109,6 +899,30 @@
                                         Seasoned assistant director from the film industry,
                                         bringing on-set storytelling expertise to every project.
                                     </p>
+                                    <div class="chroma-social">
+                                        <a class="chroma-social__link" href="https://www.instagram.com/BHUVAN_HANDLE/"
+                                            target="_blank" rel="noopener noreferrer"
+                                            aria-label="Bhuvan Gowda on Instagram" title="Instagram">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z" />
+                                            </svg>
+                                        </a>
+                                        <a class="chroma-social__link" href="https://www.linkedin.com/in/BHUVAN_HANDLE/"
+                                            target="_blank" rel="noopener noreferrer"
+                                            aria-label="Bhuvan Gowda on LinkedIn" title="LinkedIn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+                                            </svg>
+                                        </a>
+                                        <a class="chroma-social__link chroma-social__link--imdb"
+                                            href="https://www.imdb.com/name/nmBHUVAN_ID/" target="_blank"
+                                            rel="noopener noreferrer" aria-label="Bhuvan Gowda on IMDb"
+                                            title="IMDb">IMDb</a>
+                                    </div>
                                 </footer>
                             </article>
                             <!-- Card 3: Deepen – Co-Founder -->
@@ -1140,6 +954,26 @@
                                         class="bio col-span-1 mt-[0.15rem] text-[0.9rem] leading-[1.45] text-[#d5d5d5] min-[480px]:col-span-2">
                                         AI, Automation &amp; Business Architect
                                     </p>
+                                    <div class="chroma-social">
+                                        <a class="chroma-social__link" href="https://www.instagram.com/DEEPEN_HANDLE/"
+                                            target="_blank" rel="noopener noreferrer" aria-label="Deepen on Instagram"
+                                            title="Instagram">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z" />
+                                            </svg>
+                                        </a>
+                                        <a class="chroma-social__link" href="https://www.linkedin.com/in/DEEPEN_HANDLE/"
+                                            target="_blank" rel="noopener noreferrer" aria-label="Deepen on LinkedIn"
+                                            title="LinkedIn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </footer>
                             </article>
                             <!-- Card 4: Pruthvij Prabhu – Co-Founder & CTO -->
@@ -1173,6 +1007,27 @@
                                         Aesthetic &amp; Video Director who has worked with multiple international
                                         brands.
                                     </p>
+                                    <div class="chroma-social">
+                                        <a class="chroma-social__link" href="https://www.instagram.com/PRUTHVIJ_HANDLE/"
+                                            target="_blank" rel="noopener noreferrer"
+                                            aria-label="Pruthvij Prabhu on Instagram" title="Instagram">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z" />
+                                            </svg>
+                                        </a>
+                                        <a class="chroma-social__link"
+                                            href="https://www.linkedin.com/in/PRUTHVIJ_HANDLE/" target="_blank"
+                                            rel="noopener noreferrer" aria-label="Pruthvij Prabhu on LinkedIn"
+                                            title="LinkedIn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </footer>
                             </article>
                         </div>
@@ -1297,7 +1152,6 @@
                                             <img alt="SKROMAN" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
                                         </figure>
-                                        </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="TATA" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
@@ -1310,7 +1164,6 @@
                                             <img alt="SKROMAN" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
                                         </figure>
-
                                     </div>
                                 </div>
                             </div>
@@ -1517,221 +1370,11 @@
     <script defer="" src="./vendor/motionpathplugin.min.js"></script>
     <script defer="" src="./vendor/lenis.min.js"></script>
     <script defer="" src="./vendor/springer.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="./assets/main5.js" type="module"></script>
     <script src="./assets/main.js" type="module"></script>
     <script src="./assets/fx.js?v=3"></script>
-    <script>
-        (function () {
-            var reduce =
-                window.matchMedia &&
-                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            /* reveal-on-scroll for the 3D tilt cards */
-            var cards = Array.prototype.slice.call(
-                document.querySelectorAll(".sk3d-card"),
-            );
-            if (cards.length) {
-                if ("IntersectionObserver" in window && !reduce) {
-                    var cardsWrap = document.querySelector(".sk3d-cards");
-                    if (cardsWrap) {
-                        cardsWrap.classList.add("sk3d-anim");
-                    }
-                    var io = new IntersectionObserver(
-                        function (entries) {
-                            entries.forEach(function (en, i) {
-                                if (en.isIntersecting) {
-                                    var el = en.target;
-                                    setTimeout(
-                                        function () {
-                                            el.classList.add("is-in");
-                                        },
-                                        (Array.prototype.indexOf.call(cards, el) % 3) * 90,
-                                    );
-                                    io.unobserve(el);
-                                }
-                            });
-                        },
-                        { threshold: 0.2 },
-                    );
-                    cards.forEach(function (c) {
-                        io.observe(c);
-                    });
-                } else {
-                    cards.forEach(function (c) {
-                        c.classList.add("is-in");
-                    });
-                }
-                /* lift inner layers for parallax depth + pointer tilt + glare */
-                if (!reduce) {
-                    cards.forEach(function (card) {
-                        card.querySelectorAll("[data-z]").forEach(function (l) {
-                            l.style.transform =
-                                "translateZ(" + l.getAttribute("data-z") + "px)";
-                        });
-                        var MAX = 9;
-                        function onMove(e) {
-                            var r = card.getBoundingClientRect();
-                            var px = (e.clientX - r.left) / r.width;
-                            var py = (e.clientY - r.top) / r.height;
-                            card.style.transform =
-                                "rotateX(" +
-                                ((0.5 - py) * MAX).toFixed(2) +
-                                "deg) " +
-                                "rotateY(" +
-                                ((px - 0.5) * MAX).toFixed(2) +
-                                "deg)";
-                            card.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
-                            card.style.setProperty("--my", (py * 100).toFixed(1) + "%");
-                        }
-                        function reset() {
-                            card.style.transform = "";
-                        }
-                        card.addEventListener("pointermove", onMove);
-                        card.addEventListener("pointerleave", reset);
-                        card.addEventListener("blur", reset);
-                    });
-                }
-            }
-            /* pointer parallax on the MICRA core */
-            var core = document.getElementById("sk3dCore");
-            if (core && !reduce) {
-                var stage = core.closest(".sk3d-stage") || core.parentNode;
-                stage.addEventListener("pointermove", function (e) {
-                    var r = stage.getBoundingClientRect();
-                    var px = (e.clientX - r.left) / r.width - 0.5;
-                    var py = (e.clientY - r.top) / r.height - 0.5;
-                    core.style.setProperty("--ry", (px * 26).toFixed(2) + "deg");
-                    core.style.setProperty("--rx", (-py * 26).toFixed(2) + "deg");
-                });
-                stage.addEventListener("pointerleave", function () {
-                    core.style.setProperty("--ry", "0deg");
-                    core.style.setProperty("--rx", "0deg");
-                });
-            }
-        })();
-    </script>
-
     <script defer="" src="./assets/navbar.js?v=6"></script>
     <script defer="" src="./assets/footer.js?v=2"></script>
-    <script>
-        (function () {
-            const container = document.getElementById('sk3dCore');
-            if (!container) return;
-
-            function init3D() {
-                if (typeof THREE === 'undefined' || typeof THREE.STLLoader === 'undefined' || typeof THREE.OrbitControls === 'undefined') {
-                    setTimeout(init3D, 100);
-                    return;
-                }
-
-                // Clear fallback markup (CSS rotor and gem)
-                container.innerHTML = '';
-
-                let width = container.clientWidth || 320;
-                let height = container.clientHeight || 320;
-
-                const scene = new THREE.Scene();
-
-                const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-                camera.position.set(0, 0, 8);
-
-                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-                renderer.setSize(width, height);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                container.appendChild(renderer.domElement);
-
-                // Setup OrbitControls for mouse interaction
-                const controls = new THREE.OrbitControls(camera, renderer.domElement);
-                controls.enableDamping = true;
-                controls.dampingFactor = 0.05;
-                controls.enableZoom = false; // Prevents page scrolling hijack
-                controls.enablePan = false;  // Keeps model centered
-
-                // Lock OrbitControls to horizontal (Y-axis) rotation only
-                controls.minPolarAngle = Math.PI / 2;
-                controls.maxPolarAngle = Math.PI / 2;
-
-                let isInteracting = false;
-                controls.addEventListener('start', () => {
-                    isInteracting = true;
-                });
-                controls.addEventListener('end', () => {
-                    setTimeout(() => {
-                        isInteracting = false;
-                    }, 1000);
-                });
-
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-                scene.add(ambientLight);
-
-                const dirLight1 = new THREE.DirectionalLight(0xffd84d, 1.5);
-                dirLight1.position.set(5, 5, 5);
-                scene.add(dirLight1);
-
-                const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-                dirLight2.position.set(-5, -5, 5);
-                scene.add(dirLight2);
-
-                const loader = new THREE.STLLoader();
-                let model = null;
-
-                loader.load('./images/3ds/hf_20260224_190358_f6a416bd-50ea-43d9-99b6-edc8ca167973-removebg-preview.stl', function (geometry) {
-                    const material = new THREE.MeshPhongMaterial({
-                        color: 0xf2d400,
-                        specular: 0xffffff,
-                        shininess: 100,
-                        flatShading: false,
-                        side: THREE.DoubleSide
-                    });
-                    const mesh = new THREE.Mesh(geometry, material);
-                    model = mesh;
-
-                    // Center geometry & compute bounding box
-                    geometry.computeBoundingBox();
-                    geometry.center();
-
-                    const box = geometry.boundingBox;
-                    const size = new THREE.Vector3();
-                    box.getSize(size);
-                    const maxDim = Math.max(size.x, size.y, size.z);
-                    const scaleFactor = 3.6 / maxDim;
-                    mesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
-
-                    scene.add(mesh);
-                }, undefined, function (error) {
-                    console.error('An error happened loading the 3D model:', error);
-                });
-
-                function animate() {
-                    requestAnimationFrame(animate);
-
-                    if (model && !isInteracting) {
-                        // Rotate only around Y-axis
-                        model.rotation.y += 0.015;
-                    }
-
-                    controls.update();
-                    renderer.render(scene, camera);
-                }
-                animate();
-
-                const resizeObserver = new ResizeObserver(entries => {
-                    for (let entry of entries) {
-                        width = entry.contentRect.width || width;
-                        height = entry.contentRect.height || height;
-                        camera.aspect = width / height;
-                        camera.updateProjectionMatrix();
-                        renderer.setSize(width, height);
-                    }
-                });
-                resizeObserver.observe(container);
-            }
-
-            init3D();
-        })();
-    </script>
 </body>
 
 </html>
