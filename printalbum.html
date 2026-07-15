@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Synkyn Studios: Prints & Creative Works -->
 
 <head>
     <meta charset="utf-8" />
@@ -36,7 +35,6 @@
     <link href="./assets/main.css" rel="stylesheet" />
     <link href="./assets/navbar.css?v=8" rel="stylesheet" />
     <style id="synkyn-theme">
-        /* Synkyn Studios — yellow / dark-yellow / black theme (overrides main.css) */
         :root,
         :host {
             --color-primary-50: #faf8ee;
@@ -99,21 +97,22 @@
             border-color: #000 !important;
         }
 
-        html, body {
+        html,
+        body {
             background-color: #080808;
             color: #fff;
-            overflow-x: hidden !important;
+            overflow-x: clip !important;
             max-width: 100% !important;
         }
     </style>
     <link href="./assets/footer.css?v=2" rel="stylesheet" />
 
-    <!-- ================= PRINTS / PORTFOLIO PAGE STYLES (scoped under .pf-) ================= -->
     <style id="prints-styles">
         .pf-page {
             --pf-accent: #f2d400;
             --pf-accent-2: #ffd84d;
             --pf-bg: transparent;
+            --pf-panel: #080808;
             --pf-surface: #0f0f0f;
             --pf-surface-2: #141414;
             --pf-line: rgba(255, 255, 255, .08);
@@ -136,7 +135,6 @@
             color: #fff;
         }
 
-        /* Custom hover for Explore the Gallery button */
         .btn-explore-gallery {
             transition: all 0.3s ease !important;
         }
@@ -152,7 +150,6 @@
             opacity: 0 !important;
         }
 
-        /* Explore SVG & Path styling */
         .explore-svg1 {
             width: 20px;
             height: 20px;
@@ -170,7 +167,6 @@
             stroke: #ffffff !important;
         }
 
-        /* Shared reveal animation */
         .pf-reveal {
             opacity: 0;
             transform: translateY(26px);
@@ -185,17 +181,22 @@
             filter: none;
         }
 
-        /* ===================== HERO ===================== */
         .pf-hero {
-            position: relative;
+            --pf-accent: #f2d400;
+            --pf-accent-2: #ffd84d;
+            --pf-bg: #0d0d0f;
+            --pf-ease: cubic-bezier(.22, .68, 0, 1.04);
+            position: sticky;
+            top: 0;
+            z-index: 0;
             min-height: 100svh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             overflow: hidden;
             isolation: isolate;
-            padding: 200px 22px 90px;
+            padding: clamp(130px, 20vh, 200px) 22px clamp(70px, 12vh, 110px);
             text-align: center;
         }
 
@@ -239,7 +240,6 @@
         }
 
         .pf-hero::after {
-            /* vignette + bottom fade into page */
             content: "";
             position: absolute;
             inset: 0;
@@ -252,8 +252,23 @@
 
         .pf-hero__inner {
             position: relative;
+            width: 100%;
             max-width: 1080px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            will-change: transform, opacity;
+        }
+
+        .pf-hero__inner>* {
+            width: 100%;
+        }
+
+        .pf-hero__inner .pf-reveal {
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .pf-hero__eyebrow {
@@ -424,10 +439,35 @@
             }
         }
 
-        /* ===================== SECTION SHELL ===================== */
         .pf-section {
             padding: clamp(56px, 8vw, 120px) clamp(18px, 4vw, 60px);
-            background-color: transparent;
+            background-color: var(--pf-panel);
+            position: relative;
+            z-index: 10;
+        }
+
+        .pf-section--overlap {
+            border-top: 1px solid rgba(242, 212, 0, .14);
+            border-radius: 28px 28px 0 0;
+            box-shadow: 0 -34px 70px rgba(0, 0, 0, .72);
+        }
+
+        .pf-section--overlap::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(180px, 40%);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #f2d400, transparent);
+            opacity: .8;
+        }
+
+        @media (max-width: 767.98px) {
+            .pf-section--overlap {
+                border-radius: 20px 20px 0 0;
+            }
         }
 
         .pf-wrap {
@@ -470,7 +510,6 @@
             line-height: 1.65;
         }
 
-        /* ===================== FEATURED SHOWCASE ===================== */
         .pf-feat {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
@@ -514,7 +553,6 @@
             box-shadow: 0 30px 60px -28px rgba(0, 0, 0, .9);
         }
 
-        /* ===================== CARD MEDIA (shared) ===================== */
         .pf-media {
             position: relative;
             width: 100%;
@@ -525,7 +563,6 @@
         }
 
         .pf-media::before {
-            /* watermark label shown when image is missing/failed */
             content: attr(data-label);
             position: absolute;
             inset: 0;
@@ -685,12 +722,10 @@
             transform: translate(3px, -3px);
         }
 
-        /* On the compact justified tiles, hide the 2-line description to keep them clean */
         .pf-card .pf-cap__desc {
             display: none;
         }
 
-        /* ===================== CONTROLS: search + sticky filters ===================== */
         .pf-controls {
             position: sticky;
             top: 0;
@@ -848,7 +883,6 @@
             font-weight: 600;
         }
 
-        /* ===================== JUSTIFIED GRID (Google-Photos style) ===================== */
         .pf-grid {
             display: flex;
             flex-direction: column;
@@ -882,7 +916,6 @@
             box-shadow: 0 24px 50px -26px rgba(0, 0, 0, .9), 0 0 0 1px rgba(242, 212, 0, .12);
         }
 
-        /* Empty state */
         .pf-empty {
             display: none;
             text-align: center;
@@ -918,7 +951,6 @@
             font-size: 14.5px;
         }
 
-        /* ===================== LIGHTBOX (Apple-Photos style) ===================== */
         .pf-lb {
             position: fixed;
             inset: 0;
@@ -998,7 +1030,6 @@
             }
         }
 
-
         .pf-lb__img.swap {
             opacity: 0;
         }
@@ -1072,7 +1103,6 @@
             transition: opacity .4s ease;
         }
 
-        /* thumbnail strip */
         .pf-lb__thumbs {
             position: absolute;
             bottom: 16px;
@@ -1131,7 +1161,6 @@
             transform: translateY(-2px);
         }
 
-        /* Info panel */
         .pf-lb__panel {
             flex: 0 0 auto;
             background: rgba(10, 10, 10, .72);
@@ -1349,7 +1378,6 @@
             height: 22px;
         }
 
-        /* toast */
         .pf-toast {
             position: fixed;
             left: 50%;
@@ -1373,7 +1401,6 @@
             transform: translate(-50%, 0);
         }
 
-        /* Featured — tablet */
         @media (max-width: 1023.98px) {
             .pf-feat {
                 grid-template-columns: repeat(2, 1fr);
@@ -1426,8 +1453,6 @@
         }
 
         @media (max-width: 600px) {
-
-            /* ---- Mobile pattern grid rows ---- */
             .pf-row--mobile-full {
                 display: flex;
             }
@@ -1477,7 +1502,6 @@
                 font-size: 14px;
             }
 
-            /* Hide description text on thumbnail cards in mobile */
             .pf-cap__desc {
                 display: none !important;
             }
@@ -1505,7 +1529,6 @@
                 padding: 10px;
             }
 
-            /* ---- Lightbox mobile optimizations ---- */
             .pf-lb__img {
                 max-width: 100vw;
                 max-height: 68vh;
@@ -1594,7 +1617,6 @@
             }
         }
 
-        /* ---- Lightbox tablet optimizations ---- */
         @media (max-width: 1023.98px) {
             .pf-lb__nav {
                 width: 44px;
@@ -1613,7 +1635,6 @@
                 display: none;
             }
 
-            /* Hide description on tablet thumbnails too */
             .pf-cap__desc {
                 display: none !important;
             }
@@ -1650,7 +1671,7 @@
 
 <body class="bg-background-3 dark:bg-helix-blue-dark-2">
     <header>
-        <div class="header-two header-two-at-rest lp:!max-w-[1290px] {=$class} fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0"
+        <div class="header-two header-two-at-rest lp:!max-w-[1290px] fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0"
             data-direction="up" data-ns-animate="" data-offset="20">
             <div>
                 <a class="flex min-w-0 shrink-0 items-center gap-2" href="./">
@@ -1778,12 +1799,8 @@
         </aside>
     </header>
 
-    <!-- ===================================================================
-       PRINTS / PORTFOLIO  (everything between navbar and footer)
-       =================================================================== -->
     <main class="pf-page">
 
-        <!-- ===================== HERO ===================== -->
         <section class="pf-hero" id="pf-top">
             <canvas class="pf-hero__canvas" id="pf-particles" aria-hidden="true"></canvas>
             <span class="pf-hero__glow pf-hero__glow--a" aria-hidden="true"></span>
@@ -1796,10 +1813,12 @@
                         Synkyn Studios — Gallery
                     </span>
                     <div
-                        class="md:space-y-4 space-y-2 lg:max-w-full md:max-w-[600px] sm:max-w-[550px] min-[500px]:max-w-[450px] max-w-[350px] lg:mx-0 mx-auto pointer-events-none">
+                        class="md:space-y-4 space-y-2 lg:max-w-full md:max-w-[600px] sm:max-w-[550px] min-[500px]:max-w-[450px] max-w-[350px] mx-auto pointer-events-none">
                         <h1 class="font-creato text-accent pointer-events-auto w-fit max-w-full mx-auto max-md:text-[38px] max-md:leading-[1.1] pf-reveal"
                             data-delay="0.2" data-ns-animate="" data-orion-obstacle="">
-                            Our Prints &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-helix-blue">Creative Works</span>
+                            Our Prints &amp; <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-helix-blue">Creative
+                                Works</span>
                         </h1>
                         <p class="text-accent/60 pointer-events-auto w-fit text-base md:w-[700px] max-w-full mx-auto md:text-lg pf-reveal"
                             data-delay="0.3" data-ns-animate="" data-orion-obstacle="">
@@ -1835,8 +1854,7 @@
 
         </section>
 
-        <!-- ===================== FEATURED ===================== -->
-        <section class="pf-section" id="pf-featured">
+        <section class="pf-section pf-section--overlap" id="pf-featured">
             <div class="pf-wrap">
                 <div class="pf-head pf-reveal">
                     <div>
@@ -1847,11 +1865,10 @@
                         full
                         gallery.</p>
                 </div>
-                <div class="pf-feat pf-reveal" id="pf-featured-grid"><!-- JS --></div>
+                <div class="pf-feat pf-reveal" id="pf-featured-grid"></div>
             </div>
         </section>
 
-        <!-- ===================== CONTROLS (sticky) ===================== -->
         <div class="pf-controls" id="pf-work">
             <div class="pf-controls__inner">
                 <div class="pf-search">
@@ -1870,12 +1887,10 @@
                     </button>
                 </div>
                 <div class="pf-filters" id="pf-filters" role="tablist" aria-label="Filter projects by category">
-                    <!-- JS -->
                 </div>
             </div>
         </div>
 
-        <!-- ===================== JUSTIFIED GALLERY ===================== -->
         <section class="pf-section" id="pf-gallery" style="padding-top: clamp(28px,4vw,56px);">
             <div class="pf-wrap">
                 <div class="pf-head pf-reveal" style="margin-bottom: clamp(18px,3vw,34px);">
@@ -1885,7 +1900,7 @@
                     </div>
                 </div>
                 <p class="pf-result-line" id="pf-result-line"></p>
-                <div class="pf-grid" id="pf-grid" aria-live="polite"><!-- JS --></div>
+                <div class="pf-grid" id="pf-grid" aria-live="polite"></div>
                 <div class="pf-empty" id="pf-empty">
                     <div class="pf-empty__icon">
                         <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor"
@@ -1900,7 +1915,6 @@
             </div>
         </section>
 
-        <!-- ===================== FULLSCREEN GALLERY ===================== -->
         <div class="pf-lb" id="pf-lb" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project gallery">
             <button class="pf-lb__close" id="pf-lb-close" aria-label="Close gallery">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -2051,7 +2065,6 @@
                         'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/15.png?updatedAt=1783537581123',
                         'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/16.png?updatedAt=1783537581053',
                         'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/visa4.png?updatedAt=1783544356080'
-
                     ]
                 },
                 {
@@ -2103,9 +2116,6 @@
                 }
             ];
 
-            /* =====================================================================
-               SMALL HELPERS
-               ===================================================================== */
             const $ = (s, r) => (r || document).querySelector(s);
             const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2113,13 +2123,11 @@
                 .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-            // featured size pattern
             const featSizes = ['s-row1-land', 's-row1-port', 's-row1-port', 's-row2-land', 's-row2-land'];
 
             const iconCount = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg>';
             const iconArrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>';
 
-            // Lazy-load images via one shared IntersectionObserver
             const imgIO = ('IntersectionObserver' in window) ? new IntersectionObserver((entries, obs) => {
                 entries.forEach((e) => {
                     if (!e.isIntersecting) return;
@@ -2131,11 +2139,10 @@
 
             function hydrateImg(img) {
                 img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
-                img.addEventListener('error', function () { /* keep watermark label visible */ }, { once: true });
+                img.addEventListener('error', function () { }, { once: true });
                 if (imgIO) imgIO.observe(img); else { img.src = img.dataset.src; img.removeAttribute('data-src'); }
             }
 
-            // Reveal-on-scroll observer
             const revealIO = ('IntersectionObserver' in window && !reduceMotion) ? new IntersectionObserver((entries, obs) => {
                 entries.forEach((e) => {
                     if (e.isIntersecting) { e.target.classList.add('is-in'); obs.unobserve(e.target); }
@@ -2151,9 +2158,6 @@
                 });
             }
 
-            /* =====================================================================
-               STATE
-               ===================================================================== */
             const byId = {};
             projects.forEach((p) => { byId[p.id] = p; });
             let activeCat = 'All';
@@ -2169,9 +2173,6 @@
             const searchInput = $('#pf-search-input');
             const searchClear = $('#pf-search-clear');
 
-            /* =====================================================================
-               RENDER: card markup (shared by featured + justified grid)
-               ===================================================================== */
             function mediaMarkup(p) {
                 const first = p.images && p.images[0] ? p.images[0] : '';
                 const count = (p.images || []).length;
@@ -2207,9 +2208,6 @@
                 return el;
             }
 
-            /* =====================================================================
-               RENDER: featured
-               ===================================================================== */
             function renderFeatured() {
                 let feats = projects.filter((p) => p.featured);
                 if (!feats.length) feats = projects.slice(0, 5);
@@ -2221,9 +2219,6 @@
                 });
             }
 
-            /* =====================================================================
-               RENDER: filters (categories derived from data)
-               ===================================================================== */
             function renderFilters() {
                 const counts = { All: projects.length };
                 projects.forEach((p) => { counts[p.category] = (counts[p.category] || 0) + 1; });
@@ -2260,9 +2255,6 @@
                 });
             }
 
-            /* =====================================================================
-               FILTER + SEARCH
-               ===================================================================== */
             function computeFiltered() {
                 const q = query.trim().toLowerCase();
                 return projects.filter((p) => {
@@ -2273,12 +2265,7 @@
                 });
             }
 
-            /* =====================================================================
-               JUSTIFIED GRID (Google Photos style):
-               rows of consistent height that keep each image's aspect ratio and
-               fill the container width; the final row is left-aligned (not stretched).
-               ===================================================================== */
-            let gridCards = []; // { p, el, ar }
+            let gridCards = [];
 
             function currentGap() {
                 const cs = getComputedStyle(grid);
@@ -2297,7 +2284,7 @@
             }
 
             function buildGridCards(list) {
-                gridCards = list.map((p, i) => {
+                gridCards = list.map((p) => {
                     const el = makeCard(p, { className: 'pf-card pf-reveal' });
                     return { p: p, el: el, ar: p.aspectRatio || 2.33 };
                 });
@@ -2311,9 +2298,6 @@
                 const isMobile = window.innerWidth <= 600;
 
                 if (isMobile) {
-                    // Mobile: pattern-based layout
-                    // Landscape (ar > 1) → full-width, 21:9 ratio
-                    // Portrait (ar ≤ 1) → paired 2-per-row, 4:5 ratio
                     grid.innerHTML = '';
                     const frag = document.createDocumentFragment();
                     let portraitQueue = [];
@@ -2334,9 +2318,7 @@
 
                     gridCards.forEach((c) => {
                         if (c.ar > 1) {
-                            // Flush any queued portraits first
                             flushPortraits();
-                            // Full-width landscape row
                             const rowEl = document.createElement('div');
                             rowEl.className = 'pf-row pf-row--mobile-full';
                             c.el.style.flex = '';
@@ -2345,14 +2327,12 @@
                             rowEl.appendChild(c.el);
                             frag.appendChild(rowEl);
                         } else {
-                            // Queue portrait card
                             portraitQueue.push(c);
                             if (portraitQueue.length === 2) {
                                 flushPortraits();
                             }
                         }
                     });
-                    // Flush any remaining portrait
                     flushPortraits();
                     grid.appendChild(frag);
                     return;
@@ -2360,7 +2340,6 @@
 
                 const target = targetRowHeight();
 
-                // greedily pack cards into rows
                 const rows = [];
                 let row = [];
                 let arSum = 0;
@@ -2376,13 +2355,12 @@
                 });
                 if (row.length) rows.push({ items: row, arSum: arSum, last: true });
 
-                // rebuild DOM with computed dimensions
                 grid.innerHTML = '';
                 const frag = document.createDocumentFragment();
                 rows.forEach((r) => {
                     const gaps = gap * (r.items.length - 1);
                     let h = (containerWidth - gaps) / r.arSum;
-                    if (r.last && h > target * 1.30) h = target; // don't overstretch a sparse last row
+                    if (r.last && h > target * 1.30) h = target;
                     const rowEl = document.createElement('div');
                     rowEl.className = 'pf-row';
                     r.items.forEach((c) => {
@@ -2422,14 +2400,12 @@
                 }
             }
 
-            // re-flow the justified grid on resize (debounced)
             let resizeTimer = null;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(layoutGrid, 140);
             }, { passive: true });
 
-            // search input (debounced)
             let searchTimer = null;
             searchInput.addEventListener('input', function () {
                 query = this.value;
@@ -2445,9 +2421,6 @@
                 applyFilter();
             });
 
-            /* =====================================================================
-               FULLSCREEN GALLERY (lightbox)
-               ===================================================================== */
             const lb = $('#pf-lb');
             const lbImg = $('#pf-lb-img');
             const lbWrap = $('#pf-lb-imgwrap');
@@ -2472,9 +2445,7 @@
             let lastFocus = null;
 
             function projectListForNav() {
-                // navigate projects within the current filtered set (fallback: all)
-                const list = filtered.length ? filtered : projects;
-                return list;
+                return filtered.length ? filtered : projects;
             }
 
             function applyTransform() {
@@ -2489,25 +2460,20 @@
                 const src = imgs[curIndex] || '';
                 resetZoom();
                 lbImg.classList.add('swap');
-                // small delay to let the fade-out register, then swap
                 window.requestAnimationFrame(() => {
                     setTimeout(() => {
                         lbImg.src = src;
                         lbImg.alt = curProject.title + ' — image ' + (curIndex + 1);
                         lbImg.onload = () => lbImg.classList.remove('swap');
                         lbImg.onerror = () => lbImg.classList.remove('swap');
-                        // also clear after a beat in case of cache (no load event)
                         setTimeout(() => lbImg.classList.remove('swap'), 260);
                     }, 90);
                 });
-                // counter + panel
                 lbCounter.textContent = (curIndex + 1) + ' / ' + imgs.length;
                 lbCurrent.innerHTML = '<b>' + (curIndex + 1) + '</b> / ' + imgs.length;
-                // active thumb
                 $$('.pf-lb__thumb', lbThumbs).forEach((t, i) => t.classList.toggle('is-active', i === curIndex));
                 const active = lbThumbs.children[curIndex];
                 if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                // preload neighbours
                 preload(imgs[curIndex + 1]);
                 preload(imgs[curIndex - 1]);
             }
@@ -2560,7 +2526,6 @@
                 document.body.style.overflow = 'hidden';
                 window.requestAnimationFrame(() => lb.classList.add('fade'));
                 $('#pf-lb-close').focus();
-                // hide hint after a moment
                 clearTimeout(openLightbox._t);
                 lbZoomHint.style.opacity = '';
                 openLightbox._t = setTimeout(() => { lbZoomHint.style.opacity = '0'; }, 2600);
@@ -2599,7 +2564,6 @@
             function toggleZoom(clientX, clientY) {
                 if (scale > 1) { resetZoom(); return; }
                 scale = 2.4;
-                // zoom toward the tapped point
                 const r = lbStage.getBoundingClientRect();
                 const cx = clientX != null ? clientX : r.left + r.width / 2;
                 const cy = clientY != null ? clientY : r.top + r.height / 2;
@@ -2608,7 +2572,6 @@
                 applyTransform();
             }
 
-            // buttons
             $('#pf-lb-close').addEventListener('click', closeLightbox);
             $('#pf-lb-next').addEventListener('click', nextImage);
             $('#pf-lb-prev').addEventListener('click', prevImage);
@@ -2617,7 +2580,6 @@
 
             lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
 
-            // share
             $('#pf-lb-share').addEventListener('click', async () => {
                 const url = location.origin + location.pathname + '#' + curProject.id;
                 const data = { title: curProject.title + ' — Synkyn Studios', text: curProject.description, url: url };
@@ -2625,7 +2587,7 @@
                     if (navigator.share) { await navigator.share(data); }
                     else if (navigator.clipboard) { await navigator.clipboard.writeText(url); showToast('Link copied to clipboard'); }
                     else { showToast(url); }
-                } catch (err) { /* user cancelled */ }
+                } catch (err) { }
             });
 
             let toastTimer = null;
@@ -2636,7 +2598,6 @@
                 toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
             }
 
-            // keyboard
             document.addEventListener('keydown', (e) => {
                 if (!lb.classList.contains('show')) return;
                 switch (e.key) {
@@ -2658,10 +2619,8 @@
                 else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
             }
 
-            // double-click / double-tap zoom
             lbStage.addEventListener('dblclick', (e) => toggleZoom(e.clientX, e.clientY));
 
-            // mouse wheel: navigate when not zoomed, zoom when zoomed
             let wheelLock = false;
             lbStage.addEventListener('wheel', (e) => {
                 e.preventDefault();
@@ -2676,7 +2635,6 @@
                 if (e.deltaY > 0 || e.deltaX > 0) nextImage(); else prevImage();
             }, { passive: false });
 
-            /* ---------- Pointer / touch: swipe, drag-pan, drag-navigate, pinch ---------- */
             let pStartX = 0, pStartY = 0, pPanX = 0, pPanY = 0, dragging = false, moved = false;
             let pointers = new Map();
             let pinchStartDist = 0, pinchStartScale = 1;
@@ -2700,7 +2658,6 @@
                 pPanX = panX; pPanY = panY;
                 lbWrap.classList.add('dragging');
 
-                // double-tap detection (touch)
                 const now = Date.now();
                 if (e.pointerType === 'touch') {
                     if (now - lastTap < 300) toggleZoom(e.clientX, e.clientY);
@@ -2711,7 +2668,6 @@
             lbStage.addEventListener('pointermove', (e) => {
                 if (pointers.has(e.pointerId)) pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-                // pinch
                 if (pointers.size === 2 && pinchStartDist > 0) {
                     const pts = Array.from(pointers.values());
                     const d = dist(pts[0], pts[1]);
@@ -2728,12 +2684,10 @@
                 if (Math.abs(dx) > 5 || Math.abs(dy) > 5) moved = true;
 
                 if (scale > 1) {
-                    // pan within zoom
                     panX = pPanX + dx;
                     panY = pPanY + dy;
                     applyTransform();
                 } else {
-                    // drag-navigate preview (follow finger a bit)
                     lbWrap.style.transform = 'translate(' + (dx * 0.4) + 'px,0) scale(1)';
                 }
             });
@@ -2741,7 +2695,6 @@
             function endPointer(e) {
                 if (pointers.has(e.pointerId)) pointers.delete(e.pointerId);
                 if (pointers.size === 1) {
-                    // one finger lifted after pinch — resume single tracking
                     const remaining = Array.from(pointers.entries())[0];
                     pStartX = remaining[1].x; pStartY = remaining[1].y; pPanX = panX; pPanY = panY;
                     pinchStartDist = 0;
@@ -2762,9 +2715,6 @@
             lbStage.addEventListener('pointerup', endPointer);
             lbStage.addEventListener('pointercancel', endPointer);
 
-            /* =====================================================================
-               HERO — canvas particles + parallax
-               ===================================================================== */
             function initParticles() {
                 const canvas = $('#pf-particles');
                 if (!canvas || reduceMotion) { if (canvas) canvas.style.display = 'none'; return; }
@@ -2806,7 +2756,6 @@
                         ctx.fillStyle = 'rgba(242,212,0,' + p.a + ')';
                         ctx.fill();
                     }
-                    // subtle connecting lines
                     for (let i = 0; i < parts.length; i++) {
                         for (let j = i + 1; j < parts.length; j++) {
                             const a = parts[i], b = parts[j];
@@ -2825,7 +2774,6 @@
                 window.addEventListener('resize', resize, { passive: true });
                 requestAnimationFrame(frame);
 
-                // pause when hero scrolled out of view
                 if ('IntersectionObserver' in window) {
                     new IntersectionObserver((entries) => {
                         entries.forEach((e) => {
@@ -2836,41 +2784,42 @@
                 }
             }
 
-            function initParallax() {
+            function initHeroRecede() {
                 if (reduceMotion) return;
                 const ga = $('.pf-hero__glow--a');
                 const gb = $('.pf-hero__glow--b');
                 const inner = $('.pf-hero__inner');
                 let ticking = false;
+                function update() {
+                    const vh = window.innerHeight || 1;
+                    const y = window.scrollY || 0;
+                    const t = Math.min(1, Math.max(0, y / (vh * 0.85)));
+                    if (ga) ga.style.transform = 'translateY(' + (y * 0.18) + 'px)';
+                    if (gb) gb.style.transform = 'translateY(' + (-y * 0.12) + 'px)';
+                    if (inner) {
+                        inner.style.transform = 'translateY(' + (-48 * t) + 'px) scale(' + (1 - 0.07 * t) + ')';
+                        inner.style.opacity = String(1 - t);
+                        inner.style.filter = t > 0 ? 'blur(' + (5 * t) + 'px)' : '';
+                    }
+                    ticking = false;
+                }
                 window.addEventListener('scroll', () => {
                     if (ticking) return;
                     ticking = true;
-                    requestAnimationFrame(() => {
-                        const y = window.scrollY || 0;
-                        if (y < window.innerHeight) {
-                            if (ga) ga.style.transform = 'translateY(' + (y * 0.18) + 'px)';
-                            if (gb) gb.style.transform = 'translateY(' + (-y * 0.12) + 'px)';
-                            if (inner) { inner.style.transform = 'translateY(' + (y * 0.12) + 'px)'; inner.style.opacity = String(Math.max(0, 1 - y / (window.innerHeight * 0.8))); }
-                        }
-                        ticking = false;
-                    });
+                    requestAnimationFrame(update);
                 }, { passive: true });
+                update();
             }
 
-            /* =====================================================================
-               INIT
-               ===================================================================== */
             renderFeatured();
             renderFilters();
             applyFilter();
             observeReveals(document);
             initParticles();
-            initParallax();
+            initHeroRecede();
 
-            // Re-flow once fonts settle (in case container width shifts after load)
             window.addEventListener('load', () => { layoutGrid(); });
 
-            // Deep-link: open a project directly via #project-id
             if (location.hash) {
                 const id = location.hash.slice(1);
                 if (byId[id]) setTimeout(() => openLightbox(id, 0), 350);
@@ -2897,10 +2846,12 @@
                     <p class="footer-tagline footer-tagline--motto">&mdash;Turn Your Idea Into a High-End AI Film.</p>
                     <ul class="footer-social-list" role="list">
                         <li class="footer-social-item">
-                            <a href="#" target="_blank"
-                                rel="noopener noreferrer" class="footer-social-link" aria-label="YouTube">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true" fill="currentColor">
-                                    <path d="M 44.898438 14.5 C 44.5 12.300781 42.601563 10.699219 40.398438 10.199219 C 37.101563 9.5 31 9 24.398438 9 C 17.800781 9 11.601563 9.5 8.300781 10.199219 C 6.101563 10.699219 4.199219 12.199219 3.800781 14.5 C 3.398438 17 3 20.5 3 25 C 3 29.5 3.398438 33 3.898438 35.5 C 4.300781 37.699219 6.199219 39.300781 8.398438 39.800781 C 11.898438 40.5 17.898438 41 24.5 41 C 31.101563 41 37.101563 40.5 40.601563 39.800781 C 42.800781 39.300781 44.699219 37.800781 45.101563 35.5 C 45.5 33 46 29.398438 46.101563 25 C 45.898438 20.5 45.398438 17 44.898438 14.5 Z M 19 32 L 19 18 L 31.199219 25 Z"/>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-link"
+                                aria-label="YouTube">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
+                                    fill="currentColor">
+                                    <path
+                                        d="M 44.898438 14.5 C 44.5 12.300781 42.601563 10.699219 40.398438 10.199219 C 37.101563 9.5 31 9 24.398438 9 C 17.800781 9 11.601563 9.5 8.300781 10.199219 C 6.101563 10.699219 4.199219 12.199219 3.800781 14.5 C 3.398438 17 3 20.5 3 25 C 3 29.5 3.398438 33 3.898438 35.5 C 4.300781 37.699219 6.199219 39.300781 8.398438 39.800781 C 11.898438 40.5 17.898438 41 24.5 41 C 31.101563 41 37.101563 40.5 40.601563 39.800781 C 42.800781 39.300781 44.699219 37.800781 45.101563 35.5 C 45.5 33 46 29.398438 46.101563 25 C 45.898438 20.5 45.398438 17 44.898438 14.5 Z M 19 32 L 19 18 L 31.199219 25 Z" />
                                 </svg>
                                 <span>YouTube</span>
                             </a>
@@ -2909,8 +2860,10 @@
                         <li class="footer-social-item">
                             <a href="https://www.instagram.com/synkyn_studios/" target="_blank"
                                 rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true" fill="currentColor">
-                                    <path d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
+                                    fill="currentColor">
+                                    <path
+                                        d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z" />
                                 </svg>
                                 <span>Instagram</span>
                             </a>
@@ -2919,8 +2872,10 @@
                         <li class="footer-social-item">
                             <a href="https://www.linkedin.com/company/synkynstudios/" target="_blank"
                                 rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true" fill="currentColor">
-                                    <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
+                                    fill="currentColor">
+                                    <path
+                                        d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
                                 </svg>
                                 <span>LinkedIn</span>
                             </a>
@@ -2964,10 +2919,10 @@
             </div>
         </div>
     </footer>
+
     <script>
         (function () {
             'use strict';
-            /* Animate the footer-divider width from 0 → 100% when the footer enters the viewport */
             const divider = document.querySelector('.footer-divider');
             if (!divider || !('IntersectionObserver' in window)) return;
             divider.style.width = '0';
@@ -2986,6 +2941,7 @@
             io.observe(divider.parentElement);
         })();
     </script>
+
     <style>
         @media (max-width: 767.98px) {
             #sticky-bar {
@@ -2993,9 +2949,11 @@
             }
         }
     </style>
+
     <div data-curve="bezier" data-div-count="5" data-duration="0.3s" data-easing="ease-out" data-exponential="true"
         data-gradual-blur="" data-height="7rem" data-opacity="1" data-position="bottom" data-show-on-scroll="50"
         data-strength="2" data-target="page" data-z-index="50" id="sticky-bar"></div>
+
     <script defer="" src="./vendor/split-text.min.js"></script>
     <script defer="" src="./vendor/gsap.min.js"></script>
     <script defer="" src="./vendor/scroll-trigger.min.js"></script>
@@ -3005,7 +2963,7 @@
     <script defer="" src="./vendor/springer.min.js"></script>
     <script src="./assets/main.js" type="module"></script>
     <script src="./assets/fx.js?v=3"></script>
-    
+
     <script defer="" src="./assets/navbar.js?v=6"></script>
     <script defer="" src="./assets/footer.js?v=2"></script>
 </body>

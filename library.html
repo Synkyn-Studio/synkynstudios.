@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Synkyn Studios: Album / Our Works -->
 
 <head>
   <meta charset="utf-8" />
@@ -113,7 +112,7 @@
     body {
       background-color: #080808;
       color: #fff;
-      overflow-x: hidden !important;
+      overflow-x: clip !important;
       max-width: 100% !important;
     }
   </style>
@@ -136,7 +135,7 @@
         </a>
       </div>
       <nav class="hidden items-center xl:flex" id="desktop-navbar"></nav>
-            <script src="./assets/desktop-navbar.js"></script>
+      <script src="./assets/desktop-navbar.js"></script>
       <div class="flex items-center gap-2">
         <div class="hidden items-center justify-center xl:flex">
           <a class="btn btn-md btn-primary" href="./contact.html">
@@ -237,163 +236,212 @@
   <main>
     <style>
       .pf-hero {
-          --pf-accent: #f2d400;
-          --pf-accent-2: #ffd84d;
-          --pf-bg: transparent;
-          --pf-ease: cubic-bezier(.22, .68, 0, 1.04);
-          position: relative;
-          min-height: 100svh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: flex-start;
-          overflow: hidden;
-          isolation: isolate;
-          padding: 200px 22px 90px;
-          text-align: center;
+        --pf-accent: #f2d400;
+        --pf-accent-2: #ffd84d;
+        --pf-bg: transparent;
+        --pf-ease: cubic-bezier(.22, .68, 0, 1.04);
+        position: sticky;
+        top: 0;
+        z-index: 0;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        isolation: isolate;
+        padding: clamp(130px, 20vh, 200px) 22px clamp(70px, 12vh, 110px);
+        text-align: center;
       }
+
       .pf-hero::after {
-          /* vignette + bottom fade into page */
-          content: "";
-          position: absolute;
-          inset: 0;
-          z-index: -1;
-          background:
-              radial-gradient(120% 90% at 50% 30%, transparent 40%, rgba(0, 0, 0, .55) 100%),
-              linear-gradient(to bottom, transparent 55%, var(--pf-bg) 100%);
-          pointer-events: none;
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+          radial-gradient(120% 90% at 50% 30%, transparent 40%, rgba(0, 0, 0, .55) 100%),
+          linear-gradient(to bottom, transparent 55%, var(--pf-bg) 100%);
+        pointer-events: none;
       }
+
       .pf-hero__canvas {
-          position: absolute;
-          inset: 0;
-          z-index: -3;
-          width: 100%;
-          height: 100%;
-          display: block;
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        width: 100%;
+        height: 100%;
+        display: block;
       }
+
       .pf-hero__glow {
-          position: absolute;
-          z-index: -2;
-          border-radius: 50%;
-          filter: blur(90px);
-          opacity: .5;
-          pointer-events: none;
-          will-change: transform;
+        position: absolute;
+        z-index: -2;
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: .5;
+        pointer-events: none;
+        will-change: transform;
       }
+
       .pf-hero__glow--a {
-          width: 60vw;
-          height: 60vw;
-          max-width: 760px;
-          max-height: 760px;
-          top: -16%;
-          left: -8%;
-          background: radial-gradient(circle, rgba(242, 212, 0, .42), transparent 62%);
+        width: 60vw;
+        height: 60vw;
+        max-width: 760px;
+        max-height: 760px;
+        top: -16%;
+        left: -8%;
+        background: radial-gradient(circle, rgba(242, 212, 0, .42), transparent 62%);
       }
+
       .pf-hero__glow--b {
-          width: 52vw;
-          height: 52vw;
-          max-width: 640px;
-          max-height: 640px;
-          bottom: -22%;
-          right: -10%;
-          background: radial-gradient(circle, rgba(255, 216, 77, .28), transparent 60%);
+        width: 52vw;
+        height: 52vw;
+        max-width: 640px;
+        max-height: 640px;
+        bottom: -22%;
+        right: -10%;
+        background: radial-gradient(circle, rgba(255, 216, 77, .28), transparent 60%);
       }
 
       .pf-hero__inner {
-          position: relative;
-          max-width: 1080px;
-          margin: 0 auto;
+        position: relative;
+        width: 100%;
+        max-width: 1080px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
-      .pf-reveal {
+
+      .pf-hero__inner>* {
+        width: 100%;
+      }
+
+      .pf-hero__inner .pf-reveal {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @keyframes pf-hero-recede {
+        to {
           opacity: 0;
-          transform: translateY(26px);
-          filter: blur(6px);
-          transition: opacity .9s var(--pf-ease), transform .9s var(--pf-ease), filter .9s var(--pf-ease);
-          will-change: opacity, transform;
+          transform: translateY(-48px) scale(.93);
+          filter: blur(5px);
+        }
       }
+
+      @supports (animation-timeline: scroll()) {
+        @media (prefers-reduced-motion: no-preference) {
+          .pf-hero__inner {
+            animation: pf-hero-recede linear both;
+            animation-timeline: scroll(root block);
+            animation-range: 10vh 85vh;
+          }
+        }
+      }
+
+      .pf-reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        filter: blur(6px);
+        transition: opacity .9s var(--pf-ease), transform .9s var(--pf-ease), filter .9s var(--pf-ease);
+        will-change: opacity, transform;
+      }
+
       .pf-reveal.is-in {
-          opacity: 1;
-          transform: none;
-          filter: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
       }
+
       .btn-explore-gallery {
-          transition: all 0.3s ease !important;
+        transition: all 0.3s ease !important;
       }
+
       .btn-explore-gallery:hover {
-          background-color: #000000 !important;
-          background-image: none !important;
-          color: #ffffff !important;
-          border-color: rgba(255, 255, 0, 0.3) !important;
+        background-color: #000000 !important;
+        background-image: none !important;
+        color: #ffffff !important;
+        border-color: rgba(255, 255, 0, 0.3) !important;
       }
+
       .btn-explore-gallery:hover::before {
-          opacity: 0 !important;
+        opacity: 0 !important;
       }
+
       .explore-svg1 {
-          width: 20px;
-          height: 20px;
-          flex-shrink: 0;
-          display: inline-block;
-          vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        display: inline-block;
+        vertical-align: middle;
       }
+
       .btn-explore-gallery .explore-svg1-path {
-          stroke: #1a1a1c !important;
-          transition: stroke 0.3s ease !important;
+        stroke: #1a1a1c !important;
+        transition: stroke 0.3s ease !important;
       }
+
       .btn-explore-gallery:hover .explore-svg1-path {
-          stroke: #ffffff !important;
+        stroke: #ffffff !important;
       }
     </style>
 
     <section class="pf-hero" id="pf-top">
-        <canvas class="pf-hero__canvas" id="pf-particles" aria-hidden="true"></canvas>
-        <span class="pf-hero__glow pf-hero__glow--a" aria-hidden="true"></span>
-        <span class="pf-hero__glow pf-hero__glow--b" aria-hidden="true"></span>
+      <canvas class="pf-hero__canvas" id="pf-particles" aria-hidden="true"></canvas>
+      <span class="pf-hero__glow pf-hero__glow--a" aria-hidden="true"></span>
+      <span class="pf-hero__glow pf-hero__glow--b" aria-hidden="true"></span>
 
-        <div class="pf-hero__inner">
-            <div class="space-y-5 text-center relative z-10 pointer-events-none">
-                <span class="inline-block badge badge-gradient-helix pointer-events-auto pf-reveal" data-delay="0.1"
-                    data-ns-animate="" data-orion-obstacle="">
-                    Our Works
-                </span>
-                <div class="md:space-y-4 space-y-2 lg:max-w-full md:max-w-[600px] sm:max-w-[550px] min-[500px]:max-w-[450px] max-w-[350px] lg:mx-0 mx-auto pointer-events-none">
-                    <h2 class="font-creato text-accent pointer-events-auto w-fit max-w-full mx-auto max-md:text-[38px] max-md:leading-[1.1] pf-reveal"
-                        data-delay="0.2" data-ns-animate="" data-orion-obstacle="">
-                        Projects <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-helix-blue">crafted
-                            by Synkyn Studios</span>
-                    </h2>
-                    <p class="text-accent/60 pointer-events-auto w-fit text-base md:w-[700px] max-w-full mx-auto md:text-lg pf-reveal"
-                        data-delay="0.3" data-ns-animate="" data-orion-obstacle="">
-                        Every project reflects our commitment to exceptional design, precision, and creativity. Explore our
-                        portfolio of branding, print, signage, and visual solutions that have helped businesses stand out and make
-                        a lasting impression.
-                    </p>
-                </div>
-            </div>
-            <ul class="flex items-center text-center sm:flex-row flex-col gap-4 justify-center md:mt-14 mt-8 pointer-events-none relative z-10">
-                <li class="w-full sm:w-auto pointer-events-auto pf-reveal" data-delay="0.4" data-direction="left"
-                    data-ns-animate="" data-offset="50" data-orion-obstacle="">
-                    <a class="btn btn-secondary dark:btn-accent btn-explore-gallery btn-xl sm:w-auto w-[85%]" href="#bento-grid-container">
-                        <span>Explore our works</span>
-                        <svg fill="none" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="explore-svg1">
-                            <path class="explore-svg1-path" d="M2.5 14.166l7.5 3.334 7.5-3.334M2.5 9.166l7.5 3.334 7.5-3.334M10 2.5L2.5 5.833l7.5 3.334 7.5-3.334L10 2.5z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </li>
-            </ul>
+      <div class="pf-hero__inner">
+        <div class="space-y-5 text-center relative z-10 pointer-events-none">
+          <span class="inline-block badge badge-gradient-helix pointer-events-auto pf-reveal" data-delay="0.1"
+            data-ns-animate="" data-orion-obstacle="">
+            Our Works
+          </span>
+          <div
+            class="md:space-y-4 space-y-2 lg:max-w-full md:max-w-[600px] sm:max-w-[550px] min-[500px]:max-w-[450px] max-w-[350px] lg:mx-0 mx-auto pointer-events-none">
+            <h2
+              class="font-creato text-accent pointer-events-auto w-fit max-w-full mx-auto max-md:text-[38px] max-md:leading-[1.1] pf-reveal"
+              data-delay="0.2" data-ns-animate="" data-orion-obstacle="">
+              Projects <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-helix-blue">crafted
+                by Synkyn Studios</span>
+            </h2>
+            <p class="text-accent/60 pointer-events-auto w-fit text-base md:w-[700px] max-w-full mx-auto md:text-lg pf-reveal"
+              data-delay="0.3" data-ns-animate="" data-orion-obstacle="">
+              Every project reflects our commitment to exceptional design, precision, and creativity. Explore our
+              portfolio of branding, print, signage, and visual solutions that have helped businesses stand out and make
+              a lasting impression.
+            </p>
+          </div>
         </div>
+        <ul
+          class="flex items-center text-center sm:flex-row flex-col gap-4 justify-center md:mt-14 mt-8 pointer-events-none relative z-10">
+          <li class="w-full sm:w-auto pointer-events-auto pf-reveal" data-delay="0.4" data-direction="left"
+            data-ns-animate="" data-offset="50" data-orion-obstacle="">
+            <a class="btn btn-secondary dark:btn-accent btn-explore-gallery btn-xl sm:w-auto w-[85%]"
+              href="#bento-grid-container">
+              <span>Explore our works</span>
+              <svg fill="none" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="explore-svg1">
+                <path class="explore-svg1-path"
+                  d="M2.5 14.166l7.5 3.334 7.5-3.334M2.5 9.166l7.5 3.334 7.5-3.334M10 2.5L2.5 5.833l7.5 3.334 7.5-3.334L10 2.5z"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section class="max-[1920px]:px-5 py-14 md:py-24 lg:py-32 xl:py-40 bg-transparent pt-0 md:pt-0 lg:pt-0 xl:pt-0">
+    <section class="pf-works max-[1920px]:px-5 py-14 md:py-24 lg:py-32 xl:py-40 pt-16 md:pt-24 lg:pt-28 xl:pt-32">
       <div class="mx-auto max-w-[1880px] md:px-5 xl:pb-16">
         <div class="main-container 2xl:!max-w-[1440px]">
-          <div id="bento-grid-container" class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
-            <!-- Javascript will populate this with Bento logic -->
-          </div>
+          <div id="bento-grid-container" class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-4"></div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== MEDIA MODAL ===================== -->
     <div id="media-modal" class="media-modal" aria-hidden="true" role="dialog" aria-modal="true"
       aria-labelledby="modal-title">
       <div class="media-modal__card" id="modal-content-wrapper">
@@ -405,9 +453,7 @@
         </button>
 
         <div class="media-modal__media-wrapper">
-          <div id="modal-media-container" class="media-modal__media">
-            <!-- media slides injected here -->
-          </div>
+          <div id="modal-media-container" class="media-modal__media"></div>
           <button id="modal-prev-btn" class="media-modal__nav-btn media-modal__nav-btn--prev" aria-label="Previous">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
               stroke-linejoin="round" aria-hidden="true">
@@ -438,54 +484,118 @@
         </aside>
       </div>
     </div>
+
     <style>
-      /* ============================================================
-         BENTO GRID — robust responsive layout
-         ============================================================ */
+      .pf-works {
+        position: relative;
+        z-index: 2;
+        background: #080808;
+        border-top: 1px solid rgba(242, 212, 0, .14);
+        border-radius: 28px 28px 0 0;
+        box-shadow: 0 -34px 70px rgba(0, 0, 0, .72);
+      }
+
+      .pf-works::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(180px, 40%);
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #f2d400, transparent);
+        opacity: .8;
+      }
+
       @media (max-width: 767.98px) {
-        #bento-grid-container {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 1rem;
-        }
-
-        #bento-grid-container>.bento-item {
-          grid-column: auto !important;
-          grid-row: auto !important;
-          min-height: 230px;
-          display: flex !important;
-        }
-
-        #bento-grid-container>.bento-item:nth-child(5) {
-          min-height: 300px;
+        .pf-works {
+          border-radius: 20px 20px 0 0;
         }
       }
 
-      @media (min-width: 768px) and (max-width: 1023.98px) {
-        #bento-grid-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-        }
+      #bento-grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(12px, 1.4vw, 22px);
+      }
 
-        #bento-grid-container>.bento-item {
-          grid-column: auto !important;
-          grid-row: auto !important;
-          min-height: 260px;
-          display: flex !important;
-        }
+      .bento-pattern-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+        gap: clamp(12px, 1.4vw, 22px);
+        width: 100%;
       }
 
       @media (min-width: 1024px) {
-        #bento-grid-container>.bento-item {
-          min-height: 200px;
+        .bento-pattern-block {
+          grid-template-columns: 1fr 1.093fr 1fr;
+        }
+
+        .bento-pattern-block.is-pattern-b {
+          grid-template-columns: 1.093fr 1fr 1fr;
+        }
+
+        .bento-pattern-block.is-pattern-loose {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .bento-pattern-mid-col {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(12px, 1.4vw, 22px);
+        min-width: 0;
+      }
+
+      .bento-pattern-squares {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+        gap: clamp(12px, 1.4vw, 22px);
+      }
+
+      @media (max-width: 1023.98px) {
+
+        .bento-pattern-mid-col,
+        .bento-pattern-squares {
+          display: contents;
         }
       }
 
       .bento-item {
+        position: relative;
+        padding: 0;
+        width: 100%;
+        height: auto;
+        align-self: start;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, .05);
         cursor: pointer;
         transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-        border: 1px solid rgba(255, 255, 255, .05);
+      }
+
+      .bento-ar--portrait {
+        aspect-ratio: 9 / 16;
+      }
+
+      .bento-ar--square {
+        aspect-ratio: 1 / 1;
+      }
+
+      .bento-ar--landscape {
+        aspect-ratio: 16 / 9;
+      }
+
+      @media (max-width: 1023.98px) {
+        .bento-ar--portrait {
+          aspect-ratio: 3 / 4;
+        }
+
+        .bento-ar--landscape {
+          aspect-ratio: 4 / 3;
+        }
       }
 
       .bento-item:hover {
@@ -503,7 +613,6 @@
         -webkit-backdrop-filter: blur(6px);
       }
 
-      /* -------- Modal overlay -------- */
       .media-modal {
         position: fixed;
         inset: 0;
@@ -603,7 +712,6 @@
         pointer-events: none;
       }
 
-      /* Active (multi-source) but hidden until the media area is hovered */
       .media-modal__nav-btn.show {
         opacity: 0;
         pointer-events: none;
@@ -615,7 +723,6 @@
         pointer-events: auto;
       }
 
-      /* Touch devices have no hover — keep the arrows visible there */
       @media (hover: none),
       (pointer: coarse) {
         .media-modal__nav-btn.show {
@@ -850,7 +957,6 @@
         transform: scale(1.06);
       }
 
-      /* ============= MODAL — TABLET (768–1023) ============= */
       @media (min-width: 768px) and (max-width: 1023.98px) {
         .media-modal {
           padding: 20px;
@@ -894,7 +1000,6 @@
         }
       }
 
-      /* ============= MODAL — MOBILE (<=767) ============= */
       @media (max-width: 767.98px) {
         .media-modal {
           padding: 12px;
@@ -1051,13 +1156,11 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
       }
 
-      /* Hide the floating header/navbar completely when the modal popup is open */
       body.modal-open header,
       body.modal-open .header-two {
         display: none !important;
       }
 
-      /* Instagram specific height styling on mobile views to prevent cutoffs */
       @media (max-width: 767.98px) {
         .media-modal--instagram .media-modal__media-wrapper {
           height: 62vh !important;
@@ -1076,9 +1179,6 @@
         }
       }
 
-      /* ============================================================
-         CUSTOM VIMEO PLAYER (inside modal) — our bar, not Vimeo's
-         ============================================================ */
       .media-modal__slide[data-type="vimeo"] {
         padding: 0;
       }
@@ -1298,48 +1398,10 @@
         }
       }
     </style>
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
 
-
-        const bentoClasses = [
-          'lg:col-span-1 lg:row-span-4',
-          'lg:col-span-1 lg:row-span-1',
-          'lg:col-span-1 lg:row-span-1',
-          'lg:col-span-1 lg:row-span-3 lg:min-h-[361px]',
-          'lg:col-span-2 lg:row-span-6 lg:min-h-[452px]',
-          'lg:col-span-1 lg:row-span-2 lg:min-h-[226px]',
-          'lg:col-span-1 lg:row-span-4',
-          'lg:col-span-1 lg:row-span-3 lg:min-h-[361px]',
-          'lg:col-span-1 lg:row-span-1',
-          'lg:col-span-1 lg:row-span-1'
-        ];
-
-        // ==========================================================================
-        //  PROJECTS  —  EDIT EVERYTHING HERE.  Add / remove / reorder freely.
-        //
-        //  One project = one { } block inside worksData below.
-        //  Copy a block, change the fields, done. Fields:
-        //
-        //    id:          unique slug — also the deep link (library.html#your-id)
-        //    title:       project name (shown big)
-        //    category:    small label above the title
-        //    tag:         tiny badge on the grid tile (optional)
-        //    thumbnail:   grid tile image URL (optional — else the 1st source is used)
-        //    description: text; simple HTML like <br> is allowed
-        //    sources:     one OR many. If many, the popup shows swipe arrows + dots.
-        //                 Available source types:
-        //                   { type: 'image',     src: 'https://…​.png' }
-        //                   { type: 'video',     src: './video/clip.mp4' }         // native controls
-        //                   { type: 'vimeo',     src: 'https://player.vimeo.com/video/123456789' } // custom bar + sound + fullscreen
-        //                   { type: 'youtube',   src: 'https://youtu.be/XXXXXXXXXXX' }
-        //                   { type: 'instagram', src: 'https://www.instagram.com/reel/XXXX/' }
-        //
-        //  Grid sizing: the Nth project uses bentoClasses[N] (they repeat if you add
-        //  more than the list). Reorder projects to change which tile size they get.
-        // ==========================================================================
-        // Neutral placeholder used by the empty custom slots below.
-        // Replace each custom project's thumbnail + sources[].src with your real media.
         const PLACEHOLDER_IMG = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
           "<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>" +
           "<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>" +
@@ -1371,7 +1433,6 @@
               { type: 'youtube', src: 'https://youtu.be/FlOzIM7Yov4?si=pdGIj50dAFhKnGQ5' }
             ]
           },
-
           {
             id: 'work-nbk111',
             title: 'NBK111',
@@ -1394,8 +1455,6 @@
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1208145520' }
             ]
           },
-
-
           {
             id: 'work-major-installation',
             title: 'Major Installation',
@@ -1406,7 +1465,6 @@
               { type: 'video', src: './video/HEHomeVid.mp4' }
             ]
           },
-
           {
             id: 'work-red-bus',
             title: 'Red Bus',
@@ -1421,7 +1479,6 @@
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1208148386' }
             ]
           },
-
           {
             id: 'work-camel',
             title: 'Camel',
@@ -1433,7 +1490,6 @@
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1208876567' }
             ]
           },
-
           {
             id: 'work-senior-living',
             title: 'Senior Living Facility',
@@ -1448,7 +1504,6 @@
               { type: 'image', src: './images/auditoriumbg1.png' }
             ]
           },
-
           {
             id: 'work-compliance',
             title: 'Compliance Upgrade',
@@ -1458,7 +1513,6 @@
               { type: 'image', src: './images/codestightening.png' }
             ]
           },
-
           {
             id: 'work-air-refresh',
             title: 'Indoor Air Refresh',
@@ -1468,14 +1522,6 @@
               { type: 'image', src: './images/airqualityworse.png' }
             ]
           },
-
-          // ============================================================
-          //  8 CUSTOM SLOTS — fill these in.
-          //  Swap thumbnail + sources[].src for your real media; edit the
-          //  title / category / tag / description; keep each id unique.
-          //  A source can be: image | video | vimeo | youtube | instagram.
-          // ============================================================
-
           {
             id: 'work-custom-11',
             title: 'Custom Project 11',
@@ -1487,7 +1533,6 @@
               { type: 'image', src: PLACEHOLDER_IMG }
             ]
           },
-
           {
             id: 'work-custom-12',
             title: 'Custom Project 12',
@@ -1499,7 +1544,6 @@
               { type: 'image', src: PLACEHOLDER_IMG }
             ]
           },
-
           {
             id: 'work-custom-13',
             title: 'Custom Project 13',
@@ -1511,7 +1555,6 @@
               { type: 'image', src: PLACEHOLDER_IMG }
             ]
           },
-
           {
             id: 'work-custom-14',
             title: 'Custom Project 14',
@@ -1523,7 +1566,6 @@
               { type: 'image', src: PLACEHOLDER_IMG }
             ]
           },
-
           {
             id: 'work-custom-15',
             title: 'Custom Project 15',
@@ -1535,7 +1577,6 @@
               { type: 'image', src: PLACEHOLDER_IMG }
             ]
           },
-
           {
             id: 'work-custom-16',
             title: 'Custom Project 16',
@@ -1547,7 +1588,6 @@
               { type: 'image', src: PLACEHOLDER_IMG }
             ]
           },
-
           {
             id: 'work-custom-17',
             title: 'Custom Project 17',
@@ -1559,7 +1599,6 @@
               { type: 'image', src: PLACEHOLDER_IMG }
             ]
           },
-
           {
             id: 'work-custom-18',
             title: 'Custom Project 18',
@@ -1571,10 +1610,8 @@
               { type: 'image', src: PLACEHOLDER_IMG }
             ]
           }
-
         ];
 
-        // ---------- helpers ----------
         function getYouTubeId(url) {
           const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/))([A-Za-z0-9_-]{11})/);
           return m ? m[1] : null;
@@ -1589,7 +1626,6 @@
           return m ? m[1] : null;
         }
 
-        // ---------- Vimeo API loader ----------
         function ensureVimeoAPI(cb) {
           if (window.Vimeo && window.Vimeo.Player) { cb(); return; }
           if (!document.getElementById('vimeo-api-js')) {
@@ -1610,86 +1646,151 @@
 
         const gridContainer = document.getElementById('bento-grid-container');
 
-        // Full image adapts to fill the whole tile — no crop, no empty bars.
-        // Thumbnail fills the tile (cover) — clean, no distortion.
         function fillThumb(src, alt) {
           return `<img src="${src}" alt="${alt}" class="absolute inset-0 w-full h-full" style="object-fit:cover;object-position:center;display:block;" loading="lazy" onerror="this.style.display='none'" />`;
         }
 
-        function renderGrid() {
-          gridContainer.innerHTML = '';
-          // Every project in worksData is ONE tile (no duplication).
-          const gridItems = worksData;
-          gridItems.forEach((work, index) => {
-            const el = document.createElement('div');
-            const layoutClass = bentoClasses[index % bentoClasses.length];
-            el.className = `relative flex flex-col justify-center rounded-2xl bg-white dark:bg-background-8 overflow-hidden group bento-item ${layoutClass}`;
-            el.dataset.id = work.id;
-            el.setAttribute('role', 'button');
-            el.setAttribute('tabindex', '0');
-            el.setAttribute('aria-label', `${work.title} — ${work.category}`);
+        function createBentoItem(work, aspectClass) {
+          const el = document.createElement('div');
+          el.className = `relative bg-white dark:bg-background-8 group bento-item ${aspectClass}`;
+          el.dataset.id = work.id;
+          el.setAttribute('role', 'button');
+          el.setAttribute('tabindex', '0');
+          el.setAttribute('aria-label', `${work.title} — ${work.category}`);
 
-            let badge = '';
-            let mediaHtml = '';
-            const firstSource = work.sources[0];
-            const customThumbnail = work.thumbnail || firstSource.thumbnail;
+          let badge = '';
+          let mediaHtml = '';
+          const firstSource = work.sources[0];
+          const customThumbnail = work.thumbnail || (firstSource && firstSource.thumbnail);
 
-            if (customThumbnail) {
-              if (firstSource.type === 'youtube') badge = work.tag || 'YouTube';
-              else if (firstSource.type === 'instagram') badge = work.tag || 'Instagram';
-              else if (firstSource.type === 'video' || firstSource.type === 'vimeo') badge = work.tag || 'Video';
-              else badge = work.tag || 'Photo';
+          if (customThumbnail) {
+            if (firstSource.type === 'youtube') badge = work.tag || 'YouTube';
+            else if (firstSource.type === 'instagram') badge = work.tag || 'Instagram';
+            else if (firstSource.type === 'video' || firstSource.type === 'vimeo') badge = work.tag || 'Video';
+            else badge = work.tag || 'Photo';
 
-              mediaHtml = fillThumb(customThumbnail, work.title);
-              if (firstSource.type === 'instagram') {
-                mediaHtml += `<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>`;
-              }
-            } else {
-              if (firstSource.type === 'youtube') {
-                const ytId = getYouTubeId(firstSource.src);
-                badge = work.tag || 'YouTube';
-                const thumbUrl = getYouTubeThumbnail(ytId);
-                mediaHtml = ytId
-                  ? fillThumb(thumbUrl, work.title)
-                  : `<div class="absolute inset-0 w-full h-full" style="background:linear-gradient(135deg,#ff0000 0%,#8b0000 100%);"></div>`;
-              } else if (firstSource.type === 'instagram') {
-                badge = work.tag || 'Instagram';
-                const thumbUrl = 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png';
-                mediaHtml = fillThumb(thumbUrl, work.title) + `<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>`;
-              } else if (firstSource.type === 'vimeo') {
-                badge = work.tag || 'Video';
-                mediaHtml = `<div class="absolute inset-0 w-full h-full" style="background:linear-gradient(135deg,#101010 0%,#000 100%);"></div>`;
-              } else if (firstSource.type === 'video') {
-                badge = work.tag || 'Video';
-                mediaHtml = `<video src="${firstSource.src}" autoplay loop muted playsinline preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>`;
-              } else {
-                badge = work.tag || 'Photo';
-                mediaHtml = fillThumb(firstSource.src, work.title);
-              }
+            mediaHtml = fillThumb(customThumbnail, work.title);
+            if (firstSource.type === 'instagram') {
+              mediaHtml += `<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>`;
             }
+          } else if (firstSource) {
+            if (firstSource.type === 'youtube') {
+              const ytId = getYouTubeId(firstSource.src);
+              badge = work.tag || 'YouTube';
+              const thumbUrl = getYouTubeThumbnail(ytId);
+              mediaHtml = ytId
+                ? fillThumb(thumbUrl, work.title)
+                : `<div class="absolute inset-0 w-full h-full" style="background:linear-gradient(135deg,#ff0000 0%,#8b0000 100%);"></div>`;
+            } else if (firstSource.type === 'instagram') {
+              badge = work.tag || 'Instagram';
+              const thumbUrl = 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png';
+              mediaHtml = fillThumb(thumbUrl, work.title) + `<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>`;
+            } else if (firstSource.type === 'vimeo') {
+              badge = work.tag || 'Video';
+              mediaHtml = `<div class="absolute inset-0 w-full h-full" style="background:linear-gradient(135deg,#101010 0%,#000 100%);"></div>`;
+            } else if (firstSource.type === 'video') {
+              badge = work.tag || 'Video';
+              mediaHtml = `<video src="${firstSource.src}" autoplay loop muted playsinline preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>`;
+            } else {
+              badge = work.tag || 'Photo';
+              mediaHtml = fillThumb(firstSource.src, work.title);
+            }
+          }
 
-            if (work.sources.length > 1) badge += ` (1/${work.sources.length})`;
-            const badgeColour = 'background:rgba(0,0,0,0.6);color:#fff;backdrop-filter:blur(4px);';
+          if (work.sources.length > 1) badge += ` (1/${work.sources.length})`;
+          const badgeColour = 'background:rgba(0,0,0,0.6);color:#fff;backdrop-filter:blur(4px);';
 
-            el.innerHTML = `
-          ${mediaHtml}
-          <span class="bento-item__badge absolute top-3 left-3 z-20 text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
-            style="${badgeColour}">${badge}</span>
-          <div class="bento-item__overlay absolute inset-0 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col justify-end p-5 md:p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-            <p class="text-[#ffd84d] uppercase text-[10px] md:text-xs tracking-wider font-bold mb-1 drop-shadow-md">${work.category}</p>
-            <h4 class="text-white text-lg md:text-xl font-bold drop-shadow-md">${work.title}</h4>
-          </div>
-        `;
+          el.innerHTML = `
+        ${mediaHtml}
+        <span class="bento-item__badge absolute top-3 left-3 z-20 text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
+          style="${badgeColour}">${badge}</span>
+        <div class="bento-item__overlay absolute inset-0 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col justify-end p-5 md:p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+          <p class="text-[#ffd84d] uppercase text-[10px] md:text-xs tracking-wider font-bold mb-1 drop-shadow-md">${work.category}</p>
+          <h4 class="text-white text-lg md:text-xl font-bold drop-shadow-md">${work.title}</h4>
+        </div>
+      `;
 
-            el.addEventListener('click', () => openModal(work));
-            el.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(work); }
-            });
-            gridContainer.appendChild(el);
+          el.addEventListener('click', () => openModal(work));
+          el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(work); }
           });
+          return el;
         }
 
-        // ---------- MODAL ----------
+        function buildPatternA(chunk) {
+          const block = document.createElement('div');
+          block.className = 'bento-pattern-block';
+
+          block.appendChild(createBentoItem(chunk[0], 'bento-ar--portrait'));
+
+          const midCol = document.createElement('div');
+          midCol.className = 'bento-pattern-mid-col';
+          midCol.appendChild(createBentoItem(chunk[1], 'bento-ar--landscape'));
+
+          const squares = document.createElement('div');
+          squares.className = 'bento-pattern-squares';
+          squares.appendChild(createBentoItem(chunk[2], 'bento-ar--square'));
+          squares.appendChild(createBentoItem(chunk[3], 'bento-ar--square'));
+          midCol.appendChild(squares);
+
+          midCol.appendChild(createBentoItem(chunk[4], 'bento-ar--landscape'));
+          block.appendChild(midCol);
+
+          block.appendChild(createBentoItem(chunk[5], 'bento-ar--portrait'));
+          return block;
+        }
+
+        function buildPatternB(chunk) {
+          const block = document.createElement('div');
+          block.className = 'bento-pattern-block is-pattern-b';
+
+          const midCol = document.createElement('div');
+          midCol.className = 'bento-pattern-mid-col';
+
+          const squares = document.createElement('div');
+          squares.className = 'bento-pattern-squares';
+          squares.appendChild(createBentoItem(chunk[0], 'bento-ar--square'));
+          squares.appendChild(createBentoItem(chunk[1], 'bento-ar--square'));
+          midCol.appendChild(squares);
+
+          midCol.appendChild(createBentoItem(chunk[2], 'bento-ar--landscape'));
+          midCol.appendChild(createBentoItem(chunk[3], 'bento-ar--landscape'));
+          block.appendChild(midCol);
+
+          block.appendChild(createBentoItem(chunk[4], 'bento-ar--portrait'));
+          block.appendChild(createBentoItem(chunk[5], 'bento-ar--portrait'));
+          return block;
+        }
+
+        function renderGrid() {
+          gridContainer.innerHTML = '';
+          const gridItems = worksData;
+          let blockIndex = 0;
+
+          for (let i = 0; i < gridItems.length; i += 6) {
+            const chunk = gridItems.slice(i, i + 6);
+
+            if (chunk.length === 6) {
+              gridContainer.appendChild(
+                blockIndex % 2 === 0 ? buildPatternA(chunk) : buildPatternB(chunk)
+              );
+              blockIndex++;
+            } else {
+              const block = document.createElement('div');
+              block.className = 'bento-pattern-block is-pattern-loose';
+              chunk.forEach((work) => {
+                let arClass = 'bento-ar--square';
+                if (work.sources[0]) {
+                  if (work.sources[0].type === 'instagram') arClass = 'bento-ar--portrait';
+                  else if (['youtube', 'vimeo', 'video'].includes(work.sources[0].type)) arClass = 'bento-ar--landscape';
+                }
+                block.appendChild(createBentoItem(work, arClass));
+              });
+              gridContainer.appendChild(block);
+            }
+          }
+        }
+
         const modal = document.getElementById('media-modal');
         const btnClose = document.getElementById('close-modal');
         const mediaContainer = document.getElementById('modal-media-container');
@@ -1731,7 +1832,6 @@
           });
         }, { threshold: 0.6, root: mediaContainer });
 
-        // ---------- Custom Vimeo controls ----------
         const VIC = {
           play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>',
           pause: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4.2" height="15" rx="1"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1"/></svg>',
@@ -1991,7 +2091,7 @@
           if (targetWork) setTimeout(() => { openModal(targetWork); }, 300);
           else if (hashId === 'recent-post' && worksData.length > 0) setTimeout(() => { openModal(worksData[0]); }, 300);
         }
-        
+
         handleHash();
         window.addEventListener('hashchange', handleHash);
       });
@@ -2086,6 +2186,7 @@
       </div>
     </div>
   </footer>
+
   <script>
     (function () {
       'use strict';
@@ -2104,6 +2205,7 @@
       io.observe(divider.parentElement);
     })();
   </script>
+
   <style>
     @media (max-width: 767.98px) {
       #sticky-bar {
@@ -2111,11 +2213,11 @@
       }
     }
   </style>
+
   <div data-curve="bezier" data-div-count="5" data-duration="0.3s" data-easing="ease-out" data-exponential="true"
     data-gradual-blur="" data-height="7rem" data-opacity="1" data-position="bottom" data-show-on-scroll="50"
     data-strength="2" data-target="page" data-z-index="50" id="sticky-bar"></div>
 
-  <!-- Vimeo Player API (for the custom-controlled film in the modal) -->
   <script src="https://player.vimeo.com/api/player.js" id="vimeo-api-js"></script>
 
   <script defer="" src="./vendor/split-text.min.js"></script>
@@ -2127,8 +2229,8 @@
   <script defer="" src="./vendor/springer.min.js"></script>
   <script src="./assets/main.js" type="module"></script>
   <script src="./assets/fx.js?v=3"></script>
-  
-    <script defer="" src="./assets/navbar.js?v=6"></script>
+
+  <script defer="" src="./assets/navbar.js?v=6"></script>
   <script defer="" src="./assets/footer.js?v=2"></script>
 </body>
 

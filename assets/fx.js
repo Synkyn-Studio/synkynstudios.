@@ -46,12 +46,15 @@
     inset: '0',
     width: '100%',
     height: '100%',
-    zIndex: '1',
+    zIndex: '-1',
     pointerEvents: 'none',
     mixBlendMode: 'screen',
     opacity: '0',
     transition: 'opacity 1.2s ease'
   });
+  
+  // Create a stacking context on body so z-index: -1 stays above body's background but behind content
+  document.body.style.isolation = 'isolate';
   document.body.appendChild(canvas);
   var ctx = canvas.getContext('2d');
 
