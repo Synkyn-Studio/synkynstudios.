@@ -9,4 +9,4 @@ Disallow: /404.html
 Disallow: /vendor/
 Disallow: /video/
 
-Sitemap: https://synkynstudios.com/sitemap.xml
+Sitemap: https://www.synkynstudios.com/sitemap.xml

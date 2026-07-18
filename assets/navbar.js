@@ -34,7 +34,7 @@
         sidebar.innerHTML = `
         <div class="mobile-menu-inner">
             <div class="mobile-menu-top">
-                <img src="./images/logo.png" alt="Synkyn Studios" class="mobile-menu-logo">
+                <img src="https://www.synkynstudios.com/images/logo.png" alt="Synkyn Studios" class="mobile-menu-logo">
                 <button class="mobile-menu-close" aria-label="Close menu">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"></line>

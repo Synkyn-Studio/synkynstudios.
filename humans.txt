@@ -8,4 +8,4 @@
   Language: English
   Doctype: HTML5
   Design: Space-inspired, Earth-destined
-  Printalbum: https://synkynstudios.com/printalbum.html
+  Printalbum: https://www.synkynstudios.com/printalbum.html
