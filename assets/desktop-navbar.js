@@ -40,7 +40,7 @@ if (desktopNav) {
                                 </div>
                                 <div class="flex flex-col text-left">
                                     <p class="text-[15px] font-medium text-white leading-tight">Library</p>
-                                    <p class="text-[12px] text-white/60 font-normal mt-0.5">Our Works — Skykyn</p>
+                                    <p class="text-[12px] text-white/60 font-normal mt-0.5">Our Work-Skykyn</p>
                                 </div>
                             </div>
                             <svg class="size-4 stroke-white transition-all duration-300 group-hover:translate-x-1" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -88,8 +88,8 @@ if (desktopNav) {
                     <div class="absolute inset-x-0 bottom-0 z-10 p-3">
                         <div class="flex items-center justify-between bg-black/60 backdrop-blur-md p-2 pl-3 rounded-full border border-white/10 shadow-lg group-hover:bg-black/80 transition-colors">
                             <div class="flex flex-col min-w-0 mr-2">
-                                <p class="text-[13px] text-white font-medium drop-shadow-lg leading-tight truncate">NBK111 Glimpse</p>
-                                <p class="text-[10px] text-white/70 font-normal drop-shadow-md leading-tight truncate mt-0.5">#NBK111 Glimpse - Entry of an Era</p>
+                                <p class="text-[13px] text-white font-medium drop-shadow-lg leading-tight truncate">Grooming - Zlade</p>
+                                <p class="text-[10px] text-white/70 font-normal drop-shadow-md leading-tight truncate mt-0.5">Print Album</p>
                             </div>
                             <div class="group-hover:bg-helix-blue bg-white/20 relative flex h-7 w-12 shrink-0 items-center justify-center overflow-hidden rounded-[40px] transition-all duration-500 ease-in-out">
                                 <figure class="relative size-4 overflow-hidden">

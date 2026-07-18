@@ -112,7 +112,7 @@
             --pf-accent: #f2d400;
             --pf-accent-2: #ffd84d;
             --pf-bg: transparent;
-            --pf-panel: #080808;
+            --pf-panel: transparent;
             --pf-surface: #0f0f0f;
             --pf-surface-2: #141414;
             --pf-line: rgba(255, 255, 255, .08);
@@ -244,9 +244,7 @@
             position: absolute;
             inset: 0;
             z-index: -1;
-            background:
-                radial-gradient(120% 90% at 50% 30%, transparent 40%, rgba(0, 0, 0, .55) 100%),
-                linear-gradient(to bottom, transparent 55%, var(--pf-bg) 100%);
+            background: transparent;
             pointer-events: none;
         }
 
@@ -1808,10 +1806,6 @@
     <main class="pf-page">
 
         <section class="pf-hero" id="pf-top">
-            <canvas class="pf-hero__canvas" id="pf-particles" aria-hidden="true"></canvas>
-            <span class="pf-hero__glow pf-hero__glow--a" aria-hidden="true"></span>
-            <span class="pf-hero__glow pf-hero__glow--b" aria-hidden="true"></span>
-
             <div class="pf-hero__inner">
                 <div class="space-y-5 text-center relative z-10 pointer-events-none">
                     <span class="inline-block badge badge-gradient-helix pointer-events-auto pf-reveal" data-delay="0.1"
@@ -1828,8 +1822,8 @@
                         </h1>
                         <p class="text-accent/60 pointer-events-auto w-fit text-base md:w-[700px] max-w-full mx-auto md:text-lg pf-reveal"
                             data-delay="0.3" data-ns-animate="" data-orion-obstacle="">
-                            Every project reflects our passion for quality, creativity and craftsmanship — explore a
-                            curated exhibition of completed works, installations and prints.
+                            A premium gallery of completed works, prints, and installations by Synkyn Studios. A curated
+                            exhibition of AI-crafted creative projects. Made in Bengaluru.
                         </p>
                     </div>
                 </div>
@@ -1998,974 +1992,975 @@
         </div>
 
         <div class="pf-toast" id="pf-toast" role="status" aria-live="polite"></div>
-    </main>
 
-    <script>
-        (function () {
-            'use strict';
+        <script>
+            (function () {
+                'use strict';
 
-            const projects = [
-                {
-                    id: 'project-1',
-                    title: 'Zlade',
-                    category: 'Grooming',
-                    description: 'A bold print campaign for Zlade – a men’s grooming brand that blends sharp design with clean formulas. Through striking visuals and a confident tone, we capture the essence of precision, performance, and modern self-care.',
-                    featured: true,
-                    aspectRatio: 2.33,
-                    images: [
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Zlade_horizontal.png',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260704_062814_0edf2927-4afc-4ffa-801d-5803824143c6.png',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260706_110951_2529f6dd-cc1b-4900-aece-190f51613453.png',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260706_114824_431b8ca4-2b51-4fde-b83a-7eb9779ea840.png',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Zlade/6.png?updatedAt=1783525136871'
-                    ]
-                },
-                {
-                    id: 'project-2',
-                    title: 'Skroman',
-                    category: 'Smart Home',
-                    description: 'Magnific: A premium vertical product catalogue designed for Skroman Smart Home systems, presenting next-generation automation panels and switches in an elegant print layout.',
-                    featured: true,
-                    aspectRatio: 0.8,
-                    images: [
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el02.png?updatedAt=1783594290438',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el01.png?updatedAt=1783594290985',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_kLI2XdZ16B.png?updatedAt=1783594309942',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el03.png?updatedAt=1783594290771',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_74Hp49HJAL.png?updatedAt=1783594310051',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific__a-premium-product-catalogue-post-vertical-45-compo__26798.png?updatedAt=1783594319873',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_fFTyRWjCDY.png?updatedAt=1783594310078',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_1stz7qhr4r.png?updatedAt=1783594310336',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/k12pro.png?updatedAt=1783594290518'
-                    ]
-                },
-                {
-                    id: 'project-3',
-                    title: 'Porter',
-                    category: 'Delivery',
-                    description: 'A high-end product catalogue for Porter, India’s leading on-demand logistics platform. Designed to communicate speed, reliability, and efficiency through bold layouts and precision-driven graphics.',
-                    featured: true,
-                    aspectRatio: 0.8,
-                    images: [
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/11.png?updatedAt=1783525203490',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/10.png?updatedAt=1783525203309',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/12.png?updatedAt=1783525202054'
-                    ]
-                },
-                {
-                    id: 'project-4',
-                    title: 'Visa',
-                    category: 'Cards',
-                    description: 'Premium metallic Visa credit cards with custom die-cut, foil stamping, and lenticular printing, designed for luxury banking clients.',
-                    featured: true,
-                    aspectRatio: 2.33,
-                    images: [
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/212221.png?updatedAt=1783514163848',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/visa1.png?updatedAt=1783525383204',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/15.png?updatedAt=1783537581123',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/16.png?updatedAt=1783537581053',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/visa4.png?updatedAt=1783544356080'
-                    ]
-                },
-                {
-                    id: 'project-5',
-                    title: 'Comet',
-                    category: 'Shoes',
-                    description: 'A premium print catalogue for Comet, featuring bold, editorial layouts and dynamic product spreads that bring the brand’s energetic identity to life.',
-                    featured: true,
-                    aspectRatio: 2.33,
-                    images: [
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/10.png?updatedAt=1783513871971',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/2.png?updatedAt=1783514672985',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/3.png?updatedAt=1783514673418',
-                        'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/1.png?updatedAt=1783514673680'
-                    ]
-                },
-                {
-                    id: 'project-6',
-                    title: 'Zenith Timepieces',
-                    category: 'Editorial',
-                    description: 'Premium print catalogue and collector’s magazine insert for Zenith luxury mechanical watches, featuring minimalist editorial typography.',
-                    aspectRatio: 2.33,
-                    images: [
-                        'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000',
-                        'https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=1000'
-                    ]
-                },
-                {
-                    id: 'project-7',
-                    title: 'Aura Cosmetics',
-                    category: 'Cosmetics',
-                    description: 'Minimalist brand lookbook and print advertisement series for Aura’s organic cosmetics line, showcasing clean design layouts.',
-                    aspectRatio: 0.8,
-                    images: [
-                        'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1000',
-                        'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1000'
-                    ]
-                },
-                {
-                    id: 'project-8',
-                    title: 'Prism Paint Co.',
-                    category: 'Packaging',
-                    description: 'Vibrant packaging labels and swatches catalog for Prism’s new eco-friendly interior paint lineup.',
-                    aspectRatio: 0.8,
-                    images: [
-                        'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1000',
-                        'https://images.unsplash.com/photo-1562975078-0a018422ded3?q=80&w=1000'
-                    ]
-                }
-            ];
+                const projects = [
+                    {
+                        id: 'project-1',
+                        title: 'Zlade',
+                        category: 'Grooming',
+                        description: 'A bold print campaign for Zlade – a men’s grooming brand that blends sharp design with clean formulas. Through striking visuals and a confident tone, we capture the essence of precision, performance, and modern self-care.',
+                        featured: true,
+                        aspectRatio: 2.33,
+                        images: [
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Zlade_horizontal.png',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260704_062814_0edf2927-4afc-4ffa-801d-5803824143c6.png',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260706_110951_2529f6dd-cc1b-4900-aece-190f51613453.png',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/hf_20260706_114824_431b8ca4-2b51-4fde-b83a-7eb9779ea840.png',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Zlade/6.png?updatedAt=1783525136871'
+                        ]
+                    },
+                    {
+                        id: 'project-8',
+                        title: 'Dot & Key',
+                        category: 'Skincare',
+                        description: 'A curated selection of print materials for Dot & Key, where every layout tells a story of radiance and care.',
+                        featured: true,
+                        aspectRatio: 0.8,
+                        images: [
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Dot%20&%20Key/10515238-fdec-4a88-8ecd-ffcef3a5eadd.JPG?updatedAt=1784389349017',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Dot%20&%20Key/cc8134ce-3885-4671-9197-fb5bc4694693.JPG?updatedAt=1784389348237',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Dot%20&%20Key/hf_20260225_192508_24987b5c-45f2-430f-a659-ce377b43ba38.JPEG?updatedAt=1784389349501'
+                        ]
+                    },
+                    {
+                        id: 'project-3',
+                        title: 'Porter',
+                        category: 'Delivery',
+                        description: 'A high-end product catalogue for Porter, India’s leading on-demand logistics platform. Designed to communicate speed, reliability, and efficiency through bold layouts and precision-driven graphics.',
+                        featured: true,
+                        aspectRatio: 0.8,
+                        images: [
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/11.png?updatedAt=1783525203490',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/10.png?updatedAt=1783525203309',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Porter/12.png?updatedAt=1783525202054'
+                        ]
+                    },
+                    {
+                        id: 'project-4',
+                        title: 'Visa',
+                        category: 'Cards',
+                        description: 'Premium metallic Visa credit cards with custom die-cut, foil stamping, and lenticular printing, designed for luxury banking clients.',
+                        featured: true,
+                        aspectRatio: 2.33,
+                        images: [
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/212221.png?updatedAt=1783514163848',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/visa1.png?updatedAt=1783525383204',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/15.png?updatedAt=1783537581123',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/16.png?updatedAt=1783537581053',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Visa/visa4.png?updatedAt=1783544356080'
+                        ]
+                    },
+                    {
+                        id: 'project-5',
+                        title: 'Comet',
+                        category: 'Shoes',
+                        description: 'A premium print catalogue for Comet, featuring bold, editorial layouts and dynamic product spreads that bring the brand’s energetic identity to life.',
+                        featured: true,
+                        aspectRatio: 2.33,
+                        images: [
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/10.png?updatedAt=1783513871971',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/2.png?updatedAt=1783514672985',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/3.png?updatedAt=1783514673418',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Comet/1.png?updatedAt=1783514673680'
+                        ]
+                    },
+                    {
+                        id: 'project-6',
+                        title: 'Volkswagen Taigun',
+                        category: 'Car',
+                        description: 'The Taigun Print Catalogue: where bold typography meets automotive excellence. Every page is designed to reflect the car’s dynamic performance and sophisticated design.',
+                        aspectRatio: 2.33,
+                        images: [
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Volkswagon%20Taigun/hf_20260711_180154_abe9bd6c-02f9-4458-83ad-d405b29509e1.png?updatedAt=1784389999938',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Volkswagon%20Taigun/hf_20260711_175607_87c650d5-f2e7-46da-aaf8-1fafe3e3639f.png?updatedAt=1784390000259',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Volkswagon%20Taigun/hf_20260711_185629_d992f8f7-386e-408d-b0b0-30e5b9dd0bbb.png?updatedAt=1784389996289'
+                        ]
+                    },
+                    {
+                        id: 'project-7',
+                        title: 'Yonex',
+                        category: 'Sports',
+                        description: 'The Yonex Print Catalogue: A dynamic blend of high-octane visuals and precision typography, designed to reflect the precision and energy of the sport.',
+                        aspectRatio: 0.8,
+                        images: [
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Yonex/yonext.png?updatedAt=1784389326671'
+                        ]
+                    },
+                    {
+                        id: 'project-2',
+                        title: 'Skroman',
+                        category: 'Smart Home',
+                        description: 'Magnific: A premium vertical product catalogue designed for Skroman Smart Home systems, presenting next-generation automation panels and switches in an elegant print layout.',
+                        aspectRatio: 0.8,
+                        images: [
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el02.png?updatedAt=1783594290438',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el01.png?updatedAt=1783594290985',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_kLI2XdZ16B.png?updatedAt=1783594309942',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/el03.png?updatedAt=1783594290771',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_74Hp49HJAL.png?updatedAt=1783594310051',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific__a-premium-product-catalogue-post-vertical-45-compo__26798.png?updatedAt=1783594319873',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_fFTyRWjCDY.png?updatedAt=1783594310078',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/magnific_a-premium-product-catalog_1stz7qhr4r.png?updatedAt=1783594310336',
+                            'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Prints/Skroman/k12pro.png?updatedAt=1783594290518'
+                        ]
+                    },
+                ];
 
-            const $ = (s, r) => (r || document).querySelector(s);
-            const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const esc = (str) => String(str == null ? '' : str)
-                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                const $ = (s, r) => (r || document).querySelector(s);
+                const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
+                const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                const esc = (str) => String(str == null ? '' : str)
+                    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-            const featSizes = ['s-row1-land', 's-row1-port', 's-row1-port', 's-row2-land', 's-row2-land'];
+                const featSizes = ['s-row1-land', 's-row1-port', 's-row1-port', 's-row2-land', 's-row2-land'];
 
-            const iconCount = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg>';
-            const iconArrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+                const iconCount = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg>';
+                const iconArrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>';
 
-            const imgIO = ('IntersectionObserver' in window) ? new IntersectionObserver((entries, obs) => {
-                entries.forEach((e) => {
-                    if (!e.isIntersecting) return;
-                    const img = e.target;
-                    if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
-                    obs.unobserve(img);
-                });
-            }, { rootMargin: '300px 0px' }) : null;
-
-            function hydrateImg(img) {
-                img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
-                img.addEventListener('error', function () { }, { once: true });
-                if (imgIO) imgIO.observe(img); else { img.src = img.dataset.src; img.removeAttribute('data-src'); }
-            }
-
-            const revealIO = ('IntersectionObserver' in window && !reduceMotion) ? new IntersectionObserver((entries, obs) => {
-                entries.forEach((e) => {
-                    if (e.isIntersecting) { e.target.classList.add('is-in'); obs.unobserve(e.target); }
-                });
-            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }) : null;
-
-            function observeReveals(scope) {
-                const els = $$('.pf-reveal', scope);
-                if (!revealIO) { els.forEach((el) => el.classList.add('is-in')); return; }
-                els.forEach((el, i) => {
-                    if (el.dataset.stagger == null) el.style.transitionDelay = Math.min(i * 45, 320) + 'ms';
-                    revealIO.observe(el);
-                });
-            }
-
-            const byId = {};
-            projects.forEach((p) => { byId[p.id] = p; });
-            let activeCat = 'All';
-            let query = '';
-            let filtered = projects.slice();
-
-            const grid = $('#pf-grid');
-            const featuredGrid = $('#pf-featured-grid');
-            const featuredSection = $('#pf-featured');
-            const filtersWrap = $('#pf-filters');
-            const emptyEl = $('#pf-empty');
-            const resultLine = $('#pf-result-line');
-            const searchInput = $('#pf-search-input');
-            const searchClear = $('#pf-search-clear');
-
-            function mediaMarkup(p) {
-                const first = p.images && p.images[0] ? p.images[0] : '';
-                const count = (p.images || []).length;
-                return (
-                    '<div class="pf-media" data-label="' + esc(p.title) + '">' +
-                    (first ? '<img alt="' + esc(p.title) + '" data-src="' + esc(first) + '" loading="lazy" decoding="async" />' : '') +
-                    '<div class="pf-media__shade"></div>' +
-                    '<span class="pf-badge">' + esc(p.category) + '</span>' +
-                    (count > 1 ? '<span class="pf-count">' + iconCount + count + '</span>' : '') +
-                    '<div class="pf-cap">' +
-                    '<div class="pf-cap__text">' +
-                    '<h3 class="pf-cap__title">' + esc(p.title) + '</h3>' +
-                    '<p class="pf-cap__desc">' + esc(p.description) + '</p>' +
-                    '</div>' +
-                    '<span class="pf-arrow">' + iconArrow + '</span>' +
-                    '</div>' +
-                    '</div>'
-                );
-            }
-
-            function makeCard(p, opts) {
-                opts = opts || {};
-                const el = document.createElement('button');
-                el.type = 'button';
-                el.className = opts.className || 'pf-card';
-                el.dataset.id = p.id;
-                el.setAttribute('aria-label', p.title + ' — ' + p.category + ', ' + (p.images || []).length + ' images. Open gallery.');
-                if (opts.style) el.setAttribute('style', opts.style);
-                el.innerHTML = mediaMarkup(p);
-                el.addEventListener('click', () => openLightbox(p.id, 0));
-                const img = el.querySelector('img');
-                if (img) hydrateImg(img);
-                return el;
-            }
-
-            function renderFeatured() {
-                let feats = projects.filter((p) => p.featured);
-                if (!feats.length) feats = projects.slice(0, 5);
-                feats = feats.slice(0, 5);
-                featuredGrid.innerHTML = '';
-                feats.forEach((p, i) => {
-                    const card = makeCard(p, { className: 'pf-feat-card ' + featSizes[i % featSizes.length] });
-                    featuredGrid.appendChild(card);
-                });
-            }
-
-            function renderFilters() {
-                const counts = { All: projects.length };
-                projects.forEach((p) => { counts[p.category] = (counts[p.category] || 0) + 1; });
-                const cats = ['All'].concat(Object.keys(counts)
-                    .filter((c) => c !== 'All')
-                    .sort((a, b) => {
-                        const countDiff = counts[b] - counts[a];
-                        if (countDiff !== 0) return countDiff;
-                        return a.localeCompare(b);
-                    })
-                );
-
-                filtersWrap.innerHTML = '';
-                cats.forEach((cat) => {
-                    const b = document.createElement('button');
-                    b.type = 'button';
-                    b.className = 'pf-chip' + (cat === activeCat ? ' is-active' : '');
-                    b.dataset.cat = cat;
-                    b.setAttribute('role', 'tab');
-                    b.setAttribute('aria-selected', cat === activeCat ? 'true' : 'false');
-                    b.innerHTML = esc(cat) + '<span class="pf-chip__count">' + counts[cat] + '</span>';
-                    b.addEventListener('click', () => {
-                        if (activeCat === cat) return;
-                        activeCat = cat;
-                        $$('.pf-chip', filtersWrap).forEach((c) => {
-                            const on = c.dataset.cat === cat;
-                            c.classList.toggle('is-active', on);
-                            c.setAttribute('aria-selected', on ? 'true' : 'false');
-                        });
-                        b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                        applyFilter();
+                const imgIO = ('IntersectionObserver' in window) ? new IntersectionObserver((entries, obs) => {
+                    entries.forEach((e) => {
+                        if (!e.isIntersecting) return;
+                        const img = e.target;
+                        if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+                        obs.unobserve(img);
                     });
-                    filtersWrap.appendChild(b);
-                });
-            }
+                }, { rootMargin: '300px 0px' }) : null;
 
-            function computeFiltered() {
-                const q = query.trim().toLowerCase();
-                return projects.filter((p) => {
-                    const catOk = activeCat === 'All' || p.category === activeCat;
-                    if (!catOk) return false;
-                    if (!q) return true;
-                    return (p.title + ' ' + p.category + ' ' + p.description).toLowerCase().indexOf(q) !== -1;
-                });
-            }
+                function hydrateImg(img) {
+                    img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+                    img.addEventListener('error', function () { }, { once: true });
+                    if (imgIO) imgIO.observe(img); else { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+                }
 
-            let gridCards = [];
+                const revealIO = ('IntersectionObserver' in window && !reduceMotion) ? new IntersectionObserver((entries, obs) => {
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) { e.target.classList.add('is-in'); obs.unobserve(e.target); }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }) : null;
 
-            function currentGap() {
-                const cs = getComputedStyle(grid);
-                const g = parseFloat(cs.rowGap || cs.gap || '12');
-                return isNaN(g) ? 12 : g;
-            }
+                function observeReveals(scope) {
+                    const els = $$('.pf-reveal', scope);
+                    if (!revealIO) { els.forEach((el) => el.classList.add('is-in')); return; }
+                    els.forEach((el, i) => {
+                        if (el.dataset.stagger == null) el.style.transitionDelay = Math.min(i * 45, 320) + 'ms';
+                        revealIO.observe(el);
+                    });
+                }
 
-            function targetRowHeight() {
-                const w = window.innerWidth;
-                if (w < 380) return 180;
-                if (w < 480) return 200;
-                if (w < 768) return 220;
-                if (w < 1200) return 245;
-                if (w < 1700) return 270;
-                return 300;
-            }
+                const byId = {};
+                projects.forEach((p) => { byId[p.id] = p; });
+                let activeCat = 'All';
+                let query = '';
+                let filtered = projects.slice();
 
-            function buildGridCards(list) {
-                gridCards = list.map((p) => {
-                    const el = makeCard(p, { className: 'pf-card pf-reveal' });
-                    return { p: p, el: el, ar: p.aspectRatio || 2.33 };
-                });
-            }
+                const grid = $('#pf-grid');
+                const featuredGrid = $('#pf-featured-grid');
+                const featuredSection = $('#pf-featured');
+                const filtersWrap = $('#pf-filters');
+                const emptyEl = $('#pf-empty');
+                const resultLine = $('#pf-result-line');
+                const searchInput = $('#pf-search-input');
+                const searchClear = $('#pf-search-clear');
 
-            function layoutGrid() {
-                if (!gridCards.length) { grid.innerHTML = ''; return; }
-                const containerWidth = grid.clientWidth;
-                if (containerWidth <= 0) return;
-                const gap = currentGap();
-                const isMobile = window.innerWidth <= 600;
+                function mediaMarkup(p) {
+                    const first = p.images && p.images[0] ? p.images[0] : '';
+                    const count = (p.images || []).length;
+                    return (
+                        '<div class="pf-media" data-label="' + esc(p.title) + '">' +
+                        (first ? '<img alt="' + esc(p.title) + '" data-src="' + esc(first) + '" loading="lazy" decoding="async" />' : '') +
+                        '<div class="pf-media__shade"></div>' +
+                        '<span class="pf-badge">' + esc(p.category) + '</span>' +
+                        (count > 1 ? '<span class="pf-count">' + iconCount + count + '</span>' : '') +
+                        '<div class="pf-cap">' +
+                        '<div class="pf-cap__text">' +
+                        '<h3 class="pf-cap__title">' + esc(p.title) + '</h3>' +
+                        '<p class="pf-cap__desc">' + esc(p.description) + '</p>' +
+                        '</div>' +
+                        '<span class="pf-arrow">' + iconArrow + '</span>' +
+                        '</div>' +
+                        '</div>'
+                    );
+                }
 
-                if (isMobile) {
+                function makeCard(p, opts) {
+                    opts = opts || {};
+                    const el = document.createElement('button');
+                    el.type = 'button';
+                    el.className = opts.className || 'pf-card';
+                    el.dataset.id = p.id;
+                    el.setAttribute('aria-label', p.title + ' — ' + p.category + ', ' + (p.images || []).length + ' images. Open gallery.');
+                    if (opts.style) el.setAttribute('style', opts.style);
+                    el.innerHTML = mediaMarkup(p);
+                    el.addEventListener('click', () => openLightbox(p.id, 0));
+                    const img = el.querySelector('img');
+                    if (img) hydrateImg(img);
+                    return el;
+                }
+
+                function renderFeatured() {
+                    let feats = projects.filter((p) => p.featured);
+                    if (!feats.length) feats = projects.slice(0, 5);
+                    feats = feats.slice(0, 5);
+                    featuredGrid.innerHTML = '';
+                    feats.forEach((p, i) => {
+                        const card = makeCard(p, { className: 'pf-feat-card ' + featSizes[i % featSizes.length] });
+                        featuredGrid.appendChild(card);
+                    });
+                }
+
+                function renderFilters() {
+                    const counts = { All: projects.length };
+                    projects.forEach((p) => { counts[p.category] = (counts[p.category] || 0) + 1; });
+                    const cats = ['All'].concat(Object.keys(counts)
+                        .filter((c) => c !== 'All')
+                        .sort((a, b) => {
+                            const countDiff = counts[b] - counts[a];
+                            if (countDiff !== 0) return countDiff;
+                            return a.localeCompare(b);
+                        })
+                    );
+
+                    filtersWrap.innerHTML = '';
+                    cats.forEach((cat) => {
+                        const b = document.createElement('button');
+                        b.type = 'button';
+                        b.className = 'pf-chip' + (cat === activeCat ? ' is-active' : '');
+                        b.dataset.cat = cat;
+                        b.setAttribute('role', 'tab');
+                        b.setAttribute('aria-selected', cat === activeCat ? 'true' : 'false');
+                        b.innerHTML = esc(cat) + '<span class="pf-chip__count">' + counts[cat] + '</span>';
+                        b.addEventListener('click', () => {
+                            if (activeCat === cat) return;
+                            activeCat = cat;
+                            $$('.pf-chip', filtersWrap).forEach((c) => {
+                                const on = c.dataset.cat === cat;
+                                c.classList.toggle('is-active', on);
+                                c.setAttribute('aria-selected', on ? 'true' : 'false');
+                            });
+                            b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                            applyFilter();
+                        });
+                        filtersWrap.appendChild(b);
+                    });
+                }
+
+                function computeFiltered() {
+                    const q = query.trim().toLowerCase();
+                    return projects.filter((p) => {
+                        const catOk = activeCat === 'All' || p.category === activeCat;
+                        if (!catOk) return false;
+                        if (!q) return true;
+                        return (p.title + ' ' + p.category + ' ' + p.description).toLowerCase().indexOf(q) !== -1;
+                    });
+                }
+
+                let gridCards = [];
+
+                function currentGap() {
+                    const cs = getComputedStyle(grid);
+                    const g = parseFloat(cs.rowGap || cs.gap || '12');
+                    return isNaN(g) ? 12 : g;
+                }
+
+                function targetRowHeight() {
+                    const w = window.innerWidth;
+                    if (w < 380) return 180;
+                    if (w < 480) return 200;
+                    if (w < 768) return 220;
+                    if (w < 1200) return 245;
+                    if (w < 1700) return 270;
+                    return 300;
+                }
+
+                function buildGridCards(list) {
+                    gridCards = list.map((p) => {
+                        const el = makeCard(p, { className: 'pf-card pf-reveal' });
+                        return { p: p, el: el, ar: p.aspectRatio || 2.33 };
+                    });
+                }
+
+                function layoutGrid() {
+                    if (!gridCards.length) { grid.innerHTML = ''; return; }
+                    const containerWidth = grid.clientWidth;
+                    if (containerWidth <= 0) return;
+                    const gap = currentGap();
+                    const isMobile = window.innerWidth <= 600;
+
+                    if (isMobile) {
+                        grid.innerHTML = '';
+                        const frag = document.createDocumentFragment();
+                        let portraitQueue = [];
+
+                        function flushPortraits() {
+                            if (!portraitQueue.length) return;
+                            const rowEl = document.createElement('div');
+                            rowEl.className = 'pf-row pf-row--mobile-pair';
+                            portraitQueue.forEach((c) => {
+                                c.el.style.flex = '';
+                                c.el.style.width = '';
+                                c.el.style.height = '';
+                                rowEl.appendChild(c.el);
+                            });
+                            frag.appendChild(rowEl);
+                            portraitQueue = [];
+                        }
+
+                        gridCards.forEach((c) => {
+                            if (c.ar > 1) {
+                                flushPortraits();
+                                const rowEl = document.createElement('div');
+                                rowEl.className = 'pf-row pf-row--mobile-full';
+                                c.el.style.flex = '';
+                                c.el.style.width = '';
+                                c.el.style.height = '';
+                                rowEl.appendChild(c.el);
+                                frag.appendChild(rowEl);
+                            } else {
+                                portraitQueue.push(c);
+                                if (portraitQueue.length === 2) {
+                                    flushPortraits();
+                                }
+                            }
+                        });
+                        flushPortraits();
+                        grid.appendChild(frag);
+                        return;
+                    }
+
+                    const target = targetRowHeight();
+
+                    const rows = [];
+                    let row = [];
+                    let arSum = 0;
+                    gridCards.forEach((c) => {
+                        row.push(c);
+                        arSum += c.ar;
+                        const rowW = arSum * target + gap * (row.length - 1);
+                        if (rowW >= containerWidth) {
+                            rows.push({ items: row, arSum: arSum, last: false });
+                            row = [];
+                            arSum = 0;
+                        }
+                    });
+                    if (row.length) rows.push({ items: row, arSum: arSum, last: true });
+
                     grid.innerHTML = '';
                     const frag = document.createDocumentFragment();
-                    let portraitQueue = [];
-
-                    function flushPortraits() {
-                        if (!portraitQueue.length) return;
+                    rows.forEach((r) => {
+                        const gaps = gap * (r.items.length - 1);
+                        let h = (containerWidth - gaps) / r.arSum;
+                        if (r.last && h > target * 1.30) h = target;
                         const rowEl = document.createElement('div');
-                        rowEl.className = 'pf-row pf-row--mobile-pair';
-                        portraitQueue.forEach((c) => {
-                            c.el.style.flex = '';
-                            c.el.style.width = '';
-                            c.el.style.height = '';
+                        rowEl.className = 'pf-row';
+                        r.items.forEach((c) => {
+                            const w = Math.max(60, c.ar * h);
+                            c.el.style.flex = '0 0 ' + w + 'px';
+                            c.el.style.width = w + 'px';
+                            c.el.style.height = h + 'px';
                             rowEl.appendChild(c.el);
                         });
                         frag.appendChild(rowEl);
-                        portraitQueue = [];
-                    }
-
-                    gridCards.forEach((c) => {
-                        if (c.ar > 1) {
-                            flushPortraits();
-                            const rowEl = document.createElement('div');
-                            rowEl.className = 'pf-row pf-row--mobile-full';
-                            c.el.style.flex = '';
-                            c.el.style.width = '';
-                            c.el.style.height = '';
-                            rowEl.appendChild(c.el);
-                            frag.appendChild(rowEl);
-                        } else {
-                            portraitQueue.push(c);
-                            if (portraitQueue.length === 2) {
-                                flushPortraits();
-                            }
-                        }
                     });
-                    flushPortraits();
                     grid.appendChild(frag);
-                    return;
                 }
 
-                const target = targetRowHeight();
+                function renderGrid(list) {
+                    buildGridCards(list);
+                    layoutGrid();
+                    observeReveals(grid);
+                }
 
-                const rows = [];
-                let row = [];
-                let arSum = 0;
-                gridCards.forEach((c) => {
-                    row.push(c);
-                    arSum += c.ar;
-                    const rowW = arSum * target + gap * (row.length - 1);
-                    if (rowW >= containerWidth) {
-                        rows.push({ items: row, arSum: arSum, last: false });
-                        row = [];
-                        arSum = 0;
+                function applyFilter() {
+                    filtered = computeFiltered();
+                    renderGrid(filtered);
+
+                    const searching = query.trim().length > 0 || activeCat !== 'All';
+                    featuredSection.style.display = searching ? 'none' : '';
+                    emptyEl.classList.toggle('show', filtered.length === 0);
+
+                    const total = projects.length;
+                    if (filtered.length === total) {
+                        resultLine.innerHTML = 'Showing all <b>' + total + '</b> projects';
+                    } else {
+                        let txt = 'Showing <b>' + filtered.length + '</b> of ' + total + ' projects';
+                        if (activeCat !== 'All') txt += ' in <b>' + esc(activeCat) + '</b>';
+                        if (query.trim()) txt += ' for “<b>' + esc(query.trim()) + '</b>”';
+                        resultLine.innerHTML = txt;
                     }
-                });
-                if (row.length) rows.push({ items: row, arSum: arSum, last: true });
+                }
 
-                grid.innerHTML = '';
-                const frag = document.createDocumentFragment();
-                rows.forEach((r) => {
-                    const gaps = gap * (r.items.length - 1);
-                    let h = (containerWidth - gaps) / r.arSum;
-                    if (r.last && h > target * 1.30) h = target;
-                    const rowEl = document.createElement('div');
-                    rowEl.className = 'pf-row';
-                    r.items.forEach((c) => {
-                        const w = Math.max(60, c.ar * h);
-                        c.el.style.flex = '0 0 ' + w + 'px';
-                        c.el.style.width = w + 'px';
-                        c.el.style.height = h + 'px';
-                        rowEl.appendChild(c.el);
+                let resizeTimer = null;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(layoutGrid, 140);
+                }, { passive: true });
+
+                let searchTimer = null;
+                searchInput.addEventListener('input', function () {
+                    query = this.value;
+                    searchClear.classList.toggle('show', query.length > 0);
+                    clearTimeout(searchTimer);
+                    searchTimer = setTimeout(applyFilter, 120);
+                });
+                searchClear.addEventListener('click', function () {
+                    query = '';
+                    searchInput.value = '';
+                    searchClear.classList.remove('show');
+                    searchInput.focus();
+                    applyFilter();
+                });
+
+                const lb = $('#pf-lb');
+                const lbImg = $('#pf-lb-img');
+                const lbWrap = $('#pf-lb-imgwrap');
+                const lbStage = $('#pf-lb-stage');
+                const lbCounter = $('#pf-lb-counter');
+                const lbCat = $('#pf-lb-cat');
+                const lbTitle = $('#pf-lb-title');
+                const lbDesc = $('#pf-lb-desc');
+                const lbCurrent = $('#pf-lb-current');
+                const lbTotal = $('#pf-lb-total');
+                const lbThumbs = $('#pf-lb-thumbs');
+                const lbZoomHint = $('#pf-lb-zoomhint');
+                const prevProjBtn = $('#pf-lb-prevproj');
+                const nextProjBtn = $('#pf-lb-nextproj');
+                const prevProjName = $('#pf-lb-prevproj-name');
+                const nextProjName = $('#pf-lb-nextproj-name');
+                const toast = $('#pf-toast');
+
+                let curProject = null;
+                let curIndex = 0;
+                let scale = 1, panX = 0, panY = 0;
+                let lastFocus = null;
+
+                function projectListForNav() {
+                    return filtered.length ? filtered : projects;
+                }
+
+                function applyTransform() {
+                    lbWrap.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
+                }
+                function resetZoom() { scale = 1; panX = 0; panY = 0; applyTransform(); }
+
+                function preload(src) { if (src) { const im = new Image(); im.src = src; } }
+
+                function setImage() {
+                    const imgs = curProject.images || [];
+                    const src = imgs[curIndex] || '';
+                    resetZoom();
+                    lbImg.classList.add('swap');
+                    window.requestAnimationFrame(() => {
+                        setTimeout(() => {
+                            lbImg.src = src;
+                            lbImg.alt = curProject.title + ' — image ' + (curIndex + 1);
+                            lbImg.onload = () => lbImg.classList.remove('swap');
+                            lbImg.onerror = () => lbImg.classList.remove('swap');
+                            setTimeout(() => lbImg.classList.remove('swap'), 260);
+                        }, 90);
                     });
-                    frag.appendChild(rowEl);
-                });
-                grid.appendChild(frag);
-            }
-
-            function renderGrid(list) {
-                buildGridCards(list);
-                layoutGrid();
-                observeReveals(grid);
-            }
-
-            function applyFilter() {
-                filtered = computeFiltered();
-                renderGrid(filtered);
-
-                const searching = query.trim().length > 0 || activeCat !== 'All';
-                featuredSection.style.display = searching ? 'none' : '';
-                emptyEl.classList.toggle('show', filtered.length === 0);
-
-                const total = projects.length;
-                if (filtered.length === total) {
-                    resultLine.innerHTML = 'Showing all <b>' + total + '</b> projects';
-                } else {
-                    let txt = 'Showing <b>' + filtered.length + '</b> of ' + total + ' projects';
-                    if (activeCat !== 'All') txt += ' in <b>' + esc(activeCat) + '</b>';
-                    if (query.trim()) txt += ' for “<b>' + esc(query.trim()) + '</b>”';
-                    resultLine.innerHTML = txt;
+                    lbCounter.textContent = (curIndex + 1) + ' / ' + imgs.length;
+                    lbCurrent.innerHTML = '<b>' + (curIndex + 1) + '</b> / ' + imgs.length;
+                    $$('.pf-lb__thumb', lbThumbs).forEach((t, i) => t.classList.toggle('is-active', i === curIndex));
+                    const active = lbThumbs.children[curIndex];
+                    if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    preload(imgs[curIndex + 1]);
+                    preload(imgs[curIndex - 1]);
                 }
-            }
 
-            let resizeTimer = null;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(layoutGrid, 140);
-            }, { passive: true });
+                function buildThumbs() {
+                    const imgs = curProject.images || [];
+                    lbThumbs.innerHTML = '';
+                    lbThumbs.classList.toggle('show', imgs.length > 1);
+                    imgs.forEach((src, i) => {
+                        const t = document.createElement('button');
+                        t.type = 'button';
+                        t.className = 'pf-lb__thumb' + (i === curIndex ? ' is-active' : '');
+                        t.setAttribute('aria-label', 'Go to image ' + (i + 1));
+                        t.innerHTML = '<img src="' + esc(src) + '" alt="" loading="lazy" />';
+                        t.addEventListener('click', () => { curIndex = i; setImage(); });
+                        lbThumbs.appendChild(t);
+                    });
+                }
 
-            let searchTimer = null;
-            searchInput.addEventListener('input', function () {
-                query = this.value;
-                searchClear.classList.toggle('show', query.length > 0);
-                clearTimeout(searchTimer);
-                searchTimer = setTimeout(applyFilter, 120);
-            });
-            searchClear.addEventListener('click', function () {
-                query = '';
-                searchInput.value = '';
-                searchClear.classList.remove('show');
-                searchInput.focus();
-                applyFilter();
-            });
+                function syncProjectNav() {
+                    const list = projectListForNav();
+                    const idx = list.findIndex((p) => p.id === curProject.id);
+                    const prev = idx > 0 ? list[idx - 1] : null;
+                    const next = idx > -1 && idx < list.length - 1 ? list[idx + 1] : null;
+                    prevProjBtn.disabled = !prev;
+                    nextProjBtn.disabled = !next;
+                    prevProjName.textContent = prev ? prev.title : '—';
+                    nextProjName.textContent = next ? next.title : '—';
+                }
 
-            const lb = $('#pf-lb');
-            const lbImg = $('#pf-lb-img');
-            const lbWrap = $('#pf-lb-imgwrap');
-            const lbStage = $('#pf-lb-stage');
-            const lbCounter = $('#pf-lb-counter');
-            const lbCat = $('#pf-lb-cat');
-            const lbTitle = $('#pf-lb-title');
-            const lbDesc = $('#pf-lb-desc');
-            const lbCurrent = $('#pf-lb-current');
-            const lbTotal = $('#pf-lb-total');
-            const lbThumbs = $('#pf-lb-thumbs');
-            const lbZoomHint = $('#pf-lb-zoomhint');
-            const prevProjBtn = $('#pf-lb-prevproj');
-            const nextProjBtn = $('#pf-lb-nextproj');
-            const prevProjName = $('#pf-lb-prevproj-name');
-            const nextProjName = $('#pf-lb-nextproj-name');
-            const toast = $('#pf-toast');
+                function loadProject(p, index) {
+                    curProject = p;
+                    curIndex = index || 0;
+                    lbCat.textContent = p.category;
+                    lbTitle.textContent = p.title;
+                    lbDesc.textContent = p.description;
+                    lbTotal.textContent = (p.images || []).length;
+                    buildThumbs();
+                    setImage();
+                    syncProjectNav();
+                }
 
-            let curProject = null;
-            let curIndex = 0;
-            let scale = 1, panX = 0, panY = 0;
-            let lastFocus = null;
+                function openLightbox(id, index) {
+                    const p = byId[id];
+                    if (!p) return;
+                    lastFocus = document.activeElement;
+                    loadProject(p, index);
+                    lb.classList.add('show');
+                    lb.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                    window.requestAnimationFrame(() => lb.classList.add('fade'));
+                    $('#pf-lb-close').focus();
+                    clearTimeout(openLightbox._t);
+                    lbZoomHint.style.opacity = '';
+                    openLightbox._t = setTimeout(() => { lbZoomHint.style.opacity = '0'; }, 2600);
+                }
 
-            function projectListForNav() {
-                return filtered.length ? filtered : projects;
-            }
-
-            function applyTransform() {
-                lbWrap.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
-            }
-            function resetZoom() { scale = 1; panX = 0; panY = 0; applyTransform(); }
-
-            function preload(src) { if (src) { const im = new Image(); im.src = src; } }
-
-            function setImage() {
-                const imgs = curProject.images || [];
-                const src = imgs[curIndex] || '';
-                resetZoom();
-                lbImg.classList.add('swap');
-                window.requestAnimationFrame(() => {
+                function closeLightbox() {
+                    lb.classList.remove('fade');
+                    lb.setAttribute('aria-hidden', 'true');
                     setTimeout(() => {
-                        lbImg.src = src;
-                        lbImg.alt = curProject.title + ' — image ' + (curIndex + 1);
-                        lbImg.onload = () => lbImg.classList.remove('swap');
-                        lbImg.onerror = () => lbImg.classList.remove('swap');
-                        setTimeout(() => lbImg.classList.remove('swap'), 260);
-                    }, 90);
+                        lb.classList.remove('show');
+                        document.body.style.overflow = '';
+                        lbImg.removeAttribute('src');
+                        if (lastFocus && lastFocus.focus) lastFocus.focus();
+                    }, 360);
+                }
+
+                function nextImage() {
+                    const n = (curProject.images || []).length;
+                    if (n < 2) return;
+                    curIndex = (curIndex + 1) % n;
+                    setImage();
+                }
+                function prevImage() {
+                    const n = (curProject.images || []).length;
+                    if (n < 2) return;
+                    curIndex = (curIndex - 1 + n) % n;
+                    setImage();
+                }
+                function gotoProject(dir) {
+                    const list = projectListForNav();
+                    const idx = list.findIndex((p) => p.id === curProject.id);
+                    const target = list[idx + dir];
+                    if (target) loadProject(target, 0);
+                }
+
+                function toggleZoom(clientX, clientY) {
+                    if (scale > 1) { resetZoom(); return; }
+                    scale = 2.4;
+                    const r = lbStage.getBoundingClientRect();
+                    const cx = clientX != null ? clientX : r.left + r.width / 2;
+                    const cy = clientY != null ? clientY : r.top + r.height / 2;
+                    panX = (r.left + r.width / 2 - cx) * (scale - 1);
+                    panY = (r.top + r.height / 2 - cy) * (scale - 1);
+                    applyTransform();
+                }
+
+                $('#pf-lb-close').addEventListener('click', closeLightbox);
+                $('#pf-lb-next').addEventListener('click', nextImage);
+                $('#pf-lb-prev').addEventListener('click', prevImage);
+                prevProjBtn.addEventListener('click', () => gotoProject(-1));
+                nextProjBtn.addEventListener('click', () => gotoProject(1));
+
+                lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+
+                $('#pf-lb-share').addEventListener('click', async () => {
+                    const url = location.origin + location.pathname + '#' + curProject.id;
+                    const data = { title: curProject.title + ' — Synkyn Studios', text: curProject.description, url: url };
+                    try {
+                        if (navigator.share) { await navigator.share(data); }
+                        else if (navigator.clipboard) { await navigator.clipboard.writeText(url); showToast('Link copied to clipboard'); }
+                        else { showToast(url); }
+                    } catch (err) { }
                 });
-                lbCounter.textContent = (curIndex + 1) + ' / ' + imgs.length;
-                lbCurrent.innerHTML = '<b>' + (curIndex + 1) + '</b> / ' + imgs.length;
-                $$('.pf-lb__thumb', lbThumbs).forEach((t, i) => t.classList.toggle('is-active', i === curIndex));
-                const active = lbThumbs.children[curIndex];
-                if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                preload(imgs[curIndex + 1]);
-                preload(imgs[curIndex - 1]);
-            }
 
-            function buildThumbs() {
-                const imgs = curProject.images || [];
-                lbThumbs.innerHTML = '';
-                lbThumbs.classList.toggle('show', imgs.length > 1);
-                imgs.forEach((src, i) => {
-                    const t = document.createElement('button');
-                    t.type = 'button';
-                    t.className = 'pf-lb__thumb' + (i === curIndex ? ' is-active' : '');
-                    t.setAttribute('aria-label', 'Go to image ' + (i + 1));
-                    t.innerHTML = '<img src="' + esc(src) + '" alt="" loading="lazy" />';
-                    t.addEventListener('click', () => { curIndex = i; setImage(); });
-                    lbThumbs.appendChild(t);
+                let toastTimer = null;
+                function showToast(msg) {
+                    toast.textContent = msg;
+                    toast.classList.add('show');
+                    clearTimeout(toastTimer);
+                    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+                }
+
+                document.addEventListener('keydown', (e) => {
+                    if (!lb.classList.contains('show')) return;
+                    switch (e.key) {
+                        case 'Escape': closeLightbox(); break;
+                        case 'ArrowRight': nextImage(); break;
+                        case 'ArrowLeft': prevImage(); break;
+                        case 'ArrowDown': case 'PageDown': e.preventDefault(); gotoProject(1); break;
+                        case 'ArrowUp': case 'PageUp': e.preventDefault(); gotoProject(-1); break;
+                        case 'Tab': trapFocus(e); break;
+                        default: break;
+                    }
                 });
-            }
 
-            function syncProjectNav() {
-                const list = projectListForNav();
-                const idx = list.findIndex((p) => p.id === curProject.id);
-                const prev = idx > 0 ? list[idx - 1] : null;
-                const next = idx > -1 && idx < list.length - 1 ? list[idx + 1] : null;
-                prevProjBtn.disabled = !prev;
-                nextProjBtn.disabled = !next;
-                prevProjName.textContent = prev ? prev.title : '—';
-                nextProjName.textContent = next ? next.title : '—';
-            }
-
-            function loadProject(p, index) {
-                curProject = p;
-                curIndex = index || 0;
-                lbCat.textContent = p.category;
-                lbTitle.textContent = p.title;
-                lbDesc.textContent = p.description;
-                lbTotal.textContent = (p.images || []).length;
-                buildThumbs();
-                setImage();
-                syncProjectNav();
-            }
-
-            function openLightbox(id, index) {
-                const p = byId[id];
-                if (!p) return;
-                lastFocus = document.activeElement;
-                loadProject(p, index);
-                lb.classList.add('show');
-                lb.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                window.requestAnimationFrame(() => lb.classList.add('fade'));
-                $('#pf-lb-close').focus();
-                clearTimeout(openLightbox._t);
-                lbZoomHint.style.opacity = '';
-                openLightbox._t = setTimeout(() => { lbZoomHint.style.opacity = '0'; }, 2600);
-            }
-
-            function closeLightbox() {
-                lb.classList.remove('fade');
-                lb.setAttribute('aria-hidden', 'true');
-                setTimeout(() => {
-                    lb.classList.remove('show');
-                    document.body.style.overflow = '';
-                    lbImg.removeAttribute('src');
-                    if (lastFocus && lastFocus.focus) lastFocus.focus();
-                }, 360);
-            }
-
-            function nextImage() {
-                const n = (curProject.images || []).length;
-                if (n < 2) return;
-                curIndex = (curIndex + 1) % n;
-                setImage();
-            }
-            function prevImage() {
-                const n = (curProject.images || []).length;
-                if (n < 2) return;
-                curIndex = (curIndex - 1 + n) % n;
-                setImage();
-            }
-            function gotoProject(dir) {
-                const list = projectListForNav();
-                const idx = list.findIndex((p) => p.id === curProject.id);
-                const target = list[idx + dir];
-                if (target) loadProject(target, 0);
-            }
-
-            function toggleZoom(clientX, clientY) {
-                if (scale > 1) { resetZoom(); return; }
-                scale = 2.4;
-                const r = lbStage.getBoundingClientRect();
-                const cx = clientX != null ? clientX : r.left + r.width / 2;
-                const cy = clientY != null ? clientY : r.top + r.height / 2;
-                panX = (r.left + r.width / 2 - cx) * (scale - 1);
-                panY = (r.top + r.height / 2 - cy) * (scale - 1);
-                applyTransform();
-            }
-
-            $('#pf-lb-close').addEventListener('click', closeLightbox);
-            $('#pf-lb-next').addEventListener('click', nextImage);
-            $('#pf-lb-prev').addEventListener('click', prevImage);
-            prevProjBtn.addEventListener('click', () => gotoProject(-1));
-            nextProjBtn.addEventListener('click', () => gotoProject(1));
-
-            lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
-
-            $('#pf-lb-share').addEventListener('click', async () => {
-                const url = location.origin + location.pathname + '#' + curProject.id;
-                const data = { title: curProject.title + ' — Synkyn Studios', text: curProject.description, url: url };
-                try {
-                    if (navigator.share) { await navigator.share(data); }
-                    else if (navigator.clipboard) { await navigator.clipboard.writeText(url); showToast('Link copied to clipboard'); }
-                    else { showToast(url); }
-                } catch (err) { }
-            });
-
-            let toastTimer = null;
-            function showToast(msg) {
-                toast.textContent = msg;
-                toast.classList.add('show');
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-            }
-
-            document.addEventListener('keydown', (e) => {
-                if (!lb.classList.contains('show')) return;
-                switch (e.key) {
-                    case 'Escape': closeLightbox(); break;
-                    case 'ArrowRight': nextImage(); break;
-                    case 'ArrowLeft': prevImage(); break;
-                    case 'ArrowDown': case 'PageDown': e.preventDefault(); gotoProject(1); break;
-                    case 'ArrowUp': case 'PageUp': e.preventDefault(); gotoProject(-1); break;
-                    case 'Tab': trapFocus(e); break;
-                    default: break;
-                }
-            });
-
-            function trapFocus(e) {
-                const f = $$('button, a[href], input', lb).filter((el) => !el.disabled && el.offsetParent !== null);
-                if (!f.length) return;
-                const first = f[0], last = f[f.length - 1];
-                if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-                else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-            }
-
-            lbStage.addEventListener('dblclick', (e) => toggleZoom(e.clientX, e.clientY));
-
-            let wheelLock = false;
-            lbStage.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                if (scale > 1) {
-                    scale = Math.min(4, Math.max(1, scale - e.deltaY * 0.0016));
-                    if (scale === 1) resetZoom(); else applyTransform();
-                    return;
-                }
-                if (wheelLock) return;
-                wheelLock = true;
-                setTimeout(() => { wheelLock = false; }, 220);
-                if (e.deltaY > 0 || e.deltaX > 0) nextImage(); else prevImage();
-            }, { passive: false });
-
-            let pStartX = 0, pStartY = 0, pPanX = 0, pPanY = 0, dragging = false, moved = false;
-            let pointers = new Map();
-            let pinchStartDist = 0, pinchStartScale = 1;
-            let lastTap = 0;
-
-            function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
-
-            lbStage.addEventListener('pointerdown', (e) => {
-                if (e.target.closest('.pf-lb__nav, .pf-lb__thumbs, .pf-lb__close')) return;
-                lbStage.setPointerCapture(e.pointerId);
-                pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-
-                if (pointers.size === 2) {
-                    const pts = Array.from(pointers.values());
-                    pinchStartDist = dist(pts[0], pts[1]);
-                    pinchStartScale = scale;
-                    return;
-                }
-                dragging = true; moved = false;
-                pStartX = e.clientX; pStartY = e.clientY;
-                pPanX = panX; pPanY = panY;
-                lbWrap.classList.add('dragging');
-
-                const now = Date.now();
-                if (e.pointerType === 'touch') {
-                    if (now - lastTap < 300) toggleZoom(e.clientX, e.clientY);
-                    lastTap = now;
-                }
-            });
-
-            lbStage.addEventListener('pointermove', (e) => {
-                if (pointers.has(e.pointerId)) pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-
-                if (pointers.size === 2 && pinchStartDist > 0) {
-                    const pts = Array.from(pointers.values());
-                    const d = dist(pts[0], pts[1]);
-                    scale = Math.min(4, Math.max(1, pinchStartScale * (d / pinchStartDist)));
-                    if (scale === 1) { panX = 0; panY = 0; }
-                    applyTransform();
-                    moved = true;
-                    return;
+                function trapFocus(e) {
+                    const f = $$('button, a[href], input', lb).filter((el) => !el.disabled && el.offsetParent !== null);
+                    if (!f.length) return;
+                    const first = f[0], last = f[f.length - 1];
+                    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
                 }
 
-                if (!dragging) return;
-                const dx = e.clientX - pStartX;
-                const dy = e.clientY - pStartY;
-                if (Math.abs(dx) > 5 || Math.abs(dy) > 5) moved = true;
+                lbStage.addEventListener('dblclick', (e) => toggleZoom(e.clientX, e.clientY));
 
-                if (scale > 1) {
-                    panX = pPanX + dx;
-                    panY = pPanY + dy;
-                    applyTransform();
-                } else {
-                    lbWrap.style.transform = 'translate(' + (dx * 0.4) + 'px,0) scale(1)';
-                }
-            });
+                let wheelLock = false;
+                lbStage.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    if (scale > 1) {
+                        scale = Math.min(4, Math.max(1, scale - e.deltaY * 0.0016));
+                        if (scale === 1) resetZoom(); else applyTransform();
+                        return;
+                    }
+                    if (wheelLock) return;
+                    wheelLock = true;
+                    setTimeout(() => { wheelLock = false; }, 220);
+                    if (e.deltaY > 0 || e.deltaX > 0) nextImage(); else prevImage();
+                }, { passive: false });
 
-            function endPointer(e) {
-                if (pointers.has(e.pointerId)) pointers.delete(e.pointerId);
-                if (pointers.size === 1) {
-                    const remaining = Array.from(pointers.entries())[0];
-                    pStartX = remaining[1].x; pStartY = remaining[1].y; pPanX = panX; pPanY = panY;
-                    pinchStartDist = 0;
-                    return;
-                }
-                if (!dragging) { lbWrap.classList.remove('dragging'); return; }
-                dragging = false;
-                lbWrap.classList.remove('dragging');
+                let pStartX = 0, pStartY = 0, pPanX = 0, pPanY = 0, dragging = false, moved = false;
+                let pointers = new Map();
+                let pinchStartDist = 0, pinchStartScale = 1;
+                let lastTap = 0;
 
-                const dx = e.clientX - pStartX;
-                if (scale <= 1) {
-                    lbWrap.style.transform = '';
-                    applyTransform();
-                    const threshold = Math.min(120, lbStage.clientWidth * 0.18);
-                    if (moved && Math.abs(dx) > threshold) { dx < 0 ? nextImage() : prevImage(); }
-                }
-            }
-            lbStage.addEventListener('pointerup', endPointer);
-            lbStage.addEventListener('pointercancel', endPointer);
+                function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
 
-            function initParticles() {
-                const canvas = $('#pf-particles');
-                if (!canvas || reduceMotion) { if (canvas) canvas.style.display = 'none'; return; }
-                const ctx = canvas.getContext('2d');
-                let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-                let parts = [];
-                let running = true;
-                const hero = $('#pf-top');
+                lbStage.addEventListener('pointerdown', (e) => {
+                    if (e.target.closest('.pf-lb__nav, .pf-lb__thumbs, .pf-lb__close')) return;
+                    lbStage.setPointerCapture(e.pointerId);
+                    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-                function resize() {
-                    const r = hero.getBoundingClientRect();
-                    w = r.width; h = r.height;
-                    canvas.width = w * dpr; canvas.height = h * dpr;
-                    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                    const target = Math.round(Math.min(90, (w * h) / 16000));
-                    parts = [];
-                    for (let i = 0; i < target; i++) {
-                        parts.push({
-                            x: Math.random() * w, y: Math.random() * h,
-                            r: Math.random() * 1.8 + 0.4,
-                            vx: (Math.random() - 0.5) * 0.25,
-                            vy: (Math.random() - 0.5) * 0.25,
-                            a: Math.random() * 0.5 + 0.15
-                        });
+                    if (pointers.size === 2) {
+                        const pts = Array.from(pointers.values());
+                        pinchStartDist = dist(pts[0], pts[1]);
+                        pinchStartScale = scale;
+                        return;
+                    }
+                    dragging = true; moved = false;
+                    pStartX = e.clientX; pStartY = e.clientY;
+                    pPanX = panX; pPanY = panY;
+                    lbWrap.classList.add('dragging');
+
+                    const now = Date.now();
+                    if (e.pointerType === 'touch') {
+                        if (now - lastTap < 300) toggleZoom(e.clientX, e.clientY);
+                        lastTap = now;
+                    }
+                });
+
+                lbStage.addEventListener('pointermove', (e) => {
+                    if (pointers.has(e.pointerId)) pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+                    if (pointers.size === 2 && pinchStartDist > 0) {
+                        const pts = Array.from(pointers.values());
+                        const d = dist(pts[0], pts[1]);
+                        scale = Math.min(4, Math.max(1, pinchStartScale * (d / pinchStartDist)));
+                        if (scale === 1) { panX = 0; panY = 0; }
+                        applyTransform();
+                        moved = true;
+                        return;
+                    }
+
+                    if (!dragging) return;
+                    const dx = e.clientX - pStartX;
+                    const dy = e.clientY - pStartY;
+                    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) moved = true;
+
+                    if (scale > 1) {
+                        panX = pPanX + dx;
+                        panY = pPanY + dy;
+                        applyTransform();
+                    } else {
+                        lbWrap.style.transform = 'translate(' + (dx * 0.4) + 'px,0) scale(1)';
+                    }
+                });
+
+                function endPointer(e) {
+                    if (pointers.has(e.pointerId)) pointers.delete(e.pointerId);
+                    if (pointers.size === 1) {
+                        const remaining = Array.from(pointers.entries())[0];
+                        pStartX = remaining[1].x; pStartY = remaining[1].y; pPanX = panX; pPanY = panY;
+                        pinchStartDist = 0;
+                        return;
+                    }
+                    if (!dragging) { lbWrap.classList.remove('dragging'); return; }
+                    dragging = false;
+                    lbWrap.classList.remove('dragging');
+
+                    const dx = e.clientX - pStartX;
+                    if (scale <= 1) {
+                        lbWrap.style.transform = '';
+                        applyTransform();
+                        const threshold = Math.min(120, lbStage.clientWidth * 0.18);
+                        if (moved && Math.abs(dx) > threshold) { dx < 0 ? nextImage() : prevImage(); }
                     }
                 }
+                lbStage.addEventListener('pointerup', endPointer);
+                lbStage.addEventListener('pointercancel', endPointer);
 
-                function frame() {
-                    if (!running) return;
-                    ctx.clearRect(0, 0, w, h);
-                    for (let i = 0; i < parts.length; i++) {
-                        const p = parts[i];
-                        p.x += p.vx; p.y += p.vy;
-                        if (p.x < -10) p.x = w + 10; if (p.x > w + 10) p.x = -10;
-                        if (p.y < -10) p.y = h + 10; if (p.y > h + 10) p.y = -10;
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                        ctx.fillStyle = 'rgba(242,212,0,' + p.a + ')';
-                        ctx.fill();
+                function initParticles() {
+                    const canvas = $('#pf-particles');
+                    if (!canvas || reduceMotion) { if (canvas) canvas.style.display = 'none'; return; }
+                    const ctx = canvas.getContext('2d');
+                    let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    let parts = [];
+                    let running = true;
+                    const hero = $('#pf-top');
+
+                    function resize() {
+                        const r = hero.getBoundingClientRect();
+                        w = r.width; h = r.height;
+                        canvas.width = w * dpr; canvas.height = h * dpr;
+                        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+                        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                        const target = Math.round(Math.min(90, (w * h) / 16000));
+                        parts = [];
+                        for (let i = 0; i < target; i++) {
+                            parts.push({
+                                x: Math.random() * w, y: Math.random() * h,
+                                r: Math.random() * 1.8 + 0.4,
+                                vx: (Math.random() - 0.5) * 0.25,
+                                vy: (Math.random() - 0.5) * 0.25,
+                                a: Math.random() * 0.5 + 0.15
+                            });
+                        }
                     }
-                    for (let i = 0; i < parts.length; i++) {
-                        for (let j = i + 1; j < parts.length; j++) {
-                            const a = parts[i], b = parts[j];
-                            const d2 = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
-                            if (d2 < 12000) {
-                                ctx.strokeStyle = 'rgba(242,212,0,' + (0.06 * (1 - d2 / 12000)) + ')';
-                                ctx.lineWidth = 1;
-                                ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+
+                    function frame() {
+                        if (!running) return;
+                        ctx.clearRect(0, 0, w, h);
+                        for (let i = 0; i < parts.length; i++) {
+                            const p = parts[i];
+                            p.x += p.vx; p.y += p.vy;
+                            if (p.x < -10) p.x = w + 10; if (p.x > w + 10) p.x = -10;
+                            if (p.y < -10) p.y = h + 10; if (p.y > h + 10) p.y = -10;
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                            ctx.fillStyle = 'rgba(242,212,0,' + p.a + ')';
+                            ctx.fill();
+                        }
+                        for (let i = 0; i < parts.length; i++) {
+                            for (let j = i + 1; j < parts.length; j++) {
+                                const a = parts[i], b = parts[j];
+                                const d2 = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+                                if (d2 < 12000) {
+                                    ctx.strokeStyle = 'rgba(242,212,0,' + (0.06 * (1 - d2 / 12000)) + ')';
+                                    ctx.lineWidth = 1;
+                                    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+                                }
                             }
                         }
+                        requestAnimationFrame(frame);
                     }
+
+                    resize();
+                    window.addEventListener('resize', resize, { passive: true });
                     requestAnimationFrame(frame);
-                }
 
-                resize();
-                window.addEventListener('resize', resize, { passive: true });
-                requestAnimationFrame(frame);
-
-                if ('IntersectionObserver' in window) {
-                    new IntersectionObserver((entries) => {
-                        entries.forEach((e) => {
-                            if (e.isIntersecting && !running) { running = true; requestAnimationFrame(frame); }
-                            else if (!e.isIntersecting) { running = false; }
-                        });
-                    }, { threshold: 0 }).observe(hero);
-                }
-            }
-
-            function initHeroRecede() {
-                if (reduceMotion) return;
-                const ga = $('.pf-hero__glow--a');
-                const gb = $('.pf-hero__glow--b');
-                const inner = $('.pf-hero__inner');
-                let ticking = false;
-                function update() {
-                    const vh = window.innerHeight || 1;
-                    const y = window.scrollY || 0;
-                    const t = Math.min(1, Math.max(0, y / (vh * 0.85)));
-                    if (ga) ga.style.transform = 'translateY(' + (y * 0.18) + 'px)';
-                    if (gb) gb.style.transform = 'translateY(' + (-y * 0.12) + 'px)';
-                    if (inner) {
-                        inner.style.transform = 'translateY(' + (-48 * t) + 'px) scale(' + (1 - 0.07 * t) + ')';
-                        inner.style.opacity = String(1 - t);
-                        inner.style.filter = t > 0 ? 'blur(' + (5 * t) + 'px)' : '';
+                    if ('IntersectionObserver' in window) {
+                        new IntersectionObserver((entries) => {
+                            entries.forEach((e) => {
+                                if (e.isIntersecting && !running) { running = true; requestAnimationFrame(frame); }
+                                else if (!e.isIntersecting) { running = false; }
+                            });
+                        }, { threshold: 0 }).observe(hero);
                     }
-                    ticking = false;
                 }
-                window.addEventListener('scroll', () => {
-                    if (ticking) return;
-                    ticking = true;
-                    requestAnimationFrame(update);
-                }, { passive: true });
-                update();
-            }
 
-            renderFeatured();
-            renderFilters();
-            applyFilter();
-            observeReveals(document);
-            initParticles();
-            initHeroRecede();
-
-            window.addEventListener('load', () => { layoutGrid(); });
-
-            if (location.hash) {
-                const id = location.hash.slice(1);
-                if (byId[id]) setTimeout(() => openLightbox(id, 0), 350);
-            }
-        })();
-    </script>
-
-    <footer class="site-footer">
-        <figure class="footer-blob footer-blob--right" aria-hidden="true">
-            <div class="footer-gradient-blob"></div>
-        </figure>
-        <figure class="footer-blob footer-blob--left" aria-hidden="true">
-            <div class="footer-gradient-blob footer-gradient-blob--left"></div>
-        </figure>
-        <div class="main-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <img src="https://www.synkynstudios.com/images/logo.png" alt="Synkyn Studios Logo"
-                        class="footer-logo" onerror="this.style.display='none'" />
-                    <p class="footer-brand-title">About the studio</p>
-                    <p class="footer-tagline">
-                        Synkyn creates AI-powered commercials, product films, CGI visuals, and social media content for
-                        brands that want to look premium without slow production delays.</p>
-                    <p class="footer-tagline footer-tagline--motto">&mdash;Turn Your Idea Into a High-End AI Film.</p>
-                    <ul class="footer-social-list" role="list">
-                        <li class="footer-social-item">
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-link"
-                                aria-label="YouTube">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
-                                    fill="currentColor">
-                                    <path
-                                        d="M 44.898438 14.5 C 44.5 12.300781 42.601563 10.699219 40.398438 10.199219 C 37.101563 9.5 31 9 24.398438 9 C 17.800781 9 11.601563 9.5 8.300781 10.199219 C 6.101563 10.699219 4.199219 12.199219 3.800781 14.5 C 3.398438 17 3 20.5 3 25 C 3 29.5 3.398438 33 3.898438 35.5 C 4.300781 37.699219 6.199219 39.300781 8.398438 39.800781 C 11.898438 40.5 17.898438 41 24.5 41 C 31.101563 41 37.101563 40.5 40.601563 39.800781 C 42.800781 39.300781 44.699219 37.800781 45.101563 35.5 C 45.5 33 46 29.398438 46.101563 25 C 45.898438 20.5 45.398438 17 44.898438 14.5 Z M 19 32 L 19 18 L 31.199219 25 Z" />
-                                </svg>
-                                <span>YouTube</span>
-                            </a>
-                        </li>
-                        <li class="footer-social-separator"></li>
-                        <li class="footer-social-item">
-                            <a href="https://www.instagram.com/synkyn_studios/" target="_blank"
-                                rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
-                                    fill="currentColor">
-                                    <path
-                                        d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z" />
-                                </svg>
-                                <span>Instagram</span>
-                            </a>
-                        </li>
-                        <li class="footer-social-separator"></li>
-                        <li class="footer-social-item">
-                            <a href="https://www.linkedin.com/company/synkynstudios/" target="_blank"
-                                rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
-                                    fill="currentColor">
-                                    <path
-                                        d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
-                                </svg>
-                                <span>LinkedIn</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-links-grid">
-                    <div>
-                        <p class="footer-col-title">Company</p>
-                        <ul class="footer-nav" role="list">
-                            <li><a href="./about-us.html#team" class="footer-link">Our Team</a></li>
-                            <li><a href="./contact.html" class="footer-link">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="footer-col-title">Discover</p>
-                        <ul class="footer-nav" role="list">
-                            <li><a href="./library.html" class="footer-link">Library</a></li>
-                            <li><a href="./printalbum.html" class="footer-link active">Printalbum</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="footer-col-title">Legal Policies</p>
-                        <ul class="footer-nav" role="list">
-                            <li><a href="./terms.html" class="footer-link">Terms &amp; Conditions</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-divider" aria-hidden="true"></div>
-                <p class="footer-copy footer-copy--location"><svg fill="none" height="20" viewBox="0 0 20 20" width="20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path class="stroke-secondary dark:stroke-accent"
-                            d="M10 2.5c-3.1 0-5.6 2.5-5.6 5.6 0 4.7 5.6 10.6 5.6 10.6s5.6-5.9 5.6-10.6c0-3.1-2.5-5.6-5.6-5.6z"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <circle class="stroke-secondary dark:stroke-accent" cx="10" cy="8.1" r="2.5" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg> Bengaluru, Karnataka, India</p>
-                <p class="footer-copy">© 2026 Synkyn Studios. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        (function () {
-            'use strict';
-            const divider = document.querySelector('.footer-divider');
-            if (!divider || !('IntersectionObserver' in window)) return;
-            divider.style.width = '0';
-            divider.style.transition = 'width 0.9s cubic-bezier(.22,.68,0,1.2)';
-            const io = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            divider.style.width = '100%';
-                            io.disconnect();
+                function initHeroRecede() {
+                    if (reduceMotion) return;
+                    const ga = $('.pf-hero__glow--a');
+                    const gb = $('.pf-hero__glow--b');
+                    const inner = $('.pf-hero__inner');
+                    let ticking = false;
+                    function update() {
+                        const vh = window.innerHeight || 1;
+                        const y = window.scrollY || 0;
+                        const t = Math.min(1, Math.max(0, y / (vh * 0.85)));
+                        if (ga) ga.style.transform = 'translateY(' + (y * 0.18) + 'px)';
+                        if (gb) gb.style.transform = 'translateY(' + (-y * 0.12) + 'px)';
+                        if (inner) {
+                            inner.style.transform = 'translateY(' + (-48 * t) + 'px) scale(' + (1 - 0.07 * t) + ')';
+                            inner.style.opacity = String(1 - t);
+                            inner.style.filter = t > 0 ? 'blur(' + (5 * t) + 'px)' : '';
                         }
-                    });
-                },
-                { threshold: 0.2 }
-            );
-            io.observe(divider.parentElement);
-        })();
-    </script>
+                        ticking = false;
+                    }
+                    window.addEventListener('scroll', () => {
+                        if (ticking) return;
+                        ticking = true;
+                        requestAnimationFrame(update);
+                    }, { passive: true });
+                    update();
+                }
 
-    <style>
-        @media (max-width: 767.98px) {
-            #sticky-bar {
-                height: 4.5rem !important;
+                renderFeatured();
+                renderFilters();
+                applyFilter();
+                observeReveals(document);
+                initHeroRecede();
+
+                window.addEventListener('load', () => { layoutGrid(); });
+
+                if (location.hash) {
+                    const id = location.hash.slice(1);
+                    if (byId[id]) setTimeout(() => openLightbox(id, 0), 350);
+                }
+            })();
+        </script>
+
+        <footer class="site-footer">
+            <figure class="footer-blob footer-blob--right" aria-hidden="true">
+                <div class="footer-gradient-blob"></div>
+            </figure>
+            <figure class="footer-blob footer-blob--left" aria-hidden="true">
+                <div class="footer-gradient-blob footer-gradient-blob--left"></div>
+            </figure>
+            <div class="main-container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <img src="https://www.synkynstudios.com/images/logo.png" alt="Synkyn Studios Logo"
+                            class="footer-logo" onerror="this.style.display='none'" />
+                        <p class="footer-brand-title">About the studio</p>
+                        <p class="footer-tagline">
+                            Synkyn creates AI-powered commercials, product films, CGI visuals, and social media content
+                            for
+                            brands that want to look premium without slow production delays.</p>
+                        <p class="footer-tagline footer-tagline--motto">&mdash;Turn Your Idea Into a High-End AI Film.
+                        </p>
+                        <ul class="footer-social-list" role="list">
+                            <li class="footer-social-item">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-link"
+                                    aria-label="YouTube">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
+                                        fill="currentColor">
+                                        <path
+                                            d="M 44.898438 14.5 C 44.5 12.300781 42.601563 10.699219 40.398438 10.199219 C 37.101563 9.5 31 9 24.398438 9 C 17.800781 9 11.601563 9.5 8.300781 10.199219 C 6.101563 10.699219 4.199219 12.199219 3.800781 14.5 C 3.398438 17 3 20.5 3 25 C 3 29.5 3.398438 33 3.898438 35.5 C 4.300781 37.699219 6.199219 39.300781 8.398438 39.800781 C 11.898438 40.5 17.898438 41 24.5 41 C 31.101563 41 37.101563 40.5 40.601563 39.800781 C 42.800781 39.300781 44.699219 37.800781 45.101563 35.5 C 45.5 33 46 29.398438 46.101563 25 C 45.898438 20.5 45.398438 17 44.898438 14.5 Z M 19 32 L 19 18 L 31.199219 25 Z" />
+                                    </svg>
+                                    <span>YouTube</span>
+                                </a>
+                            </li>
+                            <li class="footer-social-separator"></li>
+                            <li class="footer-social-item">
+                                <a href="https://www.instagram.com/synkyn_studios/" target="_blank"
+                                    rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
+                                        fill="currentColor">
+                                        <path
+                                            d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z" />
+                                    </svg>
+                                    <span>Instagram</span>
+                                </a>
+                            </li>
+                            <li class="footer-social-separator"></li>
+                            <li class="footer-social-item">
+                                <a href="https://www.linkedin.com/company/synkynstudios/" target="_blank"
+                                    rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" aria-hidden="true"
+                                        fill="currentColor">
+                                        <path
+                                            d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+                                    </svg>
+                                    <span>LinkedIn</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-grid">
+                        <div>
+                            <p class="footer-col-title">Company</p>
+                            <ul class="footer-nav" role="list">
+                                <li><a href="./about-us.html#team" class="footer-link">Our Team</a></li>
+                                <li><a href="./contact.html" class="footer-link">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="footer-col-title">Discover</p>
+                            <ul class="footer-nav" role="list">
+                                <li><a href="./library.html" class="footer-link">Library</a></li>
+                                <li><a href="./printalbum.html" class="footer-link active">Printalbum</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="footer-col-title">Legal Policies</p>
+                            <ul class="footer-nav" role="list">
+                                <li><a href="./terms.html" class="footer-link">Terms &amp; Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-divider" aria-hidden="true"></div>
+                    <p class="footer-copy footer-copy--location"><svg fill="none" height="20" viewBox="0 0 20 20"
+                            width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path class="stroke-secondary dark:stroke-accent"
+                                d="M10 2.5c-3.1 0-5.6 2.5-5.6 5.6 0 4.7 5.6 10.6 5.6 10.6s5.6-5.9 5.6-10.6c0-3.1-2.5-5.6-5.6-5.6z"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle class="stroke-secondary dark:stroke-accent" cx="10" cy="8.1" r="2.5"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg> Bengaluru, Karnataka, India</p>
+                    <p class="footer-copy">© 2026 Synkyn Studios. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            (function () {
+                'use strict';
+                const divider = document.querySelector('.footer-divider');
+                if (!divider || !('IntersectionObserver' in window)) return;
+                divider.style.width = '0';
+                divider.style.transition = 'width 0.9s cubic-bezier(.22,.68,0,1.2)';
+                const io = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                divider.style.width = '100%';
+                                io.disconnect();
+                            }
+                        });
+                    },
+                    { threshold: 0.2 }
+                );
+                io.observe(divider.parentElement);
+            })();
+        </script>
+
+        <style>
+            @media (max-width: 767.98px) {
+                #sticky-bar {
+                    height: 4.5rem !important;
+                }
             }
-        }
-    </style>
+        </style>
 
-    <div data-curve="bezier" data-div-count="5" data-duration="0.3s" data-easing="ease-out" data-exponential="true"
-        data-gradual-blur="" data-height="7rem" data-opacity="1" data-position="bottom" data-show-on-scroll="50"
-        data-strength="2" data-target="page" data-z-index="50" id="sticky-bar"></div>
+        <div data-curve="bezier" data-div-count="5" data-duration="0.3s" data-easing="ease-out" data-exponential="true"
+            data-gradual-blur="" data-height="7rem" data-opacity="1" data-position="bottom" data-show-on-scroll="50"
+            data-strength="2" data-target="page" data-z-index="50" id="sticky-bar"></div>
 
-    <script defer="" src="./vendor/split-text.min.js"></script>
-    <script defer="" src="./vendor/gsap.min.js"></script>
-    <script defer="" src="./vendor/scroll-trigger.min.js"></script>
-    <script defer="" src="./vendor/draw-svg.min.js"></script>
-    <script defer="" src="./vendor/motionpathplugin.min.js"></script>
-    <script defer="" src="./vendor/lenis.min.js"></script>
-    <script defer="" src="./vendor/springer.min.js"></script>
-    <script src="./assets/main.js" type="module"></script>
-    <script src="./assets/fx.js?v=3"></script>
+        <script defer="" src="./vendor/split-text.min.js"></script>
+        <script defer="" src="./vendor/gsap.min.js"></script>
+        <script defer="" src="./vendor/scroll-trigger.min.js"></script>
+        <script defer="" src="./vendor/draw-svg.min.js"></script>
+        <script defer="" src="./vendor/motionpathplugin.min.js"></script>
+        <script defer="" src="./vendor/lenis.min.js"></script>
+        <script defer="" src="./vendor/springer.min.js"></script>
+        <script src="./assets/main.js" type="module"></script>
+        <script src="./assets/fx.js?v=3"></script>
 
-    <script defer="" src="./assets/navbar.js?v=6"></script>
-    <script defer="" src="./assets/footer.js?v=2"></script>
+        <script defer="" src="./assets/navbar.js?v=6"></script>
+        <script defer="" src="./assets/footer.js?v=2"></script>
 </body>
 
 </html>

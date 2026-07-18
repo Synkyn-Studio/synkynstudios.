@@ -42,7 +42,7 @@ footer.site-footer {
 }
 
 .site-footer .footer-blob--right {
-    top: -17%;
+    top: 5%;
     right: -64%;
     width: 550px;
     height: 550px;
@@ -58,7 +58,7 @@ footer.site-footer {
 
 @media (min-width: 768px) {
     .site-footer .footer-blob--right {
-        top: -25%;
+        top: 5%;
         right: -30%;
     }
 
@@ -251,6 +251,7 @@ footer.site-footer {
         gap: 2.5rem 1rem;
         margin-top: 2.5rem;
     }
+
     .site-footer .footer-col:last-child {
         grid-column: span 2;
     }
