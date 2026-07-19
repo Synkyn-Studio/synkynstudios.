@@ -11,7 +11,7 @@ if (desktopNav) {
                     <li class="nav-item relative cursor-pointer py-2.5" data-menu="works-mega-menu">
     <a class="hover:text-accent hover:border-accent dark:hover:border-stroke-7 text-tagline-1 text-accent/60 dark:text-accent/60 dark:hover:text-accent group flex items-center gap-1 rounded-full border border-transparent px-4 py-2 font-normal transition-all duration-200"
         href="javascript:void(0)">
-        <span>Works</span>
+        <span>Work</span>
         <span class="nav-arrow block origin-center translate-y-px transition-all duration-300">
             <svg class="stroke-accent/60 group-hover:stroke-accent size-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="m19.5 8.25-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
