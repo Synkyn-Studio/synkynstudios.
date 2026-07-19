@@ -118,170 +118,171 @@
   </style>
   <link href="./assets/footer.css?v=2" rel="stylesheet" />
   <meta name="google-site-verification" content="gj7RmRKG4U9jAcIZ-Un31uUunZXLUf6AQuKdNDEYZVU" />
-    <!-- ================= NEW RESPONSIVE CSS (Mobile + Tablet First) ================= -->
-    <style id="synkyn-enhanced-responsive">
-        /* ===== GLOBAL SMOOTH SCROLL & TOUCH ===== */
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        html {
-            -webkit-text-size-adjust: 100%;
-        }
+  <!-- ================= NEW RESPONSIVE CSS (Mobile + Tablet First) ================= -->
+  <style id="synkyn-enhanced-responsive">
+    /* ===== GLOBAL SMOOTH SCROLL & TOUCH ===== */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        /* ===== HERO - FRESH MOBILE/TABLET EXPERIENCE ===== */
-        #hero {
-            height: 100svh;
-            min-height: 560px;
-            position: relative;
-        }
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
 
-        .hero-inner {
-            border-radius: 0;
-        }
+    /* ===== HERO - FRESH MOBILE/TABLET EXPERIENCE ===== */
+    #hero {
+      height: 100svh;
+      min-height: 560px;
+      position: relative;
+    }
 
-        @media (min-width: 640px) {
-            .hero-inner {
-                border-radius: 32px;
-                border: 12px solid #000;
-            }
-        }
+    .hero-inner {
+      border-radius: 0;
+    }
 
-        @media (min-width: 1024px) {
-            .hero-inner {
-                border-radius: 64px;
-                border: 16px solid #000;
-            }
-        }
+    @media (min-width: 640px) {
+      .hero-inner {
+        border-radius: 32px;
+        border: 12px solid #000;
+      }
+    }
 
-        .hero-brand {
-            font-weight: 700;
-            line-height: 0.92;
-            letter-spacing: -0.04em;
-        }
+    @media (min-width: 1024px) {
+      .hero-inner {
+        border-radius: 64px;
+        border: 16px solid #000;
+      }
+    }
 
-        /* Mobile Hero (≤767px) */
-        @media (max-width: 767px) {
-            .hero-top-layout {
-                gap: 2rem !important;
-                padding-top: 1.5rem;
-            }
+    .hero-brand {
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+    }
 
-            .hero-brand {
-                font-size: clamp(2.1rem, 11vw, 3.4rem) !important;
-                line-height: 0.9 !important;
-            }
+    /* Mobile Hero (≤767px) */
+    @media (max-width: 767px) {
+      .hero-top-layout {
+        gap: 2rem !important;
+        padding-top: 1.5rem;
+      }
 
-            .hero-services-list {
-                gap: 0.6rem !important;
-            }
+      .hero-brand {
+        font-size: clamp(2.1rem, 11vw, 3.4rem) !important;
+        line-height: 0.9 !important;
+      }
 
-            .hero-services {
-                font-size: clamp(1.05rem, 4.8vw, 1.45rem) !important;
-                line-height: 1.1 !important;
-            }
+      .hero-services-list {
+        gap: 0.6rem !important;
+      }
 
-            .hero-tagline {
-                font-size: clamp(1.05rem, 4.2vw, 1.35rem) !important;
-                line-height: 1.38 !important;
-            }
+      .hero-services {
+        font-size: clamp(1.05rem, 4.8vw, 1.45rem) !important;
+        line-height: 1.1 !important;
+      }
 
-            #hero-how-it-works-btn {
-                width: 100% !important;
-                max-width: 320px;
-                height: 180px;
-                margin: 0 auto;
-            }
-        }
+      .hero-tagline {
+        font-size: clamp(1.05rem, 4.2vw, 1.35rem) !important;
+        line-height: 1.38 !important;
+      }
 
-        /* Tablet (768px - 1023px) */
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .hero-brand {
-                font-size: clamp(3.2rem, 7.5vw, 5.2rem) !important;
-            }
+      #hero-how-it-works-btn {
+        width: 100% !important;
+        max-width: 320px;
+        height: 180px;
+        margin: 0 auto;
+      }
+    }
 
-            .hero-services {
-                font-size: clamp(1.35rem, 3vw, 2.1rem) !important;
-            }
+    /* Tablet (768px - 1023px) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-brand {
+        font-size: clamp(3.2rem, 7.5vw, 5.2rem) !important;
+      }
 
-            .hero-tagline {
-                font-size: clamp(1.2rem, 2.6vw, 1.8rem) !important;
-            }
-        }
+      .hero-services {
+        font-size: clamp(1.35rem, 3vw, 2.1rem) !important;
+      }
 
-        /* ===== PIPELINE SECTION - ENHANCED MOBILE ===== */
-        .pipeline-section {
-            padding: 0 1rem;
-        }
+      .hero-tagline {
+        font-size: clamp(1.2rem, 2.6vw, 1.8rem) !important;
+      }
+    }
 
-        .pipeline-section .hero {
-            padding: clamp(120px, 18vh, 220px) 1rem 80px;
-        }
+    /* ===== PIPELINE SECTION - ENHANCED MOBILE ===== */
+    .pipeline-section {
+      padding: 0 1rem;
+    }
 
-        @media (max-width: 767px) {
-            .journey-svg {
-                width: 138% !important;
-                margin-left: -19% !important;
-                max-height: 4200px;
-            }
+    .pipeline-section .hero {
+      padding: clamp(120px, 18vh, 220px) 1rem 80px;
+    }
 
-            .stop {
-                width: 92% !important;
-                margin: 2rem auto !important;
-                padding: 1.25rem 1.5rem;
-                background: rgba(10, 10, 10, 0.85);
-                border-radius: 20px;
-                border: 1px solid rgba(255, 216, 77, 0.2);
-                backdrop-filter: blur(16px);
-            }
+    @media (max-width: 767px) {
+      .journey-svg {
+        width: 138% !important;
+        margin-left: -19% !important;
+        max-height: 4200px;
+      }
 
-            .stop.left, .stop.right {
-                left: auto !important;
-                right: auto !important;
-                text-align: center !important;
-                align-items: center !important;
-            }
+      .stop {
+        width: 92% !important;
+        margin: 2rem auto !important;
+        padding: 1.25rem 1.5rem;
+        background: rgba(10, 10, 10, 0.85);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 216, 77, 0.2);
+        backdrop-filter: blur(16px);
+      }
 
-            .pipeline-section .title {
-                font-size: 1.65rem !important;
-            }
-        }
+      .stop.left,
+      .stop.right {
+        left: auto !important;
+        right: auto !important;
+        text-align: center !important;
+        align-items: center !important;
+      }
 
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .journey-svg {
-                width: 118% !important;
-                margin-left: -9% !important;
-            }
-        }
+      .pipeline-section .title {
+        font-size: 1.65rem !important;
+      }
+    }
 
-        /* ===== SPACE EARTH TEXT ===== */
-        #space-earth-text {
-            font-size: clamp(2.2rem, 9vw, 4.2rem);
-            line-height: 1.05;
-            text-align: center;
-        }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .journey-svg {
+        width: 118% !important;
+        margin-left: -9% !important;
+      }
+    }
 
-        /* ===== FOOTER ===== */
-        .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-        }
+    /* ===== SPACE EARTH TEXT ===== */
+    #space-earth-text {
+      font-size: clamp(2.2rem, 9vw, 4.2rem);
+      line-height: 1.05;
+      text-align: center;
+    }
 
-        @media (min-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1.1fr 1fr;
-            }
-        }
+    /* ===== FOOTER ===== */
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
 
-        /* ===== VIDEO MODAL - MOBILE OPTIMIZED ===== */
-        @media (max-width: 640px) {
-            .modal-card {
-                border-radius: 0 !important;
-                max-height: 100vh !important;
-                height: 100vh !important;
-            }
-        }
-    </style>
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+    }
+
+    /* ===== VIDEO MODAL - MOBILE OPTIMIZED ===== */
+    @media (max-width: 640px) {
+      .modal-card {
+        border-radius: 0 !important;
+        max-height: 100vh !important;
+        height: 100vh !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-background-3 dark:bg-helix-blue-dark-2">
@@ -1661,6 +1662,7 @@
             thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/For%20Album/Tata%20Cover%20for%20web.png?updatedAt=1783526676609',
             description: 'Tata - Dal Product Window',
             sources: [
+              { type: 'vimeo', src: 'https://player.vimeo.com/video/1211044048' },
               { type: 'image', src: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/For%20Album/pw%20dal%202.png?updatedAt=1783526325276' },
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1208145520' }
             ]
@@ -1796,6 +1798,72 @@
           el.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(work); }
           });
+
+          const firstVideoSrc = work.sources && work.sources.find(s => s.type === 'vimeo' || s.type === 'youtube' || s.type === 'video');
+          if (firstVideoSrc) {
+            let hoverTimeout;
+            let previewContainer = null;
+
+            el.addEventListener('mouseenter', () => {
+              if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+              
+              hoverTimeout = setTimeout(() => {
+                if (!previewContainer) {
+                  previewContainer = document.createElement('div');
+                  previewContainer.className = 'absolute inset-0 z-[5] bg-black opacity-0 transition-opacity duration-700 pointer-events-none flex items-center justify-center overflow-hidden';
+                  
+                  const iframeStyle = "position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100vw; height:56.25vw; min-width:177.77vh; min-height:100vh; pointer-events:none;";
+                  let innerHtml = '';
+                  
+                  if (firstVideoSrc.type === 'vimeo') {
+                    const vId = getVimeoId(firstVideoSrc.src);
+                    innerHtml = `<iframe src="https://player.vimeo.com/video/${vId}?background=1&autoplay=1&loop=1&muted=1&autopause=0" frameborder="0" allow="autoplay; fullscreen" style="${iframeStyle}"></iframe>`;
+                  } else if (firstVideoSrc.type === 'youtube') {
+                    const yId = getYouTubeId(firstVideoSrc.src);
+                    innerHtml = `<iframe src="https://www.youtube.com/embed/${yId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${yId}&playsinline=1&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" style="${iframeStyle}"></iframe>`;
+                  } else if (firstVideoSrc.type === 'video') {
+                    innerHtml = `<video src="${firstVideoSrc.src}" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover pointer-events-none"></video>`;
+                  }
+                  
+                  previewContainer.innerHTML = innerHtml;
+                  el.insertBefore(previewContainer, el.querySelector('.bento-item__overlay'));
+                  
+                  let loaded = false;
+                  const showPreview = () => {
+                    if (loaded) return;
+                    loaded = true;
+                    if (previewContainer) previewContainer.style.opacity = '1';
+                  };
+                  
+                  const iframe = previewContainer.querySelector('iframe');
+                  const video = previewContainer.querySelector('video');
+                  
+                  if (iframe) iframe.onload = showPreview;
+                  if (video) video.onloadeddata = showPreview;
+                  
+                  setTimeout(showPreview, 600);
+                } else {
+                  previewContainer.style.opacity = '1';
+                  const v = previewContainer.querySelector('video');
+                  if (v) v.play().catch(() => {});
+                }
+              }, 250);
+            });
+
+            el.addEventListener('mouseleave', () => {
+              clearTimeout(hoverTimeout);
+              if (previewContainer) {
+                previewContainer.style.opacity = '0';
+                setTimeout(() => {
+                  if (previewContainer && previewContainer.style.opacity === '0') {
+                    previewContainer.remove();
+                    previewContainer = null;
+                  }
+                }, 700);
+              }
+            });
+          }
+
           return el;
         }
 
