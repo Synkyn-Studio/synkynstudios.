@@ -40,7 +40,7 @@ if (desktopNav) {
                                 </div>
                                 <div class="flex flex-col text-left">
                                     <p class="text-[15px] font-medium text-white leading-tight">Library</p>
-                                    <p class="text-[12px] text-white/60 font-normal mt-0.5">Our Work-Skykyn</p>
+                                    <p class="text-[12px] text-white/60 font-normal mt-0.5">Our Work</p>
                                 </div>
                             </div>
                             <svg class="size-4 stroke-white transition-all duration-300 group-hover:translate-x-1" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
