@@ -503,13 +503,21 @@
 
         /* ===== HERO - FRESH MOBILE/TABLET EXPERIENCE ===== */
         #hero {
-            height: 100svh;
-            min-height: 560px;
+            min-height: 100dvh;
+            height: auto;
             position: relative;
+        }
+
+        @media (min-width: 1024px) {
+            #hero {
+                height: 100svh;
+            }
         }
 
         .hero-inner {
             border-radius: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         @media (min-width: 640px) {
@@ -534,50 +542,80 @@
 
         /* Mobile Hero (≤767px) */
         @media (max-width: 767px) {
+            #hero .relative.z-10 {
+                padding-top: 6.5rem !important;
+                padding-bottom: 3.5rem !important;
+            }
+
             .hero-top-layout {
-                gap: 2rem !important;
-                padding-top: 1.5rem;
+                gap: 1rem !important;
+                margin-bottom: 1.5rem !important;
             }
 
             .hero-brand {
-                font-size: clamp(2.1rem, 11vw, 3.4rem) !important;
-                line-height: 0.9 !important;
+                font-size: clamp(1.75rem, 9vw, 3.2rem) !important;
+                line-height: 0.92 !important;
             }
 
             .hero-services-list {
-                gap: 0.6rem !important;
+                gap: 0.35rem !important;
+                padding-top: 0 !important;
             }
 
             .hero-services {
-                font-size: clamp(1.05rem, 4.8vw, 1.45rem) !important;
-                line-height: 1.1 !important;
+                font-size: clamp(0.9rem, 3.8vw, 1.2rem) !important;
+                line-height: 1.15 !important;
             }
 
             .hero-tagline {
-                font-size: clamp(1.05rem, 4.2vw, 1.35rem) !important;
+                font-size: clamp(0.95rem, 3.8vw, 1.2rem) !important;
                 line-height: 1.38 !important;
+                margin-bottom: 0.75rem;
+            }
+
+            .hero-showreel-container {
+                width: 100%;
+                display: flex;
+                justify-content: center !important;
+                margin-top: 0.75rem !important;
+                margin-bottom: 0.75rem !important;
             }
 
             #hero-how-it-works-btn {
+                display: block;
                 width: 100% !important;
-                max-width: 320px;
-                height: 180px;
-                margin: 0 auto;
+                max-width: 360px !important;
+                height: auto !important;
+                aspect-ratio: 16 / 9 !important;
+                margin: 0 auto !important;
+                border-width: 4px !important;
+                border-radius: 16px !important;
+                box-shadow: 0 10px 30px rgba(242, 212, 0, 0.3) !important;
             }
         }
 
         /* Tablet (768px - 1023px) */
         @media (min-width: 768px) and (max-width: 1023px) {
+            #hero .relative.z-10 {
+                padding-top: 7.5rem !important;
+                padding-bottom: 4rem !important;
+            }
+
             .hero-brand {
-                font-size: clamp(3.2rem, 7.5vw, 5.2rem) !important;
+                font-size: clamp(2.8rem, 6.5vw, 4.5rem) !important;
             }
 
             .hero-services {
-                font-size: clamp(1.35rem, 3vw, 2.1rem) !important;
+                font-size: clamp(1.1rem, 2.4vw, 1.6rem) !important;
             }
 
             .hero-tagline {
-                font-size: clamp(1.2rem, 2.6vw, 1.8rem) !important;
+                font-size: clamp(1.05rem, 2.2vw, 1.45rem) !important;
+            }
+
+            #hero-how-it-works-btn {
+                width: 310px !important;
+                height: 175px !important;
             }
         }
 
@@ -800,21 +838,21 @@
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                     </div>
 
-                    <div class="relative z-10 flex flex-col h-full px-4 pt-28 sm:px-6 md:px-12 lg:px-24 pb-10 sm:pb-12 md:pb-14 md:pt-32"
+                    <div class="relative z-10 flex flex-col h-full px-4 pt-24 sm:px-6 md:px-12 lg:px-24 pb-8 sm:pb-10 md:pb-12 pt-24 sm:pt-28 md:pt-32"
                         style="place-content: center flex-start">
                         <h1
                             style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0, 0, 0, 0); white-space:nowrap; border:0;">
                             Synkyn Studios — AI film studio and creative production studio in Bengaluru for commercials,
                             product films, CGI visuals, and social content
                         </h1>
-                        <div class="flex-1 flex flex-col max-w-8xl mx-auto w-full">
+                        <div class="flex-1 flex flex-col max-w-8xl mx-auto w-full justify-between">
                             <div
-                                class="hero-top-layout flex flex-col lg:flex-row lg:items-start lg:justify-between md:flex-col md:items-start md:justify-start gap-6 sm:gap-8 lg:gap-16 mb-8 sm:mb-10 lg:mb-14">
+                                class="hero-top-layout flex flex-row items-start justify-between gap-4 sm:gap-8 lg:gap-16 mb-6 sm:mb-8 lg:mb-14">
                                 <div class="flex flex-col min-w-0">
                                     <div class="flex flex-col items-start min-w-0">
                                         <div class="flex items-baseline flex-nowrap w-full min-w-0">
                                             <div
-                                                class="hero-brand font-semibold tracking-[-0.02em] leading-none text-white/80 whitespace-nowrap text-[clamp(1rem,min(15vw,12dvh),6.5rem)] min-[400px]:text-[clamp(1.1rem,min(15.5vw,13dvh),7.5rem)] sm:text-[clamp(1.15rem,min(15.5vw,13.5dvh),8.75rem)] md:text-[clamp(1.2rem,min(15.8vw,12dvh),9.75rem)] lg:text-[clamp(1.28rem,min(12.4vw,11.5dvh),12rem)] xl:text-[clamp(1.35rem,min(13vw,13dvh),15.5rem)] reveal-text hover-text-effect flex flex-col gap-2 md:gap-3 lg:gap-4">
+                                                class="hero-brand font-semibold tracking-[-0.02em] leading-none text-white/80 whitespace-nowrap text-[clamp(1.8rem,min(14vw,10dvh),6.5rem)] min-[400px]:text-[clamp(2.1rem,min(14.5vw,11dvh),7.5rem)] sm:text-[clamp(2.2rem,min(13vw,12dvh),8.75rem)] md:text-[clamp(2.8rem,min(12vw,11dvh),9.75rem)] lg:text-[clamp(1.28rem,min(12.4vw,11.5dvh),12rem)] xl:text-[clamp(1.35rem,min(13vw,13dvh),15.5rem)] reveal-text hover-text-effect flex flex-col gap-1 sm:gap-2 md:gap-3 lg:gap-4">
                                                 <span>Less Syn</span>
                                                 <span>More Kyn</span>
                                             </div>
@@ -824,7 +862,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="hero-services-list flex flex-col gap-1 sm:gap-2.5 lg:gap-3 shrink-0 pt-6 justify-end items-end text-right">
+                                    class="hero-services-list flex flex-col gap-1 sm:gap-2 lg:gap-3 shrink-0 pt-1 sm:pt-3 lg:pt-6 justify-end items-end text-right">
                                     <span
                                         class="font-semibold tracking-[-0.04em] text-white hero-services reveal-text hover-text-effect delay-100">
                                         Films</span>
@@ -843,10 +881,10 @@
                                 </div>
                             </div>
                             <div
-                                class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-4 lg:gap-6 mt-auto">
+                                class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 sm:gap-6 lg:gap-6 mt-auto">
                                 <div class="flex flex-col gap-3 flex-1 max-w-2xl min-w-0">
                                     <h2
-                                        class="tracking-[-0.02em] leading-[1.25] text-white hero-tagline reveal-wipe hover-text-effect delay-500">
+                                        class="tracking-[-0.02em] leading-[1.3] text-white hero-tagline reveal-wipe hover-text-effect delay-500">
                                         Synkyn Studios is an AI film studio and creative production studio in Bengaluru
                                         creating
                                         <span class="text-white/70">commercials, product films, CGI visuals, and social
@@ -854,13 +892,13 @@
                                         <span> with cinematic quality for modern brands.</span>
                                     </h2>
                                     <p
-                                        class="font-medium tracking-[-0.04em] text-white/60 hero-copyright reveal-text delay-700">
+                                        class="font-medium tracking-[-0.04em] text-white/60 hero-copyright reveal-text delay-700 hidden md:block">
                                         &copy; 2026 Synkyn Studios &middot; Made in Bengaluru, India
                                     </p>
                                 </div>
-                                <div class="shrink-0 hidden lg:block">
+                                <div class="shrink-0 flex justify-start md:justify-end my-1 md:my-0">
                                     <button aria-label="Watch SHOWREEL 2026"
-                                        class="relative block w-[340px] h-[200px] overflow-hidden group active:scale-[0.98] transition-transform bg-black border-6 border-accent dark:border-secondary rounded-2xl cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-secondary/50 dark:focus-visible:ring-accent/30"
+                                        class="relative block w-full max-w-[340px] sm:max-w-[360px] md:w-[290px] lg:w-[340px] aspect-[16/9] md:aspect-auto md:h-[170px] lg:h-[200px] overflow-hidden group active:scale-[0.97] transition-transform bg-black border-4 sm:border-6 border-accent dark:border-secondary rounded-2xl cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-secondary/50 dark:focus-visible:ring-accent/30 shadow-[0_8px_30px_rgba(242,212,0,0.25)]"
                                         id="hero-how-it-works-btn" onclick="openVideoModal()" type="button">
                                         <iframe
                                             class="absolute inset-0 w-full h-full object-cover pointer-events-none transition-all duration-500 group-hover:blur-sm"
@@ -869,19 +907,23 @@
                                             title="Synkyn Studios SHOWREEL 2026 preview" tabindex="-1" frameborder="0"
                                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                                         <div
-                                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/60 z-10">
+                                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-all duration-300 bg-black/60 z-10">
                                             <img src="https://www.synkynstudios.com/images/logo.png"
                                                 alt="Synkyn Studios"
-                                                class="w-24 h-auto object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105" />
+                                                class="w-20 sm:w-24 h-auto object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105" />
                                         </div>
-                                        <div class="absolute bottom-0 right-0 flex items-center justify-center px-4 py-2 rounded-tl-2xl border-t border-l z-10 overflow-hidden"
+                                        <div class="absolute bottom-0 right-0 flex items-center justify-center px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-tl-2xl border-t border-l z-10 overflow-hidden"
                                             style="background: linear-gradient(135deg, #ffe08a 0%, #f2d400 100%); border-color: rgba(255, 255, 255, 0.35); box-shadow: 0 -2px 18px rgba(242, 212, 0, 0.35);">
-                                            <span class="micra-badge inline-block"
+                                            <span class="micra-badge inline-block text-[11px] sm:text-[13px]"
                                                 style="color: #0a0a0a; font-weight: 800; letter-spacing: .02em;">SHOWREEL
                                                 2026</span>
                                         </div>
                                     </button>
                                 </div>
+                                <p
+                                    class="font-medium tracking-[-0.04em] text-white/60 hero-copyright reveal-text delay-700 block md:hidden text-left mt-1 text-xs sm:text-sm">
+                                    &copy; 2026 Synkyn Studios &middot; Made in Bengaluru, India
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -913,6 +955,7 @@
                         .modal-card {
                             width: 100vw;
                             aspect-ratio: 16 / 9;
+                            min-height: auto;
                             border-radius: 0;
                         }
                     }
@@ -2798,9 +2841,20 @@
             }
 
             function toggleFS() {
-                var fs = document.fullscreenElement || document.webkitFullscreenElement;
-                if (fs) { (document.exitFullscreen || document.webkitExitFullscreen || function () { }).call(document); }
-                else { var el = modalContent; (el.requestFullscreen || el.webkitRequestFullscreen || function () { }).call(el); }
+                var fs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+                if (fs) {
+                    var exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+                    if (exitFS) exitFS.call(document);
+                } else {
+                    var el = modalContent;
+                    var reqFS = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+                    if (reqFS) {
+                        reqFS.call(el);
+                    } else {
+                        var p = ensurePlayer();
+                        if (p && p.requestFullscreen) p.requestFullscreen().catch(function () { });
+                    }
+                }
             }
             if (fsBtn) fsBtn.addEventListener("click", function (e) { e.stopPropagation(); toggleFS(); });
             document.addEventListener("fullscreenchange", setFsIcon);
@@ -2834,6 +2888,7 @@
                 document.body.style.right = "0";
                 document.body.style.width = "100%";
                 document.body.style.overflow = "hidden";
+                document.documentElement.style.overflow = "hidden";
             }
             function unlockScroll() {
                 document.body.style.position = "";
@@ -2842,6 +2897,7 @@
                 document.body.style.right = "";
                 document.body.style.width = "";
                 document.body.style.overflow = "";
+                document.documentElement.style.overflow = "";
                 window.scrollTo(0, scrollY);
                 if (window.lenis) { window.lenis.scrollTo(scrollY, { immediate: true }); window.lenis.start(); }
             }
