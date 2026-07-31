@@ -392,3 +392,17 @@ body.overflow-hidden {
         margin-top: -34px !important;
     }
 }
+
+@media (max-width: 767px) {
+    #hero-how-it-works-btn {
+        display: block;
+        width: 100% !important;
+        max-width: 276px !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9 !important;
+        margin: 0 auto !important;
+        border-width: 4px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 30px rgba(242, 212, 0, 0.3) !important;
+    }
+}
