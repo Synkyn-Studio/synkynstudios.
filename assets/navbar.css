@@ -414,6 +414,6 @@ body.overflow-hidden {
 
 @media (max-width: 767px) {
     .hero-bottom-content {
-        margin-bottom: 1rem;
+        margin-bottom: -1.9rem;
     }
 }
