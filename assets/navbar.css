@@ -406,3 +406,14 @@ body.overflow-hidden {
         box-shadow: 0 10px 30px rgba(242, 212, 0, 0.3) !important;
     }
 }
+
+/* Hero Bottom Content Layout Adjustment */
+.hero-bottom-content {
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 767px) {
+    .hero-bottom-content {
+        margin-bottom: 1rem;
+    }
+}
