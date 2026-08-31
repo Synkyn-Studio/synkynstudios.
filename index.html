@@ -567,18 +567,35 @@
                 line-height: 1.15 !important;
             }
 
+            .hero-bottom-content {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0.85rem !important;
+            }
+
+            .hero-showreel-wrapper {
+                order: 1 !important;
+                width: 100% !important;
+                display: flex !important;
+                justify-content: center !important;
+                margin-top: 0.25rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .hero-tagline-wrapper {
+                order: 2 !important;
+            }
+
             .hero-tagline {
                 font-size: clamp(0.9rem, 3.5vw, 1.15rem) !important;
                 line-height: 1.32 !important;
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.25rem;
+                text-align: center !important;
             }
 
-            .hero-showreel-container {
-                width: 100%;
-                display: flex;
-                justify-content: center !important;
-                margin-top: 0.5rem !important;
-                margin-bottom: 0.5rem !important;
+            .hero-copyright-mobile {
+                order: 3 !important;
+                margin-top: 0.25rem !important;
             }
 
             #hero-how-it-works-btn {
@@ -882,7 +899,7 @@
                             </div>
                             <div
                                 class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 sm:gap-6 lg:gap-6 mt-auto hero-bottom-content mb-4 sm:mb-6 lg:mb-8">
-                                <div class="flex flex-col gap-2 flex-1 max-w-2xl min-w-0">
+                                <div class="flex flex-col gap-2 flex-1 max-w-2xl min-w-0 hero-tagline-wrapper">
                                     <h2
                                         class="text-center sm:text-left text-[13px] sm:text-base md:text-lg lg:text-xl tracking-[-0.02em] leading-[1.35] text-white hero-tagline reveal-wipe hover-text-effect delay-500">
                                         Synkyn Studios is an AI film studio and creative production studio in Bengaluru
@@ -896,7 +913,7 @@
                                         &copy; 2026 Synkyn Studios &middot; Made in Bengaluru, India
                                     </p>
                                 </div>
-                                <div class="shrink-0 flex justify-center md:justify-end w-full md:w-auto my-2 md:my-0">
+                                <div class="shrink-0 flex justify-center md:justify-end w-full md:w-auto my-2 md:my-0 hero-showreel-wrapper">
                                     <button aria-label="Watch SHOWREEL 2026"
                                         class="relative block w-full max-w-[276px] sm:max-w-[276px] md:w-[250px] lg:w-[280px] xl:w-[310px] aspect-[16/9] overflow-hidden group active:scale-[0.97] transition-transform bg-black border-4 sm:border-6 border-accent dark:border-secondary rounded-2xl cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-secondary/50 dark:focus-visible:ring-accent/30 shadow-[0_8px_30px_rgba(242,212,0,0.25)] mx-auto md:mx-0"
                                         id="hero-how-it-works-btn" onclick="openVideoModal()" type="button">
@@ -921,7 +938,7 @@
                                     </button>
                                 </div>
                                 <p
-                                    class="font-medium tracking-[-0.04em] text-white/60 hero-copyright reveal-text delay-700 block md:hidden text-center w-full mt-1 text-xs sm:text-sm">
+                                    class="font-medium tracking-[-0.04em] text-white/60 hero-copyright hero-copyright-mobile reveal-text delay-700 block md:hidden text-center w-full mt-1 text-xs sm:text-sm">
                                     &copy; 2026 Synkyn Studios &middot; Made in Bengaluru, India
                                 </p>
                             </div>
