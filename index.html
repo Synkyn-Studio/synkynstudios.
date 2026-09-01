@@ -509,7 +509,7 @@
                 justify-content: center !important;
                 width: 100% !important;
                 max-width: 276px !important;
-                margin: 0 auto !important;
+                margin: clamp(1.25rem, 3.5vh, 2rem) auto clamp(1rem, 2.5vh, 1.5rem) auto !important;
             }
 
             #hero-tagline-block {
@@ -531,6 +531,7 @@
         @media (max-width: 767px) {
             #hero .hero-top-layout {
                 gap: 1.5rem !important;
+                margin-bottom: clamp(1.25rem, 3.5vh, 2rem) !important;
             }
 
             .hero-brand {
@@ -688,7 +689,7 @@
 
             .hero-top-layout {
                 gap: 0.75rem !important;
-                margin-bottom: 1rem !important;
+                margin-bottom: clamp(1.25rem, 3.5vh, 2rem) !important;
             }
 
             .hero-brand {
@@ -2291,7 +2292,6 @@
                 <h1 class="hero-title">
                     <span class="hero-white">WHAT DO WE DO?</span>
                 </h1>
-                <p class="hero-sub">Five verticals of filmmaking</p>
             </header>
 
             <section class="journey" aria-label="Studio services timeline">
