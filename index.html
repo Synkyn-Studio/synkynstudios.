@@ -83,9 +83,9 @@
     <link href="https://www.synkynstudios.com/" rel="canonical" />
     <title>Synkyn Studios | AI Film Studio & Creative Production in Bengaluru</title>
     <link href="./assets/main.js" rel="modulepreload" />
-    <link as="style" href="./assets/main.css" rel="preload" />
-    <link href="./assets/main.css" rel="stylesheet" />
-    <link href="./assets/navbar.css?v=8" rel="stylesheet" />
+    <link as="style" href="./assets/main.css?v=9" rel="preload" />
+    <link href="./assets/main.css?v=9" rel="stylesheet" />
+    <link href="./assets/navbar.css?v=9" rel="stylesheet" />
     <style id="synkyn-theme">
         :root,
         :host {
@@ -401,6 +401,41 @@
         }
 
         /* Phones (iPhone + Android) */
+        /* ================= MOBILE: VIDEO ABOVE TEXT, CENTERED =================
+           On mobile the showreel button should come first, the tagline
+           text second, both centered — reverse of the desktop DOM order. */
+        @media (max-width: 767px) {
+            .hero-bottom-content {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+
+            #hero-showreel-wrap {
+                order: 1 !important;
+                display: flex !important;
+                justify-content: center !important;
+                width: 100% !important;
+                max-width: 276px !important;
+                margin: 0 auto !important;
+            }
+
+            #hero-tagline-block {
+                order: 2 !important;
+                width: 100% !important;
+                align-items: center !important;
+                text-align: center !important;
+            }
+
+            #hero-tagline-block .hero-tagline {
+                text-align: center !important;
+            }
+
+            #hero-mobile-copyright {
+                order: 3 !important;
+            }
+        }
+
         @media (max-width: 767px) {
             #hero .hero-top-layout {
                 gap: 1.5rem !important;
@@ -540,6 +575,27 @@
             letter-spacing: -0.04em;
         }
 
+        /* Hero SHOWREEL 2026 Button - Perfect 16:9 Aspect Ratio */
+        #hero-how-it-works-btn {
+            display: block !important;
+            aspect-ratio: 16 / 9 !important;
+            width: 310px !important;
+            max-width: 100% !important;
+            height: auto !important;
+            overflow: hidden !important;
+            position: relative !important;
+        }
+
+        #hero-thumbnail-video {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            border: 0 !important;
+            pointer-events: none !important;
+        }
+
         /* Mobile Hero (≤767px) */
         @media (max-width: 767px) {
             #hero .relative.z-10 {
@@ -567,39 +623,22 @@
                 line-height: 1.15 !important;
             }
 
-            .hero-bottom-content {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 0.85rem !important;
-            }
-
-            .hero-showreel-wrapper {
-                order: 1 !important;
-                width: 100% !important;
-                display: flex !important;
-                justify-content: center !important;
-                margin-top: 0.25rem !important;
-                margin-bottom: 0.5rem !important;
-            }
-
-            .hero-tagline-wrapper {
-                order: 2 !important;
-            }
-
             .hero-tagline {
                 font-size: clamp(0.9rem, 3.5vw, 1.15rem) !important;
                 line-height: 1.32 !important;
-                margin-bottom: 0.25rem;
-                text-align: center !important;
+                margin-bottom: 0.5rem;
             }
 
-            .hero-copyright-mobile {
-                order: 3 !important;
-                margin-top: 0.25rem !important;
+            .hero-showreel-container {
+                width: 100%;
+                display: flex;
+                justify-content: center !important;
+                margin-top: 0.5rem !important;
+                margin-bottom: 0.5rem !important;
             }
 
             #hero-how-it-works-btn {
-                display: block;
+                display: block !important;
                 width: 100% !important;
                 max-width: 276px !important;
                 height: auto !important;
@@ -631,8 +670,23 @@
             }
 
             #hero-how-it-works-btn {
-                width: 310px !important;
-                height: 175px !important;
+                width: 260px !important;
+                height: auto !important;
+                aspect-ratio: 16 / 9 !important;
+            }
+        }
+
+        /* Desktop (≥64rem / 1024px) */
+        @media (min-width: 64rem) {
+            .lg\:w-\[280px\] {
+                width: 280px !important;
+                height: 155px !important;
+            }
+
+            #hero-how-it-works-btn {
+                width: 280px !important;
+                height: 155px !important;
+                aspect-ratio: 16 / 9 !important;
             }
         }
 
@@ -698,8 +752,63 @@
         @media (max-width: 640px) {
             .modal-card {
                 border-radius: 0 !important;
-                max-height: 100vh !important;
-                height: 100vh !important;
+                max-height: none !important;
+                height: auto !important;
+                aspect-ratio: 16 / 9 !important;
+            }
+        }
+    </style>
+
+    <!-- ================= SHOWREEL BUTTON — FORCE EXACT 16:9 =================
+       Comes after the earlier rules, so it wins on source order + !important.
+       Uses padding-bottom (bulletproof) instead of aspect-ratio + height:auto,
+       which was letting the button get squashed by the surrounding layout. -->
+    <style id="synkyn-showreel-16x9-fix">
+        #hero-how-it-works-btn {
+            display: block !important;
+            position: relative !important;
+            width: 310px !important;
+            max-width: 100% !important;
+            height: 0 !important;
+            padding-bottom: 56.25% !important;
+            /* 9/16 exact */
+            aspect-ratio: auto !important;
+            overflow: hidden !important;
+        }
+
+        @media (max-width: 767px) {
+            #hero-how-it-works-btn {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 0 !important;
+                padding-bottom: 56.25% !important;
+                margin: 0 auto !important;
+                border-width: 4px !important;
+                border-radius: 16px !important;
+                box-shadow: 0 10px 30px rgba(242, 212, 0, 0.3) !important;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            #hero-how-it-works-btn {
+                width: 260px !important;
+                height: 0 !important;
+                padding-bottom: 56.25% !important;
+            }
+        }
+
+        @media (min-width: 64rem) {
+            .lg\:w-\[280px\] {
+                width: 280px !important;
+                height: 0 !important;
+                padding-bottom: 56.25% !important;
+            }
+
+            #hero-how-it-works-btn {
+                width: 280px !important;
+                height: 0 !important;
+                padding-bottom: 56.25% !important;
+                /* = exactly 157.5px at 280px wide */
             }
         }
     </style>
@@ -841,15 +950,19 @@
             <div class="relative w-full h-full p-0">
                 <div class="relative overflow-hidden mx-auto w-full h-full hero-inner" style="background-color: #000">
 
-                    <!-- BACKGROUND: Vimeo cover-fill (autoplays, loops, muted, full opacity) -->
+                    <!-- BACKGROUND: Vimeo cover-fill (autoplays, loops, muted, full opacity)
+                         Uses data-src so only ONE of these ever loads (whichever matches
+                         the viewport) — previously both eagerly loaded on every visit,
+                         doubling video bandwidth for nothing. Quality param dropped so
+                         Vimeo's adaptive bitrate can pick the fastest-starting stream. -->
                     <div class="absolute inset-0 -z-0 overflow-hidden hero-video-bg" aria-hidden="true">
                         <iframe class="hero-bg-iframe hero-bg-desktop"
-                            src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071&quality=1080p"
+                            data-src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
                             title="Synkyn Studios background" tabindex="-1" frameborder="0"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                         <iframe class="hero-bg-iframe hero-bg-mobile"
-                            src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071&quality=1080p"
+                            data-src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
                             title="Synkyn Studios background (mobile)" tabindex="-1" frameborder="0"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
@@ -899,7 +1012,7 @@
                             </div>
                             <div
                                 class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 sm:gap-6 lg:gap-6 mt-auto hero-bottom-content mb-4 sm:mb-6 lg:mb-8">
-                                <div class="flex flex-col gap-2 flex-1 max-w-2xl min-w-0 hero-tagline-wrapper">
+                                <div id="hero-tagline-block" class="flex flex-col gap-2 flex-1 max-w-2xl min-w-0">
                                     <h2
                                         class="text-center sm:text-left text-[13px] sm:text-base md:text-lg lg:text-xl tracking-[-0.02em] leading-[1.35] text-white hero-tagline reveal-wipe hover-text-effect delay-500">
                                         Synkyn Studios is an AI film studio and creative production studio in Bengaluru
@@ -913,14 +1026,16 @@
                                         &copy; 2026 Synkyn Studios &middot; Made in Bengaluru, India
                                     </p>
                                 </div>
-                                <div class="shrink-0 flex justify-center md:justify-end w-full md:w-auto my-2 md:my-0 hero-showreel-wrapper">
+                                <div id="hero-showreel-wrap"
+                                    class="shrink-0 flex justify-center md:justify-end w-full md:w-auto my-2 md:my-0">
                                     <button aria-label="Watch SHOWREEL 2026"
-                                        class="relative block w-full max-w-[276px] sm:max-w-[276px] md:w-[250px] lg:w-[280px] xl:w-[310px] aspect-[16/9] overflow-hidden group active:scale-[0.97] transition-transform bg-black border-4 sm:border-6 border-accent dark:border-secondary rounded-2xl cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-secondary/50 dark:focus-visible:ring-accent/30 shadow-[0_8px_30px_rgba(242,212,0,0.25)] mx-auto md:mx-0"
-                                        id="hero-how-it-works-btn" onclick="openVideoModal()" type="button">
+                                        class="relative block overflow-hidden group active:scale-[0.97] transition-transform bg-black border-4 sm:border-6 border-accent dark:border-secondary rounded-2xl cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-secondary/50 dark:focus-visible:ring-accent/30 shadow-[0_8px_30px_rgba(242,212,0,0.25)] mx-auto md:mx-0"
+                                        id="hero-how-it-works-btn" onclick="openVideoModal()" type="button"
+                                        style="aspect-ratio: 16 / 9;">
                                         <iframe
-                                            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[103%] h-[103%] object-cover pointer-events-none transition-all duration-500 group-hover:blur-sm"
-                                            id="hero-thumbnail-video"
-                                            src="https://player.vimeo.com/video/1210886734?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&quality=1080p"
+                                            class="absolute inset-0 w-full h-full object-cover pointer-events-none transition-all duration-500 group-hover:blur-sm"
+                                            id="hero-thumbnail-video" fetchpriority="low"
+                                            src="https://player.vimeo.com/video/1210886734?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&quality=540p"
                                             title="Synkyn Studios SHOWREEL 2026 preview" tabindex="-1" frameborder="0"
                                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                                         <div
@@ -937,8 +1052,8 @@
                                         </div>
                                     </button>
                                 </div>
-                                <p
-                                    class="font-medium tracking-[-0.04em] text-white/60 hero-copyright hero-copyright-mobile reveal-text delay-700 block md:hidden text-center w-full mt-1 text-xs sm:text-sm">
+                                <p id="hero-mobile-copyright"
+                                    class="font-medium tracking-[-0.04em] text-white/60 hero-copyright reveal-text delay-700 block md:hidden text-center w-full mt-1 text-xs sm:text-sm">
                                     &copy; 2026 Synkyn Studios &middot; Made in Bengaluru, India
                                 </p>
                             </div>
@@ -960,19 +1075,19 @@
 
                     .modal-card {
                         width: 100%;
-                        max-width: 1200px;
+                        max-width: min(1200px, calc((100vh - 120px) * 16 / 9), 92vw);
                         aspect-ratio: 16 / 9;
-                        min-height: 280px;
-                        max-height: 86vh;
+                        height: auto;
                         border-radius: 16px;
                         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
                     }
 
                     @media (max-width: 640px) {
                         .modal-card {
-                            width: 100vw;
+                            width: 100%;
+                            max-width: 100vw;
                             aspect-ratio: 16 / 9;
-                            min-height: auto;
+                            height: auto;
                             border-radius: 0;
                         }
                     }
@@ -1245,6 +1360,58 @@
                 </div>
             </div>
         </section>
+        <style>
+            /* ================= SEAMLESS SECTION FADE =================
+               Blends the black hero video into the b/w "AI Generated /
+               Human Directed" section, and blends that section into the
+               golden Pipeline section below — no hard cuts. */
+            .actually-area {
+                position: relative;
+                opacity: 0;
+                transform: translateY(24px);
+                filter: blur(6px);
+                transition: opacity 1.1s cubic-bezier(.22, .68, 0, 1.04),
+                    transform 1.1s cubic-bezier(.22, .68, 0, 1.04),
+                    filter 1.1s cubic-bezier(.22, .68, 0, 1.04);
+                will-change: opacity, transform, filter;
+            }
+
+            .actually-area.is-in-view {
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+
+            .actually-area::before,
+            .actually-area::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: clamp(90px, 16vh, 220px);
+                pointer-events: none;
+                z-index: 5;
+            }
+
+            .actually-area::before {
+                top: -1px;
+                background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0) 100%);
+            }
+
+            .actually-area::after {
+                bottom: -1px;
+                background: linear-gradient(to top, #080808 0%, rgba(8, 8, 8, 0) 100%);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .actually-area {
+                    opacity: 1;
+                    transform: none;
+                    filter: none;
+                    transition: none;
+                }
+            }
+        </style>
         <section class="actually-area overflow-hidden">
             <div class="actually-area-inner section-spacing">
                 <div class="container">
@@ -1263,6 +1430,29 @@
                 </div>
             </div>
         </section>
+        <script>
+            (function () {
+                var el = document.querySelector(".actually-area");
+                if (!el) return;
+                if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                    el.classList.add("is-in-view");
+                    return;
+                }
+                if (!("IntersectionObserver" in window)) {
+                    el.classList.add("is-in-view");
+                    return;
+                }
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            el.classList.add("is-in-view");
+                            io.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+                io.observe(el);
+            })();
+        </script>
         <style>
             #problem-section-cursor-dot {
                 pointer-events: none !important;
@@ -2538,7 +2728,7 @@
                         <div>
                             <p class="footer-col-title">Discover</p>
                             <ul class="footer-nav" role="list">
-                                <li><a href="./library.html" class="footer-link active">Library</a></li>
+                                <li><a href="./library.html" class="footer-link">Library</a></li>
                                 <li><a href="./printalbum.html" class="footer-link">Print Album</a></li>
                             </ul>
                         </div>
@@ -2577,6 +2767,19 @@
             io.observe(divider.parentElement);
         })();
     </script>
+
+    <!-- ================= STICKY BAR (bottom gradual blur) — matches library.html ================= -->
+    <style>
+        @media (max-width: 767.98px) {
+            #sticky-bar {
+                height: 4.5rem !important;
+            }
+        }
+    </style>
+
+    <div data-curve="bezier" data-div-count="5" data-duration="0.3s" data-easing="ease-out" data-exponential="true"
+        data-gradual-blur="" data-height="7rem" data-opacity="1" data-position="bottom" data-show-on-scroll="50"
+        data-strength="2" data-target="page" data-z-index="50" id="sticky-bar"></div>
 
     <style id="synkyn-final-responsive">
         /* tap + text sizing */
@@ -2699,20 +2902,6 @@
         }
     </style>
 
-    <!-- Bottom gradual-blur bar — matches about-us / contact / library /
-         printalbum exactly (strength 2, opacity 1, 7rem, 5 layers, bezier).
-         main.js reads this [data-gradual-blur] element and renders the frosted
-         progressive blur; the media query below shortens it to 4.5rem on phones. -->
-    <style>
-        @media (max-width: 767.98px) {
-            #sticky-bar {
-                height: 4.5rem !important;
-            }
-        }
-    </style>
-    <div data-curve="bezier" data-div-count="5" data-duration="0.3s" data-easing="ease-out" data-exponential="true"
-        data-gradual-blur="" data-height="7rem" data-opacity="1" data-position="bottom" data-show-on-scroll="50"
-        data-strength="2" data-target="page" data-z-index="50" id="sticky-bar"></div>
     <script defer="" src="./vendor/split-text.min.js"></script>
     <script defer="" src="./vendor/gsap.min.js"></script>
     <script defer="" src="./vendor/scroll-trigger.min.js"></script>
@@ -3267,7 +3456,7 @@
 
 
     <script defer="" src="./assets/navbar.js?v=6"></script>
-    <script defer="" src="./assets/footer.js?v=2"></script>
+    <script defer="" src="./assets/footer.js?v=6"></script>
 
     <!-- HOW IT WORKS ANIMATION LOGIC (guards for optional roadmap elements) -->
     <script>

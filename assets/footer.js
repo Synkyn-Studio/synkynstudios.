@@ -26,40 +26,42 @@
 
 /* ── Hide bottom blur overlay when footer is in view ── */
 (function () {
-    var footer = document.querySelector('footer.disp');
-    if (!footer || !('IntersectionObserver' in window)) return;
+    function initFooterBlurObserver() {
+        var footer = document.querySelector('footer.site-footer, footer');
+        if (!footer || !('IntersectionObserver' in window)) return;
 
-    function getBlurWrapper() {
-        // The gradual-blur wrapper is generated dynamically by main.js,
-        // so we look it up each time in case it hasn't been created yet.
-        return document.querySelector('.gradual-blur-wrapper');
+        function getBlurWrapper() {
+            return document.querySelector('.gradual-blur-wrapper, #sticky-bar');
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+            var wrapper = getBlurWrapper();
+            if (!wrapper) return;
+
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    // Footer is visible → hide the bottom blur
+                    wrapper.style.setProperty('opacity', '0', 'important');
+                    wrapper.style.setProperty('pointer-events', 'none', 'important');
+                } else {
+                    // Footer is out of view → restore the bottom blur
+                    wrapper.style.removeProperty('opacity');
+                    wrapper.style.removeProperty('pointer-events');
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.05  // trigger as soon as 5% of the footer is visible
+        });
+
+        observer.observe(footer);
     }
 
-    var observer = new IntersectionObserver(function (entries) {
-        var wrapper = getBlurWrapper();
-        if (!wrapper) return;
-
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                // Footer is visible → hide the bottom blur
-                wrapper.classList.remove('is-visible');
-                wrapper.classList.add('is-hidden');
-                wrapper.style.opacity = '0';
-                wrapper.style.pointerEvents = 'none';
-            } else {
-                // Footer is out of view → show the bottom blur
-                wrapper.classList.remove('is-hidden');
-                wrapper.classList.add('is-visible');
-                wrapper.style.opacity = '';
-                wrapper.style.pointerEvents = '';
-            }
-        });
-    }, {
-        root: null,
-        threshold: 0.05  // trigger as soon as 5% of the footer is visible
-    });
-
-    observer.observe(footer);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFooterBlurObserver);
+    } else {
+        initFooterBlurObserver();
+    }
 })();
 
 /* ── Disable footer links pointing to the current page ── */
