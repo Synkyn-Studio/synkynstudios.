@@ -1820,9 +1820,9 @@
               hoverTimeout = setTimeout(() => {
                 if (!previewContainer) {
                   previewContainer = document.createElement('div');
-                  previewContainer.className = 'absolute inset-0 z-[5] bg-black opacity-0 transition-opacity duration-700 pointer-events-none flex items-center justify-center overflow-hidden';
+                  previewContainer.className = 'absolute inset-0 z-[5] bg-black opacity-0 transition-opacity duration-200 pointer-events-none flex items-center justify-center overflow-hidden';
 
-                  const iframeStyle = "position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100vw; height:56.25vw; min-width:177.77vh; min-height:100vh; pointer-events:none;";
+                  const iframeStyle = "position:absolute; inset:0; width:100%; height:100%; border:0; pointer-events:none;";
                   let innerHtml = '';
 
                   if (firstVideoSrc.type === 'vimeo') {
@@ -1851,25 +1851,21 @@
                   if (iframe) iframe.onload = showPreview;
                   if (video) video.onloadeddata = showPreview;
 
-                  setTimeout(showPreview, 600);
+                  setTimeout(showPreview, 250);
                 } else {
                   previewContainer.style.opacity = '1';
                   const v = previewContainer.querySelector('video');
                   if (v) v.play().catch(() => { });
                 }
-              }, 250);
+              }, 40);
             });
 
             el.addEventListener('mouseleave', () => {
               clearTimeout(hoverTimeout);
               if (previewContainer) {
                 previewContainer.style.opacity = '0';
-                setTimeout(() => {
-                  if (previewContainer && previewContainer.style.opacity === '0') {
-                    previewContainer.remove();
-                    previewContainer = null;
-                  }
-                }, 700);
+                const v = previewContainer.querySelector('video');
+                if (v) v.pause();
               }
             });
           }
