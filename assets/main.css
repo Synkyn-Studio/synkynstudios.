@@ -1985,6 +1985,20 @@ body {
     border-radius: 4px
 }
 
+@media (max-width: 767.98px) {
+    ::-webkit-scrollbar {
+        width: 2.5px !important;
+        height: 2.5px !important;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(242, 212, 0, 0.45) !important;
+        border-radius: 999px !important;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+}
+
 @keyframes popIn {
     0% {
         opacity: 0;
