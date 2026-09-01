@@ -8,7 +8,16 @@
    DESKTOP (>= 1280px) — keep the existing floating pill behaviour untouched
    -------------------------------------------------------------------------- */
 @media (min-width: 1280px) {
+    body header .header-two,
+    header .header-two,
     .header-two {
+        position: fixed !important;
+        top: 3.5rem !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate3d(-50%, 0, 0) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
         transition: top 0.5s ease-in-out, opacity 0.4s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
         will-change: transform, opacity, top;
         z-index: 99999 !important;
@@ -16,6 +25,8 @@
     }
 
     /* Desktop hidden state: faded out, keeping centering */
+    body header .header-two.nav-hidden,
+    header .header-two.nav-hidden,
     .header-two.nav-hidden {
         opacity: 0 !important;
         pointer-events: none !important;

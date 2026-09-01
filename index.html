@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Synkyn Studios: Home Page -->
 
 <head>
     <meta name="msvalidate.01" content="41DF851FCE84360A9074BDC7D98E6FE8" />
-    <!-- Google tag (gtag.js) -->
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PST0K7RG3R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -85,7 +84,7 @@
     <link href="./assets/main.js" rel="modulepreload" />
     <link as="style" href="./assets/main.css?v=9" rel="preload" />
     <link href="./assets/main.css?v=9" rel="stylesheet" />
-    <link href="./assets/navbar.css?v=10" rel="stylesheet" />
+    <link href="./assets/navbar.css?v=11" rel="stylesheet" />
     <style id="synkyn-theme">
         :root,
         :host {
@@ -179,10 +178,17 @@
             color: #ffffff;
             background-color: rgba(255, 235, 59, 0.3);
         }
-    </style>
-    <link href="./assets/footer.css?v=4" rel="stylesheet" />
 
-    <!-- ================= LOADER STYLES ================= -->
+        html,
+        body {
+            background-color: #080808;
+            color: #fff;
+            overflow-x: clip !important;
+            max-width: 100% !important;
+        }
+    </style>
+    <link href="./assets/footer.css?v=2" rel="stylesheet" />
+
     <style id="synkyn-loader-styles">
         :root {
             --loader-ink: #080808;
@@ -212,26 +218,28 @@
             height: 100svh;
         }
 
-        body.loading header {
+        body.loading header,
+        body.loading .header-two,
+        body.loading .sidebar,
+        body.loading #desktop-navbar,
+        body.loading .nav-hamburger,
+        body.loading aside {
             opacity: 0 !important;
-            pointer-events: none;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
-        body.animating-logo header figure img {
+        body.animating-logo #nav-brand-logo-desktop,
+        body.animating-logo #nav-brand-logo-mobile {
             opacity: 0 !important;
         }
 
         .sk-flying-logo {
             position: fixed;
-            z-index: 200000;
+            z-index: 2000000;
             pointer-events: none;
-            will-change: transform, top, left, width, height, opacity;
-            filter: drop-shadow(0 0 38px rgba(242, 212, 0, .2));
-            transition: top 1s var(--loader-ease-film),
-                left 1s var(--loader-ease-film),
-                width 1s var(--loader-ease-film),
-                height 1s var(--loader-ease-film),
-                opacity .3s ease;
+            will-change: transform, opacity, filter;
+            transform-origin: top left;
         }
 
         .sk-flying-logo img {
@@ -244,7 +252,7 @@
         .loader {
             position: fixed;
             inset: 0;
-            z-index: 9999;
+            z-index: 999999 !important;
             overflow: hidden;
         }
 
@@ -376,13 +384,11 @@
         }
     </style>
 
-    <!-- ================= RESPONSIVE + ZOOM-FRIENDLY HERO TYPOGRAPHY ================= -->
     <style id="synkyn-responsive-fixes">
         .hero-brand {
             font-weight: 600;
         }
 
-        /* Tablet */
         @media (min-width: 768px) and (max-width: 1023px) {
             .hero-brand {
                 font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
@@ -400,10 +406,6 @@
             }
         }
 
-        /* Phones (iPhone + Android) */
-        /* ================= MOBILE: VIDEO ABOVE TEXT, CENTERED =================
-           On mobile the showreel button should come first, the tagline
-           text second, both centered — reverse of the desktop DOM order. */
         @media (max-width: 767px) {
             .hero-bottom-content {
                 display: flex !important;
@@ -476,7 +478,6 @@
             }
         }
 
-        /* iPhone 12/13/14/15, most Androids (390–430px) */
         @media (max-width: 430px) {
             .hero-brand {
                 font-size: clamp(1.8rem, 9.5vw, 2.5rem) !important;
@@ -491,7 +492,6 @@
             }
         }
 
-        /* Small Androids / iPhone SE (<=360px) */
         @media (max-width: 360px) {
             .hero-brand {
                 font-size: clamp(1.6rem, 9vw, 2.2rem) !important;
@@ -506,9 +506,6 @@
             }
         }
 
-        /* Desktop — cap the giant hero by viewport HEIGHT so 70% browser zoom
-           (which widens the CSS layout viewport) can't blow the type up or
-           overflow the frame. dvh cap keeps it filmic but contained. */
         @media (min-width: 1024px) {
             .hero-brand {
                 font-size: clamp(2.5rem, min(6.5vw, 7.5dvh), 6rem) !important;
@@ -525,9 +522,8 @@
         }
     </style>
     <meta name="google-site-verification" content="U6ECGq1OyJuADOEHcX9TC1W24aWH9jZQienHQgxDD1s" />
-    <!-- ================= NEW RESPONSIVE CSS (Mobile + Tablet First) ================= -->
+
     <style id="synkyn-enhanced-responsive">
-        /* ===== GLOBAL SMOOTH SCROLL & TOUCH ===== */
         * {
             -webkit-tap-highlight-color: transparent;
         }
@@ -536,7 +532,6 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* ===== HERO - FRESH MOBILE/TABLET EXPERIENCE ===== */
         #hero {
             min-height: 100dvh;
             height: auto;
@@ -575,7 +570,6 @@
             letter-spacing: -0.04em;
         }
 
-        /* Hero SHOWREEL 2026 Button - Perfect 16:9 Aspect Ratio */
         #hero-how-it-works-btn {
             display: block !important;
             aspect-ratio: 16 / 9 !important;
@@ -596,7 +590,6 @@
             pointer-events: none !important;
         }
 
-        /* Mobile Hero (≤767px) */
         @media (max-width: 767px) {
             #hero .relative.z-10 {
                 padding-top: 5.25rem !important;
@@ -650,7 +643,6 @@
             }
         }
 
-        /* Tablet (768px - 1023px) */
         @media (min-width: 768px) and (max-width: 1023px) {
             #hero .relative.z-10 {
                 padding-top: 7.5rem !important;
@@ -676,7 +668,6 @@
             }
         }
 
-        /* Desktop (≥64rem / 1024px) */
         @media (min-width: 64rem) {
             .lg\:w-\[280px\] {
                 width: 280px !important;
@@ -690,7 +681,6 @@
             }
         }
 
-        /* ===== PIPELINE SECTION - ENHANCED MOBILE ===== */
         .pipeline-section {
             padding: 0 1rem;
         }
@@ -729,14 +719,12 @@
             }
         }
 
-        /* ===== SPACE EARTH TEXT ===== */
         #space-earth-text {
             font-size: clamp(2.2rem, 9vw, 4.2rem);
             line-height: 1.05;
             text-align: center;
         }
 
-        /* ===== FOOTER ===== */
         .footer-grid {
             grid-template-columns: 1fr;
             gap: 3rem;
@@ -748,7 +736,6 @@
             }
         }
 
-        /* ===== VIDEO MODAL - MOBILE OPTIMIZED ===== */
         @media (max-width: 640px) {
             .modal-card {
                 border-radius: 0 !important;
@@ -759,10 +746,6 @@
         }
     </style>
 
-    <!-- ================= SHOWREEL BUTTON — FORCE EXACT 16:9 =================
-       Comes after the earlier rules, so it wins on source order + !important.
-       Uses padding-bottom (bulletproof) instead of aspect-ratio + height:auto,
-       which was letting the button get squashed by the surrounding layout. -->
     <style id="synkyn-showreel-16x9-fix">
         #hero-how-it-works-btn {
             display: block !important;
@@ -771,7 +754,7 @@
             max-width: 100% !important;
             height: 0 !important;
             padding-bottom: 56.25% !important;
-            /* 9/16 exact */
+
             aspect-ratio: auto !important;
             overflow: hidden !important;
         }
@@ -808,14 +791,14 @@
                 width: 280px !important;
                 height: 0 !important;
                 padding-bottom: 56.25% !important;
-                /* = exactly 157.5px at 280px wide */
+
             }
         }
     </style>
 </head>
 
-<body class="loading bg-background-2 dark:bg-helix-blue-dark-2">
-    <!-- ================= LOADER ================= -->
+<body class="loading bg-background-3 dark:bg-helix-blue-dark-2">
+
     <div class="loader" id="synkynLoader">
         <canvas class="loader-canvas" aria-hidden="true"></canvas>
         <div class="loader-panel loader-top"></div>
@@ -836,10 +819,10 @@
             <div>
                 <a class="flex min-w-0 shrink-0 items-center gap-2" href="/">
                     <figure class="m-0 hidden lg:block lg:max-w-[112px]">
-                        <img alt="Synkyn Studios" class="w-[80px] h-auto object-contain" src="./images/logo.png" />
+                        <img id="nav-brand-logo-desktop" alt="Synkyn Studios" class="w-[80px] h-auto object-contain" src="./images/logo.png" />
                     </figure>
                     <figure class="m-0 flex max-w-[52px] shrink-0 lg:hidden">
-                        <img alt="Synkyn Studios" class="w-full h-auto object-contain" src="./images/logo.png" />
+                        <img id="nav-brand-logo-mobile" alt="Synkyn Studios" class="w-full h-auto object-contain" src="./images/logo.png" />
                     </figure>
                 </a>
             </div>
@@ -950,11 +933,6 @@
             <div class="relative w-full h-full p-0">
                 <div class="relative overflow-hidden mx-auto w-full h-full hero-inner" style="background-color: #000">
 
-                    <!-- BACKGROUND: Vimeo cover-fill (autoplays, loops, muted, full opacity)
-                         Uses data-src so only ONE of these ever loads (whichever matches
-                         the viewport) — previously both eagerly loaded on every visit,
-                         doubling video bandwidth for nothing. Quality param dropped so
-                         Vimeo's adaptive bitrate can pick the fastest-starting stream. -->
                     <div class="absolute inset-0 -z-0 overflow-hidden hero-video-bg" aria-hidden="true">
                         <iframe class="hero-bg-iframe hero-bg-desktop"
                             data-src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
@@ -1061,7 +1039,6 @@
                     </div>
                 </div>
 
-                <!-- ================= VIDEO MODAL (custom controls, sound only here) ================= -->
                 <style>
                     #video-modal.is-open {
                         display: flex !important;
@@ -1119,7 +1096,6 @@
                         }
                     }
 
-                    /* ---- custom player stage ---- */
                     .v-stage {
                         position: absolute;
                         inset: 0;
@@ -1136,7 +1112,6 @@
                         outline: none;
                     }
 
-                    /* transparent click layer over the video for tap-to-play/pause */
                     .v-click {
                         position: absolute;
                         inset: 0;
@@ -1150,7 +1125,6 @@
                         z-index: 4;
                     }
 
-                    /* ---- custom control bar (bar + fullscreen, no native Vimeo UI) ---- */
                     .v-controls {
                         position: absolute;
                         left: 0;
@@ -1298,7 +1272,6 @@
                         }
                     }
 
-                    /* When the modal card is in native fullscreen, fill the screen */
                     #modal-content:fullscreen,
                     #modal-content:-webkit-full-screen {
                         width: 100vw;
@@ -1331,7 +1304,7 @@
                         </button>
 
                         <div class="v-stage">
-                            <!-- controls=0 => native Vimeo UI hidden; autoplay=0 => no sound until we open -->
+
                             <iframe id="modal-video" class="v-iframe" loading="lazy"
                                 src="https://player.vimeo.com/video/1210886734?autoplay=0&loop=1&title=0&byline=0&portrait=0&badge=0&controls=0&dnt=1&transparent=0"
                                 title="Synkyn Studios SHOWREEL 2026" frameborder="0"
@@ -1361,10 +1334,6 @@
             </div>
         </section>
         <style>
-            /* ================= SEAMLESS SECTION FADE =================
-               Blends the black hero video into the b/w "AI Generated /
-               Human Directed" section, and blends that section into the
-               golden Pipeline section below — no hard cuts. */
             .actually-area {
                 position: relative;
                 opacity: 0;
@@ -1517,9 +1486,6 @@
                 }
             }
 
-            /* ==========================================================
-               THE PIPELINE — winding golden trail timeline
-               ========================================================== */
             .pipeline-section {
                 --gold: #e8b34a;
                 --gold-bright: #ffd77e;
@@ -2303,8 +2269,7 @@
                                 width="600" height="360" preserveAspectRatio="xMidYMid contain" />
                         </symbol>
                         <symbol id="s-rocket-up" viewBox="0 0 64 170" overflow="visible">
-                            <!-- Uploaded rocket.svg, cropped to its artwork and placed nose-up.
-                                 Keep rocket.svg in the same folder as this file. -->
+
                             <svg x="-24.3" y="8" width="112.5" height="150" viewBox="81 40 668 891"
                                 preserveAspectRatio="xMidYMid meet" overflow="visible">
                                 <image href="./images/rocket.svg" x="0" y="0" width="810" height="1012"
@@ -2670,8 +2635,6 @@
             })();
         </script>
 
-
-
         <footer class="site-footer">
             <figure class="footer-blob footer-blob--right" aria-hidden="true">
                 <div class="footer-gradient-blob"></div>
@@ -2768,7 +2731,6 @@
         })();
     </script>
 
-    <!-- ================= STICKY BAR (bottom gradual blur) — matches library.html ================= -->
     <style>
         @media (max-width: 767.98px) {
             #sticky-bar {
@@ -2782,7 +2744,6 @@
         data-strength="2" data-target="page" data-z-index="50" id="sticky-bar"></div>
 
     <style id="synkyn-final-responsive">
-        /* tap + text sizing */
         * {
             -webkit-tap-highlight-color: transparent;
         }
@@ -2792,7 +2753,6 @@
             text-size-adjust: 100%;
         }
 
-        /* no horizontal bleed anywhere; stop rubber-band scroll-chaining */
         html,
         body {
             overscroll-behavior-y: none;
@@ -2812,22 +2772,17 @@
             max-width: 100%;
         }
 
-        /* iOS momentum scrolling for inner scrollers */
         .scroll-bar,
         .sidebar {
             -webkit-overflow-scrolling: touch;
         }
 
-        /* HERO — always fills the screen, never cut off.
-           svh = smallest viewport (mobile URL bar visible) so content
-           is never clipped; dvh takes over where supported. */
         #hero {
             height: 100svh;
             height: 100dvh;
             min-height: 560px;
         }
 
-        /* ---- TABLET (768–1023px) ---- */
         @media (min-width: 768px) and (max-width: 1023.98px) {
             #hero {
                 min-height: 640px;
@@ -2851,13 +2806,11 @@
             }
         }
 
-        /* ---- PHONES (<=767px) ---- */
         @media (max-width: 767px) {
             #hero {
                 min-height: 520px;
             }
 
-            /* keep the winding trail inside its frame — no side-scroll */
             .pipeline-section .journey-svg {
                 width: 126%;
                 margin-left: -13%;
@@ -2868,7 +2821,6 @@
             }
         }
 
-        /* ---- SMALL PHONES (<=400px) ---- */
         @media (max-width: 400px) {
             .pipeline-section .journey-svg {
                 width: 132%;
@@ -2880,7 +2832,6 @@
             }
         }
 
-        /* comfortable touch targets on touch devices */
         @media (hover: none) and (pointer: coarse) {
 
             .btn,
@@ -2894,7 +2845,6 @@
             }
         }
 
-        /* reduced motion: calmer scroll */
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
@@ -2929,10 +2879,8 @@
         });
     </script>
 
-    <!-- Vimeo Player API (loaded before the modal controller so window.Vimeo is available) -->
     <script src="https://player.vimeo.com/api/player.js"></script>
 
-    <!-- ================= SHOW REEL MODAL (Vimeo API + custom controls, sound only in popup) ================= -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var videoModal = document.getElementById("video-modal");
@@ -2947,8 +2895,6 @@
 
             if (!videoModal || !modalContent || !iframe) return;
 
-            // The small looping preview shares one continuous timeline with the popup:
-            // opening seeks the popup to the preview's frame, closing hands the frame back.
             var thumbPlayer = null;
             function getThumbPlayer() {
                 if (thumbPlayer) return thumbPlayer;
@@ -3081,10 +3027,10 @@
             ["mousemove", "pointerdown", "touchstart"].forEach(function (ev) { modalContent.addEventListener(ev, showControls, { passive: true }); });
 
             var isAnimating = false, scrollY = 0;
-            var DUR = 450;                                   // open (grow) duration
-            var CLOSE_DUR = 780;                             // close flight — slower, like the loader
-            var FILM = "cubic-bezier(.76,0,.24,1)";          // same film ease the loader logo uses
-            var SETTLE = 230;                                // gentle fade once it lands in the container
+            var DUR = 450;
+            var CLOSE_DUR = 780;
+            var FILM = "cubic-bezier(.76,0,.24,1)";
+            var SETTLE = 230;
             function lockScroll() {
                 if (window.lenis) window.lenis.stop();
                 scrollY = window.scrollY || document.documentElement.scrollTop;
@@ -3117,13 +3063,12 @@
 
                 var p = ensurePlayer();
                 if (p) {
-                    // Start playing with sound synchronously (inside the click gesture)
+
                     p.setMuted(false).catch(function () { });
                     p.setVolume(1).catch(function () { });
                     isMuted = false; setMuteIcon();
                     p.play().catch(function () { });
 
-                    // Continue the SAME frame the little preview was on, then rest the preview
                     var tpOpen = getThumbPlayer();
                     if (tpOpen) {
                         tpOpen.getCurrentTime().then(function (t) {
@@ -3182,21 +3127,17 @@
             window.closeVideoModal = function () {
                 if (isAnimating) return; isAnimating = true;
 
-                // Leave native fullscreen first so we measure the real card rect
                 var fs = document.fullscreenElement || document.webkitFullscreenElement;
                 if (fs) { (document.exitFullscreen || document.webkitExitFullscreen || function () { }).call(document); }
 
                 if (closeBtn) { closeBtn.style.transition = "opacity 0.2s ease"; closeBtn.style.opacity = "0"; }
-                if (controls) controls.classList.add("hidden-ui");   // hide the bar during the flight
+                if (controls) controls.classList.add("hidden-ui");
                 if (vTitle) vTitle.classList.add("hidden-ui");
                 if (navbar) { navbar.style.filter = ""; navbar.style.opacity = "1"; navbar.style.pointerEvents = ""; }
 
-                // Backdrop clears over the flight so the page (and the small container) reappears
                 backdrop.style.transition = "opacity " + CLOSE_DUR + "ms ease";
                 backdrop.style.opacity = "0";
 
-                // Hand the exact frame back to the muted preview so the shot is continuous,
-                // then silence the popup — sound lives ONLY inside the popup.
                 var p = ensurePlayer();
                 var tpClose = getThumbPlayer();
                 if (p) {
@@ -3214,9 +3155,6 @@
 
                 unlockScroll();
 
-                // Measure where the little Show Reel container sits on screen right now.
-                // The popup will FLY into that exact slot — same idea as the loader logo
-                // gliding into the navbar — staying fully visible for the whole flight.
                 var visibleOpener = (opener && opener.offsetParent !== null) ? opener : null;
                 var startRect = visibleOpener
                     ? visibleOpener.getBoundingClientRect()
@@ -3229,16 +3167,13 @@
                 var landRadius = visibleOpener ? "16px" : "24px";
 
                 requestAnimationFrame(function () {
-                    // Flight: geometry only — opacity stays 1 so it reads as the card
-                    // physically travelling into its home, not fading away.
+
                     modalContent.style.transition =
                         "transform " + CLOSE_DUR + "ms " + FILM + ", border-radius " + CLOSE_DUR + "ms " + FILM;
                     modalContent.style.transform = "translate(" + tx + "px, " + ty + "px) scale(" + sx + ", " + sy + ")";
                     modalContent.style.borderRadius = landRadius;
                 });
 
-                // Landed in the container → settle: a short fade reveals the live muted
-                // preview sitting underneath at the same frame (seamless handoff).
                 setTimeout(function () {
                     modalContent.style.transition = "opacity " + SETTLE + "ms ease";
                     modalContent.style.opacity = "0";
@@ -3308,7 +3243,6 @@
         })();
     </script>
 
-    <!-- ================= LOADER LOGIC ================= -->
     <script>
         (function () {
             var REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3320,49 +3254,54 @@
             var loaderLogo = loader.querySelector('.loader-logo img');
 
             function getVisibleNavLogo() {
-                var imgs = document.querySelectorAll('header figure img');
-                for (var i = 0; i < imgs.length; i++) {
-                    var img = imgs[i];
-                    var r = img.getBoundingClientRect();
-                    if (img.offsetParent !== null && r.width > 0 && r.height > 0) return img;
-                }
-                return null;
+                var isDesktop = window.innerWidth >= 1024;
+                var logo = isDesktop ? document.getElementById('nav-brand-logo-desktop') : document.getElementById('nav-brand-logo-mobile');
+                if (logo && logo.getBoundingClientRect().width > 0) return logo;
+                return document.getElementById('nav-brand-logo-desktop') || document.getElementById('nav-brand-logo-mobile');
             }
 
             function morphLogoToNav() {
+                var navLogo = getVisibleNavLogo();
                 var loaderRect = loaderLogo.getBoundingClientRect();
-                if (!loaderRect.width) return;
+                if (!loaderRect.width || !navLogo) return;
+
+                var navRect = navLogo.getBoundingClientRect();
+                if (!navRect.width) return;
 
                 var clone = document.createElement('div');
                 clone.className = 'sk-flying-logo';
-                clone.innerHTML = '<img src="https://www.synkynstudios.com/images/logo.png" alt="">';
-                clone.style.top = loaderRect.top + 'px';
-                clone.style.left = loaderRect.left + 'px';
-                clone.style.width = loaderRect.width + 'px';
-                clone.style.height = loaderRect.height + 'px';
+                clone.style.top = navRect.top + 'px';
+                clone.style.left = navRect.left + 'px';
+                clone.style.width = navRect.width + 'px';
+                clone.style.height = navRect.height + 'px';
+                clone.style.transformOrigin = 'top left';
+
+                var img = document.createElement('img');
+                img.src = navLogo.src || './images/logo.png';
+                img.alt = '';
+                clone.appendChild(img);
                 document.body.appendChild(clone);
 
+                var dx = loaderRect.left - navRect.left;
+                var dy = loaderRect.top - navRect.top;
+                var sx = loaderRect.width / navRect.width;
+                var sy = loaderRect.height / navRect.height;
+
+                clone.style.transform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale(' + sx + ', ' + sy + ')';
+                clone.style.filter = 'drop-shadow(0 0 36px rgba(242, 212, 0, 0.4))';
                 loaderLogo.style.opacity = '0';
-                void document.body.offsetHeight;
+
+                void clone.offsetHeight;
 
                 requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        var navLogo = getVisibleNavLogo();
-                        if (navLogo) {
-                            var n = navLogo.getBoundingClientRect();
-                            clone.style.top = n.top + 'px';
-                            clone.style.left = n.left + 'px';
-                            clone.style.width = n.width + 'px';
-                            clone.style.height = n.height + 'px';
-                        }
-                        setTimeout(function () {
-                            clone.style.opacity = '0';
-                            document.body.classList.remove('animating-logo');
-                            setTimeout(function () {
-                                if (clone.parentNode) clone.parentNode.removeChild(clone);
-                            }, 350);
-                        }, 1050);
-                    });
+                    clone.style.transition = 'transform 1.05s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease';
+                    clone.style.transform = 'translate3d(0, 0, 0) scale(1, 1)';
+                    clone.style.filter = 'drop-shadow(0 0 0px rgba(242, 212, 0, 0))';
+
+                    setTimeout(function () {
+                        document.body.classList.remove('animating-logo');
+                        if (clone.parentNode) clone.parentNode.removeChild(clone);
+                    }, 1080);
                 });
             }
 
@@ -3454,11 +3393,9 @@
         })();
     </script>
 
-
     <script defer="" src="./assets/navbar.js?v=6"></script>
-    <script defer="" src="./assets/footer.js?v=6"></script>
+    <script defer="" src="./assets/footer.js?v=2"></script>
 
-    <!-- HOW IT WORKS ANIMATION LOGIC (guards for optional roadmap elements) -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
