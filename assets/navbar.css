@@ -418,7 +418,7 @@ body.overflow-hidden {
 
 /* Hero Bottom Content Layout Adjustment */
 .hero-bottom-content {
-    margin-bottom: 2rem;
+    margin-bottom: 0.25rem;
 }
 
 @media (max-width: 767px) {
