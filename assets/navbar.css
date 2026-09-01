@@ -264,19 +264,19 @@
     .mobile-menu-links {
         display: flex !important;
         flex-direction: column !important;
-        gap: clamp(0.4rem, 2vh, 0.75rem) !important;
-        margin-bottom: clamp(2rem, 6vh, 4rem) !important;
+        gap: clamp(0.5rem, 1.8vh, 0.85rem) !important;
+        margin-bottom: clamp(1.5rem, 4vh, 2.5rem) !important;
     }
 
     .mobile-menu-link {
         font-family: 'Inter Tight', system-ui, sans-serif !important;
-        font-size: clamp(1.8rem, 6.5vh, 2.75rem) !important;
-        font-weight: 700 !important;
-        letter-spacing: -0.04em !important;
+        font-size: clamp(1.35rem, 4.2vh, 1.85rem) !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.025em !important;
         color: #ffffff !important;
         text-decoration: none !important;
-        line-height: 1.1 !important;
-        transition: opacity 0.2s ease !important;
+        line-height: 1.2 !important;
+        transition: opacity 0.2s ease, color 0.2s ease !important;
     }
 
     .mobile-menu-link:active,
@@ -288,26 +288,26 @@
     .mobile-menu-divider {
         height: 1px !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
-        margin: 0 -1.5rem clamp(1.5rem, 5vh, 3rem) -1.5rem !important;
+        margin: 0 -1.5rem clamp(1.25rem, 3.5vh, 2rem) -1.5rem !important;
     }
 
     .mobile-menu-footer-block {
         display: flex !important;
         flex-direction: column !important;
-        gap: 0.5rem !important;
-        margin-bottom: clamp(1.25rem, 4vh, 2.5rem) !important;
+        gap: 0.35rem !important;
+        margin-bottom: clamp(1rem, 2.8vh, 1.75rem) !important;
     }
 
     .mobile-menu-label {
         font-family: 'Inter Tight', system-ui, sans-serif !important;
-        font-size: 0.85rem !important;
-        color: rgba(255, 255, 255, 0.6) !important;
-        margin-bottom: 0.25rem !important;
+        font-size: 0.8rem !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+        margin-bottom: 0.15rem !important;
     }
 
     .mobile-menu-email {
         font-family: 'Inter Tight', system-ui, sans-serif !important;
-        font-size: clamp(1.2rem, 5vw, 1.6rem) !important;
+        font-size: clamp(1rem, 4vw, 1.25rem) !important;
         font-weight: 600 !important;
         letter-spacing: -0.02em !important;
         color: #ffffff !important;
