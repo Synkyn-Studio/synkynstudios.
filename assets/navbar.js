@@ -320,7 +320,7 @@ window.SynkynWhatsNew = {
     src: './images/ns-img-485.png', // using the default image
     title: 'NBK111 Glimpse',
     description: '#NBK111 Glimpse - Entry of an Era',
-    link: './library.html#work-yt-1'
+    link: './library.html#work-nbk111'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
