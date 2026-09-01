@@ -24,45 +24,7 @@
     setInterval(tick, 1000);
 })();
 
-/* ── Hide bottom blur overlay when footer is in view ── */
-(function () {
-    function initFooterBlurObserver() {
-        var footer = document.querySelector('footer.site-footer, footer');
-        if (!footer || !('IntersectionObserver' in window)) return;
 
-        function getBlurWrapper() {
-            return document.querySelector('.gradual-blur-wrapper, #sticky-bar');
-        }
-
-        var observer = new IntersectionObserver(function (entries) {
-            var wrapper = getBlurWrapper();
-            if (!wrapper) return;
-
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    // Footer is visible → hide the bottom blur
-                    wrapper.style.setProperty('opacity', '0', 'important');
-                    wrapper.style.setProperty('pointer-events', 'none', 'important');
-                } else {
-                    // Footer is out of view → restore the bottom blur
-                    wrapper.style.removeProperty('opacity');
-                    wrapper.style.removeProperty('pointer-events');
-                }
-            });
-        }, {
-            root: null,
-            threshold: 0.05  // trigger as soon as 5% of the footer is visible
-        });
-
-        observer.observe(footer);
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initFooterBlurObserver);
-    } else {
-        initFooterBlurObserver();
-    }
-})();
 
 /* ── Disable footer links pointing to the current page ── */
 (function () {
