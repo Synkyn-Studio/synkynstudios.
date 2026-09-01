@@ -46,7 +46,7 @@
             <nav class="mobile-menu-links">
                 <a href="./" class="mobile-menu-link" data-path="index.html">Home</a>
                 <a href="./about-us.html" class="mobile-menu-link" data-path="about-us.html">About Us</a>
-                <a href="./library.html" class="mobile-menu-link" data-path="library.html">Gallery</a>
+                <a href="./library.html" class="mobile-menu-link" data-path="library.html">Library</a>
                 <a href="./printalbum.html" class="mobile-menu-link" data-path="printalbum.html">Print Album</a>
                 <a href="./about-us.html#team" class="mobile-menu-link" data-path="about-us.html#team">Our Team</a>
                 <a href="./contact.html" class="mobile-menu-link" data-path="contact.html">Contact</a>
