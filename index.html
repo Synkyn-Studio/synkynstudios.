@@ -2186,7 +2186,8 @@
                     width: 58px;
                     height: 140px;
                     transform: translate3d(-50%, var(--rocket-y, 0px), 0);
-                    will-change: transform;
+                    will-change: transform, opacity;
+                    transition: opacity 0.2s ease-out;
                     z-index: 15;
                     pointer-events: none;
                 }
@@ -2823,14 +2824,30 @@
                 // Mobile Progress handler (GPU Accelerated, zero reflow)
                 const setMobileProgress = (p) => {
                     if (mobileRocket && journey) {
-                        const trackH = journey.offsetHeight - 110;
+                        // Go deeper down the journey timeline
+                        const trackH = journey.offsetHeight - 40;
                         const rY = Math.max(0, Math.min(trackH, p * trackH));
                         mobileRocket.style.setProperty("--rocket-y", `${rY.toFixed(1)}px`);
+
+                        // Smooth fade out as rocket reaches the bottom / footer
+                        let rocketOpacity = 1;
+                        if (p < 0.03) {
+                            rocketOpacity = Math.max(0, p / 0.03);
+                        } else if (p > 0.80) {
+                            rocketOpacity = Math.max(0, (1 - p) / 0.20);
+                        }
+                        mobileRocket.style.opacity = rocketOpacity.toFixed(3);
+
                         if (mobileTimelineBar) {
-                            const totalTrackH = Math.max(1, journey.offsetHeight - 60);
+                            const totalTrackH = Math.max(1, journey.offsetHeight - 40);
                             const lineFillPx = Math.min(totalTrackH, rY + 78);
                             const scale = lineFillPx / totalTrackH;
                             mobileTimelineBar.style.transform = `scaleY(${scale.toFixed(4)})`;
+                            if (p > 0.88) {
+                                mobileTimelineBar.style.opacity = Math.max(0, (1 - p) / 0.12).toFixed(3);
+                            } else {
+                                mobileTimelineBar.style.opacity = "1";
+                            }
                         }
                     }
                     const totalStops = stops.length;

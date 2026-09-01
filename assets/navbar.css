@@ -98,8 +98,6 @@
     .header-two figure.max-w-\[52px\] {
         max-width: 95px !important;
         margin: 0 !important;
-        display: flex !important;
-        align-items: center !important;
     }
 
     .header-two figure.max-w-\[52px\] img {
