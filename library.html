@@ -293,9 +293,151 @@
       }
     }
   </style>
+
+    <style id="synkyn-smooth-scroll-styles">
+        /* Apple (macOS & iOS Safari) ProMotion, Retina & Safe Area Optimizations */
+        /* Mobile Touch & Cross-Platform Instant Tap */
+        a, button, input, textarea, select, [role="button"] {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            overscroll-behavior-x: none;
+        }
+
+        /* Lenis buttery-smooth scroll engine */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        /* Eliminate hover recalculations and repaints during active scroll for 60-120 FPS */
+        html.lenis-scrolling * {
+            pointer-events: none !important;
+        }
+        html.lenis-scrolling iframe,
+        html.lenis-scrolling .hero-video-bg,
+        .lenis.lenis-scrolling iframe,
+        .lenis.lenis-scrolling .hero-video-bg {
+            pointer-events: none !important;
+        }
+        html.lenis-scrolling input,
+        html.lenis-scrolling textarea,
+        html.lenis-scrolling select {
+            pointer-events: auto !important;
+        }
+
+        /* Minimalist premium dark scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080808;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            border: 2px solid #080808;
+            transition: background 0.25s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(242, 212, 0, 0.7);
+        }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.16) #080808;
+        }
+
+        /* Reading / Scroll progress indicator at top edge */
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            top: env(safe-area-inset-top, 0px);
+            left: 0;
+            width: 100%;
+            height: 2.5px;
+            background: linear-gradient(90deg, #f2d400 0%, #ffb700 50%, #ffe45c 100%);
+            box-shadow: 0 0 10px rgba(242, 212, 0, 0.6), 0 0 20px rgba(242, 212, 0, 0.25);
+            z-index: 1000000;
+            pointer-events: none;
+            transform: scaleX(0);
+            transform-origin: left center;
+            will-change: transform;
+            transition: transform 0.05s linear;
+        }
+
+        /* Floating back-to-top button */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: max(32px, calc(env(safe-area-inset-bottom, 0px) + 20px));
+            right: max(32px, calc(env(safe-area-inset-right, 0px) + 20px));
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(14, 14, 14, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffd633;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 9000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.85);
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s, background-color 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(242, 212, 0, 0.12);
+        }
+        .back-to-top-btn.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .back-to-top-btn:hover {
+            background: rgba(26, 26, 26, 0.92);
+            border-color: rgba(242, 212, 0, 0.6);
+            color: #ffffff;
+            transform: translateY(-3px) scale(1.06);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(242, 212, 0, 0.35);
+        }
+        .back-to-top-btn:active {
+            transform: translateY(0) scale(0.96);
+        }
+        @media (max-width: 768px) {
+            .back-to-top-btn {
+                bottom: max(20px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+                right: max(20px, calc(env(safe-area-inset-right, 0px) + 12px));
+                width: 42px;
+                height: 42px;
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-background-3 dark:bg-helix-blue-dark-2">
+    <!-- Global Smooth Scroll UX: Reading Progress Bar -->
+    <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
   <header>
     <div
       class="header-two header-two-at-rest lp:!max-w-[1290px] fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0"
@@ -2416,7 +2558,116 @@
   <script src="./assets/main.js" type="module"></script>
   <script src="./assets/fx.js?v=3"></script>
 
-  <script defer="" src="./assets/navbar.js?v=7"></script>
+  
+    <script>
+        (function initSmoothScroll() {
+            function startLenis() {
+                if (typeof Lenis === 'undefined') {
+                    setTimeout(startLenis, 30);
+                    return;
+                }
+                if (window.lenis) return;
+
+                const isMobile = window.innerWidth <= 768;
+                const lenis = new Lenis({
+                    lerp: isMobile ? 0.11 : 0.085,
+                    wheelMultiplier: 1.15,
+                    touchMultiplier: 1.8,
+                    smoothWheel: true,
+                    smoothTouch: false,
+                    orientation: 'vertical',
+                    gestureOrientation: 'vertical',
+                    infinite: false,
+                    prevent: (node) => node.classList?.contains('scroll-bar') || node.hasAttribute?.('data-lenis-prevent')
+                });
+
+                window.lenis = lenis;
+
+                // Sync Lenis with GSAP ScrollTrigger if available, avoiding duplicate RAF loops
+                let rafId = null;
+                function fallbackRaf(time) {
+                    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                        gsap.registerPlugin(ScrollTrigger);
+                        lenis.on('scroll', ScrollTrigger.update);
+                        gsap.ticker.add((t) => lenis.raf(t * 1000));
+                        gsap.ticker.lagSmoothing(0);
+                        return;
+                    }
+                    lenis.raf(time);
+                    rafId = requestAnimationFrame(fallbackRaf);
+                }
+
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+                    lenis.on('scroll', ScrollTrigger.update);
+                    gsap.ticker.add((time) => {
+                        lenis.raf(time * 1000);
+                    });
+                    gsap.ticker.lagSmoothing(0);
+                } else {
+                    rafId = requestAnimationFrame(fallbackRaf);
+                }
+
+                // Top scroll progress bar & back to top button
+                const progressBar = document.getElementById('scroll-progress-bar');
+                const backToTopBtn = document.getElementById('back-to-top-btn');
+
+                lenis.on('scroll', (e) => {
+                    const scrollY = e.scroll || window.scrollY || document.documentElement.scrollTop || 0;
+                    const maxScroll = Math.max(1, (e.limit || (document.documentElement.scrollHeight - window.innerHeight)));
+                    const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
+
+                    if (progressBar) {
+                        progressBar.style.transform = `scaleX(${progress})`;
+                    }
+
+                    if (backToTopBtn) {
+                        if (scrollY > 450) {
+                            backToTopBtn.classList.add('is-visible');
+                        } else {
+                            backToTopBtn.classList.remove('is-visible');
+                        }
+                    }
+                });
+
+                if (backToTopBtn) {
+                    backToTopBtn.addEventListener('click', (ev) => {
+                        ev.preventDefault();
+                        lenis.scrollTo(0, {
+                            duration: 1.2,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                    });
+                }
+
+                // Smooth scrolling for all internal hash anchor links
+                document.addEventListener('click', (ev) => {
+                    const a = ev.target.closest('a[href^="#"]');
+                    if (!a) return;
+                    const targetId = a.getAttribute('href');
+                    if (targetId && targetId.length > 1) {
+                        const targetEl = document.querySelector(targetId);
+                        if (targetEl) {
+                            ev.preventDefault();
+                            lenis.scrollTo(targetEl, {
+                                offset: -80,
+                                duration: 1.2,
+                                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                            });
+                        }
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', startLenis);
+            } else {
+                startLenis();
+            }
+        })();
+    </script>
+
+<script defer="" src="./assets/navbar.js?v=7"></script>
   <script defer="" src="./assets/footer.js?v=2"></script>
 </body>
 
