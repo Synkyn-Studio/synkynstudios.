@@ -690,19 +690,13 @@
             overflow: hidden;
         }
         /* Eliminate hover recalculations and repaints during active scroll for 60-120 FPS */
-        html.lenis-scrolling * {
-            pointer-events: none !important;
-        }
         html.lenis-scrolling iframe,
+        html.lenis-scrolling video,
         html.lenis-scrolling .hero-video-bg,
         .lenis.lenis-scrolling iframe,
+        .lenis.lenis-scrolling video,
         .lenis.lenis-scrolling .hero-video-bg {
             pointer-events: none !important;
-        }
-        html.lenis-scrolling input,
-        html.lenis-scrolling textarea,
-        html.lenis-scrolling select {
-            pointer-events: auto !important;
         }
 
         /* Minimalist premium dark scrollbar */
@@ -1355,9 +1349,10 @@
 
                 const isMobile = window.innerWidth <= 768;
                 const lenis = new Lenis({
-                    lerp: isMobile ? 0.11 : 0.085,
-                    wheelMultiplier: 1.15,
-                    touchMultiplier: 1.8,
+                    lerp: 0.12,
+                    duration: 0.9,
+                    wheelMultiplier: 1.0,
+                    touchMultiplier: 1.5,
                     smoothWheel: true,
                     smoothTouch: false,
                     orientation: 'vertical',
@@ -1368,20 +1363,7 @@
 
                 window.lenis = lenis;
 
-                // Sync Lenis with GSAP ScrollTrigger if available, avoiding duplicate RAF loops
-                let rafId = null;
-                function fallbackRaf(time) {
-                    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                        gsap.registerPlugin(ScrollTrigger);
-                        lenis.on('scroll', ScrollTrigger.update);
-                        gsap.ticker.add((t) => lenis.raf(t * 1000));
-                        gsap.ticker.lagSmoothing(0);
-                        return;
-                    }
-                    lenis.raf(time);
-                    rafId = requestAnimationFrame(fallbackRaf);
-                }
-
+                // Clean single-hook sync with GSAP ScrollTrigger or fallback RAF
                 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                     gsap.registerPlugin(ScrollTrigger);
                     lenis.on('scroll', ScrollTrigger.update);
@@ -1390,11 +1372,14 @@
                     });
                     gsap.ticker.lagSmoothing(0);
                 } else {
-                    rafId = requestAnimationFrame(fallbackRaf);
+                    function raf(time) {
+                        lenis.raf(time);
+                        requestAnimationFrame(raf);
+                    }
+                    requestAnimationFrame(raf);
                 }
 
-                // Top scroll progress bar & back to top button
-                const progressBar = document.getElementById('scroll-progress-bar');
+                // const progressBar = document.getElementById('scroll-progress-bar');
                 const backToTopBtn = document.getElementById('back-to-top-btn');
 
                 lenis.on('scroll', (e) => {
