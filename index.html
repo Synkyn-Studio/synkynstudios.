@@ -3005,6 +3005,320 @@
             })();
         </script>
 
+        <style>
+            #research-sponsors .logo-carousel-item {
+                width: clamp(7rem, 22vw, 14rem);
+                height: clamp(4rem, 12vw, 7rem);
+            }
+
+            @media (min-width: 480px) {
+                #research-sponsors .logo-carousel-item {
+                    width: clamp(8rem, 18vw, 14rem);
+                    height: clamp(4.5rem, 10vw, 7rem);
+                }
+            }
+
+            @media (min-width: 768px) {
+                #research-sponsors .logo-carousel-item {
+                    width: 11rem;
+                    height: 6rem;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                #research-sponsors .logo-carousel-item {
+                    width: 14rem;
+                    height: 7rem;
+                }
+            }
+
+            @media (min-width: 1280px) {
+                #research-sponsors .logo-carousel-item {
+                    width: 16rem;
+                    height: 7.5rem;
+                }
+            }
+
+            #research-sponsors .logo-carousel-item-img {
+                filter: none !important;
+                -webkit-filter: none !important;
+                max-height: 90%;
+                max-width: 90%;
+                object-fit: contain;
+            }
+
+            #research-sponsors .logo-carousel-track {
+                gap: clamp(1.5rem, 5vw, 3.5rem);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform: translate3d(0, 0, 0);
+            }
+
+            #research-sponsors .logo-carousel-row--left .logo-carousel-track {
+                animation: synkyn-scroll-left 50s linear infinite !important;
+            }
+
+            #research-sponsors .logo-carousel-row--right .logo-carousel-track {
+                animation: synkyn-scroll-right 45s linear infinite !important;
+            }
+
+            @keyframes synkyn-scroll-left {
+                0% {
+                    transform: translate3d(0, 0, 0);
+                }
+
+                100% {
+                    transform: translate3d(-33.333%, 0, 0);
+                }
+            }
+
+            @keyframes synkyn-scroll-right {
+                0% {
+                    transform: translate3d(-33.333%, 0, 0);
+                }
+
+                100% {
+                    transform: translate3d(0, 0, 0);
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+
+                #research-sponsors .logo-carousel-row--left .logo-carousel-track,
+                #research-sponsors .logo-carousel-row--right .logo-carousel-track {
+                    animation: none !important;
+                }
+            }
+        </style>
+        <section class="py-10 sm:py-12 md:py-16 lg:py-22 xl:py-28" id="research-sponsors">
+            <div class="main-container w-full min-w-0 max-w-full">
+                <div
+                    class="mx-auto flex w-full min-w-0 max-w-full flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14">
+                    <div class="w-full min-w-0 max-w-full space-y-5 sm:space-y-6 md:space-y-8 lg:space-y-10">
+                        <p class="text-heading-5 text-secondary dark:text-accent px-1 text-center font-normal sm:text-balance"
+                            data-delay="0.6" data-ns-animate="">
+                            Brands
+                        </p>
+                        <div class="w-full min-w-0" data-delay="0.7" data-ns-animate="">
+                            <div class="logo-carousel-row logo-carousel-row--left mx-auto w-full min-w-0">
+                                <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--left"></div>
+                                <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--right"></div>
+                                <div class="logo-carousel-track-wrap">
+                                    <div class="logo-carousel-track">
+                                        <figure class="logo-carousel-item">
+                                            <img alt="TATA" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="RedBus" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="SKROMAN" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="TATA" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="RedBus" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="SKROMAN" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="TATA" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="RedBus" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="SKROMAN" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-heading-5 text-secondary dark:text-accent px-1 text-center font-normal sm:text-balance"
+                            data-delay="0.6" data-ns-animate="">
+                            Agency &amp; Production House
+                        </p>
+                        <div class="w-full min-w-0" data-delay="0.7" data-ns-animate="">
+                            <div class="logo-carousel-row logo-carousel-row--right mx-auto w-full min-w-0">
+                                <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--left"></div>
+                                <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--right"></div>
+                                <div class="logo-carousel-track-wrap">
+                                    <div class="logo-carousel-track">
+                                        <figure class="logo-carousel-item">
+                                            <img alt="LEO" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MINIKIM" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MYTRI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="OGILVY" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="VRIDDHI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="LEO" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MINIKIM" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MYTRI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="OGILVY" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="VRIDDHI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="LEO" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MINIKIM" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="MYTRI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="OGILVY" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
+                                        </figure>
+                                        <figure class="logo-carousel-item">
+                                            <img alt="VRIDDHI" class="logo-carousel-item-img"
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- ===================== FINAL CALL TO ACTION ===================== -->
+        <style>
+            #final-talk-cta {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                position: relative;
+                z-index: 10;
+            }
+            #final-talk-cta .cta-eyebrow {
+                display: inline-block;
+                font-size: 0.82rem;
+                font-weight: 600;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: #ffd84d;
+                margin-bottom: 0.85rem;
+            }
+            #final-talk-cta .cta-heading {
+                color: #ffffff;
+                font-size: clamp(2rem, 4.5vw, 3.4rem);
+                font-weight: 700;
+                letter-spacing: -0.03em;
+                line-height: 1.15;
+                margin: 0 auto 1rem;
+                max-width: 760px;
+            }
+            #final-talk-cta .cta-desc {
+                color: rgba(255, 255, 255, 0.68);
+                font-size: clamp(1rem, 1.6vw, 1.18rem);
+                line-height: 1.65;
+                max-width: 520px;
+                margin: 0 auto 2.25rem;
+            }
+            .synkyn-final-cta-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.75rem;
+                padding: 1rem 2.3rem;
+                border-radius: 9999px;
+                background-color: #f2d400;
+                color: #0a0a0a !important;
+                font-weight: 600;
+                font-size: 1.05rem;
+                text-decoration: none;
+                transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+                box-shadow: 0 12px 36px rgba(242, 212, 0, 0.28);
+                border: 1px solid #f2d400;
+                cursor: pointer;
+            }
+            .synkyn-final-cta-btn svg {
+                width: 20px;
+                height: 20px;
+                stroke: currentColor;
+                transition: transform 0.25s ease;
+            }
+            .synkyn-final-cta-btn:hover {
+                background-color: #ffffff !important;
+                border-color: #ffffff !important;
+                color: #0a0a0a !important;
+                transform: translateY(-2px);
+                box-shadow: 0 16px 40px rgba(255, 255, 255, 0.25);
+            }
+            .synkyn-final-cta-btn:hover svg {
+                transform: translateX(4px);
+            }
+            @media (max-width: 640px) {
+                .synkyn-final-cta-btn {
+                    width: 100%;
+                    max-width: 340px;
+                    padding: 0.95rem 1.6rem;
+                }
+            }
+        </style>
+
+        <section class="py-16 sm:py-20 md:py-24 text-center" id="final-talk-cta" aria-labelledby="cta-heading-index">
+            <div class="main-container max-w-[840px] mx-auto px-4 sm:px-6">
+                <span class="cta-eyebrow">Ready When You Are</span>
+                <h2 id="cta-heading-index" class="cta-heading">Have something in mind? Let's talk.</h2>
+                <p class="cta-desc">One email is all it takes to start. We'll take it from there.</p>
+                <div>
+                    <a href="mailto:contact@synkynstudios.com" class="synkyn-final-cta-btn" aria-label="Start the conversation via email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                        </svg>
+                        <span>Start the conversation</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <footer class="site-footer">
             <figure class="footer-blob footer-blob--right" aria-hidden="true">
                 <div class="footer-gradient-blob"></div>
