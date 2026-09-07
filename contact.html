@@ -31,27 +31,29 @@
     <meta content="index, follow" name="googlebot" />
     <meta content="index, follow" name="bingbot" />
     <meta content="English" name="language" />
-    <meta content="IN" name="geo.region" />
-    <meta content="Bengaluru, India" name="geo.placename" />
+    <meta content="IN-KA" name="geo.region" />
+    <meta content="Bengaluru" name="geo.placename" />
+    <meta content="12.9716;77.5946" name="geo.position" />
+    <meta content="12.9716, 77.5946" name="ICBM" />
     <meta content="General" name="rating" />
     <meta content="Global" name="distribution" />
     <meta content="7 days" name="revisit-after" />
     <meta content="never" name="expires" />
     <meta content="website" property="og:type" />
-    <meta content="https://www.synkynstudios.com/" property="og:url" />
+    <meta content="https://www.synkynstudios.com/contact.html" property="og:url" />
     <meta content="Synkyn Studios" property="og:site_name" />
-    <meta content="Synkyn Studios | Contact" property="og:title" />
+    <meta content="Contact Synkyn Studios | AI Film Studio in Bengaluru" property="og:title" />
     <meta
-        content="Let's build something extraordinary. One click opens your email, pre-filled and ready. No forms. No waiting."
+        content="Get in touch with Synkyn Studios — an AI-first film and creative production studio in Bengaluru for commercials, product films, CGI visuals, and social content."
         property="og:description" />
     <meta content="https://www.synkynstudios.com/images/logo.png" property="og:image" />
     <meta content="1200" property="og:image:width" />
     <meta content="630" property="og:image:height" />
     <meta content="Synkyn Studios logo" property="og:image:alt" />
     <meta content="summary_large_image" name="twitter:card" />
-    <meta content="Synkyn Studios | Contact" name="twitter:title" />
+    <meta content="Contact Synkyn Studios | AI Film Studio in Bengaluru" name="twitter:title" />
     <meta
-        content="Let's build something extraordinary. One click opens your email, pre-filled and ready. No forms. No waiting."
+        content="Get in touch with Synkyn Studios — an AI-first film and creative production studio in Bengaluru for commercials, product films, CGI visuals, and social content."
         name="twitter:description" />
     <meta content="https://www.synkynstudios.com/images/logo.png" name="twitter:image" />
     <meta content="#000000" name="theme-color" />
@@ -76,22 +78,25 @@
             "@type": "Organization",
             "@id": "https://www.synkynstudios.com/#organization",
             "name": "Synkyn Studios",
-            "legalName": "Synkyn Studios Inc.",
-            "alternateName": "Synkyn Studios",
-            "url": "https://synkynstudios.com",
+            "alternateName": ["Synkyn Studio", "Synkyn"],
+            "url": "https://www.synkynstudios.com/",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.synkynstudios.com/images/og-preview.png",
+              "@id": "https://www.synkynstudios.com/#logo",
+              "url": "https://www.synkynstudios.com/images/logo.png",
               "width": 1200,
               "height": 630
             },
-            "description": "Synkyn Studios is a cinematic, AI-first creative studio directing generative image and video with a filmmaker's eye.",
+            "description": "Synkyn Studios is a cinematic, AI-first creative studio in Bengaluru, India creating commercials, product films, CGI visuals, and social content.",
             "foundingDate": "2023",
-            "industry": "Creative Studio / Film & AI",
-            "sameAs": ["https://www.linkedin.com/company/synkynstudios/"],
+            "industry": "Creative Production / Film & AI",
+            "sameAs": [
+              "https://www.instagram.com/synkyn_studios/",
+              "https://www.linkedin.com/company/synkynstudios/"
+            ],
             "contactPoint": {
               "@type": "ContactPoint",
-              "contactType": "sales",
+              "contactType": "customer service",
               "email": "contact@synkynstudios.com",
               "url": "https://www.synkynstudios.com/contact.html",
               "availableLanguage": "English"
@@ -101,17 +106,37 @@
             "@type": "ContactPage",
             "@id": "https://www.synkynstudios.com/contact.html#webpage",
             "url": "https://www.synkynstudios.com/contact.html",
-            "name": "Contact — Synkyn Studios",
+            "name": "Contact Synkyn Studios | AI Film Studio in Bengaluru",
+            "description": "Get in touch with Synkyn Studios — an AI-first film and creative production studio in Bengaluru for commercials, product films, CGI visuals, and social content.",
             "isPartOf": { "@id": "https://www.synkynstudios.com/#website" },
-            "inLanguage": "en-US"
+            "about": { "@id": "https://www.synkynstudios.com/#organization" },
+            "inLanguage": "en"
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://www.synkynstudios.com/contact.html#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.synkynstudios.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Contact",
+                "item": "https://www.synkynstudios.com/contact.html"
+              }
+            ]
           },
           {
             "@type": "WebSite",
             "@id": "https://www.synkynstudios.com/#website",
-            "url": "https://synkynstudios.com",
+            "url": "https://www.synkynstudios.com/",
             "name": "Synkyn Studios",
             "publisher": { "@id": "https://www.synkynstudios.com/#organization" },
-            "inLanguage": "en-US"
+            "inLanguage": "en"
           }
         ]
       }
