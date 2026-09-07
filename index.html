@@ -1179,59 +1179,54 @@
                 });
             }
 
-            var PROGRESS_DURATION = 2400; // 2.4s smooth counter progression
-            var HOLD_AT_100_DURATION = 420; // 420ms beat to clearly see 100% and glowing loaded state
+            // Staged loading curve: 25% -> 50% -> 76% -> 100% quickly -> hold at 100% (within 3 seconds)
+            var STAGES = [
+                { t: 0, p: 0 },
+                { t: 450, p: 25 },
+                { t: 720, p: 25 },
+                { t: 1200, p: 50 },
+                { t: 1460, p: 50 },
+                { t: 1960, p: 76 },
+                { t: 2180, p: 76 },
+                { t: 2520, p: 100 }
+            ];
+            var HOLD_AT_100_MS = 460;
             var startTime = performance.now();
             var reached100 = false;
             var finished = false;
 
-            function finish() {
-                if (finished) return;
-                finished = true;
-                if (pctEl) pctEl.textContent = '100%';
-                if (barEl) barEl.style.right = '0%';
-                document.documentElement.classList.remove('loading');
-                document.body.classList.remove('loading');
-                document.body.classList.add('animating-logo');
-
-                try {
-                    if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
-                } catch (e) {}
-
-                requestAnimationFrame(function () {
-                    morphLogoToNav();
-                    loader.classList.add('open');
-                    setTimeout(function () {
-                        loader.hidden = true;
-                        loader.style.display = 'none';
-                        document.documentElement.classList.remove('loading');
-                        document.body.classList.remove('loading');
-                    }, 500);
-                });
+            function calculateStageProgress(elapsed) {
+                if (elapsed >= 2520) return 100;
+                for (var i = 0; i < STAGES.length - 1; i++) {
+                    var s0 = STAGES[i], s1 = STAGES[i + 1];
+                    if (elapsed >= s0.t && elapsed <= s1.t) {
+                        if (s0.p === s1.p) return s0.p;
+                        var r = (elapsed - s0.t) / (s1.t - s0.t);
+                        var ease = r < 0.5 ? 4 * r * r * r : 1 - Math.pow(-2 * r + 2, 3) / 2;
+                        return Math.round(s0.p + (s1.p - s0.p) * ease);
+                    }
+                }
+                return 100;
             }
 
-            // Paced progress loop: smooth 0-100% progression over 2.4s, then distinct hold on 100%
             function tick(now) {
                 if (finished) return;
                 var elapsed = now - startTime;
 
                 if (!reached100) {
-                    var progressRatio = Math.min(1, elapsed / PROGRESS_DURATION);
-                    // Smooth quadratic deceleration so progression is fluid, legible, and lands crisply on 100%
-                    var eased = 1 - Math.pow(1 - progressRatio, 2.2);
-                    var p = Math.floor(eased * 100);
+                    var p = calculateStageProgress(elapsed);
 
-                    if (p >= 100 || progressRatio >= 1) {
+                    if (p >= 100 || elapsed >= 2520) {
                         p = 100;
                         reached100 = true;
                         if (pctEl) pctEl.textContent = '100%';
                         if (barEl) barEl.style.right = '0%';
                         loader.classList.add('is-complete');
 
-                        // Hold at 100% so user clearly registers and experiences that it has loaded!
+                        // Hold at 100% so user clearly registers that it has loaded!
                         setTimeout(function () {
                             finish();
-                        }, HOLD_AT_100_DURATION);
+                        }, HOLD_AT_100_MS);
                         return;
                     }
 
