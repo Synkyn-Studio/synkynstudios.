@@ -2519,7 +2519,7 @@
                     <div class="pf-lb__counter" id="pf-lb-counter">1 / 1</div>
 
                     <div class="pf-lb__imgwrap" id="pf-lb-imgwrap">
-                        <img class="pf-lb__img" id="pf-lb-img" alt="" draggable="false" />
+                        <img class="pf-lb__img" id="pf-lb-img" alt="Synkyn Studios Print Gallery Preview" draggable="false" />
                     </div>
 
                     <button class="pf-lb__nav pf-lb__nav--prev" id="pf-lb-prev" aria-label="Previous image">
@@ -3078,7 +3078,7 @@
                         t.type = 'button';
                         t.className = 'pf-lb__thumb' + (i === curIndex ? ' is-active' : '');
                         t.setAttribute('aria-label', 'Go to image ' + (i + 1));
-                        t.innerHTML = '<img src="' + esc(src) + '" alt="" loading="lazy" />';
+                        t.innerHTML = '<img src="' + esc(src) + '" alt="' + esc(curProject.title || 'Print image') + ' thumbnail ' + (i + 1) + '" loading="lazy" />';
                         t.addEventListener('click', () => { curIndex = i; setImage(); });
                         lbThumbs.appendChild(t);
                     });
