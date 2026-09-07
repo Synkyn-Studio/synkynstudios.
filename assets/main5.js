@@ -1,3 +1,8 @@
+/*
+  Synkyn Studios
+  Copyright (c) 2026 Synkyn Studios. All rights reserved.
+*/
+
 import "./main.js";
 import "./particle-effect-init-Cl6WPB64.js";
 

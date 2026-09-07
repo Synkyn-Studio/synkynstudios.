@@ -1,3 +1,8 @@
+/*
+  Synkyn Studios
+  Copyright (c) 2026 Synkyn Studios. All rights reserved.
+*/
+
 (function () {
     var t = document.getElementById('disp-time');
     var ap = document.getElementById('disp-ampm');

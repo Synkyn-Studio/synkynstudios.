@@ -1,3 +1,8 @@
+/*
+  Synkyn Studios
+  Copyright (c) 2026 Synkyn Studios. All rights reserved.
+*/
+
 const desktopNav = document.getElementById('desktop-navbar');
 if (desktopNav) {
     desktopNav.innerHTML = `
