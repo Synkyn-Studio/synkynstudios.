@@ -213,13 +213,30 @@
         return window.pageYOffset || document.documentElement.scrollTop || 0;
     }
 
+    // Always ensure navbar is visible upon page load / refresh anywhere in the document
+    navbar.classList.remove('nav-hidden');
+    lastY = readScroll();
+
+    // Lock navbar visible during page load / refresh so scroll restoration never hides it
+    let readyForHide = false;
+    setTimeout(() => {
+        readyForHide = true;
+        lastY = readScroll();
+        navbar.classList.remove('nav-hidden');
+    }, 2200);
+
     function update() {
         ticking = false;
         let y = readScroll();
         if (y < 0) y = 0;
 
-        // Never hide while the menu is open
+        // Never hide while the menu is open or during initial load/refresh grace period
         if (isOpen()) { lastY = y; return; }
+        if (!readyForHide) {
+            navbar.classList.remove('nav-hidden');
+            lastY = y;
+            return;
+        }
 
         // Always show near the top
         if (y <= TOP_BAND) {
@@ -261,6 +278,15 @@
         }
         if (tries > 0) requestAnimationFrame(() => attachLenis(tries - 1));
     })(60);
+
+    window.addEventListener('pageshow', () => {
+        navbar.classList.remove('nav-hidden');
+        lastY = readScroll();
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        navbar.classList.remove('nav-hidden');
+        lastY = readScroll();
+    });
 
     update();
 })();

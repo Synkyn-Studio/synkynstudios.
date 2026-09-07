@@ -27,8 +27,7 @@
                     window.__SKIP_LOADER__ = false;
                     if (isReload) {
                         try {
-                            if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-                            window.scrollTo(0, 0);
+                            if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
                         } catch (e) {}
                     }
                 }
@@ -435,8 +434,6 @@
             scrollbar-width: none !important;
         }
 
-        body.loading header,
-        body.loading .header-two,
         body.loading .sidebar,
         body.loading #desktop-navbar,
         body.loading .nav-hamburger,
@@ -447,6 +444,17 @@
         body.animating-logo #back-to-top-btn {
             opacity: 0 !important;
             visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* Ensure navbar is always there when refreshed or viewed anywhere in index.html */
+        .header-two {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        .header-two.nav-hidden {
+            opacity: 0 !important;
             pointer-events: none !important;
         }
 
@@ -1167,6 +1175,11 @@
                     if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
                 } catch (e) {}
 
+                var nav = document.querySelector('.header-two');
+                if (nav) {
+                    nav.classList.remove('nav-hidden');
+                }
+
                 requestAnimationFrame(function () {
                     morphLogoToNav();
                     loader.classList.add('open');
@@ -1175,6 +1188,8 @@
                         loader.style.display = 'none';
                         document.documentElement.classList.remove('loading');
                         document.body.classList.remove('loading');
+                        document.body.classList.remove('animating-logo');
+                        if (nav) nav.classList.remove('nav-hidden');
                     }, 500);
                 });
             }
