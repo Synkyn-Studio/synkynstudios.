@@ -28,7 +28,7 @@
     <title>Synkyn Studios | AI Film Studio &amp; Creative Production in Bengaluru</title>
     <meta name="title" content="Synkyn Studios | AI Film Studio &amp; Creative Production in Bengaluru" />
     <meta name="description"
-        content="Synkyn Studios is an AI-first film and creative production studio in Bengaluru creating commercials, product films, CGI visuals, and social content with cinematic quality." />
+        content="Synkyn Studios is an AI film studio in Bengaluru creating commercials, product films, CGI visuals, and social media content for modern brands without delays." />
     <meta name="keywords"
         content="Synkyn Studios, Synkyn Studio, AI film studio, AI video studio, AI creative studio, Bengaluru creative studio, commercials, product films, CGI visuals, generative video, social content, AI advertising agency, VFX, set extension" />
     <meta name="author" content="Synkyn Studios" />
@@ -60,7 +60,7 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Synkyn Studios | AI Film Studio &amp; Creative Production in Bengaluru" />
     <meta property="og:description"
-        content="Synkyn Studios is an AI-first film and creative production studio in Bengaluru creating commercials, product films, CGI visuals, and social content with cinematic quality." />
+        content="Synkyn Studios is an AI film studio in Bengaluru creating commercials, product films, CGI visuals, and social media content for modern brands without delays." />
     <meta property="og:image" content="https://www.synkynstudios.com/images/logo.png" />
     <meta property="og:image:secure_url" content="https://www.synkynstudios.com/images/logo.png" />
     <meta property="og:image:type" content="image/png" />
@@ -73,7 +73,7 @@
     <meta name="twitter:url" content="https://www.synkynstudios.com/" />
     <meta name="twitter:title" content="Synkyn Studios | AI Film Studio in Bengaluru" />
     <meta name="twitter:description"
-        content="Synkyn Studios is an AI-first film and creative production studio in Bengaluru creating commercials, product films, CGI visuals, and social content." />
+        content="Synkyn Studios is an AI film studio in Bengaluru creating commercials, product films, CGI visuals, and social media content for modern brands without delays." />
     <meta name="twitter:image" content="https://www.synkynstudios.com/images/logo.png" />
     <meta name="twitter:image:alt" content="Synkyn Studios logo" />
 
@@ -159,6 +159,14 @@
                     "publisher": {
                         "@id": "https://www.synkynstudios.com/#organization"
                     },
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": {
+                            "@type": "EntryPoint",
+                            "urlTemplate": "https://www.synkynstudios.com/library.html?q={search_term_string}"
+                        },
+                        "query-input": "required name=search_term_string"
+                    },
                     "inLanguage": "en-US"
                 },
                 {
@@ -175,8 +183,59 @@
                     "primaryImageOfPage": {
                         "@id": "https://www.synkynstudios.com/#logo"
                     },
-                    "description": "Synkyn Studios is an AI-first film and creative production studio in Bengaluru creating commercials, product films, CGI visuals, and social content with cinematic quality.",
+                    "description": "Synkyn Studios is an AI film studio in Bengaluru creating commercials, product films, CGI visuals, and social media content for modern brands without delays.",
                     "inLanguage": "en-US"
+                },
+                {
+                    "@type": "VideoObject",
+                    "@id": "https://www.synkynstudios.com/#showreel",
+                    "name": "Synkyn Studios SHOWREEL 2026 — AI Film & Creative Production",
+                    "description": "Synkyn Studios SHOWREEL 2026 highlighting AI-powered commercials, product films, CGI visuals, and cinematic brand storytelling made in Bengaluru, India.",
+                    "thumbnailUrl": [
+                        "https://www.synkynstudios.com/images/logo.png"
+                    ],
+                    "uploadDate": "2026-01-01T00:00:00+05:30",
+                    "embedUrl": "https://player.vimeo.com/video/1210886734",
+                    "publisher": {
+                        "@id": "https://www.synkynstudios.com/#organization"
+                    }
+                },
+                {
+                    "@type": "SiteNavigationElement",
+                    "@id": "https://www.synkynstudios.com/#navigation",
+                    "name": "Primary Navigation",
+                    "hasPart": [
+                        {
+                            "@type": "WebPage",
+                            "name": "Work Library",
+                            "description": "Selected AI film, ad, and key-art portfolio",
+                            "url": "https://www.synkynstudios.com/library.html"
+                        },
+                        {
+                            "@type": "WebPage",
+                            "name": "Print Album",
+                            "description": "Gallery of prints, installations, and key art",
+                            "url": "https://www.synkynstudios.com/printalbum.html"
+                        },
+                        {
+                            "@type": "WebPage",
+                            "name": "About Studio",
+                            "description": "Our story, founding team, and vision",
+                            "url": "https://www.synkynstudios.com/about-us.html"
+                        },
+                        {
+                            "@type": "WebPage",
+                            "name": "Contact",
+                            "description": "Get in touch with Synkyn Studios",
+                            "url": "https://www.synkynstudios.com/contact.html"
+                        },
+                        {
+                            "@type": "WebPage",
+                            "name": "Terms & Conditions",
+                            "description": "Terms and conditions of service",
+                            "url": "https://www.synkynstudios.com/terms.html"
+                        }
+                    ]
                 }
             ]
         }
@@ -2073,13 +2132,88 @@
                 text-transform: uppercase;
             }
 
-            @media (max-width: 900px) {
+            @media (min-width: 768px) and (max-width: 1024px) {
+                .pipeline-section .hero {
+                    padding: clamp(100px, 16vh, 180px) 20px 30px !important;
+                    min-height: auto !important;
+                }
+
+                .pipeline-section .hero-title {
+                    font-size: clamp(28px, 4.2vw, 40px) !important;
+                }
+
+                .pipeline-section .journey {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    margin: 0 auto !important;
+                    overflow: visible !important;
+                }
+
+                .pipeline-section .journey-svg {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 1000px !important;
+                    height: auto !important;
+                    margin-inline: auto !important;
+                    overflow: visible !important;
+                }
+
+                .pipeline-section .fg-clouds {
+                    opacity: 0.35 !important;
+                }
+
+                .pipeline-section .rocket-traveler {
+                    z-index: 50;
+                }
+
                 .pipeline-section .stop {
-                    width: min(340px, 46%);
+                    width: min(290px, 34%) !important;
+                    padding: 14px 16px !important;
+                    background: rgba(10, 12, 18, 0.76) !important;
+                    backdrop-filter: blur(12px) !important;
+                    -webkit-backdrop-filter: blur(12px) !important;
+                    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                    border-radius: 16px !important;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+                    z-index: 25 !important;
+                }
+
+                .pipeline-section .stop.left {
+                    left: clamp(14px, 2.8%, 30px) !important;
+                    text-align: left !important;
+                }
+
+                .pipeline-section .stop.right {
+                    right: clamp(14px, 2.8%, 30px) !important;
+                    text-align: right !important;
+                    align-items: flex-end !important;
+                }
+
+                .pipeline-section .stop .title {
+                    font-size: clamp(19px, 2.4vw, 26px) !important;
+                    line-height: 1.22 !important;
+                    margin-top: 2px !important;
+                }
+
+                .pipeline-section .stop .desc {
+                    font-size: 13.5px !important;
+                    line-height: 1.55 !important;
+                    max-width: 28ch !important;
+                    margin-top: 4px !important;
+                }
+
+                .pipeline-section .stop .num {
+                    font-size: 11px !important;
+                    letter-spacing: 0.24em !important;
+                }
+
+                .pipeline-section .stop .eyebrow {
+                    font-size: 11px !important;
+                    letter-spacing: 0.2em !important;
                 }
             }
 
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 .pipeline-section {
                     position: relative;
                     padding-bottom: 60px !important;
@@ -2683,7 +2817,7 @@
 
                 const SVG_NS = "http://www.w3.org/2000/svg";
                 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-                const isMobileDevice = () => window.innerWidth <= 768;
+                const isMobileDevice = () => window.innerWidth < 768;
 
                 const section = document.getElementById("pipeline-section");
                 if (!section) return;
@@ -2692,7 +2826,7 @@
                 const mobileTimelineBar = section.querySelector(".mobile-timeline-bar");
                 const mobileRocket = section.querySelector(".mobile-rocket");
 
-                // Flecks only initialized on desktop
+                // Flecks only initialized on desktop and tablet
                 const fleckLayer = section.querySelector(".flecks");
                 if (fleckLayer && !isMobileDevice()) {
                     const rand = (min, max) => min + Math.random() * (max - min);
@@ -2728,7 +2862,7 @@
                     fleckLayer.appendChild(frag);
                 }
 
-                // Desktop SVG Elements
+                // Desktop / Tablet SVG Elements
                 const geo = document.getElementById("trail-geo");
                 const layers = ["trail-halo", "trail-glow", "trail-core"].map((cls) => section.querySelector(`.${cls}`));
                 const rocketTraveler = section.querySelector(".rocket-traveler");
@@ -2742,7 +2876,26 @@
                 const NUM_SAMPLES = 3000;
                 let nodes = [];
 
-                if (geo && !isMobileDevice()) {
+                const createAestheticCloud = (parentLayer, cx, cy, w, h, tilt, flipX, op, cls, delay) => {
+                    if (!parentLayer) return;
+                    const group = document.createElementNS(SVG_NS, "g");
+                    const scaleX = flipX ? -1 : 1;
+                    group.setAttribute("transform", `translate(${cx.toFixed(1)} ${cy.toFixed(1)}) rotate(${tilt}) scale(${scaleX}, 1)`);
+                    const cloud = document.createElementNS(SVG_NS, "use");
+                    cloud.setAttribute("href", "#s-cloud");
+                    cloud.setAttribute("x", (-w / 2).toFixed(1));
+                    cloud.setAttribute("y", (-h / 2).toFixed(1));
+                    cloud.setAttribute("width", w);
+                    cloud.setAttribute("height", h);
+                    cloud.setAttribute("opacity", op);
+                    cloud.setAttribute("class", `cloud ${cls}`);
+                    cloud.style.animationDelay = `${delay}s`;
+                    group.appendChild(cloud);
+                    parentLayer.appendChild(group);
+                };
+
+                const initDesktopPath = () => {
+                    if (pathLUT || !geo) return;
                     L = geo.getTotalLength();
                     layers.forEach((el) => {
                         if (el) {
@@ -2772,27 +2925,11 @@
                         pathLUT[i] = { x: pt.x, y: pt.y, rot };
                     }
 
-                    const createAestheticCloud = (parentLayer, cx, cy, w, h, tilt, flipX, op, cls, delay) => {
-                        if (!parentLayer) return;
-                        const group = document.createElementNS(SVG_NS, "g");
-                        const scaleX = flipX ? -1 : 1;
-                        group.setAttribute("transform", `translate(${cx.toFixed(1)} ${cy.toFixed(1)}) rotate(${tilt}) scale(${scaleX}, 1)`);
-                        const cloud = document.createElementNS(SVG_NS, "use");
-                        cloud.setAttribute("href", "#s-cloud");
-                        cloud.setAttribute("x", (-w / 2).toFixed(1));
-                        cloud.setAttribute("y", (-h / 2).toFixed(1));
-                        cloud.setAttribute("width", w);
-                        cloud.setAttribute("height", h);
-                        cloud.setAttribute("opacity", op);
-                        cloud.setAttribute("class", `cloud ${cls}`);
-                        cloud.style.animationDelay = `${delay}s`;
-                        group.appendChild(cloud);
-                        parentLayer.appendChild(group);
-                    };
-
-                    createAestheticCloud(fgCloudLayer, 680, 220, 680, 408, 6, false, 0.82, "drift-a", 0.5);
-                    createAestheticCloud(fgCloudLayer, 600, 1340, 720, 432, -8, true, 0.85, "drift-b", 1.8);
-                    createAestheticCloud(fgCloudLayer, 600, 2660, 700, 420, 10, false, 0.84, "drift-c", 3.2);
+                    if (fgCloudLayer && !fgCloudLayer.hasChildNodes()) {
+                        createAestheticCloud(fgCloudLayer, 680, 220, 680, 408, 6, false, 0.82, "drift-a", 0.5);
+                        createAestheticCloud(fgCloudLayer, 600, 1340, 720, 432, -8, true, 0.85, "drift-b", 1.8);
+                        createAestheticCloud(fgCloudLayer, 600, 2660, 700, 420, 10, false, 0.84, "drift-c", 3.2);
+                    }
 
                     const lengthAtY = (targetY) => {
                         let lo = 0, hi = L;
@@ -2805,42 +2942,50 @@
                     };
 
                     const APEX_Y = [300, 980, 1660, 2340, 3020, 3700];
-                    nodes = APEX_Y.map((y, i) => {
-                        const len = lengthAtY(y);
-                        const pt = geo.getPointAtLength(len);
-                        const isRightBend = i % 2 === 0;
-                        const tilt1 = (i % 3 === 0) ? 7 : -9;
-                        const tilt2 = (i % 2 === 0) ? -6 : 10;
-                        const tiltFg = (i % 2 === 0) ? 8 : -7;
+                    if (nodes.length === 0) {
+                        nodes = APEX_Y.map((y, i) => {
+                            const len = lengthAtY(y);
+                            const pt = geo.getPointAtLength(len);
+                            const isRightBend = i % 2 === 0;
+                            const tilt1 = (i % 3 === 0) ? 7 : -9;
+                            const tilt2 = (i % 2 === 0) ? -6 : 10;
+                            const tiltFg = (i % 2 === 0) ? 8 : -7;
 
-                        if (isRightBend) {
-                            createAestheticCloud(nodeCloudLayer, pt.x - 180, pt.y - 100, 680, 408, tilt1, false, 0.78, "drift-a", (i * 1.2).toFixed(1));
-                            createAestheticCloud(nodeCloudLayer, pt.x + 160, pt.y + 80, 600, 360, tilt2, true, 0.60, "drift-c", (i * 1.2 + 2.1).toFixed(1));
-                            createAestheticCloud(fgCloudLayer, pt.x + 10, pt.y - 20, 680, 408, tiltFg, true, 0.84, "drift-b", (i * 0.9).toFixed(1));
-                        } else {
-                            createAestheticCloud(nodeCloudLayer, pt.x + 180, pt.y - 100, 680, 408, tilt1, true, 0.78, "drift-b", (i * 1.2).toFixed(1));
-                            createAestheticCloud(nodeCloudLayer, pt.x - 160, pt.y + 80, 600, 360, tilt2, false, 0.62, "drift-a", (i * 1.2 + 2.1).toFixed(1));
-                            createAestheticCloud(fgCloudLayer, pt.x - 10, pt.y + 20, 680, 408, tiltFg, false, 0.86, "drift-a", (i * 0.9).toFixed(1));
-                        }
+                            if (nodeCloudLayer && !nodeCloudLayer.hasChildNodes()) {
+                                if (isRightBend) {
+                                    createAestheticCloud(nodeCloudLayer, pt.x - 180, pt.y - 100, 680, 408, tilt1, false, 0.78, "drift-a", (i * 1.2).toFixed(1));
+                                    createAestheticCloud(nodeCloudLayer, pt.x + 160, pt.y + 80, 600, 360, tilt2, true, 0.60, "drift-c", (i * 1.2 + 2.1).toFixed(1));
+                                    createAestheticCloud(fgCloudLayer, pt.x + 10, pt.y - 20, 680, 408, tiltFg, true, 0.84, "drift-b", (i * 0.9).toFixed(1));
+                                } else {
+                                    createAestheticCloud(nodeCloudLayer, pt.x + 180, pt.y - 100, 680, 408, tilt1, true, 0.78, "drift-b", (i * 1.2).toFixed(1));
+                                    createAestheticCloud(nodeCloudLayer, pt.x - 160, pt.y + 80, 600, 360, tilt2, false, 0.62, "drift-a", (i * 1.2 + 2.1).toFixed(1));
+                                    createAestheticCloud(fgCloudLayer, pt.x - 10, pt.y + 20, 680, 408, tiltFg, false, 0.86, "drift-a", (i * 0.9).toFixed(1));
+                                }
+                            }
 
-                        const g = document.createElementNS(SVG_NS, "g");
-                        g.setAttribute("class", "node");
-                        g.setAttribute("transform", `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)})`);
-                        const glow = document.createElementNS(SVG_NS, "circle");
-                        glow.setAttribute("r", "40");
-                        glow.setAttribute("fill", "url(#g-node)");
-                        glow.setAttribute("class", "node-glow");
-                        const ring = document.createElementNS(SVG_NS, "circle");
-                        ring.setAttribute("r", "9");
-                        ring.setAttribute("class", "node-ring");
-                        const core = document.createElementNS(SVG_NS, "circle");
-                        core.setAttribute("r", "3.4");
-                        core.setAttribute("class", "node-core");
-                        g.append(glow, ring, core);
-                        if (nodeLayer) nodeLayer.appendChild(g);
+                            const g = document.createElementNS(SVG_NS, "g");
+                            g.setAttribute("class", "node");
+                            g.setAttribute("transform", `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)})`);
+                            const glow = document.createElementNS(SVG_NS, "circle");
+                            glow.setAttribute("r", "40");
+                            glow.setAttribute("fill", "url(#g-node)");
+                            glow.setAttribute("class", "node-glow");
+                            const ring = document.createElementNS(SVG_NS, "circle");
+                            ring.setAttribute("r", "9");
+                            ring.setAttribute("class", "node-ring");
+                            const core = document.createElementNS(SVG_NS, "circle");
+                            core.setAttribute("r", "3.4");
+                            core.setAttribute("class", "node-core");
+                            g.append(glow, ring, core);
+                            if (nodeLayer) nodeLayer.appendChild(g);
 
-                        return { el: g, len, stop: stops[i] || null, lit: false, inState: false };
-                    });
+                            return { el: g, len, stop: stops[i] || null, lit: false, inState: false };
+                        });
+                    }
+                };
+
+                if (geo && !isMobileDevice()) {
+                    initDesktopPath();
                 }
 
                 const samplePath = (len) => {
@@ -2859,6 +3004,10 @@
 
                 // Desktop progress handler
                 const setDesktopProgress = (p) => {
+                    if (!pathLUT) {
+                        initDesktopPath();
+                        if (!pathLUT) return;
+                    }
                     const drawn = L * p;
                     const offset = (L - drawn).toFixed(1);
                     layers.forEach((el) => { if (el) el.style.strokeDashoffset = offset; });
@@ -2944,6 +3093,10 @@
 
                 const updateScrollTarget = () => {
                     if (!journey) return;
+                    const isMobile = isMobileDevice();
+                    if (!isMobile && !pathLUT) {
+                        initDesktopPath();
+                    }
                     const rect = journey.getBoundingClientRect();
                     const vh = window.innerHeight;
                     const raw = (vh * 0.5 - rect.top) / rect.height;
@@ -2992,7 +3145,13 @@
                 }
 
                 window.addEventListener("scroll", updateScrollTarget, { passive: true });
-                window.addEventListener("resize", updateScrollTarget, { passive: true });
+                window.addEventListener("resize", () => {
+                    if (!isMobileDevice() && !pathLUT) {
+                        initDesktopPath();
+                    }
+                    current = -1;
+                    updateScrollTarget();
+                }, { passive: true });
                 (function hookLenis(tries) {
                     if (window.lenis && typeof window.lenis.on === 'function') {
                         window.lenis.on('scroll', updateScrollTarget);

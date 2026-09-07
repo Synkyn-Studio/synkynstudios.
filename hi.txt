@@ -1,0 +1,48 @@
+{
+"position":
+1,
+"title":
+"Synkyn Studios | AI Film Studio & Creative Production in ...",
+"link":
+"https://www.synkynstudios.com/",
+"redirect_link":
+"https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESVgHrOzAVsnz6IEknAVZPWfflnEt9Burb2QbEAsf9K06nfyg2-5mHTqmUDbACjLFpx-8PR0Hu4cIhx0FbAw8O4PaBbWTaqRnteZvate55wqtiZkHnYOAI&ved=2ahUKEwjh_NnNi9yWAxUhEFkFHVUXOYcQFnoECB4QAQ&uoh=1",
+"displayed_link":
+"https://www.synkynstudios.com",
+"favicon":
+"https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y-mAAAAPFBMVEVHcEyJlJbSxWHWyFrSxFnUyF3ez1airXDo11Lfz1XWyl7l1VTWy1_j0lbn1FLbzVvp11HWzGPMznTDtVPOP5aRAAAAFHRSTlMAAQtCUShiA6dzHJQUhrg1yQYBX7MJlt4AAADlSURBVHgBYqA2ANRBBkkCgyAQdB0ggiJR_v_Xva7Jpo90UQPz860q6j9DAjOoilxPw1WaqvU2_LUIH7NrxC2rGj8kR8zeTd1GAb8uVCWmLt1XGeNP6rYVUElIF0cRjT_yomjCRNTIrMZN-0iEA0l6I8KmlJMxGAqf_W4q7_8FyFSayhV2yL3EIzPDdZWQekjAXTIpXWI8G7jZ-0QmZGqczVqbJeCEVG1R99ENaUhTEXIS7Ocfy7zrVJIFLi92XUMprhXjqVjLCoSSX-VFcKlmJIc8CBm8ywfAVb4YZOVb2s-33O-8X-WoCiuyHbC3AAAAAElFTkSuQmCC.png",
+"snippet":
+"Synkyn creates AI-powered commercials, product films, CGI visuals, and social media content for brands that want to look premium without slow production delays.",
+"snippet_highlighted_words":
+[
+"Synkyn creates AI-powered commercials, product films, CGI visuals, and social media content"
+],
+"about_this_result":
+{
+"source":
+{
+"description":
+"Synkyn creates AI-powered commercials, product films, CGI visuals, and social media content for brands that want to look premium without slow production delays.",
+"source_info_link":
+"https://www.synkynstudios.com/",
+"icon":
+"https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y-mAAAAPFBMVEVHcEyJlJbSxWHWyFrSxFnUyF3ez1airXDo11Lfz1XWyl7l1VTWy1_j0lbn1FLbzVvp11HWzGPMznTDtVPOP5aRAAAAFHRSTlMAAQtCUShiA6dzHJQUhrg1yQYBX7MJlt4AAADlSURBVHgBYqA2ANRBBkkCgyAQdB0ggiJR_v_Xva7Jpo90UQPz860q6j9DAjOoilxPw1WaqvU2_LUIH7NrxC2rGj8kR8zeTd1GAb8uVCWmLt1XGeNP6rYVUElIF0cRjT_yomjCRNTIrMZN-0iEA0l6I8KmlJMxGAqf_W4q7_8FyFSayhV2yL3EIzPDdZWQekjAXTIpXWI8G7jZ-0QmZGqczVqbJeCEVG1R99ENaUhTEXIS7Ocfy7zrVJIFLi92XUMprhXjqVjLCoSSX-VFcKlmJIc8CBm8ywfAVb4YZOVb2s-33O-8X-WoCiuyHbC3AAAAAElFTkSuQmCC.png"
+},
+"languages":
+[
+"en"
+],
+"regions":
+[
+"US"
+]
+},
+"about_page_link":
+"https://www.google.com/search?q=About+https://www.synkynstudios.com/&tbm=ilp",
+"about_page_serpapi_link":
+"https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.synkynstudios.com%2F",
+"source":
+"synkynstudios.com",
+"read_more_link":
+"https://www.synkynstudios.com/#:~:text=Synkyn%20creates%20AI%2Dpowered%20commercials%2C%20product,premium%20without%20slow%20production%20delays."
+},
