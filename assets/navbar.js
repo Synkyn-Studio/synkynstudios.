@@ -17,6 +17,10 @@
 (function () {
     'use strict';
 
+    try {
+        sessionStorage.setItem('synkyn_loader_shown', 'true');
+    } catch (e) {}
+
     const navbar = document.querySelector('.header-two');
     const sidebar = document.querySelector('.sidebar');
     if (!navbar) return;

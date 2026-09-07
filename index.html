@@ -3,9 +3,40 @@
   Copyright (c) 2026 Synkyn Studios. All rights reserved.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="loading">
 
 <head>
+    <script>
+        (function () {
+            try {
+                var isReload = false;
+                var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+                if (navEntries && navEntries.length > 0) {
+                    isReload = navEntries[0].type === 'reload';
+                } else if (window.performance && window.performance.navigation) {
+                    isReload = window.performance.navigation.type === 1;
+                }
+
+                var hasShown = sessionStorage.getItem('synkyn_loader_shown') === 'true';
+                if (hasShown && !isReload) {
+                    document.documentElement.classList.remove('loading');
+                    document.documentElement.classList.add('synkyn-skip-loader');
+                    window.__SKIP_LOADER__ = true;
+                } else {
+                    sessionStorage.setItem('synkyn_loader_shown', 'true');
+                    window.__SKIP_LOADER__ = false;
+                    if (isReload) {
+                        try {
+                            if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+                            window.scrollTo(0, 0);
+                        } catch (e) {}
+                    }
+                }
+            } catch (e) {
+                window.__SKIP_LOADER__ = false;
+            }
+        })();
+    </script>
     <!-- Search Engine Verifications -->
     <meta name="msvalidate.01" content="41DF851FCE84360A9074BDC7D98E6FE8" />
 
@@ -358,6 +389,27 @@
             --loader-ease-out: cubic-bezier(.16, 1, .3, 1);
         }
 
+        html.loading,
+        body.loading,
+        body.animating-logo {
+            overflow: hidden !important;
+            height: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        html.loading::-webkit-scrollbar,
+        body.loading::-webkit-scrollbar,
+        body.animating-logo::-webkit-scrollbar,
+        .loader::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
         body.loading,
         body.loading *,
         body.animating-logo,
@@ -368,11 +420,19 @@
         }
 
         .loader {
-            position: fixed;
-            inset: 0;
-            z-index: 999999 !important;
-            overflow: hidden;
-            touch-action: none;
+            position: fixed !important;
+            inset: 0 !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            height: 100dvh !important;
+            z-index: 9999999 !important;
+            overflow: hidden !important;
+            touch-action: none !important;
+            scrollbar-width: none !important;
         }
 
         body.loading header,
@@ -380,7 +440,11 @@
         body.loading .sidebar,
         body.loading #desktop-navbar,
         body.loading .nav-hamburger,
-        body.loading aside {
+        body.loading aside,
+        body.loading #scroll-progress-bar,
+        body.loading #back-to-top-btn,
+        body.animating-logo #scroll-progress-bar,
+        body.animating-logo #back-to-top-btn {
             opacity: 0 !important;
             visibility: hidden !important;
             pointer-events: none !important;
@@ -406,15 +470,30 @@
             display: block;
         }
 
-        .loader {
-            position: fixed;
-            inset: 0;
-            z-index: 999999 !important;
-            overflow: hidden;
+        .loader[hidden] {
+            display: none !important;
         }
 
-        .loader[hidden] {
-            display: none;
+        html:not(.loading) .loader,
+        html.synkyn-skip-loader .loader,
+        body:not(.loading) .loader {
+            display: none !important;
+        }
+
+        html.synkyn-skip-loader header,
+        html.synkyn-skip-loader .header-two,
+        html.synkyn-skip-loader #desktop-navbar,
+        html.synkyn-skip-loader .nav-hamburger,
+        html.synkyn-skip-loader aside,
+        html:not(.loading) header,
+        html:not(.loading) .header-two,
+        html:not(.loading) #desktop-navbar,
+        body:not(.loading) header,
+        body:not(.loading) .header-two,
+        body:not(.loading) #desktop-navbar {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
 
         .loader-panel {
@@ -424,7 +503,7 @@
             height: 51%;
             background: var(--loader-ink);
             z-index: 2;
-            transition: transform 1s var(--loader-ease-film);
+            transition: transform 0.48s var(--loader-ease-film);
             will-change: transform;
         }
 
@@ -450,7 +529,7 @@
             z-index: 3;
             opacity: 0.25;
             pointer-events: none;
-            transition: opacity 1s var(--loader-ease-film);
+            transition: opacity 0.35s var(--loader-ease-film);
         }
 
         .loader.open .loader-canvas {
@@ -524,6 +603,32 @@
             font-size: .82rem;
             letter-spacing: .22em;
             color: var(--loader-volt);
+            transition: color .2s ease, text-shadow .2s ease, transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .loader.is-complete .loader-pct {
+            color: #ffffff !important;
+            text-shadow: 0 0 16px #f2d400, 0 0 32px #f2d400 !important;
+            transform: scale(1.12);
+        }
+
+        .loader.is-complete .loader-bar {
+            box-shadow: 0 0 16px rgba(242, 212, 0, 0.85), 0 0 32px rgba(242, 212, 0, 0.45);
+        }
+
+        .loader.is-complete .loader-bar i {
+            box-shadow: 0 0 14px #f2d400;
+        }
+
+        .loader.is-complete .loader-logo {
+            filter: drop-shadow(0 0 45px rgba(242, 212, 0, 0.45));
+            transition: filter .3s ease;
+        }
+
+        .loader.is-complete .loader-tag {
+            color: #f2d400 !important;
+            letter-spacing: .42em;
+            transition: color .25s ease, letter-spacing .25s ease;
         }
 
         .loader.open .loader-tag,
@@ -531,7 +636,7 @@
         .loader.open .loader-bar {
             opacity: 0;
             transform: translateY(8px);
-            transition: .4s ease;
+            transition: .22s ease;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -925,6 +1030,7 @@
 </head>
 
 <body class="loading bg-background-3 dark:bg-helix-blue-dark-2">
+    <script>if (window.__SKIP_LOADER__) document.body.classList.remove('loading');</script>
     <!-- Global Smooth Scroll UX: Reading Progress Bar -->
     <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
     <!-- Back to Top Button -->
@@ -949,6 +1055,263 @@
             <div class="loader-pct">00%</div>
         </div>
     </div>
+
+    <script id="synkyn-loader-controller">
+        (function () {
+            if (window.__SKIP_LOADER__) {
+                var l = document.getElementById('synkynLoader');
+                if (l) {
+                    l.hidden = true;
+                    l.style.display = 'none';
+                }
+                document.documentElement.classList.remove('loading');
+                document.body.classList.remove('loading');
+                return;
+            }
+
+            var REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var loader = document.getElementById('synkynLoader');
+            if (!loader) return;
+
+            var pctEl = loader.querySelector('.loader-pct');
+            var barEl = loader.querySelector('.loader-bar i');
+            var loaderLogo = loader.querySelector('.loader-logo img');
+
+            if (REDUCE) {
+                document.documentElement.classList.remove('loading');
+                document.body.classList.remove('loading');
+                loader.hidden = true;
+                loader.style.display = 'none';
+                return;
+            }
+
+            // Start progress tracking immediately with website loading
+            var startTime = performance.now();
+            var isDomReady = document.readyState === 'interactive' || document.readyState === 'complete';
+            var isWindowLoaded = document.readyState === 'complete';
+            var finished = false;
+
+            if (!isDomReady) {
+                document.addEventListener('DOMContentLoaded', function () {
+                    isDomReady = true;
+                }, { once: true });
+            }
+            if (!isWindowLoaded) {
+                window.addEventListener('load', function () {
+                    isWindowLoaded = true;
+                }, { once: true });
+            }
+
+            function getVisibleNavLogo() {
+                var isDesktop = window.innerWidth >= 1024;
+                var logo = isDesktop ? document.getElementById('nav-brand-logo-desktop') : document.getElementById('nav-brand-logo-mobile');
+                if (logo && logo.getBoundingClientRect().width > 0) return logo;
+                return document.getElementById('nav-brand-logo-desktop') || document.getElementById('nav-brand-logo-mobile');
+            }
+
+            function morphLogoToNav() {
+                var navLogo = getVisibleNavLogo();
+                if (!loaderLogo || !navLogo) return;
+                var loaderRect = loaderLogo.getBoundingClientRect();
+                var navRect = navLogo.getBoundingClientRect();
+                if (!loaderRect.width || !navRect.width) return;
+
+                var clone = document.createElement('div');
+                clone.className = 'sk-flying-logo';
+                clone.style.top = navRect.top + 'px';
+                clone.style.left = navRect.left + 'px';
+                clone.style.width = navRect.width + 'px';
+                clone.style.height = navRect.height + 'px';
+                clone.style.transformOrigin = 'top left';
+
+                var img = document.createElement('img');
+                img.src = navLogo.src || './images/logo.png';
+                img.alt = '';
+                clone.appendChild(img);
+                document.body.appendChild(clone);
+
+                var dx = loaderRect.left - navRect.left;
+                var dy = loaderRect.top - navRect.top;
+                var sx = loaderRect.width / navRect.width;
+                var sy = loaderRect.height / navRect.height;
+
+                clone.style.transform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale(' + sx + ', ' + sy + ')';
+                clone.style.filter = 'drop-shadow(0 0 36px rgba(242, 212, 0, 0.4))';
+                loaderLogo.style.opacity = '0';
+
+                void clone.offsetHeight;
+
+                requestAnimationFrame(function () {
+                    clone.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease';
+                    clone.style.transform = 'translate3d(0, 0, 0) scale(1, 1)';
+                    clone.style.filter = 'drop-shadow(0 0 0px rgba(242, 212, 0, 0))';
+
+                    setTimeout(function () {
+                        document.body.classList.remove('animating-logo');
+                        document.documentElement.classList.remove('loading');
+                        if (clone.parentNode) clone.parentNode.removeChild(clone);
+                    }, 520);
+                });
+            }
+
+            function finish() {
+                if (finished) return;
+                finished = true;
+                if (pctEl) pctEl.textContent = '100%';
+                if (barEl) barEl.style.right = '0%';
+                document.documentElement.classList.remove('loading');
+                document.body.classList.remove('loading');
+                document.body.classList.add('animating-logo');
+
+                try {
+                    if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+                } catch (e) {}
+
+                requestAnimationFrame(function () {
+                    morphLogoToNav();
+                    loader.classList.add('open');
+                    setTimeout(function () {
+                        loader.hidden = true;
+                        loader.style.display = 'none';
+                        document.documentElement.classList.remove('loading');
+                        document.body.classList.remove('loading');
+                    }, 500);
+                });
+            }
+
+            var PROGRESS_DURATION = 2400; // 2.4s smooth counter progression
+            var HOLD_AT_100_DURATION = 420; // 420ms beat to clearly see 100% and glowing loaded state
+            var startTime = performance.now();
+            var reached100 = false;
+            var finished = false;
+
+            function finish() {
+                if (finished) return;
+                finished = true;
+                if (pctEl) pctEl.textContent = '100%';
+                if (barEl) barEl.style.right = '0%';
+                document.documentElement.classList.remove('loading');
+                document.body.classList.remove('loading');
+                document.body.classList.add('animating-logo');
+
+                try {
+                    if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+                } catch (e) {}
+
+                requestAnimationFrame(function () {
+                    morphLogoToNav();
+                    loader.classList.add('open');
+                    setTimeout(function () {
+                        loader.hidden = true;
+                        loader.style.display = 'none';
+                        document.documentElement.classList.remove('loading');
+                        document.body.classList.remove('loading');
+                    }, 500);
+                });
+            }
+
+            // Paced progress loop: smooth 0-100% progression over 2.4s, then distinct hold on 100%
+            function tick(now) {
+                if (finished) return;
+                var elapsed = now - startTime;
+
+                if (!reached100) {
+                    var progressRatio = Math.min(1, elapsed / PROGRESS_DURATION);
+                    // Smooth quadratic deceleration so progression is fluid, legible, and lands crisply on 100%
+                    var eased = 1 - Math.pow(1 - progressRatio, 2.2);
+                    var p = Math.floor(eased * 100);
+
+                    if (p >= 100 || progressRatio >= 1) {
+                        p = 100;
+                        reached100 = true;
+                        if (pctEl) pctEl.textContent = '100%';
+                        if (barEl) barEl.style.right = '0%';
+                        loader.classList.add('is-complete');
+
+                        // Hold at 100% so user clearly registers and experiences that it has loaded!
+                        setTimeout(function () {
+                            finish();
+                        }, HOLD_AT_100_DURATION);
+                        return;
+                    }
+
+                    if (pctEl) pctEl.textContent = String(p).padStart(2, '0') + '%';
+                    if (barEl) barEl.style.right = (100 - p) + '%';
+                    requestAnimationFrame(tick);
+                }
+            }
+            requestAnimationFrame(tick);
+
+            // Safety timeout
+            setTimeout(function () {
+                if (!finished) finish();
+            }, 3600);
+
+            // Floating golden spark particles
+            (function () {
+                var canvas = loader.querySelector('.loader-canvas');
+                if (!canvas) return;
+                var ctx = canvas.getContext('2d');
+                var dpr = Math.min(2, window.devicePixelRatio || 1);
+                var W, H, flakes = [], running = true;
+                var COUNT = Math.min(80, Math.round(innerWidth / 14));
+
+                function resize() {
+                    W = innerWidth * dpr; H = innerHeight * dpr;
+                    canvas.width = W; canvas.height = H;
+                    canvas.style.width = innerWidth + 'px';
+                    canvas.style.height = innerHeight + 'px';
+                }
+                function make() {
+                    flakes = [];
+                    for (var i = 0; i < COUNT; i++) {
+                        flakes.push({
+                            x: Math.random() * W, y: Math.random() * H,
+                            s: (Math.random() * 3 + 1.5) * dpr,
+                            vx: (Math.random() * 1.2 + 0.4) * dpr,
+                            vy: (-Math.random() * 0.9 - 0.3) * dpr,
+                            a: Math.random() * 0.32 + 0.08,
+                            rot: Math.random() * Math.PI * 2,
+                            vr: (Math.random() * 0.04 - 0.02),
+                            w: Math.random() * Math.PI * 2,
+                            vw: Math.random() * 0.04 + 0.01
+                        });
+                    }
+                }
+                function tri(x, y, s, rot, alpha) {
+                    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+                    ctx.globalAlpha = alpha; ctx.fillStyle = '#f2d400';
+                    ctx.beginPath(); ctx.moveTo(0, -s); ctx.lineTo(s, s); ctx.lineTo(-s, s);
+                    ctx.closePath(); ctx.fill(); ctx.restore();
+                }
+                function loop() {
+                    if (!running || loader.hidden || finished) {
+                        running = false;
+                        return;
+                    }
+                    ctx.clearRect(0, 0, W, H);
+                    for (var i = 0; i < flakes.length; i++) {
+                        var f = flakes[i];
+                        f.w += f.vw; f.x += f.vx; f.y += f.vy + Math.sin(f.w) * 0.4 * dpr; f.rot += f.vr;
+                        if (f.x > W + 10) f.x = -10;
+                        if (f.y < -10) f.y = H + 10;
+                        tri(f.x, f.y, f.s, f.rot, f.a);
+                    }
+                    requestAnimationFrame(loop);
+                }
+                resize(); make(); loop();
+                var rt;
+                addEventListener('resize', function () {
+                    clearTimeout(rt);
+                    rt = setTimeout(function () { resize(); make(); }, 200);
+                }, { passive: true });
+                document.addEventListener('visibilitychange', function () {
+                    running = !document.hidden && !finished;
+                    if (running) requestAnimationFrame(loop);
+                });
+            })();
+        })();
+    </script>
 
     <header>
         <div class="header-two header-two-at-rest lp:!max-w-[1290px] fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0"
@@ -4311,164 +4674,6 @@
             }
             window.addEventListener('scroll', onScroll, { passive: true });
             onScroll();
-        })();
-    </script>
-
-    <script>
-        (function () {
-            var REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
-            var loader = document.getElementById('synkynLoader');
-            if (!loader) return;
-
-            var pctEl = loader.querySelector('.loader-pct');
-            var barEl = loader.querySelector('.loader-bar i');
-            var loaderLogo = loader.querySelector('.loader-logo img');
-
-            function getVisibleNavLogo() {
-                var isDesktop = window.innerWidth >= 1024;
-                var logo = isDesktop ? document.getElementById('nav-brand-logo-desktop') : document.getElementById('nav-brand-logo-mobile');
-                if (logo && logo.getBoundingClientRect().width > 0) return logo;
-                return document.getElementById('nav-brand-logo-desktop') || document.getElementById('nav-brand-logo-mobile');
-            }
-
-            function morphLogoToNav() {
-                var navLogo = getVisibleNavLogo();
-                var loaderRect = loaderLogo.getBoundingClientRect();
-                if (!loaderRect.width || !navLogo) return;
-
-                var navRect = navLogo.getBoundingClientRect();
-                if (!navRect.width) return;
-
-                var clone = document.createElement('div');
-                clone.className = 'sk-flying-logo';
-                clone.style.top = navRect.top + 'px';
-                clone.style.left = navRect.left + 'px';
-                clone.style.width = navRect.width + 'px';
-                clone.style.height = navRect.height + 'px';
-                clone.style.transformOrigin = 'top left';
-
-                var img = document.createElement('img');
-                img.src = navLogo.src || './images/logo.png';
-                img.alt = '';
-                clone.appendChild(img);
-                document.body.appendChild(clone);
-
-                var dx = loaderRect.left - navRect.left;
-                var dy = loaderRect.top - navRect.top;
-                var sx = loaderRect.width / navRect.width;
-                var sy = loaderRect.height / navRect.height;
-
-                clone.style.transform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale(' + sx + ', ' + sy + ')';
-                clone.style.filter = 'drop-shadow(0 0 36px rgba(242, 212, 0, 0.4))';
-                loaderLogo.style.opacity = '0';
-
-                void clone.offsetHeight;
-
-                requestAnimationFrame(function () {
-                    clone.style.transition = 'transform 1.05s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease';
-                    clone.style.transform = 'translate3d(0, 0, 0) scale(1, 1)';
-                    clone.style.filter = 'drop-shadow(0 0 0px rgba(242, 212, 0, 0))';
-
-                    setTimeout(function () {
-                        document.body.classList.remove('animating-logo');
-                        if (clone.parentNode) clone.parentNode.removeChild(clone);
-                    }, 1080);
-                });
-            }
-
-            var finished = false;
-            function finish() {
-                if (finished) return;
-                finished = true;
-                document.body.classList.remove('loading');
-                document.body.classList.add('animating-logo');
-                requestAnimationFrame(function () {
-                    morphLogoToNav();
-                    loader.classList.add('open');
-                    setTimeout(function () { loader.hidden = true; }, 1100);
-                });
-            }
-
-            setTimeout(finish, 2800);
-
-            if (REDUCE) {
-                document.body.classList.remove('loading');
-                loader.hidden = true;
-                return;
-            }
-
-            var start = performance.now(), duration = 2200;
-            function frame(now) {
-                var p = Math.min(100, Math.floor(((now - start) / duration) * 100));
-                if (pctEl) pctEl.textContent = String(p).padStart(2, '0') + '%';
-                if (barEl) barEl.style.right = (100 - p) + '%';
-                if (p < 100) { requestAnimationFrame(frame); return; }
-                finish();
-            }
-            requestAnimationFrame(frame);
-
-            (function () {
-                var canvas = loader.querySelector('.loader-canvas');
-                if (!canvas) return;
-                var ctx = canvas.getContext('2d');
-                var dpr = Math.min(2, window.devicePixelRatio || 1);
-                var W, H, flakes = [], running = true;
-                var COUNT = Math.min(80, Math.round(innerWidth / 14));
-
-                function resize() {
-                    W = innerWidth * dpr; H = innerHeight * dpr;
-                    canvas.width = W; canvas.height = H;
-                    canvas.style.width = innerWidth + 'px';
-                    canvas.style.height = innerHeight + 'px';
-                }
-                function make() {
-                    flakes = [];
-                    for (var i = 0; i < COUNT; i++) {
-                        flakes.push({
-                            x: Math.random() * W, y: Math.random() * H,
-                            s: (Math.random() * 3 + 1.5) * dpr,
-                            vx: (Math.random() * 1.2 + 0.4) * dpr,
-                            vy: (-Math.random() * 0.9 - 0.3) * dpr,
-                            a: Math.random() * 0.32 + 0.08,
-                            rot: Math.random() * Math.PI * 2,
-                            vr: (Math.random() * 0.04 - 0.02),
-                            w: Math.random() * Math.PI * 2,
-                            vw: Math.random() * 0.04 + 0.01
-                        });
-                    }
-                }
-                function tri(x, y, s, rot, alpha) {
-                    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
-                    ctx.globalAlpha = alpha; ctx.fillStyle = '#f2d400';
-                    ctx.beginPath(); ctx.moveTo(0, -s); ctx.lineTo(s, s); ctx.lineTo(-s, s);
-                    ctx.closePath(); ctx.fill(); ctx.restore();
-                }
-                function loop() {
-                    if (!running || loader.hidden) {
-                        running = false;
-                        return;
-                    }
-                    ctx.clearRect(0, 0, W, H);
-                    for (var i = 0; i < flakes.length; i++) {
-                        var f = flakes[i];
-                        f.w += f.vw; f.x += f.vx; f.y += f.vy + Math.sin(f.w) * 0.4 * dpr; f.rot += f.vr;
-                        if (f.x > W + 10) f.x = -10;
-                        if (f.y < -10) f.y = H + 10;
-                        tri(f.x, f.y, f.s, f.rot, f.a);
-                    }
-                    requestAnimationFrame(loop);
-                }
-                resize(); make(); loop();
-                var rt;
-                addEventListener('resize', function () {
-                    clearTimeout(rt);
-                    rt = setTimeout(function () { resize(); make(); }, 200);
-                }, { passive: true });
-                document.addEventListener('visibilitychange', function () {
-                    running = !document.hidden;
-                    if (running) requestAnimationFrame(loop);
-                });
-            })();
         })();
     </script>
 
