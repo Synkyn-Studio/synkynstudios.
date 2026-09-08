@@ -19,7 +19,8 @@
     </script>
 
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        name="viewport" />
     <meta content="Synkyn Studios | 404 - Page not found" name="title" />
     <meta content="The page you're looking for doesn't exist or was moved. Get back on track to Synkyn Studios."
         name="description" />
@@ -367,12 +368,18 @@
     <style id="synkyn-smooth-scroll-styles">
         /* Apple (macOS & iOS Safari) ProMotion, Retina & Safe Area Optimizations */
         /* Mobile Touch & Cross-Platform Instant Tap */
-        a, button, input, textarea, select, [role="button"] {
+        a,
+        button,
+        input,
+        textarea,
+        select,
+        [role="button"] {
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
+        html,
+        body {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
@@ -380,28 +387,35 @@
         }
 
         /* Lenis buttery-smooth scroll engine */
-        html.lenis, html.lenis body {
+        html.lenis,
+        html.lenis body {
             height: auto;
         }
+
         .lenis.lenis-smooth {
             scroll-behavior: auto !important;
         }
+
         .lenis.lenis-smooth [data-lenis-prevent] {
             overscroll-behavior: contain;
         }
+
         .lenis.lenis-stopped {
             overflow: hidden;
         }
+
         /* Eliminate hover recalculations and repaints during active scroll for 60-120 FPS */
         html.lenis-scrolling * {
             pointer-events: none !important;
         }
+
         html.lenis-scrolling iframe,
         html.lenis-scrolling .hero-video-bg,
         .lenis.lenis-scrolling iframe,
         .lenis.lenis-scrolling .hero-video-bg {
             pointer-events: none !important;
         }
+
         html.lenis-scrolling input,
         html.lenis-scrolling textarea,
         html.lenis-scrolling select {
@@ -413,18 +427,22 @@
             width: 8px;
             height: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #080808;
         }
+
         ::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.16);
             border-radius: 999px;
             border: 2px solid #080808;
             transition: background 0.25s ease;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(242, 212, 0, 0.7);
         }
+
         * {
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.16) #080808;
@@ -472,11 +490,13 @@
             transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s, background-color 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(242, 212, 0, 0.12);
         }
+
         .back-to-top-btn.is-visible {
             opacity: 1;
             visibility: visible;
             transform: translateY(0) scale(1);
         }
+
         .back-to-top-btn:hover {
             background: rgba(26, 26, 26, 0.92);
             border-color: rgba(242, 212, 0, 0.6);
@@ -484,9 +504,11 @@
             transform: translateY(-3px) scale(1.06);
             box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(242, 212, 0, 0.35);
         }
+
         .back-to-top-btn:active {
             transform: translateY(0) scale(0.96);
         }
+
         @media (max-width: 768px) {
             .back-to-top-btn {
                 bottom: max(20px, calc(env(safe-area-inset-bottom, 0px) + 12px));
@@ -503,8 +525,9 @@
     <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
     <!-- Back to Top Button -->
     <button id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6"/>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6" />
         </svg>
     </button>
 
@@ -1105,8 +1128,9 @@
         <div class="main-container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <img src="https://www.synkynstudios.com/images/logo.png" alt="Synkyn Studios Logo - AI Film Studio Bengaluru"
-                        class="footer-logo" onerror="this.style.display='none'" />
+                    <img src="https://www.synkynstudios.com/images/logo.png"
+                        alt="Synkyn Studios Logo - AI Film Studio Bengaluru" class="footer-logo"
+                        onerror="this.style.display='none'" />
                     <p class="footer-brand-title">About the studio</p>
                     <p class="footer-tagline">
                         Synkyn creates AI-powered commercials, product films, CGI visuals, and social media content for
@@ -1210,7 +1234,7 @@
     <script src="./assets/main.js" type="module"></script>
     <script src="./assets/fx.js?v=3"></script>
 
-    
+
     <script>
         (function initSmoothScroll() {
             function startLenis() {
@@ -1319,7 +1343,7 @@
         })();
     </script>
 
-<script defer="" src="./assets/navbar.js?v=7"></script>
+    <script defer="" src="./assets/navbar.js?v=7"></script>
     <script defer="" src="./assets/footer.js?v=2"></script>
 </body>
 
