@@ -3,10 +3,6 @@
   Copyright (c) 2026 Synkyn Studios. All rights reserved.
 */
 
-try {
-    sessionStorage.setItem('synkyn_loader_shown', 'true');
-} catch (e) {}
-
 const desktopNav = document.getElementById('desktop-navbar');
 if (desktopNav) {
     desktopNav.innerHTML = `

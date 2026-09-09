@@ -9,10 +9,21 @@
    dedicated, app-style navigation: top-attached black header + slide-down panel.
    ========================================================================== */
 
+/* Base navbar definition */
+body header .header-two,
+header .header-two,
+.header-two {
+    position: fixed !important;
+    z-index: 99999 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 /* --------------------------------------------------------------------------
-   DESKTOP (>= 1280px) — keep the existing floating pill behaviour untouched
+   DESKTOP (>= 1280px) — keep floating pill centered without horizontal shift
    -------------------------------------------------------------------------- */
 @media (min-width: 1280px) {
+
     body header .header-two,
     header .header-two,
     .header-two {
@@ -21,15 +32,26 @@
         left: 50% !important;
         right: auto !important;
         transform: translate3d(-50%, 0, 0) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        transition: top 0.5s ease-in-out, opacity 0.4s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        will-change: transform, opacity, top;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 1140px !important;
+        transition: top 0.4s ease-in-out, opacity 0.35s ease !important;
+        will-change: opacity, top;
         z-index: 99999 !important;
-        opacity: 1;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
-    /* Desktop hidden state: faded out, keeping centering */
+    @media (min-width: 1440px) {
+
+        body header .header-two,
+        header .header-two,
+        .header-two {
+            max-width: 1290px !important;
+        }
+    }
+
+    /* Desktop hidden state: faded out, strictly preserving horizontal centering */
     body header .header-two.nav-hidden,
     header .header-two.nav-hidden,
     .header-two.nav-hidden {
@@ -37,7 +59,13 @@
         pointer-events: none !important;
         transform: translate3d(-50%, 0, 0) !important;
     }
+
+    #desktop-navbar {
+        display: flex !important;
+        min-height: 44px;
+    }
 }
+
 
 /* --------------------------------------------------------------------------
    MOBILE & TABLET REDESIGN (<= 1279.98px)
@@ -430,5 +458,97 @@ body.overflow-hidden {
     .hero-bottom-content {
         margin-bottom: -1.9rem;
         gap: 2px !important;
+    }
+}
+
+/* ==========================================================================
+   NAVBAR POSITION LOCK — authoritative block, must stay last in this file
+   --------------------------------------------------------------------------
+   The header is fixed page chrome. It must never be moved by main.js's
+   [data-ns-animate] engine, by its headerTwo() inline-style writer, or by a
+   leftover Tailwind translate utility.
+
+   Why this resets `translate`, `rotate` and `scale` as well as `transform`:
+   those are four SEPARATE CSS properties. Depending on the Tailwind build,
+   `-translate-x-1/2` compiles either to a `transform: translate(...)` or to
+   the standalone `translate: -50%` property. Overriding only `transform`
+   leaves the standalone one alive, and the two COMPOSE — giving a double
+   -50% shift, which parks the pill off to the left. Resetting all four and
+   then applying one explicit transform removes that whole class of bug.
+   ========================================================================== */
+body header .header-two,
+header .header-two,
+.header-two {
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+    animation: none !important;
+    clip-path: none !important;
+    rotate: none !important;
+    scale: none !important;
+}
+
+/* ---------- DESKTOP (>= 1280px): centred floating pill ---------- */
+@media (min-width: 1280px) {
+
+    body header .header-two,
+    header .header-two,
+    .header-two {
+        position: fixed !important;
+        top: 3.5rem !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+        translate: none !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 1140px !important;
+        transition: top 0.4s ease-in-out, opacity 0.35s ease !important;
+        will-change: opacity, top;
+        z-index: 99999 !important;
+    }
+
+    /* Hidden state fades only — never moves horizontally. */
+    body header .header-two.nav-hidden,
+    header .header-two.nav-hidden,
+    .header-two.nav-hidden {
+        translate: none !important;
+        transform: translateX(-50%) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+}
+
+@media (min-width: 1440px) {
+
+    body header .header-two,
+    header .header-two,
+    .header-two {
+        max-width: 1290px !important;
+    }
+}
+
+/* ---------- MOBILE / TABLET (<= 1279.98px): full-width top bar ---------- */
+@media (max-width: 1279.98px) {
+
+    body header .header-two,
+    header .header-two,
+    .header-two {
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        translate: none !important;
+        transform: translate3d(0, 0, 0) !important;
+    }
+
+    /* Vertical slide-away is intentional and preserved. */
+    body header .header-two.nav-hidden,
+    header .header-two.nav-hidden,
+    .header-two.nav-hidden {
+        translate: none !important;
+        transform: translate3d(0, -100%, 0) !important;
+        opacity: 1 !important;
     }
 }
