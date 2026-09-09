@@ -38,6 +38,18 @@
             display: none !important;
         }
     </style>
+    <script>
+        // If the GSAP reveal engine has not initialised by now, the hero would
+        // otherwise stay at opacity:0 and the page reads as a black screen.
+        // main.js stamps data-ns-animate-init on elements it takes over, so
+        // this only fires when the engine genuinely has not arrived.
+        setTimeout(function () {
+            var el = document.querySelector('[data-ns-animate], .reveal-text');
+            if (!el || !el.hasAttribute('data-ns-animate-init')) {
+                document.documentElement.classList.add('fx-failsafe');
+            }
+        }, 2500);
+    </script>
     <!-- Search Engine Verifications -->
     <meta name="msvalidate.01" content="41DF851FCE84360A9074BDC7D98E6FE8" />
 
@@ -124,7 +136,10 @@
     <link href="./apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
     <link as="font" crossorigin="" href="./fonts/inter-tight-latin-normal.woff2" rel="preload" type="font/woff2" />
     <link as="font/woff2" crossorigin="" href="./fonts/inter-tight-latin-italic.woff2" rel="preload" />
+    <link rel="preconnect" href="https://ik.imagekit.io" crossorigin />
     <link rel="preconnect" href="https://player.vimeo.com" />
+    <link rel="dns-prefetch" href="https://vod-progressive.akamaized.net" />
+    <link rel="dns-prefetch" href="https://vod-adaptive-ak.vimeocdn.com" />
     <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin />
     <link rel="preconnect" href="https://f.vimeocdn.com" crossorigin />
 
@@ -272,494 +287,44 @@
     </script>
     <link href="./assets/main.js" rel="modulepreload" />
     <link as="style" href="./assets/main.css?v=9" rel="preload" />
+    <!-- Speculation Rules: prerender an internal page when the pointer lingers
+         on its link, so the next navigation paints instantly. Chrome/Edge use
+         it; other browsers ignore it harmlessly. -->
+    <script type="speculationrules">
+    {
+      "prerender": [{
+        "where": { "href_matches": "/*" },
+        "eagerness": "moderate"
+      }],
+      "prefetch": [{
+        "where": { "href_matches": "/*" },
+        "eagerness": "conservative"
+      }]
+    }
+    </script>
+    <!-- Warm the animation stack immediately. These are still executed in
+         their original order and position; preloading only moves the DOWNLOAD
+         to the start of the page rather than 130 KB into the parse. -->
+    <link rel="preload" as="script" href="./vendor/gsap.min.js" />
+    <link rel="preload" as="script" href="./vendor/split-text.min.js" />
+    <link rel="preload" as="script" href="./vendor/scroll-trigger.min.js" />
+    <link rel="preload" as="script" href="./vendor/draw-svg.min.js" />
+    <link rel="preload" as="script" href="./vendor/motionpathplugin.min.js" />
+    <link rel="preload" as="script" href="./vendor/lenis.min.js" />
+    <link rel="preload" as="script" href="./vendor/springer.min.js" />
+    <link rel="preload" as="script" href="./assets/fx.js?v=3" />
+    <link rel="preload" as="image" href="./images/logo.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="./images/hero-poster.webp" fetchpriority="high" />
     <link href="./assets/main.css?v=9" rel="stylesheet" />
     <link href="./assets/loader.css?v=4" rel="stylesheet" />
     <link href="./assets/navbar.css?v=15" rel="stylesheet" />
-    <style id="synkyn-theme">
-        :root,
-        :host {
-            --color-primary-50: #faf8ee;
-            --color-primary-400: #ffd84d;
-            --color-primary-500: #f2d400;
-            --color-primary-600: #d4af00;
-            --color-background-5: #161616;
-            --color-background-6: #101010;
-            --color-background-7: #1b1b1b;
-            --color-background-8: #080808;
-            --color-background-9: #232323;
-            --color-stroke-5: #232323;
-            --color-stroke-6: #272727;
-            --color-stroke-7: #313131;
-            --color-stroke-8: #3a3a3a;
-            --color-ns-green: #efe85c;
-            --color-ns-cyan: #ffd54a;
-            --color-helix-blue: #1a1a1a;
-            --color-helix-blue-shade: #141414;
-            --color-helix-blue-dark: #101010;
-            --color-helix-blue-dark-1: #0c0c0c;
-            --color-helix-blue-dark-2: #080808;
-            --color-cyan-400: #ffd633;
-            --color-cyan-500: #f2c200;
-            --color-cyan-600: #c79600;
-            --color-cyan-700: #9a7300;
-            --color-blue-50: #fdf8e6;
-            --color-blue-100: #fbf0c4;
-            --color-blue-400: #ffd84d;
-            --color-blue-500: #d9a800;
-            --color-blue-600: #946a00;
-            --color-blue-700: #7a5200;
-            --color-indigo-700: #7a5200;
-            --color-fuchsia-400: #ffd84d;
-            --color-fuchsia-600: #c79600;
-            --color-fuchsia-700: #9a7300;
-            --color-gradient-1: linear-gradient(135deg, #ffd84d 0%, #ffe9b0 100%);
-            --color-gradient-6: linear-gradient(#ffd54a 0%, #efe85c 100%);
-            --color-gradient-7: linear-gradient(#fff 0%, #ffd84d 100%);
-            --color-gradient-8: linear-gradient(156deg, #fff 32.92%, #f2c200 91%);
-            --color-gradient-12: radial-gradient(73.01% 80.77% at 19.23% 47.79%, #ffd54a 0%, #f2d40000 100%);
-            --color-gradient-13: linear-gradient(156deg, #fff 32.92%, #ffe0a8 91%);
-            --color-gradient-helix-dark: linear-gradient(135deg, #101010 0%, #080808 100%);
-            --swiper-theme-color: #f2c200;
-        }
-
-        .btn-primary,
-        .btn-primary-v2 {
-            color: #0a0a0a !important
-        }
-
-        .btn-primary svg,
-        .btn-primary-v2 svg {
-            color: #0a0a0a !important
-        }
-
-        .actually-area {
-            background-color: transparent !important
-        }
-
-        main>section {
-            background-color: transparent !important;
-        }
-
-        section>div[class*="bg-background-12"],
-        section>div[class*="bg-background-3"],
-        section>div[class*="bg-background-2"] {
-            background-color: transparent !important;
-        }
-
-        main>section,
-        main>section * {
-            isolation: auto;
-        }
-
-        .btn-primary:hover {
-            background-color: #000 !important;
-            color: #fff !important;
-            border-color: #000 !important;
-        }
-
-        #space-earth-text::selection {
-            -webkit-text-fill-color: #ffffff;
-            color: #ffffff;
-            background-color: rgba(255, 235, 59, 0.3);
-        }
-
-        #space-earth-text::-moz-selection {
-            -webkit-text-fill-color: #ffffff;
-            color: #ffffff;
-            background-color: rgba(255, 235, 59, 0.3);
-        }
-
-        html,
-        body {
-            background-color: #080808;
-            color: #fff;
-            overflow-x: clip !important;
-            max-width: 100% !important;
-        }
-    </style>
+    <link href="./assets/home-theme.css?v=1" rel="stylesheet" />
     <link href="./assets/footer.css?v=12" rel="stylesheet" />
+    <link href="./assets/home.css?v=1" rel="stylesheet" />
 
-    <style id="synkyn-responsive-fixes">
-        .hero-brand {
-            font-weight: 600;
-        }
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .hero-brand {
-                font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
-                line-height: .95 !important;
-            }
-
-            .hero-services {
-                font-size: clamp(1.1rem, 3.2vw, 1.8rem) !important;
-                line-height: 1.15 !important;
-            }
-
-            .hero-tagline {
-                font-size: clamp(1.05rem, 2.4vw, 1.5rem) !important;
-                line-height: 1.35 !important;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .hero-bottom-content {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-            }
-
-            #hero-showreel-wrap {
-                order: 1 !important;
-                display: flex !important;
-                justify-content: center !important;
-                width: 100% !important;
-                max-width: 276px !important;
-                margin: clamp(1.25rem, 3.5vh, 2rem) auto clamp(1rem, 2.5vh, 1.5rem) auto !important;
-            }
-
-            #hero-tagline-block {
-                order: 2 !important;
-                width: 100% !important;
-                align-items: center !important;
-                text-align: center !important;
-            }
-
-            #hero-tagline-block .hero-tagline {
-                text-align: center !important;
-            }
-
-            #hero-mobile-copyright {
-                order: 3 !important;
-            }
-        }
-
-        @media (max-width: 767px) {
-            #hero .hero-top-layout {
-                gap: 1.5rem !important;
-                margin-bottom: clamp(1.25rem, 3.5vh, 2rem) !important;
-            }
-
-            .hero-brand {
-                font-size: clamp(2rem, 10vw, 3rem) !important;
-                line-height: .95 !important;
-                letter-spacing: -.02em !important;
-            }
-
-            .hero-reg {
-                font-size: .32em !important;
-            }
-
-            .hero-services-list {
-                gap: .38rem !important;
-                padding-top: 0 !important;
-            }
-
-            .hero-services {
-                font-size: clamp(.95rem, 4.4vw, 1.35rem) !important;
-                line-height: 1.14 !important;
-            }
-
-            .hero-tagline {
-                font-size: clamp(.98rem, 4vw, 1.2rem) !important;
-                line-height: 1.4 !important;
-            }
-
-            .hero-copyright {
-                font-size: clamp(.72rem, 3vw, .85rem) !important;
-            }
-
-            .space-earth-container .section-title {
-                font-size: clamp(2rem, 9.5vw, 3.1rem) !important;
-                line-height: 1.06 !important;
-            }
-        }
-
-        @media (max-width: 430px) {
-            .hero-brand {
-                font-size: clamp(1.8rem, 9.5vw, 2.5rem) !important;
-            }
-
-            .hero-services {
-                font-size: clamp(.9rem, 4.4vw, 1.2rem) !important;
-            }
-
-            .hero-tagline {
-                font-size: clamp(.95rem, 4vw, 1.1rem) !important;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .hero-brand {
-                font-size: clamp(1.6rem, 9vw, 2.2rem) !important;
-            }
-
-            .hero-services {
-                font-size: clamp(.82rem, 4.3vw, 1.05rem) !important;
-            }
-
-            .hero-tagline {
-                font-size: clamp(.9rem, 4vw, 1.02rem) !important;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .hero-brand {
-                font-size: clamp(2.5rem, min(6.5vw, 7.5dvh), 6rem) !important;
-                line-height: .9 !important;
-            }
-
-            .hero-services {
-                font-size: clamp(1.05rem, min(2.35vw, 3dvh), 2rem) !important;
-            }
-
-            .hero-tagline {
-                font-size: clamp(1.05rem, min(1.5vw, 2.1dvh), 1.6rem) !important;
-            }
-        }
-    </style>
     <meta name="google-site-verification" content="U6ECGq1OyJuADOEHcX9TC1W24aWH9jZQienHQgxDD1s" />
 
-    <style id="synkyn-enhanced-responsive">
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
 
-        html {
-            -webkit-text-size-adjust: 100%;
-        }
-
-        #hero {
-            min-height: 100dvh;
-            height: auto;
-            position: relative;
-        }
-
-        @media (min-width: 1024px) {
-            #hero {
-                height: 100svh;
-            }
-        }
-
-        .hero-inner {
-            border-radius: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        @media (min-width: 640px) {
-            .hero-inner {
-                border-radius: 32px;
-                border: 12px solid #000;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .hero-inner {
-                border-radius: 64px;
-                border: 16px solid #000;
-            }
-        }
-
-        .hero-brand {
-            font-weight: 700;
-            line-height: 0.92;
-            letter-spacing: -0.04em;
-        }
-
-        #hero-how-it-works-btn {
-            display: block !important;
-            aspect-ratio: 16 / 9 !important;
-            width: 310px !important;
-            max-width: 100% !important;
-            height: auto !important;
-            overflow: hidden !important;
-            position: relative !important;
-        }
-
-        #hero-thumbnail-video {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            border: 0 !important;
-            pointer-events: none !important;
-        }
-
-        @media (max-width: 767px) {
-            #hero .relative.z-10 {
-                padding-top: 5.25rem !important;
-                padding-bottom: 2.5rem !important;
-            }
-
-            .hero-top-layout {
-                gap: 0.75rem !important;
-                margin-bottom: clamp(1.25rem, 3.5vh, 2rem) !important;
-            }
-
-            .hero-brand {
-                font-size: clamp(1.65rem, 8.5vw, 2.8rem) !important;
-                line-height: 0.92 !important;
-            }
-
-            .hero-services-list {
-                gap: 0.25rem !important;
-                padding-top: 0 !important;
-            }
-
-            .hero-services {
-                font-size: clamp(0.85rem, 3.5vw, 1.1rem) !important;
-                line-height: 1.15 !important;
-            }
-
-            .hero-tagline {
-                font-size: clamp(0.9rem, 3.5vw, 1.15rem) !important;
-                line-height: 1.32 !important;
-                margin-bottom: 0.5rem;
-            }
-
-            .hero-showreel-container {
-                width: 100%;
-                display: flex;
-                justify-content: center !important;
-                margin-top: 0.5rem !important;
-                margin-bottom: 0.5rem !important;
-            }
-
-            #hero-how-it-works-btn {
-                display: block !important;
-                width: 100% !important;
-                max-width: 276px !important;
-                height: auto !important;
-                aspect-ratio: 16 / 9 !important;
-                margin: 0 auto !important;
-                border-width: 4px !important;
-                border-radius: 16px !important;
-                box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.75) !important;
-            }
-        }
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-            #hero .relative.z-10 {
-                padding-top: 7.5rem !important;
-                padding-bottom: 4rem !important;
-            }
-
-            .hero-brand {
-                font-size: clamp(2.8rem, 6.5vw, 4.5rem) !important;
-            }
-
-            .hero-services {
-                font-size: clamp(1.1rem, 2.4vw, 1.6rem) !important;
-            }
-
-            .hero-tagline {
-                font-size: clamp(1.05rem, 2.2vw, 1.45rem) !important;
-            }
-
-            #hero-how-it-works-btn {
-                width: 260px !important;
-                height: auto !important;
-                aspect-ratio: 16 / 9 !important;
-            }
-        }
-
-        @media (min-width: 64rem) {
-            .lg\:w-\[280px\] {
-                width: 280px !important;
-                height: 155px !important;
-            }
-
-            #hero-how-it-works-btn {
-                width: 280px !important;
-                height: 155px !important;
-                aspect-ratio: 16 / 9 !important;
-            }
-        }
-
-        .pipeline-section {
-            padding: 0 1rem;
-        }
-
-        .pipeline-section .hero {
-            padding: clamp(120px, 18vh, 220px) 1rem 80px;
-        }
-
-        #space-earth-text {
-            font-size: clamp(2.2rem, 9vw, 4.2rem);
-            line-height: 1.05;
-            text-align: center;
-        }
-
-        .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-        }
-
-        @media (min-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1.1fr 1fr;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .modal-card {
-                border-radius: 0 !important;
-                max-height: none !important;
-                height: auto !important;
-                aspect-ratio: 16 / 9 !important;
-            }
-        }
-    </style>
-
-    <style id="synkyn-showreel-16x9-fix">
-        #hero-how-it-works-btn {
-            display: block !important;
-            position: relative !important;
-            width: 310px !important;
-            max-width: 100% !important;
-            height: 0 !important;
-            padding-bottom: 56.25% !important;
-            aspect-ratio: auto !important;
-            overflow: hidden !important;
-            box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.75) !important;
-        }
-
-        @media (max-width: 767px) {
-            #hero-how-it-works-btn {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: 0 !important;
-                padding-bottom: 56.25% !important;
-                margin: 0 auto !important;
-                border-width: 4px !important;
-                border-radius: 16px !important;
-                box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.75) !important;
-            }
-        }
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-            #hero-how-it-works-btn {
-                width: 260px !important;
-                height: 0 !important;
-                padding-bottom: 56.25% !important;
-            }
-        }
-
-        @media (min-width: 64rem) {
-            .lg\:w-\[280px\] {
-                width: 280px !important;
-                height: 0 !important;
-                padding-bottom: 56.25% !important;
-            }
-
-            #hero-how-it-works-btn {
-                width: 280px !important;
-                height: 0 !important;
-                padding-bottom: 56.25% !important;
-            }
-        }
-    </style>
 </head>
 
 <body class="bg-background-3 dark:bg-helix-blue-dark-2">
@@ -920,14 +485,11 @@
                 <div class="relative overflow-hidden mx-auto w-full h-full hero-inner" style="background-color: #000">
 
                     <div class="absolute inset-0 -z-0 overflow-hidden hero-video-bg" aria-hidden="true">
-                        <iframe class="hero-bg-iframe hero-bg-desktop"
+                        <img class="hero-video-poster" src="./images/hero-poster.webp" alt="" aria-hidden="true"
+                            fetchpriority="high" decoding="async" />
+                        <iframe class="hero-bg-iframe"
                             data-src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
                             title="Synkyn Studios background" tabindex="-1" frameborder="0"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allow="autoplay; fullscreen; picture-in-picture"></iframe>
-                        <iframe class="hero-bg-iframe hero-bg-mobile"
-                            data-src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
-                            title="Synkyn Studios background (mobile)" tabindex="-1" frameborder="0"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                     </div>
@@ -1021,249 +583,6 @@
                     </div>
                 </div>
 
-                <style>
-                    #video-modal.is-open {
-                        display: flex !important;
-                    }
-
-                    .cinematic-backdrop {
-                        background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%);
-                        backdrop-filter: blur(20px);
-                        -webkit-backdrop-filter: blur(20px);
-                    }
-
-                    .modal-card {
-                        width: 100%;
-                        max-width: min(1200px, calc((100vh - 120px) * 16 / 9), 92vw);
-                        aspect-ratio: 16 / 9;
-                        height: auto;
-                        border-radius: 16px;
-                        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
-                    }
-
-                    @media (max-width: 640px) {
-                        .modal-card {
-                            width: 100%;
-                            max-width: 100vw;
-                            aspect-ratio: 16 / 9;
-                            height: auto;
-                            border-radius: 0;
-                        }
-                    }
-
-                    .v-header-title {
-                        position: relative;
-                        z-index: 20;
-                        color: rgba(255, 255, 255, 0.95);
-                        font-family: inherit;
-                        font-weight: 900;
-                        font-size: clamp(1.4rem, 3.8vw, 2.5rem);
-                        letter-spacing: 0.12em;
-                        text-align: center;
-                        pointer-events: none;
-                        margin-bottom: 24px;
-                        transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-
-                    .v-header-title.hidden-ui {
-                        opacity: 0;
-                        transform: translateY(-16px);
-                    }
-
-                    @media (max-width: 640px) {
-                        .v-header-title {
-                            margin-bottom: 14px;
-                        }
-                    }
-
-                    .v-stage {
-                        position: absolute;
-                        inset: 0;
-                        width: 100%;
-                        height: 100%;
-                    }
-
-                    .v-iframe {
-                        position: absolute;
-                        inset: 0;
-                        width: 100%;
-                        height: 100%;
-                        border: 0;
-                        outline: none;
-                    }
-
-                    .v-click {
-                        position: absolute;
-                        inset: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: transparent;
-                        border: 0;
-                        padding: 0;
-                        margin: 0;
-                        cursor: pointer;
-                        z-index: 4;
-                    }
-
-                    .v-controls {
-                        position: absolute;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        z-index: 6;
-                        display: flex;
-                        align-items: center;
-                        gap: 12px;
-                        padding: 30px 18px 15px;
-                        background: linear-gradient(to top, rgba(0, 0, 0, .78) 0%, rgba(0, 0, 0, .25) 55%, rgba(0, 0, 0, 0) 100%);
-                        opacity: 1;
-                        transition: opacity .35s ease;
-                        pointer-events: auto;
-                    }
-
-                    .v-controls.hidden-ui {
-                        opacity: 0;
-                        pointer-events: none;
-                    }
-
-                    .v-btn {
-                        flex: 0 0 auto;
-                        width: 38px;
-                        height: 38px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        background: rgba(255, 255, 255, .08);
-                        border: 1px solid rgba(255, 255, 255, .16);
-                        border-radius: 50%;
-                        color: #fff;
-                        cursor: pointer;
-                        transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
-                    }
-
-                    .v-btn:hover {
-                        background: #f2d400;
-                        color: #000;
-                        border-color: #f2d400;
-                        transform: scale(1.06);
-                    }
-
-                    .v-btn svg {
-                        width: 18px;
-                        height: 18px;
-                        display: block;
-                    }
-
-                    .v-progress {
-                        position: relative;
-                        flex: 1 1 auto;
-                        height: 26px;
-                        display: flex;
-                        align-items: center;
-                        cursor: pointer;
-                        touch-action: none;
-                        outline: none;
-                    }
-
-                    .v-track {
-                        position: relative;
-                        width: 100%;
-                        height: 5px;
-                        border-radius: 999px;
-                        background: rgba(255, 255, 255, .22);
-                        overflow: hidden;
-                        transition: height .15s ease;
-                    }
-
-                    .v-progress:hover .v-track,
-                    .v-progress:focus-visible .v-track {
-                        height: 7px;
-                    }
-
-                    .v-buffered {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        height: 100%;
-                        width: 0;
-                        background: rgba(255, 255, 255, .34);
-                    }
-
-                    .v-played {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        height: 100%;
-                        width: 0;
-                        background: linear-gradient(90deg, #ffe08a 0%, #f2d400 100%);
-                    }
-
-                    .v-thumb {
-                        position: absolute;
-                        top: 50%;
-                        left: 0;
-                        width: 13px;
-                        height: 13px;
-                        border-radius: 50%;
-                        background: #fff;
-                        transform: translate(-50%, -50%);
-                        box-shadow: 0 0 0 4px rgba(242, 212, 0, .35);
-                        opacity: 0;
-                        transition: opacity .2s ease;
-                        pointer-events: none;
-                    }
-
-                    .v-progress:hover .v-thumb,
-                    .v-progress:focus-visible .v-thumb,
-                    .v-progress.scrubbing .v-thumb {
-                        opacity: 1;
-                    }
-
-                    .v-time {
-                        flex: 0 0 auto;
-                        color: #fff;
-                        font-size: 12.5px;
-                        font-variant-numeric: tabular-nums;
-                        letter-spacing: .02em;
-                        white-space: nowrap;
-                        min-width: 92px;
-                        text-align: center;
-                    }
-
-                    @media (max-width: 640px) {
-                        .v-controls {
-                            gap: 8px;
-                            padding: 26px 10px 10px;
-                        }
-
-                        .v-btn {
-                            width: 34px;
-                            height: 34px;
-                        }
-
-                        .v-btn svg {
-                            width: 16px;
-                            height: 16px;
-                        }
-
-                        .v-time {
-                            font-size: 11px;
-                            min-width: 78px;
-                        }
-                    }
-
-                    #modal-content:fullscreen,
-                    #modal-content:-webkit-full-screen {
-                        width: 100vw;
-                        height: 100vh;
-                        max-width: none;
-                        max-height: none;
-                        border-radius: 0;
-                        aspect-ratio: auto;
-                    }
-                </style>
 
                 <div id="video-modal" class="fixed inset-0 hidden flex-col items-center justify-center p-0 sm:p-6"
                     style="z-index: 2147483647;" role="dialog" aria-modal="true"
@@ -1288,7 +607,7 @@
                         <div class="v-stage">
 
                             <iframe id="modal-video" class="v-iframe" loading="lazy"
-                                src="https://player.vimeo.com/video/1210886734?autoplay=0&loop=1&title=0&byline=0&portrait=0&badge=0&controls=0&dnt=1&transparent=0"
+                                data-src="https://player.vimeo.com/video/1210886734?autoplay=0&loop=1&title=0&byline=0&portrait=0&badge=0&controls=0&dnt=1&transparent=0"
                                 title="Synkyn Studios SHOWREEL 2026" frameborder="0"
                                 referrerpolicy="strict-origin-when-cross-origin"
                                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
@@ -1315,67 +634,6 @@
                 </div>
             </div>
         </section>
-        <style>
-            .actually-area {
-                position: relative;
-                opacity: 0;
-                transform: translate3d(0, 20px, 0);
-                transition: opacity 0.85s cubic-bezier(.22, .68, 0, 1.04),
-                    transform 0.85s cubic-bezier(.22, .68, 0, 1.04);
-                will-change: opacity, transform;
-            }
-
-            .actually-area.is-in-view {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-
-            .actually-area::before,
-            .actually-area::after {
-                content: "";
-                position: absolute;
-                left: 0;
-                right: 0;
-                height: clamp(80px, 14vh, 180px);
-                pointer-events: none;
-                z-index: 5;
-            }
-
-            .actually-area::before {
-                top: -1px;
-                background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0) 100%);
-            }
-
-            .actually-area::after {
-                bottom: -1px;
-                background: linear-gradient(to top, #080808 0%, rgba(8, 8, 8, 0) 100%);
-            }
-
-            #space-earth-text {
-                transform: translateZ(0);
-                backface-visibility: hidden;
-                will-change: background-position;
-            }
-
-            @media (max-width: 768px) {
-                .actually-area {
-                    filter: none !important;
-                }
-
-                .actually-area-inner {
-                    padding-top: clamp(48px, 10vh, 80px) !important;
-                    padding-bottom: clamp(48px, 10vh, 80px) !important;
-                }
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-                .actually-area {
-                    opacity: 1;
-                    transform: none;
-                    transition: none;
-                }
-            }
-        </style>
         <section class="actually-area overflow-hidden">
             <div class="actually-area-inner section-spacing">
                 <div class="container">
@@ -1420,834 +678,6 @@
         <style>
             #problem-section-cursor-dot {
                 pointer-events: none !important;
-            }
-        </style>
-        <style>
-            .hero-inner {
-                border-radius: 0;
-            }
-
-            @media (min-width: 640px) {
-                .hero-inner {
-                    border-radius: 24px;
-                }
-            }
-
-            @media (min-width: 768px) {
-                .hero-inner {
-                    border-radius: 40px;
-                    border: 12px solid #000;
-                }
-            }
-
-            @media (min-width: 1024px) {
-                .hero-inner {
-                    border-radius: 64px;
-                    border: 16px solid #000;
-                }
-            }
-
-            .hero-video-bg {
-                pointer-events: none;
-                background: #000;
-            }
-
-            .hero-video-bg .hero-bg-iframe {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 100vw;
-                height: 56.25vw;
-                min-height: 100vh;
-                min-width: 177.77vh;
-                transform: translate(-50%, -50%);
-                border: 0;
-                pointer-events: none;
-                opacity: 1 !important;
-                filter: none !important;
-            }
-
-            .hero-bg-mobile {
-                display: none;
-            }
-
-            @media (max-width:767px) {
-                .hero-bg-desktop {
-                    display: none;
-                }
-
-                .hero-bg-mobile {
-                    display: block;
-                }
-            }
-
-            .pipeline-section {
-                --gold: #e8b34a;
-                --gold-bright: #ffd77e;
-                --ink: #f2f3f6;
-                --ink-dim: #8f95a0;
-                --font-display: "Inter Tight", system-ui, sans-serif;
-                --font-body: "Inter Tight", system-ui, sans-serif;
-                --ease-soft: cubic-bezier(0.22, 0.61, 0.2, 1);
-                position: relative;
-                overflow: hidden;
-                background: transparent;
-                color: var(--ink);
-                font-family: var(--font-body);
-                -webkit-font-smoothing: antialiased;
-                padding: 0;
-            }
-
-            .pipeline-section::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 280px;
-                background: linear-gradient(to bottom, transparent 0%, #080808 100%);
-                z-index: 5;
-                pointer-events: none;
-            }
-
-            .pipeline-section .flecks {
-                position: absolute;
-                inset: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 0;
-                pointer-events: none;
-            }
-
-            .pipeline-section .fleck {
-                fill: var(--gold);
-                transform-box: fill-box;
-                transform-origin: center;
-                animation:
-                    fleck-drift var(--fd, 14s) ease-in-out infinite alternate,
-                    fleck-fade var(--ff, 5s) ease-in-out infinite alternate;
-                will-change: transform, opacity;
-            }
-
-            .pipeline-section .fleck.dust {
-                fill: #aab0bd;
-            }
-
-            @keyframes fleck-drift {
-                from {
-                    transform: translate3d(0, 0, 0) rotate(0deg);
-                }
-
-                to {
-                    transform: translate3d(var(--dx, 10px), var(--dy, -14px), 0) rotate(var(--rot, 30deg));
-                }
-            }
-
-            @keyframes fleck-fade {
-                from {
-                    opacity: 0.06;
-                }
-
-                to {
-                    opacity: var(--fo, 0.4);
-                }
-            }
-
-            .pipeline-section .hero {
-                min-height: 46vh;
-                display: grid;
-                place-content: center;
-                text-align: center;
-                padding: clamp(160px, 26vh, 300px) 24px 60px;
-                background: transparent;
-            }
-
-            .pipeline-section .hero-eyebrow {
-                color: var(--gold);
-                font-size: 11.5px;
-                font-weight: 600;
-                letter-spacing: 0.46em;
-                text-transform: uppercase;
-                margin-bottom: 22px;
-            }
-
-            .pipeline-section .hero-title {
-                font-family: var(--font-display);
-                font-weight: 700;
-                font-size: clamp(34px, 5.4vw, 64px);
-                line-height: 1.08;
-                letter-spacing: -0.02em;
-                display: grid;
-                gap: 2px;
-            }
-
-            .pipeline-section .hero-gold {
-                background: linear-gradient(100deg, #f6c15e 0%, #ffe3a0 45%, #e0a63e 100%);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-            }
-
-            .pipeline-section .hero-white {
-                color: var(--ink);
-            }
-
-            .pipeline-section .hero-sub {
-                margin-top: 6px;
-                color: var(--gold);
-                font-size: clamp(13px, 1.5vw, 16px);
-                font-weight: 500;
-                letter-spacing: 0.04em;
-                line-height: 1.4;
-                max-width: 800px;
-                margin-inline: auto;
-                text-transform: none;
-                text-shadow: none;
-            }
-
-            .pipeline-section .journey {
-                position: relative;
-                max-width: 1360px;
-                margin-inline: auto;
-                background: transparent;
-                margin-top: 0;
-            }
-
-            .pipeline-section .journey-svg {
-                display: block;
-                width: min(1200px, 100%);
-                height: auto;
-                margin-inline: auto;
-                overflow: visible;
-            }
-
-            .pipeline-section .trail-dim {
-                stroke: #6f5c2f;
-                stroke-width: 1.6;
-                fill: none;
-                opacity: 0.38;
-                stroke-linecap: round;
-            }
-
-            .pipeline-section .trail-halo {
-                filter: none !important;
-                stroke: #b97f22;
-                stroke-width: 26;
-                fill: none;
-                opacity: 0.22;
-                stroke-linecap: round;
-            }
-
-            .pipeline-section .trail-glow {
-                filter: none !important;
-                stroke: #f4b452;
-                stroke-width: 12;
-                fill: none;
-                opacity: 0.45;
-                stroke-linecap: round;
-            }
-
-            .pipeline-section .trail-core {
-                stroke: url(#g-trail);
-                stroke-width: 3.4;
-                fill: none;
-                stroke-linecap: round;
-            }
-
-            .pipeline-section .trail-halo,
-            .pipeline-section .trail-glow,
-            .pipeline-section .trail-core {
-                will-change: stroke-dashoffset;
-            }
-
-            .pipeline-section .rocket-traveler {
-                will-change: transform, opacity;
-                transition: opacity 0.4s ease;
-            }
-
-            .pipeline-section .rocket-traveler .rt-glow {
-                animation: rt-breathe 2.2s ease-in-out infinite alternate;
-            }
-
-            @keyframes rt-breathe {
-                from {
-                    opacity: 0.55;
-                    transform: scale(0.94);
-                }
-
-                to {
-                    opacity: 0.85;
-                    transform: scale(1.08);
-                }
-            }
-
-            .pipeline-section .rocket-traveler .rt-flame-outer,
-            .pipeline-section .rocket-traveler .rt-flame-core,
-            .rt-flame-outer,
-            .rt-flame-core {
-                transform-origin: 0 0;
-                will-change: transform, opacity;
-            }
-
-            .pipeline-section .rocket-traveler .rt-flame-outer:nth-of-type(1),
-            .rt-flame-outer:nth-of-type(1) {
-                animation: flame-outer-a 0.55s ease-in-out infinite;
-            }
-
-            .pipeline-section .rocket-traveler .rt-flame-outer:nth-of-type(2),
-            .rt-flame-outer:nth-of-type(2) {
-                animation: flame-outer-b 0.4s ease-in-out infinite;
-                animation-delay: -0.15s;
-            }
-
-            .pipeline-section .rocket-traveler .rt-flame-core,
-            .rt-flame-core {
-                animation: flame-core 0.25s ease-in-out infinite;
-                animation-delay: -0.08s;
-            }
-
-            @keyframes flame-outer-a {
-                0% {
-                    transform: scaleY(1) scaleX(1);
-                    opacity: .85;
-                }
-
-                30% {
-                    transform: scaleY(1.08) scaleX(0.95);
-                    opacity: 1;
-                }
-
-                55% {
-                    transform: scaleY(0.94) scaleX(1.05);
-                    opacity: .8;
-                }
-
-                80% {
-                    transform: scaleY(1.05) scaleX(0.97);
-                    opacity: .95;
-                }
-
-                100% {
-                    transform: scaleY(1) scaleX(1);
-                    opacity: .85;
-                }
-            }
-
-            @keyframes flame-outer-b {
-                0% {
-                    transform: scaleY(1) translateX(0);
-                    opacity: .7;
-                }
-
-                25% {
-                    transform: scaleY(1.12) translateX(0.6px);
-                    opacity: .9;
-                }
-
-                50% {
-                    transform: scaleY(0.9) translateX(-0.4px);
-                    opacity: .65;
-                }
-
-                75% {
-                    transform: scaleY(1.06) translateX(0.5px);
-                    opacity: .85;
-                }
-
-                100% {
-                    transform: scaleY(1) translateX(0);
-                    opacity: .7;
-                }
-            }
-
-            @keyframes flame-core {
-                0% {
-                    transform: scaleY(1) scaleX(1);
-                    opacity: 1;
-                }
-
-                20% {
-                    transform: scaleY(1.15) scaleX(0.9);
-                    opacity: .9;
-                }
-
-                45% {
-                    transform: scaleY(0.92) scaleX(1.08);
-                    opacity: 1;
-                }
-
-                70% {
-                    transform: scaleY(1.1) scaleX(0.94);
-                    opacity: .95;
-                }
-
-                100% {
-                    transform: scaleY(1) scaleX(1);
-                    opacity: 1;
-                }
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-
-                .pipeline-section .rocket-traveler .rt-flame-outer,
-                .pipeline-section .rocket-traveler .rt-flame-core,
-                .rt-flame-outer,
-                .rt-flame-core {
-                    animation: none;
-                }
-            }
-
-            .rocket-rim {
-                animation: rim-shimmer 2.4s ease-in-out infinite;
-            }
-
-            @keyframes rim-shimmer {
-
-                0%,
-                100% {
-                    opacity: .25;
-                }
-
-                50% {
-                    opacity: .5;
-                }
-            }
-
-            .pipeline-section .clouds,
-            .pipeline-section .fg-clouds,
-            .pipeline-section .node-clouds,
-            .pipeline-section .cloud {
-                pointer-events: none;
-                will-change: transform;
-                transform-origin: center;
-            }
-
-            .pipeline-section .cloud.drift-a {
-                animation: cloud-drift-a 18s ease-in-out infinite alternate;
-            }
-
-            .pipeline-section .cloud.drift-b {
-                animation: cloud-drift-b 22s ease-in-out infinite alternate;
-            }
-
-            .pipeline-section .cloud.drift-c {
-                animation: cloud-drift-c 26s ease-in-out infinite alternate;
-            }
-
-            @keyframes cloud-drift-a {
-                from {
-                    transform: translate3d(0, 0, 0) scale(1);
-                }
-
-                to {
-                    transform: translate3d(24px, -12px, 0) scale(1.03);
-                }
-            }
-
-            @keyframes cloud-drift-b {
-                from {
-                    transform: translate3d(0, 0, 0) scale(1);
-                }
-
-                to {
-                    transform: translate3d(-24px, 12px, 0) scale(1.03);
-                }
-            }
-
-            @keyframes cloud-drift-c {
-                from {
-                    transform: translate3d(0, 0, 0) scale(1) rotate(-1deg);
-                }
-
-                to {
-                    transform: translate3d(16px, 16px, 0) scale(1.04) rotate(1.5deg);
-                }
-            }
-
-            .pipeline-section .node {
-                opacity: 0.32;
-                transition: opacity 0.7s ease;
-            }
-
-            .pipeline-section .node .node-glow {
-                opacity: 0;
-                transition: opacity 0.9s ease;
-            }
-
-            .pipeline-section .node .node-ring {
-                stroke: #7d6a38;
-                fill: none;
-                stroke-width: 1.6;
-                transition: stroke 0.7s ease;
-            }
-
-            .pipeline-section .node .node-core {
-                fill: #55503f;
-                transition: fill 0.7s ease;
-            }
-
-            .pipeline-section .node.lit {
-                opacity: 1;
-            }
-
-            .pipeline-section .node.lit .node-glow {
-                opacity: 0.9;
-            }
-
-            .pipeline-section .node.lit .node-ring {
-                stroke: var(--gold-bright);
-            }
-
-            .pipeline-section .node.lit .node-core {
-                fill: #fffdf4;
-            }
-
-            .pipeline-section .stop {
-                position: absolute;
-                z-index: 30 !important;
-                top: var(--top);
-                width: min(420px, 38%);
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                opacity: 0;
-                transform: translateY(26px);
-                transition: opacity 0.9s var(--ease-soft), transform 0.9s var(--ease-soft);
-                will-change: transform, opacity;
-            }
-
-            .pipeline-section .stop.in {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            .pipeline-section .stop.left {
-                left: clamp(20px, 7%, 110px);
-                text-align: left;
-            }
-
-            .pipeline-section .stop.right {
-                right: clamp(20px, 7%, 110px);
-                text-align: right;
-                align-items: flex-end;
-            }
-
-            .pipeline-section .num {
-                color: var(--gold);
-                font-size: 13.5px;
-                font-weight: 700;
-                letter-spacing: 0.32em;
-            }
-
-            .pipeline-section .eyebrow {
-                color: var(--gold);
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: 0.28em;
-                text-transform: uppercase;
-            }
-
-            .pipeline-section .title {
-                margin-top: 4px;
-                font-family: var(--font-display);
-                font-weight: 700;
-                font-size: clamp(30px, 3.1vw, 42px);
-                line-height: 1.15;
-                letter-spacing: -0.015em;
-                color: #ffffff;
-                text-shadow: 0 4px 28px rgba(0, 0, 0, 0.95);
-            }
-
-            .pipeline-section .desc {
-                margin-top: 4px;
-                color: #e2e8f0;
-                font-size: 16.5px;
-                line-height: 1.75;
-                max-width: 44ch;
-                text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9);
-            }
-
-            .pipeline-section .outro {
-                padding: 40px 24px 140px;
-                text-align: center;
-            }
-
-            .pipeline-section .outro-line {
-                color: var(--ink-dim);
-                font-size: 13px;
-                letter-spacing: 0.22em;
-                text-transform: uppercase;
-            }
-
-            @media (min-width: 768px) and (max-width: 1024px) {
-                .pipeline-section .hero {
-                    padding: clamp(100px, 16vh, 180px) 20px 30px !important;
-                    min-height: auto !important;
-                }
-
-                .pipeline-section .hero-title {
-                    font-size: clamp(28px, 4.2vw, 40px) !important;
-                }
-
-                .pipeline-section .journey {
-                    width: 100% !important;
-                    max-width: 100% !important;
-                    margin: 0 auto !important;
-                    overflow: visible !important;
-                }
-
-                .pipeline-section .journey-svg {
-                    display: block !important;
-                    width: 100% !important;
-                    max-width: 1000px !important;
-                    height: auto !important;
-                    margin-inline: auto !important;
-                    overflow: visible !important;
-                }
-
-                .pipeline-section .fg-clouds {
-                    opacity: 0.35 !important;
-                }
-
-                .pipeline-section .rocket-traveler {
-                    z-index: 50;
-                }
-
-                .pipeline-section .stop {
-                    width: min(290px, 34%) !important;
-                    padding: 14px 16px !important;
-                    background: rgba(10, 12, 18, 0.76) !important;
-                    backdrop-filter: blur(12px) !important;
-                    -webkit-backdrop-filter: blur(12px) !important;
-                    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                    border-radius: 16px !important;
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
-                    z-index: 25 !important;
-                }
-
-                .pipeline-section .stop.left {
-                    left: clamp(14px, 2.8%, 30px) !important;
-                    text-align: left !important;
-                }
-
-                .pipeline-section .stop.right {
-                    right: clamp(14px, 2.8%, 30px) !important;
-                    text-align: right !important;
-                    align-items: flex-end !important;
-                }
-
-                .pipeline-section .stop .title {
-                    font-size: clamp(19px, 2.4vw, 26px) !important;
-                    line-height: 1.22 !important;
-                    margin-top: 2px !important;
-                }
-
-                .pipeline-section .stop .desc {
-                    font-size: 13.5px !important;
-                    line-height: 1.55 !important;
-                    max-width: 28ch !important;
-                    margin-top: 4px !important;
-                }
-
-                .pipeline-section .stop .num {
-                    font-size: 11px !important;
-                    letter-spacing: 0.24em !important;
-                }
-
-                .pipeline-section .stop .eyebrow {
-                    font-size: 11px !important;
-                    letter-spacing: 0.2em !important;
-                }
-            }
-
-            @media (max-width: 767px) {
-                .pipeline-section {
-                    position: relative;
-                    padding-bottom: 60px !important;
-                    overflow: hidden;
-                }
-
-                .pipeline-section::after {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    height: 160px;
-                    background: linear-gradient(to bottom, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0.8) 50%, #080808 100%);
-                    pointer-events: none;
-                    z-index: 45;
-                }
-
-                .pipeline-section .flecks {
-                    display: none !important;
-                }
-
-                .pipeline-section .journey-svg {
-                    position: absolute !important;
-                    top: 0;
-                    left: 0;
-                    width: 0 !important;
-                    height: 0 !important;
-                    opacity: 0 !important;
-                    visibility: hidden !important;
-                    pointer-events: none !important;
-                    z-index: -1;
-                }
-
-                .pipeline-section .cloud {
-                    animation: none !important;
-                }
-
-                .pipeline-section .hero {
-                    padding: clamp(80px, 14vh, 140px) 20px 24px !important;
-                    min-height: auto !important;
-                }
-
-                .pipeline-section .hero-title {
-                    font-size: clamp(28px, 8vw, 42px) !important;
-                }
-
-                .pipeline-section .journey {
-                    position: relative !important;
-                    display: flex !important;
-                    flex-direction: column !important;
-                    gap: 28px !important;
-                    padding: 20px 16px 80px 16px !important;
-                    margin: 0 auto !important;
-                    max-width: 600px !important;
-                }
-
-                .pipeline-section .mobile-timeline-track {
-                    display: block !important;
-                    position: absolute;
-                    top: 20px;
-                    bottom: 40px;
-                    left: 28px;
-                    width: 2.5px;
-                    transform: translateX(-50%);
-                    background: rgba(255, 255, 255, 0.08);
-                    border-radius: 999px;
-                    z-index: 5;
-                    pointer-events: none;
-                }
-
-                .pipeline-section .mobile-timeline-bar {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(to bottom, #fff4d6 0%, #ffd98a 40%, #f2d400 100%);
-                    border-radius: 999px;
-                    transform-origin: top;
-                    transform: scaleY(0);
-                    will-change: transform;
-                    box-shadow: 0 0 10px rgba(242, 212, 0, 0.8), 0 0 20px rgba(242, 212, 0, 0.4);
-                }
-
-                .pipeline-section .mobile-rocket {
-                    display: block !important;
-                    position: absolute;
-                    top: 20px;
-                    left: 28px;
-                    width: 58px;
-                    height: 140px;
-                    transform: translate3d(-50%, var(--rocket-y, 0px), 0);
-                    will-change: transform, opacity;
-                    transition: opacity 0.2s ease-out;
-                    z-index: 15;
-                    pointer-events: none;
-                }
-
-                .pipeline-section .stop {
-                    position: relative !important;
-                    top: auto !important;
-                    left: auto !important;
-                    right: auto !important;
-                    width: calc(100% - 48px) !important;
-                    margin: 0 0 0 48px !important;
-                    padding: 20px 18px !important;
-                    background: rgba(12, 14, 20, 0.88) !important;
-                    backdrop-filter: blur(16px);
-                    -webkit-backdrop-filter: blur(16px);
-                    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                    border-radius: 18px !important;
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
-                    z-index: 20 !important;
-                    text-align: left !important;
-                    align-items: flex-start !important;
-                    opacity: 0.35;
-                    transform: translate3d(0, 16px, 0);
-                    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.4s ease,
-                        box-shadow 0.4s ease !important;
-                    will-change: transform, opacity;
-                }
-
-                .pipeline-section .stop.in {
-                    opacity: 1 !important;
-                    transform: translate3d(0, 0, 0) !important;
-                    border-color: rgba(242, 212, 0, 0.32) !important;
-                    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75), 0 0 20px -8px rgba(242, 212, 0, 0.25) !important;
-                }
-
-                .pipeline-section .stop .num {
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 11.5px;
-                    font-weight: 700;
-                    letter-spacing: 0.2em;
-                    color: var(--gold);
-                    padding: 3px 10px;
-                    background: rgba(242, 212, 0, 0.08);
-                    border: 1px solid rgba(242, 212, 0, 0.2);
-                    border-radius: 999px;
-                    margin-bottom: 4px;
-                }
-
-                .pipeline-section .stop.in .num {
-                    background: rgba(242, 212, 0, 0.16);
-                    border-color: rgba(242, 212, 0, 0.45);
-                    color: #fff;
-                    text-shadow: 0 0 10px rgba(242, 212, 0, 0.8);
-                }
-
-                .pipeline-section .stop .title {
-                    font-size: clamp(18px, 5.2vw, 23px) !important;
-                    font-weight: 700 !important;
-                    letter-spacing: -0.01em !important;
-                    line-height: 1.2 !important;
-                    margin-top: 4px !important;
-                }
-
-                .pipeline-section .stop .eyebrow {
-                    font-size: 11px !important;
-                    letter-spacing: 0.18em !important;
-                }
-
-                .pipeline-section .stop .desc {
-                    font-size: 13.5px !important;
-                    line-height: 1.6 !important;
-                    color: rgba(255, 255, 255, 0.72) !important;
-                    margin-top: 6px !important;
-                }
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-                .pipeline-section .stop {
-                    opacity: 1;
-                    transform: none;
-                }
-            }
-
-            @media (min-width: 1024px) {
-                .pipeline-graphic {
-                    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
-                    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
-                }
             }
         </style>
         <section class="pipeline-section bg-transparent relative overflow-hidden" id="pipeline-section">
@@ -3008,92 +1438,6 @@
             })();
         </script>
 
-        <style>
-            #research-sponsors .logo-carousel-item {
-                width: clamp(7rem, 22vw, 14rem);
-                height: clamp(4rem, 12vw, 7rem);
-            }
-
-            @media (min-width: 480px) {
-                #research-sponsors .logo-carousel-item {
-                    width: clamp(8rem, 18vw, 14rem);
-                    height: clamp(4.5rem, 10vw, 7rem);
-                }
-            }
-
-            @media (min-width: 768px) {
-                #research-sponsors .logo-carousel-item {
-                    width: 11rem;
-                    height: 6rem;
-                }
-            }
-
-            @media (min-width: 1024px) {
-                #research-sponsors .logo-carousel-item {
-                    width: 14rem;
-                    height: 7rem;
-                }
-            }
-
-            @media (min-width: 1280px) {
-                #research-sponsors .logo-carousel-item {
-                    width: 16rem;
-                    height: 7.5rem;
-                }
-            }
-
-            #research-sponsors .logo-carousel-item-img {
-                filter: none !important;
-                -webkit-filter: none !important;
-                max-height: 90%;
-                max-width: 90%;
-                object-fit: contain;
-            }
-
-            #research-sponsors .logo-carousel-track {
-                gap: clamp(1.5rem, 5vw, 3.5rem);
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-                perspective: 1000px;
-                transform: translate3d(0, 0, 0);
-            }
-
-            #research-sponsors .logo-carousel-row--left .logo-carousel-track {
-                animation: synkyn-scroll-left 50s linear infinite !important;
-            }
-
-            #research-sponsors .logo-carousel-row--right .logo-carousel-track {
-                animation: synkyn-scroll-right 45s linear infinite !important;
-            }
-
-            @keyframes synkyn-scroll-left {
-                0% {
-                    transform: translate3d(0, 0, 0);
-                }
-
-                100% {
-                    transform: translate3d(-33.333%, 0, 0);
-                }
-            }
-
-            @keyframes synkyn-scroll-right {
-                0% {
-                    transform: translate3d(-33.333%, 0, 0);
-                }
-
-                100% {
-                    transform: translate3d(0, 0, 0);
-                }
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-
-                #research-sponsors .logo-carousel-row--left .logo-carousel-track,
-                #research-sponsors .logo-carousel-row--right .logo-carousel-track {
-                    animation: none !important;
-                }
-            }
-        </style>
         <section class="py-10 sm:py-12 md:py-16 lg:py-22 xl:py-28" id="research-sponsors">
             <div class="main-container w-full min-w-0 max-w-full">
                 <div
@@ -3112,47 +1456,56 @@
                                         <figure class="logo-carousel-item">
                                             <img alt="TATA brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="RedBus brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="SKROMAN brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="TATA brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="RedBus brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="SKROMAN brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="TATA brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="RedBus brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="SKROMAN brand logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                     </div>
                                 </div>
@@ -3171,77 +1524,92 @@
                                         <figure class="logo-carousel-item">
                                             <img alt="Leo Burnett agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Minikin agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Mythri Movie Makers collaborator logo - Synkyn Studios"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Ogilvy agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Vriddhi agency collaborator logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Leo Burnett agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Minikin agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Mythri Movie Makers collaborator logo - Synkyn Studios"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Ogilvy agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Vriddhi agency collaborator logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Leo Burnett agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Minikin agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Mythri Movie Makers collaborator logo - Synkyn Studios"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Ogilvy agency partner logo - Synkyn Studios collaborator"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item">
                                             <img alt="Vriddhi agency collaborator logo - Synkyn Studios partner"
                                                 class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" />
+                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png"
+                                                loading="lazy" decoding="async" />
                                         </figure>
                                     </div>
                                 </div>
@@ -3254,88 +1622,6 @@
 
 
         <!-- ===================== FINAL CALL TO ACTION ===================== -->
-        <style>
-            #final-talk-cta {
-                background: transparent !important;
-                border: none !important;
-                box-shadow: none !important;
-                position: relative;
-                z-index: 10;
-            }
-
-            #final-talk-cta .cta-eyebrow {
-                display: inline-block;
-                font-size: 0.82rem;
-                font-weight: 600;
-                letter-spacing: 0.18em;
-                text-transform: uppercase;
-                color: #ffd84d;
-                margin-bottom: 0.85rem;
-            }
-
-            #final-talk-cta .cta-heading {
-                color: #ffffff;
-                font-size: clamp(2rem, 4.5vw, 3.4rem);
-                font-weight: 700;
-                letter-spacing: -0.03em;
-                line-height: 1.15;
-                margin: 0 auto 1rem;
-                max-width: 760px;
-            }
-
-            #final-talk-cta .cta-desc {
-                color: rgba(255, 255, 255, 0.68);
-                font-size: clamp(1rem, 1.6vw, 1.18rem);
-                line-height: 1.65;
-                max-width: 520px;
-                margin: 0 auto 2.25rem;
-            }
-
-            .synkyn-final-cta-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.75rem;
-                padding: 1rem 2.3rem;
-                border-radius: 9999px;
-                background-color: #f2d400;
-                color: #0a0a0a !important;
-                font-weight: 600;
-                font-size: 1.05rem;
-                text-decoration: none;
-                transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-                box-shadow: 0 12px 36px rgba(242, 212, 0, 0.28);
-                border: 1px solid #f2d400;
-                cursor: pointer;
-            }
-
-            .synkyn-final-cta-btn svg {
-                width: 20px;
-                height: 20px;
-                stroke: currentColor;
-                transition: transform 0.25s ease;
-            }
-
-            .synkyn-final-cta-btn:hover {
-                background-color: #ffffff !important;
-                border-color: #ffffff !important;
-                color: #0a0a0a !important;
-                transform: translateY(-2px);
-                box-shadow: 0 16px 40px rgba(255, 255, 255, 0.25);
-            }
-
-            .synkyn-final-cta-btn:hover svg {
-                transform: translateX(4px);
-            }
-
-            @media (max-width: 640px) {
-                .synkyn-final-cta-btn {
-                    width: 100%;
-                    max-width: 340px;
-                    padding: 0.95rem 1.6rem;
-                }
-            }
-        </style>
 
         <section class="py-16 sm:py-20 md:py-24 text-center" id="final-talk-cta" aria-labelledby="cta-heading-index">
             <div class="main-container max-w-[840px] mx-auto px-4 sm:px-6">
@@ -3465,245 +1751,6 @@
         data-gradual-blur="" data-height="7rem" data-opacity="1" data-position="bottom" data-show-on-scroll="50"
         data-strength="2" data-target="page" data-z-index="50" id="sticky-bar"></div>
 
-    <style id="synkyn-final-responsive">
-        /* Mobile Touch & Cross-Platform Instant Tap */
-        a,
-        button,
-        input,
-        textarea,
-        select,
-        [role="button"] {
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-        }
-
-        /* Apple trackpad swipe navigation fix */
-        html,
-        body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            overscroll-behavior-x: none;
-        }
-
-        /* Lenis buttery-smooth scroll engine */
-        html.lenis,
-        html.lenis body {
-            height: auto;
-        }
-
-        .lenis.lenis-smooth {
-            scroll-behavior: auto !important;
-        }
-
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
-
-        /* Eliminate hover recalculations and repaints during active scroll for 60-120 FPS */
-        html.lenis-scrolling iframe,
-        html.lenis-scrolling video,
-        html.lenis-scrolling .hero-video-bg,
-        .lenis.lenis-scrolling iframe,
-        .lenis.lenis-scrolling video,
-        .lenis.lenis-scrolling .hero-video-bg {
-            pointer-events: none !important;
-        }
-
-
-        /* WebKit SVG GPU compositing for Safari */
-        .pipeline-section .journey-svg {
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-
-        /* Minimalist premium dark scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #080808;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.16);
-            border-radius: 999px;
-            border: 2px solid #080808;
-            transition: background 0.25s ease;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(242, 212, 0, 0.7);
-        }
-
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.16) #080808;
-        }
-
-        /* Reading / Scroll progress indicator at top edge */
-        .scroll-progress-bar {
-            position: fixed;
-            top: 0;
-            top: env(safe-area-inset-top, 0px);
-            left: 0;
-            width: 100%;
-            height: 2.5px;
-            background: linear-gradient(90deg, #f2d400 0%, #ffb700 50%, #ffe45c 100%);
-            box-shadow: 0 0 10px rgba(242, 212, 0, 0.6), 0 0 20px rgba(242, 212, 0, 0.25);
-            z-index: 1000000;
-            pointer-events: none;
-            transform: scaleX(0);
-            transform-origin: left center;
-            will-change: transform;
-            transition: transform 0.05s linear;
-        }
-
-        /* Floating back-to-top button */
-        .back-to-top-btn {
-            position: fixed;
-            bottom: max(32px, calc(env(safe-area-inset-bottom, 0px) + 20px));
-            right: max(32px, calc(env(safe-area-inset-right, 0px) + 20px));
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: rgba(14, 14, 14, 0.78);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ffd633;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 9000;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px) scale(0.85);
-            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s, background-color 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(242, 212, 0, 0.12);
-        }
-
-        .back-to-top-btn.is-visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-
-        .back-to-top-btn:hover {
-            background: rgba(26, 26, 26, 0.92);
-            border-color: rgba(242, 212, 0, 0.6);
-            color: #ffffff;
-            transform: translateY(-3px) scale(1.06);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(242, 212, 0, 0.35);
-        }
-
-        .back-to-top-btn:active {
-            transform: translateY(0) scale(0.96);
-        }
-
-        @media (max-width: 768px) {
-            .back-to-top-btn {
-                bottom: max(20px, calc(env(safe-area-inset-bottom, 0px) + 12px));
-                right: max(20px, calc(env(safe-area-inset-right, 0px) + 12px));
-                width: 42px;
-                height: 42px;
-            }
-        }
-
-        main,
-        main>section {
-            max-width: 100%;
-        }
-
-        img,
-        video,
-        iframe,
-        svg,
-        canvas,
-        picture {
-            max-width: 100%;
-        }
-
-        .scroll-bar,
-        .sidebar {
-            -webkit-overflow-scrolling: touch;
-        }
-
-        #hero {
-            height: 100svh;
-            height: 100dvh;
-            min-height: 560px;
-        }
-
-        @media (min-width: 768px) and (max-width: 1023.98px) {
-            #hero {
-                min-height: 640px;
-            }
-
-            .pipeline-section .stop {
-                width: min(360px, 46%);
-            }
-
-            .pipeline-section .title {
-                font-size: clamp(22px, 3.4vw, 30px);
-            }
-
-            .pipeline-section .desc {
-                font-size: 15px;
-            }
-        }
-
-        @media (max-width: 767px) {
-            #hero {
-                min-height: 520px;
-            }
-
-            .pipeline-section .hero {
-                padding-top: clamp(70px, 12vh, 120px);
-            }
-        }
-
-        @media (max-width: 400px) {
-            .pipeline-section .stop {
-                width: min(300px, 82%);
-            }
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-
-            .btn,
-            a.btn,
-            button.btn {
-                min-height: 44px;
-            }
-
-            .nav-hamburger {
-                min-height: 48px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-        }
-    </style>
 
     <script defer="" src="./vendor/split-text.min.js"></script>
     <script defer="" src="./vendor/gsap.min.js"></script>
@@ -3910,6 +1957,10 @@
 
             function ensurePlayer() {
                 if (player) return player;
+                // Boot the Vimeo player on first open, not on page load.
+                if (!iframe.src && iframe.getAttribute("data-src")) {
+                    iframe.src = iframe.getAttribute("data-src");
+                }
                 if (!(window.Vimeo && window.Vimeo.Player)) return null;
                 player = new Vimeo.Player(iframe);
                 player.setLoop(true).catch(function () { });
@@ -4169,20 +2220,6 @@
         });
     </script>
 
-    <script>
-        (function () {
-            var mq = window.matchMedia('(max-width:767px)');
-            var d = document.querySelector('.hero-bg-desktop');
-            var m = document.querySelector('.hero-bg-mobile');
-            function activate() {
-                var on = mq.matches ? m : d;
-                if (on && !on.src && on.dataset.src) on.src = on.dataset.src;
-            }
-            activate();
-            if (mq.addEventListener) mq.addEventListener('change', activate);
-            else if (mq.addListener) mq.addListener(activate);
-        })();
-    </script>
 
     <script>
         (function () {
@@ -4210,6 +2247,7 @@
         })();
     </script>
 
+    <script defer="" src="./assets/hero-video.js?v=1"></script>
     <script defer="" src="./assets/navbar.js?v=8"></script>
     <script defer="" src="./assets/footer.js?v=2"></script>
 

@@ -552,3 +552,133 @@ header .header-two,
         opacity: 1 !important;
     }
 }
+
+/* ==========================================================================
+   DESKTOP DROPDOWN — SLOW, SMOOTH DISMISS
+   --------------------------------------------------------------------------
+   WHY IT SNAPPED SHUT
+
+   main.css declares the closed state as:
+
+       .mega-menu, .dropdown-menu {
+           opacity: 0; visibility: hidden; transform: translateY(10px);
+           transition: opacity .3s, transform .3s, pointer-events 0s .3s;
+       }
+
+   `visibility` is set but is NOT in that transition list. So the moment
+   main.js removes .active, visibility flips to hidden instantly and the
+   element vanishes on frame one — the opacity fade never gets a chance to
+   be seen. On top of that, `.active` carried
+   `animation: .3s forwards menuSlideIn`, and killing an animation snaps the
+   element back to its unanimated state immediately.
+
+   THE FIX
+
+   Transition `visibility` with a delay equal to the fade duration, so it
+   only flips to hidden after the opacity has finished travelling. The
+   animation is replaced with plain transitions in both directions so
+   nothing can snap.
+
+   TIMING
+
+   Open is deliberately faster than close. A menu that takes a full second
+   to appear feels broken; one that takes a full second to leave feels
+   considered. Adjust either with the two variables below — they are the
+   only numbers you need to touch.
+   ========================================================================== */
+@media (min-width: 1280px) {
+
+    :root {
+        --nav-menu-in: 280ms;
+        --nav-menu-out: 1000ms;
+        --nav-menu-ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    /* ---------- CLOSED (and closing) ---------- */
+    .mega-menu,
+    .dropdown-menu {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(10px) scale(.985) !important;
+        pointer-events: none !important;
+        animation: none !important;
+        will-change: opacity, transform;
+        transition:
+            opacity var(--nav-menu-out) var(--nav-menu-ease),
+            transform var(--nav-menu-out) var(--nav-menu-ease),
+            visibility 0s linear var(--nav-menu-out) !important;
+    }
+
+    /* ---------- OPEN ---------- */
+    .mega-menu.active,
+    .dropdown-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) scale(1) !important;
+        pointer-events: auto !important;
+        animation: none !important;
+        transition:
+            opacity var(--nav-menu-in) var(--nav-menu-ease),
+            transform var(--nav-menu-in) var(--nav-menu-ease),
+            visibility 0s !important;
+    }
+
+    /* The hover bridge is driven by inline opacity from main.js, so it only
+       needs its timing matched or it disappears a beat before the panel. */
+    .mega-menu-bridge,
+    .dropdown-menu-bridge {
+        transition: opacity var(--nav-menu-out) var(--nav-menu-ease) !important;
+    }
+
+    /* Arrow unwinds on the slow curve going out, snaps on the fast one
+       coming in, so it stays in step with the panel it belongs to. */
+    .nav-item .nav-arrow {
+        transition: transform var(--nav-menu-out) var(--nav-menu-ease) !important;
+    }
+
+    .nav-item:hover .nav-arrow,
+    .nav-item.active .nav-arrow,
+    .nav-item.menu-active .nav-arrow {
+        transition-duration: var(--nav-menu-in) !important;
+    }
+
+    /* Contents trail the panel very slightly — the panel starts moving
+       first and the cards follow, which reads as depth rather than as one
+       flat rectangle sliding. */
+    .dropdown-menu>*,
+    .mega-menu>* {
+        opacity: 0;
+        transform: translateY(6px);
+        transition:
+            opacity calc(var(--nav-menu-out) * .7) var(--nav-menu-ease),
+            transform calc(var(--nav-menu-out) * .7) var(--nav-menu-ease);
+    }
+
+    .dropdown-menu.active>*,
+    .mega-menu.active>* {
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+            opacity var(--nav-menu-in) var(--nav-menu-ease) 40ms,
+            transform var(--nav-menu-in) var(--nav-menu-ease) 40ms;
+    }
+}
+
+/* A slow dismiss is motion. Respect the preference. */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --nav-menu-in: 1ms;
+        --nav-menu-out: 1ms;
+    }
+}
+
+/* The link for the page you are already on. Kept subtle — it is a state
+   cue, not a button. desktop-navbar.js adds .is-current and aria-current. */
+.header-two a.is-current,
+#desktop-navbar a.is-current {
+    color: var(--color-accent, #f2d400) !important;
+}
+
+#desktop-navbar a.is-current>span {
+    opacity: .95;
+}

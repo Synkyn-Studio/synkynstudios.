@@ -1,0 +1,108 @@
+/*
+  Synkyn Studios — Home theme tokens
+  Extracted from index.html so it can be cached across navigations.
+  Blocks appear in their original document order; the cascade is unchanged.
+*/
+
+/* ===== synkyn-theme ===== */
+
+:root,
+:host {
+    --color-primary-50: #faf8ee;
+    --color-primary-400: #ffd84d;
+    --color-primary-500: #f2d400;
+    --color-primary-600: #d4af00;
+    --color-background-5: #161616;
+    --color-background-6: #101010;
+    --color-background-7: #1b1b1b;
+    --color-background-8: #080808;
+    --color-background-9: #232323;
+    --color-stroke-5: #232323;
+    --color-stroke-6: #272727;
+    --color-stroke-7: #313131;
+    --color-stroke-8: #3a3a3a;
+    --color-ns-green: #efe85c;
+    --color-ns-cyan: #ffd54a;
+    --color-helix-blue: #1a1a1a;
+    --color-helix-blue-shade: #141414;
+    --color-helix-blue-dark: #101010;
+    --color-helix-blue-dark-1: #0c0c0c;
+    --color-helix-blue-dark-2: #080808;
+    --color-cyan-400: #ffd633;
+    --color-cyan-500: #f2c200;
+    --color-cyan-600: #c79600;
+    --color-cyan-700: #9a7300;
+    --color-blue-50: #fdf8e6;
+    --color-blue-100: #fbf0c4;
+    --color-blue-400: #ffd84d;
+    --color-blue-500: #d9a800;
+    --color-blue-600: #946a00;
+    --color-blue-700: #7a5200;
+    --color-indigo-700: #7a5200;
+    --color-fuchsia-400: #ffd84d;
+    --color-fuchsia-600: #c79600;
+    --color-fuchsia-700: #9a7300;
+    --color-gradient-1: linear-gradient(135deg, #ffd84d 0%, #ffe9b0 100%);
+    --color-gradient-6: linear-gradient(#ffd54a 0%, #efe85c 100%);
+    --color-gradient-7: linear-gradient(#fff 0%, #ffd84d 100%);
+    --color-gradient-8: linear-gradient(156deg, #fff 32.92%, #f2c200 91%);
+    --color-gradient-12: radial-gradient(73.01% 80.77% at 19.23% 47.79%, #ffd54a 0%, #f2d40000 100%);
+    --color-gradient-13: linear-gradient(156deg, #fff 32.92%, #ffe0a8 91%);
+    --color-gradient-helix-dark: linear-gradient(135deg, #101010 0%, #080808 100%);
+    --swiper-theme-color: #f2c200;
+}
+
+.btn-primary,
+.btn-primary-v2 {
+    color: #0a0a0a !important
+}
+
+.btn-primary svg,
+.btn-primary-v2 svg {
+    color: #0a0a0a !important
+}
+
+.actually-area {
+    background-color: transparent !important
+}
+
+main>section {
+    background-color: transparent !important;
+}
+
+section>div[class*="bg-background-12"],
+section>div[class*="bg-background-3"],
+section>div[class*="bg-background-2"] {
+    background-color: transparent !important;
+}
+
+main>section,
+main>section * {
+    isolation: auto;
+}
+
+.btn-primary:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #000 !important;
+}
+
+#space-earth-text::selection {
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+    background-color: rgba(255, 235, 59, 0.3);
+}
+
+#space-earth-text::-moz-selection {
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+    background-color: rgba(255, 235, 59, 0.3);
+}
+
+html,
+body {
+    background-color: #080808;
+    color: #fff;
+    overflow-x: clip !important;
+    max-width: 100% !important;
+}
