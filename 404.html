@@ -524,15 +524,15 @@
     <!-- Global Smooth Scroll UX: Reading Progress Bar -->
     <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
     <!-- Back to Top Button -->
-    <button id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6" />
+    <button id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top">
+        <svg class="back-to-top-icon" width="20" height="20" viewBox="0 0 52 52" fill="currentColor" aria-hidden="true">
+            <path d="M41.4,21c0.8-0.8,0.8-1.9,0-2.7l-15-14.7c-0.8-0.8-2-0.8-2.8,0L8.6,18.3c-0.8,0.8-0.8,1.9,0,2.7l2.8,2.7 c0.8,0.8,2,0.8,2.8,0l4.7-4.6c0.8-0.8,2.2-0.2,2.2,0.9v27c0,1,0.9,2,2,2h4c1.1,0,2-1.1,2-2V20c0-1.2,1.4-1.7,2.2-0.9l4.7,4.6 c0.8,0.8,2,0.8,2.8,0L41.4,21z"/>
         </svg>
     </button>
 
     <header>
-        <div class="header-two header-two-at-rest lp:!max-w-[1290px] header-home fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0">
+        <div
+            class="header-two header-two-at-rest lp:!max-w-[1290px] header-home fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0">
             <div>
                 <a class="flex min-w-0 shrink-0 items-center gap-2" href="./">
                     <figure class="m-0 hidden lg:block lg:max-w-[112px]">
@@ -645,477 +645,1011 @@
             </div>
         </aside>
     </header>
-    <main>
-        <style id="nf-styles">
+    <main class="s404-main" id="s404Main">
+        <style id="s404-styles">
             /* ============================================================
-               404 — scoped to .nf so nothing leaks into main.css / Tailwind
-               Concept: an off-nominal trajectory. The page drifted off its
-               orbit. On-brand with the site's orbital / MICRA apparatus world.
+               PLAYFUL, AWARD-WINNING CINEMATIC 404 EXPERIENCE — SYNKYN STUDIOS
+               Features:
+               - Fully transparent background letting fx.js golden crystals shine
+               - Physical drag-and-throw zero-G physics on each digit
+               - Gravitational singularity pull on center '0'
+               - Kinetic Shatter & Magnetic Reassembly on click/tap
+               - Specular light sweep, chromatic aberration & holographic depth
+               - Live audio waveform telemetry and magnetic home action
                ============================================================ */
-            .nf {
-                --nf-gold: #ffd84d;
-                --nf-gold-2: #f2c200;
-                --nf-cream: #ffe9b0;
-                --nf-text: #ece7d7;
-                --nf-muted: rgba(236, 231, 215, .6);
-                --nf-panel: rgba(255, 255, 255, .035);
-                --nf-stroke: rgba(255, 255, 255, .09);
+            .s404-main {
                 position: relative;
-                z-index: 1;
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                gap: clamp(48px, 7vh, 88px);
-                width: 100%;
-                max-width: 1180px;
-                margin: 0 auto;
-                padding: clamp(150px, 20vh, 240px) clamp(20px, 5vw, 48px) clamp(72px, 12vh, 132px);
+                align-items: center;
+                background: transparent !important;
+                /* CRITICAL: Allows fx.js crystals to be 100% visible */
+                overflow: hidden;
+                padding: clamp(110px, 14vh, 160px) 24px clamp(50px, 8vh, 80px);
                 box-sizing: border-box;
+                perspective: 1200px;
+                user-select: none;
+                -webkit-user-select: none;
             }
 
-            .nf *,
-            .nf *::before,
-            .nf *::after {
-                box-sizing: border-box;
-            }
-
-            .nf a {
-                text-decoration: none;
-            }
-
-            /* ── Hero row ─────────────────────────────────────────────── */
-            .nf-wrap {
-                display: grid;
-                grid-template-columns: 1.05fr .95fr;
-                align-items: center;
-                gap: clamp(28px, 5vw, 72px);
-            }
-
-            .nf-eyebrow {
-                display: inline-flex;
-                align-items: center;
-                gap: 10px;
-                margin: 0 0 22px;
-                padding: 7px 14px 7px 12px;
-                border: 1px solid var(--nf-stroke);
-                border-radius: 999px;
-                background: var(--nf-panel);
-                font-size: 12.5px;
-                font-weight: 500;
-                letter-spacing: .14em;
-                text-transform: uppercase;
-                color: var(--nf-cream);
-            }
-
-            .nf-eyebrow .nf-dot {
-                width: 7px;
-                height: 7px;
-                border-radius: 50%;
-                background: var(--nf-gold);
-                box-shadow: 0 0 0 0 rgba(255, 216, 77, .55);
-                animation: nf-pulse 2.4s ease-out infinite;
-            }
-
-            @keyframes nf-pulse {
-                0% {
-                    box-shadow: 0 0 0 0 rgba(255, 216, 77, .5);
-                }
-
-                70% {
-                    box-shadow: 0 0 0 9px rgba(255, 216, 77, 0);
-                }
-
-                100% {
-                    box-shadow: 0 0 0 0 rgba(255, 216, 77, 0);
-                }
-            }
-
-            .nf-headline {
-                margin: 0 0 18px;
-                font-weight: 600;
-                line-height: 1.02;
-                letter-spacing: -.02em;
-                font-size: clamp(34px, 5vw, 58px);
-                background: linear-gradient(156deg, #fff 30%, var(--nf-gold-2) 96%);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-            }
-
-            .nf-lead {
-                margin: 0 0 30px;
-                max-width: 46ch;
-                font-size: clamp(15.5px, 1.4vw, 18px);
-                line-height: 1.6;
-                color: var(--nf-muted);
-            }
-
-            .nf-actions {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 14px;
-                margin-bottom: 26px;
-            }
-
-            .nf-btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 9px;
-                padding: 13px 22px;
-                border-radius: 999px;
-                font-size: 15px;
-                font-weight: 600;
-                line-height: 1;
-                transition: transform .2s ease, box-shadow .25s ease,
-                    background .25s ease, border-color .25s ease, color .2s ease;
-            }
-
-            .nf-btn svg {
-                width: 18px;
-                height: 18px;
-            }
-
-            .nf-btn-primary {
-                background: linear-gradient(135deg, var(--nf-gold) 0%, var(--nf-cream) 100%);
-                color: #0a0a0a;
-                box-shadow: 0 10px 30px -12px rgba(255, 216, 77, .65);
-            }
-
-            .nf-btn-primary:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 16px 40px -12px rgba(255, 216, 77, .8);
-            }
-
-            .nf-btn-ghost {
-                color: var(--nf-cream);
-                background: rgba(255, 255, 255, .02);
-                border: 1px solid var(--nf-stroke);
-            }
-
-            .nf-btn-ghost:hover {
-                transform: translateY(-2px);
-                border-color: rgba(255, 216, 77, .55);
-                color: #fff;
-            }
-
-            .nf-help {
-                font-size: 14px;
-                line-height: 1.55;
-                color: var(--nf-muted);
-            }
-
-            .nf-help strong {
-                color: var(--nf-cream);
-                font-weight: 600;
-            }
-
-            .nf-help code {
-                font-family: ui-monospace, "SF Mono", Menlo, monospace;
-                font-size: 12.5px;
-                padding: 2px 7px;
-                border-radius: 6px;
-                border: 1px solid var(--nf-stroke);
-                background: var(--nf-panel);
-                color: var(--nf-gold);
-            }
-
-            /* ── Signature: off-trajectory orbit ─────────────────────── */
-            .nf-visual {
-                position: relative;
-                aspect-ratio: 1 / 1;
-                width: 100%;
-                max-width: 460px;
-                margin-inline: auto;
-                display: grid;
-                place-items: center;
-            }
-
-            .nf-glow {
-                position: absolute;
-                inset: 8%;
-                border-radius: 50%;
-                background: radial-gradient(circle at 50% 50%,
-                        rgba(255, 216, 77, .22) 0%, rgba(255, 216, 77, .07) 38%, transparent 68%);
-                filter: blur(6px);
-            }
-
-            .nf-bignum {
+            /* Ambient Volumetric Nebula Glow (semi-transparent, additive) */
+            .s404-nebula {
                 position: absolute;
                 inset: 0;
-                display: grid;
-                place-items: center;
-                font-weight: 700;
-                font-size: clamp(110px, 22vw, 196px);
-                letter-spacing: -.04em;
-                line-height: 1;
-                background: linear-gradient(160deg, rgba(255, 255, 255, .14) 28%, rgba(242, 194, 0, .22) 95%);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-                user-select: none;
                 pointer-events: none;
+                z-index: 0;
+                background:
+                    radial-gradient(900px circle at var(--s404-mx, 50%) var(--s404-my, 45%), rgba(242, 212, 0, 0.065) 0%, rgba(6, 182, 212, 0.03) 35%, transparent 72%),
+                    radial-gradient(1200px circle at 50% 60%, rgba(20, 20, 30, 0.25) 0%, transparent 80%);
+                mix-blend-mode: screen;
             }
 
-            .nf-orbit {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                overflow: visible;
+            /* Retro-Futuristic 3D Horizon Grid (faint, additive) */
+            .s404-grid-floor {
+                position: absolute;
+                bottom: -60px;
+                left: -20%;
+                right: -20%;
+                height: 400px;
+                background-image:
+                    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+                background-size: 50px 50px;
+                transform: perspective(450px) rotateX(72deg) translateZ(0);
+                transform-origin: center bottom;
+                mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 85%);
+                -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 85%);
+                pointer-events: none;
+                z-index: 0;
+                opacity: 0.55;
             }
 
-            .nf-ring {
-                fill: none;
-                stroke: rgba(255, 216, 77, .55);
-                stroke-width: 1.4;
-                stroke-dasharray: 5 7;
+            /* Hairline Horizon Accents */
+            .s404-hairline-top,
+            .s404-hairline-bottom {
+                position: absolute;
+                left: 4%;
+                right: 4%;
+                height: 1px;
+                background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 20%, rgba(242, 212, 0, 0.22) 50%, rgba(255, 255, 255, 0.06) 80%, transparent 100%);
+                pointer-events: none;
+                z-index: 1;
             }
 
-            .nf-orbit-spin {
-                transform-box: fill-box;
-                transform-origin: center;
-                animation: nf-spin 30s linear infinite;
+            .s404-hairline-top {
+                top: clamp(80px, 11vh, 110px);
             }
 
-            @keyframes nf-spin {
-                to {
-                    transform: rotate(360deg);
-                }
+            .s404-hairline-bottom {
+                bottom: clamp(24px, 5vh, 48px);
             }
 
-            .nf-node {
-                fill: var(--nf-gold);
+            /* Corner Studio HUD Telemetry */
+            .s404-hud {
+                position: absolute;
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                font-size: 11px;
+                letter-spacing: 0.16em;
+                color: rgba(255, 255, 255, 0.38);
+                text-transform: uppercase;
+                pointer-events: none;
+                z-index: 3;
+                display: flex;
+                align-items: center;
+                gap: 10px;
             }
 
-            .nf-node-halo {
-                fill: rgba(255, 216, 77, .18);
+            .s404-hud-tl {
+                top: clamp(90px, 12.5vh, 120px);
+                left: clamp(18px, 4vw, 44px);
             }
 
-            .nf-trail {
-                fill: none;
-                stroke: rgba(255, 216, 77, .5);
-                stroke-width: 1.4;
-                stroke-dasharray: 2 6;
-                stroke-linecap: round;
+            .s404-hud-tr {
+                top: clamp(90px, 12.5vh, 120px);
+                right: clamp(18px, 4vw, 44px);
+                text-align: right;
             }
 
-            .nf-sat {
-                transform-box: fill-box;
-                transform-origin: center;
-                animation: nf-drift 5.5s ease-in-out infinite;
+            .s404-hud-bl {
+                bottom: clamp(30px, 6vh, 56px);
+                left: clamp(18px, 4vw, 44px);
             }
 
-            .nf-sat polygon {
-                fill: var(--nf-gold);
-                filter: drop-shadow(0 0 6px rgba(255, 216, 77, .7));
+            .s404-hud-br {
+                bottom: clamp(30px, 6vh, 56px);
+                right: clamp(18px, 4vw, 44px);
+                text-align: right;
             }
 
-            @keyframes nf-drift {
+            .s404-hud-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #f2d400;
+                box-shadow: 0 0 10px #f2d400;
+                animation: s404Blink 2.2s ease-in-out infinite;
+            }
+
+            .s404-wave-canvas {
+                width: 44px;
+                height: 12px;
+                opacity: 0.8;
+            }
+
+            @keyframes s404Blink {
 
                 0%,
                 100% {
-                    transform: translate(0, 0) rotate(0deg);
+                    opacity: 0.35;
+                    transform: scale(0.9);
                 }
 
                 50% {
-                    transform: translate(4px, -7px) rotate(8deg);
+                    opacity: 1;
+                    transform: scale(1.2);
                 }
             }
 
-            .nf-tag {
-                position: absolute;
-                top: 11%;
-                right: 2%;
-                padding: 5px 11px;
-                border-radius: 999px;
-                border: 1px solid rgba(255, 216, 77, .4);
-                background: rgba(20, 16, 4, .72);
-                backdrop-filter: blur(4px);
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: .12em;
-                text-transform: uppercase;
-                color: var(--nf-gold);
-                white-space: nowrap;
-            }
-
-            /* ── Destinations ────────────────────────────────────────── */
-            .nf-dests-title {
-                margin: 0 0 18px;
-                font-size: 13px;
-                font-weight: 500;
-                letter-spacing: .14em;
-                text-transform: uppercase;
-                color: var(--nf-muted);
-            }
-
-            .nf-grid {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 16px;
-            }
-
-            .nf-card {
+            /* Container */
+            .s404-container {
                 position: relative;
+                z-index: 3;
+                width: 100%;
+                max-width: 1140px;
+                margin: 0 auto;
                 display: flex;
                 flex-direction: column;
-                gap: 12px;
-                height: 100%;
-                padding: 22px 22px 20px;
-                border-radius: 18px;
-                border: 1px solid var(--nf-stroke);
-                background: var(--nf-panel);
-                transition: transform .22s ease, border-color .25s ease, background .25s ease;
+                align-items: center;
+                text-align: center;
             }
 
-            .nf-card:hover {
-                transform: translateY(-4px);
-                border-color: rgba(255, 216, 77, .5);
-                background: rgba(255, 216, 77, .05);
+            /* Interactive Invitation Badge */
+            .s404-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 7px 22px;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                font-family: inherit;
+                font-size: 0.76rem;
+                font-weight: 500;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: rgba(255, 255, 255, 0.82);
+                margin-bottom: clamp(18px, 3vh, 28px);
+                box-shadow: 0 6px 28px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+                transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                cursor: pointer;
             }
 
-            .nf-card-ico {
-                display: grid;
-                place-items: center;
-                width: 40px;
-                height: 40px;
-                border-radius: 11px;
-                border: 1px solid var(--nf-stroke);
-                background: rgba(0, 0, 0, .25);
+            .s404-badge:hover {
+                border-color: rgba(242, 212, 0, 0.45);
+                transform: translateY(-2px) scale(1.02);
+                box-shadow: 0 10px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(242, 212, 0, 0.18);
             }
 
-            .nf-card-ico svg {
-                width: 20px;
-                height: 20px;
-                stroke: var(--nf-gold);
+            .s404-badge-pulse {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #f2d400;
+                box-shadow: 0 0 12px 2px rgba(242, 212, 0, 0.8);
+                animation: s404Pulse 2.2s ease-in-out infinite;
             }
 
-            .nf-card-h {
+            @keyframes s404Pulse {
+
+                0%,
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+
+                50% {
+                    transform: scale(1.4);
+                    opacity: 0.65;
+                }
+            }
+
+            /* ── Interactive 3D Playable Stage ── */
+            .s404-stage {
+                position: relative;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transform-style: preserve-3d;
+            }
+
+            /* Dynamic Cosmic Aura */
+            .s404-aura {
+                position: absolute;
+                width: clamp(380px, 62vw, 700px);
+                height: clamp(200px, 32vw, 360px);
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(242, 212, 0, 0.15) 0%, rgba(6, 182, 212, 0.08) 40%, transparent 75%);
+                filter: blur(75px);
+                pointer-events: none;
+                z-index: 0;
+                transform: translateZ(-100px);
+                transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            }
+
+            /* Numerals Container */
+            .s404-numerals {
+                position: relative;
+                z-index: 1;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                margin: 0;
-                font-size: 16.5px;
+                justify-content: center;
+                gap: clamp(16px, 4.5vw, 48px);
+                transform-style: preserve-3d;
+                will-change: transform;
+                line-height: 0.82;
+            }
+
+            /* ── PLAYABLE INDIVIDUAL DIGIT WITH ZERO-G DRAG & THROW ── */
+            .s404-char {
+                position: relative;
+                display: inline-block;
+                font-family: inherit;
+                font-size: clamp(8.8rem, 24vw, 20rem);
+                font-weight: 850;
+                letter-spacing: -0.06em;
+                transform-style: preserve-3d;
+                will-change: transform;
+                cursor: grab;
+                touch-action: none;
+                transition: filter 0.25s ease;
+            }
+
+            .s404-char.is-dragging {
+                cursor: grabbing !important;
+                z-index: 20;
+                filter: drop-shadow(0 0 40px rgba(242, 212, 0, 0.6)) drop-shadow(0 0 60px rgba(6, 182, 212, 0.4));
+            }
+
+            .s404-char:active {
+                cursor: grabbing;
+            }
+
+            /* Base Layer: Deep Void Shadow */
+            .s404-char-shadow {
+                position: absolute;
+                inset: 0;
+                color: #000;
+                filter: blur(34px);
+                opacity: 0.9;
+                transform: translateZ(-40px) translateY(18px);
+                pointer-events: none;
+                z-index: -1;
+            }
+
+            /* Sculpted Liquid-Metal Chrome Core */
+            .s404-char-core {
+                display: block;
+                background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 20%, #a1a1aa 55%, #3f3f46 80%, #18181b 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-shadow: 0 6px 40px rgba(0, 0, 0, 0.7);
+                transform: translateZ(12px);
+                pointer-events: none;
+            }
+
+            /* Interactive Chromatic Aberration & RGB Split */
+            .s404-char-rgb {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                mix-blend-mode: screen;
+                opacity: var(--s404-rgb-opacity, 0.4);
+                transform: translateZ(20px);
+                transition: opacity 0.25s ease;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-shadow:
+                    calc(var(--s404-shift-x, 0px) * -1.2) 0 6px rgba(6, 182, 212, 0.8),
+                    calc(var(--s404-shift-x, 0px) * 1.2) 0 6px rgba(242, 212, 0, 0.8);
+            }
+
+            /* Specular Studio Spotlight Reflection */
+            .s404-char-light {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle 420px at var(--s404-char-x, 50%) var(--s404-char-y, 50%), rgba(255, 255, 255, 1) 0%, rgba(255, 225, 77, 0.55) 25%, transparent 72%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                pointer-events: none;
+                mix-blend-mode: screen;
+                opacity: var(--s404-light-opacity, 0.65);
+                transform: translateZ(30px);
+                transition: opacity 0.3s ease;
+            }
+
+            /* Ultra-crisp Laser Stroke Edge */
+            .s404-char-stroke {
+                position: absolute;
+                inset: 0;
+                -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.3);
+                -webkit-text-fill-color: transparent;
+                pointer-events: none;
+                transform: translateZ(22px);
+                transition: -webkit-text-stroke-color 0.3s ease;
+            }
+
+            .s404-char:hover .s404-char-stroke,
+            .s404-char.is-dragging .s404-char-stroke {
+                -webkit-text-stroke-color: rgba(242, 212, 0, 0.7);
+            }
+
+            /* ── Glorious Ambient Zero Inner Core Glow ── */
+            .s404-zero-glow {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 60%;
+                height: 70%;
+                transform: translate(-50%, -50%) translateZ(-15px);
+                border-radius: 50%;
+                background: radial-gradient(ellipse at center, rgba(242, 212, 0, 0.6) 0%, rgba(6, 182, 212, 0.25) 45%, transparent 75%);
+                filter: blur(24px);
+                pointer-events: none;
+                opacity: 0.75;
+                transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, filter 0.35s ease;
+            }
+
+            .s404-char-2:hover .s404-zero-glow,
+            .s404-char-2.is-dragging .s404-zero-glow {
+                transform: translate(-50%, -50%) translateZ(-15px) scale(1.35);
+                opacity: 1;
+                filter: blur(30px);
+            }
+
+            /* ── Interactive Shockwave Pulse Rings ── */
+            .s404-pulse-ring {
+                position: absolute;
+                border-radius: 50%;
+                border: 1.5px solid rgba(242, 212, 0, 0.85);
+                box-shadow: 0 0 20px rgba(242, 212, 0, 0.5), inset 0 0 15px rgba(242, 212, 0, 0.3);
+                pointer-events: none;
+                z-index: 10;
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+                animation: s404Shockwave 0.85s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+            }
+
+            @keyframes s404Shockwave {
+                0% {
+                    transform: translate(-50%, -50%) scale(0.1);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translate(-50%, -50%) scale(2.8);
+                    opacity: 0;
+                }
+            }
+
+            /* ── Content Details & Typography ── */
+            .s404-details {
+                position: relative;
+                z-index: 4;
+                margin-top: clamp(28px, 4.5vh, 44px);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                max-width: 600px;
+            }
+
+            .s404-title {
+                font-family: inherit;
+                font-size: clamp(1.45rem, 3.6vw, 2.3rem);
                 font-weight: 600;
-                color: #fff;
+                line-height: 1.25;
+                letter-spacing: -0.025em;
+                color: #ffffff;
+                margin: 0 0 12px;
             }
 
-            .nf-card-arrow {
-                width: 17px;
-                height: 17px;
-                stroke: var(--nf-gold);
-                transition: transform .22s ease;
+            .s404-title span.s404-title-gradient {
+                background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.72) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
-            .nf-card:hover .nf-card-arrow {
-                transform: translate(3px, -3px);
+            .s404-desc {
+                font-size: clamp(0.92rem, 2.2vw, 1.05rem);
+                line-height: 1.7;
+                color: rgba(255, 255, 255, 0.62);
+                margin: 0 0 clamp(28px, 4vh, 38px);
+                max-width: 500px;
             }
 
-            .nf-card-d {
-                margin: 0;
-                font-size: 13.5px;
-                line-height: 1.5;
-                color: var(--nf-muted);
+            /* Action Buttons Row */
+            .s404-actions {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 16px;
+                width: 100%;
             }
 
-            /* ── Focus + motion + responsive ─────────────────────────── */
-            .nf a:focus-visible,
-            .nf-card:focus-visible {
-                outline: 2px solid var(--nf-gold);
-                outline-offset: 3px;
-                border-radius: 14px;
+            /* Magnetic Primary Home CTA */
+            .s404-btn-primary {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 14px 32px;
+                border-radius: 999px;
+                background: #f2d400;
+                color: #060608;
+                font-size: 0.92rem;
+                font-weight: 650;
+                letter-spacing: 0.02em;
+                text-decoration: none;
+                border: 1px solid rgba(255, 255, 255, 0.45);
+                box-shadow: 0 8px 28px rgba(242, 212, 0, 0.38), 0 0 24px rgba(242, 212, 0, 0.2);
+                transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.2s ease;
+                will-change: transform;
             }
 
+            .s404-btn-primary:hover {
+                background: #ffdf29;
+                transform: translateY(-3px) scale(1.03);
+                box-shadow: 0 12px 36px rgba(242, 212, 0, 0.55), 0 0 36px rgba(242, 212, 0, 0.32);
+                color: #000;
+            }
+
+            .s404-btn-primary:active {
+                transform: translateY(0) scale(0.97);
+            }
+
+            .s404-btn-primary svg {
+                transition: transform 0.25s ease;
+            }
+
+            .s404-btn-primary:hover svg {
+                transform: translateX(-3px);
+            }
+
+            /* Secondary Minimal Glass Ghost Button */
+            .s404-btn-ghost {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 14px 28px;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.04);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                color: rgba(255, 255, 255, 0.82);
+                font-size: 0.92rem;
+                font-weight: 500;
+                letter-spacing: 0.02em;
+                text-decoration: none;
+                transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .s404-btn-ghost:hover {
+                border-color: rgba(255, 255, 255, 0.28);
+                background: rgba(255, 255, 255, 0.09);
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+
+            .s404-btn-ghost:active {
+                transform: translateY(0) scale(0.97);
+            }
+
+            .s404-btn-ghost svg {
+                transition: transform 0.25s ease;
+            }
+
+            .s404-btn-ghost:hover svg {
+                transform: translateX(4px);
+            }
+
+            /* Mobile & Tablet Responsiveness */
             @media (max-width: 860px) {
-                .nf-wrap {
-                    grid-template-columns: 1fr;
-                    text-align: center;
+                .s404-hud {
+                    display: none;
                 }
 
-                .nf-eyebrow,
-                .nf-actions {
-                    justify-content: center;
+                .s404-numerals {
+                    gap: clamp(10px, 3.5vw, 24px);
                 }
 
-                .nf-lead {
-                    margin-inline: auto;
+                .s404-char {
+                    font-size: clamp(6.4rem, 26vw, 11rem);
                 }
 
-                .nf-visual {
-                    order: -1;
-                    max-width: 330px;
+                .s404-portal {
+                    width: clamp(62px, 20vw, 96px);
+                    height: clamp(62px, 20vw, 96px);
                 }
 
-                .nf-grid {
-                    grid-template-columns: 1fr;
+                .s404-portal-flare {
+                    width: clamp(120px, 42vw, 210px);
                 }
 
-                .nf-card-h {
-                    justify-content: flex-start;
+                .s404-actions {
+                    flex-direction: column;
+                    width: 100%;
+                    max-width: 320px;
+                }
+
+                .s404-btn-primary,
+                .s404-btn-ghost {
+                    width: 100%;
                 }
             }
 
             @media (prefers-reduced-motion: reduce) {
 
-                .nf-orbit-spin,
-                .nf-sat,
-                .nf-eyebrow .nf-dot {
+                .s404-portal-ring-1,
+                .s404-portal-ring-2,
+                .s404-portal-ring-3,
+                .s404-hud-dot,
+                .s404-badge-pulse {
                     animation: none !important;
+                }
+
+                .s404-numerals,
+                .s404-char {
+                    transform: none !important;
                 }
             }
         </style>
-        <section aria-labelledby="nf-title" class="nf">
-            <div class="nf-wrap">
-                <div class="nf-copy">
-                    <p class="nf-eyebrow"><span class="nf-dot"></span>Lost signal · Error 404</p>
-                    <h1 class="nf-headline" id="nf-title">This page drifted off course.</h1>
-                    <p class="nf-lead">The page you’re looking for doesn’t exist, was moved, or the link is
-                        broken. Let’s get you back onto a known trajectory.</p>
-                    <div class="nf-actions">
-                        <a class="nf-btn nf-btn-primary" href="./">
-                            <svg fill="none" height="20" viewBox="0 0 20 20" width="20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke="#000000"
-                                    d="M2.5 14.166l7.5 3.334 7.5-3.334M2.5 9.166l7.5 3.334 7.5-3.334M10 2.5L2.5 5.833l7.5 3.334 7.5-3.334L10 2.5z"
-                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            Back to home
-                        </a>
-                        <a class="nf-btn nf-btn-ghost" href="./contact.html">
-                            <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
-                                <path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                            Report a broken link
-                        </a>
+
+        <!-- Dynamic Ambient Nebula Glow & Grid Floor (Transparent to allow fx.js crystals) -->
+        <div class="s404-nebula" id="s404Nebula" aria-hidden="true"></div>
+        <div class="s404-grid-floor" aria-hidden="true"></div>
+        <div class="s404-hairline-top" aria-hidden="true"></div>
+        <div class="s404-hairline-bottom" aria-hidden="true"></div>
+
+        <!-- Corner Studio HUD Telemetry -->
+        <div class="s404-hud s404-hud-tl" aria-hidden="true">
+            <span class="s404-hud-dot"></span>
+            <span>FREQ // 404.00 MHz</span>
+            <canvas class="s404-wave-canvas" id="s404Wave" width="44" height="12"></canvas>
+        </div>
+        <div class="s404-hud-tr" aria-hidden="true">
+            <span>SYNKYN ENGINE // V3.2</span>
+        </div>
+        <div class="s404-hud-bl" aria-hidden="true">
+            <span>LAT 12.9716° N · LON 77.5946° E</span>
+        </div>
+        <div class="s404-hud-br" aria-hidden="true">
+            <span>STATUS // INTERACTIVE ORBIT</span>
+        </div>
+
+        <!-- Main Content Container -->
+        <div class="s404-container">
+            <!-- Interactive Instruction Badge -->
+            <button class="s404-badge" id="s404ShatterBtn" aria-label="Trigger kinetic reassembly">
+                <span class="s404-badge-pulse" aria-hidden="true"></span>
+                <span>DRAG · TOSS · EXPLORE // ERROR 404</span>
+            </button>
+
+            <!-- 3D Interactive Playable 404 Stage -->
+            <div class="s404-stage" id="s404Stage" aria-label="Error 404: Playable Interactive Numerals">
+                <div class="s404-aura" id="s404Aura" aria-hidden="true"></div>
+
+                <div class="s404-numerals" id="s404Numerals">
+                    <!-- Left Digit: '4' -->
+                    <div class="s404-char s404-char-1" id="s404Char1" data-index="0" data-depth="0.22">
+                        <span class="s404-char-shadow" aria-hidden="true">4</span>
+                        <span class="s404-char-core">4</span>
+                        <span class="s404-char-rgb" aria-hidden="true">4</span>
+                        <span class="s404-char-light" aria-hidden="true">4</span>
+                        <span class="s404-char-stroke" aria-hidden="true">4</span>
                     </div>
-                    <p class="nf-help"><strong>Typed the address?</strong> Please check the spelling, or use the
-                        navigation to find your way.</p>
-                </div>
-                <div aria-hidden="true" class="nf-visual">
-                    <div class="nf-glow"></div>
-                    <div class="nf-bignum">404</div>
-                    <svg class="nf-orbit" viewbox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                        <g class="nf-orbit-spin">
-                            <ellipse class="nf-ring" cx="200" cy="200" rx="150" ry="92" transform="rotate(-18 200 200)">
-                            </ellipse>
-                            <circle class="nf-node-halo" cx="58" cy="158" r="11"></circle>
-                            <circle class="nf-node" cx="58" cy="158" r="4.5"></circle>
-                        </g>
-                        <path class="nf-trail" d="M300 132 Q338 96 352 64"></path>
-                        <g class="nf-sat">
-                            <polygon points="352,52 363,73 341,73"></polygon>
-                        </g>
-                    </svg>
-                    <span class="nf-tag">Off course</span>
+
+                    <!-- Center Digit: '0' with Glorious Luminous Core Glow -->
+                    <div class="s404-char s404-char-2" id="s404Char2" data-index="1" data-depth="0.42">
+                        <div class="s404-zero-glow" aria-hidden="true"></div>
+                        <span class="s404-char-shadow" aria-hidden="true">0</span>
+                        <span class="s404-char-core">0</span>
+                        <span class="s404-char-rgb" aria-hidden="true">0</span>
+                        <span class="s404-char-light" aria-hidden="true">0</span>
+                        <span class="s404-char-stroke" aria-hidden="true">0</span>
+                    </div>
+
+                    <!-- Right Digit: '4' -->
+                    <div class="s404-char s404-char-3" id="s404Char3" data-index="2" data-depth="0.28">
+                        <span class="s404-char-shadow" aria-hidden="true">4</span>
+                        <span class="s404-char-core">4</span>
+                        <span class="s404-char-rgb" aria-hidden="true">4</span>
+                        <span class="s404-char-light" aria-hidden="true">4</span>
+                        <span class="s404-char-stroke" aria-hidden="true">4</span>
+                    </div>
                 </div>
             </div>
 
-        </section>
+            <!-- Descriptive Typography & Navigation Actions -->
+            <div class="s404-details">
+                <h1 class="s404-title">
+                    <span class="s404-title-gradient">Page Drifted Off Radar</span>
+                </h1>
+                <p class="s404-desc">
+                    The creative coordinates you requested have drifted out of orbit, were relocated, or dissolved into
+                    the digital ether.
+                </p>
+
+                <div class="s404-actions">
+                    <a href="./" class="s404-btn-primary" id="s404HomeBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                        <span>Return to Studio</span>
+                    </a>
+
+                    <a href="./library.html" class="s404-btn-ghost">
+                        <span>Explore Library</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── ZERO-GRAVITY PHYSICS, DRAG-AND-THROW & MAGNETIC REASSEMBLY ENGINE ── -->
+        <script>
+            (function init404Playground() {
+                const stage = document.getElementById('s404Stage');
+                const numerals = document.getElementById('s404Numerals');
+                const charEls = [
+                    document.getElementById('s404Char1'),
+                    document.getElementById('s404Char2'),
+                    document.getElementById('s404Char3')
+                ];
+                const aura = document.getElementById('s404Aura');
+                const nebula = document.getElementById('s404Nebula');
+                const homeBtn = document.getElementById('s404HomeBtn');
+                const shatterBtn = document.getElementById('s404ShatterBtn');
+                const waveCanvas = document.getElementById('s404Wave');
+
+                if (!stage || !numerals || !charEls[0]) return;
+
+                const waveCtx = waveCanvas ? waveCanvas.getContext('2d') : null;
+
+                let winW = window.innerWidth;
+                let winH = window.innerHeight;
+
+                window.addEventListener('resize', () => {
+                    winW = window.innerWidth;
+                    winH = window.innerHeight;
+                }, { passive: true });
+
+                // ── Physical Bodies for Each Digit ──
+                const bodies = charEls.map((el, index) => ({
+                    el: el,
+                    index: index,
+                    // Current position offset from home
+                    x: 0,
+                    y: 0,
+                    z: 0,
+                    vx: 0,
+                    vy: 0,
+                    rotZ: 0,
+                    rotVx: 0,
+                    scale: 1,
+                    // Drag state
+                    isDragging: false,
+                    pointerId: null,
+                    startX: 0,
+                    startY: 0,
+                    lastPointerX: 0,
+                    lastPointerY: 0,
+                    depth: parseFloat(el.dataset.depth) || 0.3
+                }));
+
+                // Global Pointer & Tilt Coordinates
+                let targetGlobalX = 0;
+                let targetGlobalY = 0;
+                let currentGlobalX = 0;
+                let currentGlobalY = 0;
+                let mouseSpeed = 0;
+                let lastPointerX = winW / 2;
+                let lastPointerY = winH / 2;
+                let isStageHovered = false;
+                let isCenterHovered = false;
+
+                // ── Interactive Shockwave Burst Generator ──
+                function createShockwave(x, y) {
+                    const ring = document.createElement('div');
+                    ring.className = 's404-pulse-ring';
+                    ring.style.left = x + 'px';
+                    ring.style.top = y + 'px';
+                    ring.style.width = '120px';
+                    ring.style.height = '120px';
+                    document.body.appendChild(ring);
+                    setTimeout(() => ring.remove(), 900);
+                }
+
+                // ── Kinetic Shatter & Magnetic Reassembly ──
+                function triggerKineticShatter(originX, originY) {
+                    createShockwave(originX || winW / 2, originY || winH / 2);
+
+                    // Scatter each digit in opposing trajectories with rotational momentum
+                    bodies.forEach((b, idx) => {
+                        const angle = (idx === 0) ? -2.4 : (idx === 1) ? -1.57 : -0.7;
+                        const force = 180 + Math.random() * 90;
+                        b.vx = Math.cos(angle) * force;
+                        b.vy = Math.sin(angle) * force - 60;
+                        b.rotVx = (Math.random() - 0.5) * 45;
+                        b.scale = 1.15;
+                    });
+                }
+
+                if (shatterBtn) {
+                    shatterBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        triggerKineticShatter(e.clientX, e.clientY);
+                    });
+                }
+
+                // Double click anywhere on numerals to shatter
+                numerals.addEventListener('dblclick', (e) => {
+                    triggerKineticShatter(e.clientX, e.clientY);
+                });
+
+                // ── Drag & Throw Zero-G Event Listeners ──
+                bodies.forEach((b) => {
+                    function onPointerDown(e) {
+                        e.preventDefault();
+                        b.isDragging = true;
+                        b.pointerId = e.pointerId;
+                        b.el.classList.add('is-dragging');
+                        b.startX = e.clientX - b.x;
+                        b.startY = e.clientY - b.y;
+                        b.lastPointerX = e.clientX;
+                        b.lastPointerY = e.clientY;
+                        b.vx = 0;
+                        b.vy = 0;
+                        b.scale = 1.18;
+
+                        createShockwave(e.clientX, e.clientY);
+
+                        if (b.el.setPointerCapture) {
+                            b.el.setPointerCapture(e.pointerId);
+                        }
+                    }
+
+                    function onPointerMove(e) {
+                        if (!b.isDragging) return;
+                        b.x = e.clientX - b.startX;
+                        b.y = e.clientY - b.startY;
+
+                        // Calculate throw release velocity
+                        b.vx = (e.clientX - b.lastPointerX) * 0.85;
+                        b.vy = (e.clientY - b.lastPointerY) * 0.85;
+                        b.rotZ = (b.x * 0.08);
+
+                        b.lastPointerX = e.clientX;
+                        b.lastPointerY = e.clientY;
+                    }
+
+                    function onPointerUp(e) {
+                        if (!b.isDragging) return;
+                        b.isDragging = false;
+                        b.el.classList.remove('is-dragging');
+                        b.scale = 1.0;
+
+                        if (b.el.releasePointerCapture && b.pointerId !== null) {
+                            try { b.el.releasePointerCapture(b.pointerId); } catch (_) { }
+                        }
+                        b.pointerId = null;
+
+                        // If release was an intentional throw, send shockwave
+                        if (Math.hypot(b.vx, b.vy) > 8) {
+                            createShockwave(e.clientX, e.clientY);
+                        }
+                    }
+
+                    b.el.addEventListener('pointerdown', onPointerDown);
+                    window.addEventListener('pointermove', onPointerMove);
+                    window.addEventListener('pointerup', onPointerUp);
+                    window.addEventListener('pointercancel', onPointerUp);
+                });
+
+                // Singularity Gravitational Pull: Center '0' pulls '4's inward when hovered
+                charEls[1].addEventListener('mouseenter', () => {
+                    isCenterHovered = true;
+                });
+                charEls[1].addEventListener('mouseleave', () => {
+                    isCenterHovered = false;
+                });
+
+                // ── Global Mouse Movement & Light Tracking ──
+                window.addEventListener('mousemove', (e) => {
+                    const cx = e.clientX;
+                    const cy = e.clientY;
+
+                    targetGlobalX = (cx / winW) * 2 - 1;
+                    targetGlobalY = (cy / winH) * 2 - 1;
+
+                    const dx = cx - lastPointerX;
+                    const dy = cy - lastPointerY;
+                    mouseSpeed = Math.min(16, Math.hypot(dx, dy));
+                    lastPointerX = cx;
+                    lastPointerY = cy;
+
+                    if (nebula) {
+                        nebula.style.setProperty('--s404-mx', ((cx / winW) * 100).toFixed(1) + '%');
+                        nebula.style.setProperty('--s404-my', ((cy / winH) * 100).toFixed(1) + '%');
+                    }
+
+                    const rect = numerals.getBoundingClientRect();
+                    const numX = ((cx - rect.left) / rect.width) * 100;
+                    const numY = ((cy - rect.top) / rect.height) * 100;
+                    numerals.style.setProperty('--s404-char-x', Math.max(0, Math.min(100, numX)).toFixed(1) + '%');
+                    numerals.style.setProperty('--s404-char-y', Math.max(0, Math.min(100, numY)).toFixed(1) + '%');
+
+                    // Magnetic pull on Home Button
+                    if (homeBtn) {
+                        const btnRect = homeBtn.getBoundingClientRect();
+                        const btnCenterX = btnRect.left + btnRect.width / 2;
+                        const btnCenterY = btnRect.top + btnRect.height / 2;
+                        const dist = Math.hypot(cx - btnCenterX, cy - btnCenterY);
+
+                        if (dist < 100) {
+                            const pullX = (cx - btnCenterX) * 0.25;
+                            const pullY = (cy - btnCenterY) * 0.25;
+                            homeBtn.style.transform = 'translate(' + pullX.toFixed(1) + 'px, ' + pullY.toFixed(1) + 'px) scale(1.04)';
+                        } else {
+                            homeBtn.style.transform = '';
+                        }
+                    }
+                }, { passive: true });
+
+                stage.addEventListener('mouseenter', () => {
+                    isStageHovered = true;
+                    numerals.style.setProperty('--s404-light-opacity', '0.95');
+                    numerals.style.setProperty('--s404-rgb-opacity', '0.75');
+                });
+
+                stage.addEventListener('mouseleave', () => {
+                    isStageHovered = false;
+                    numerals.style.setProperty('--s404-light-opacity', '0.65');
+                    numerals.style.setProperty('--s404-rgb-opacity', '0.4');
+                    targetGlobalX = 0;
+                    targetGlobalY = 0;
+                    if (homeBtn) homeBtn.style.transform = '';
+                });
+
+                // Gyroscope on Mobile
+                if (window.DeviceOrientationEvent && typeof window.DeviceOrientationEvent.requestPermission !== 'function') {
+                    window.addEventListener('deviceorientation', (ev) => {
+                        if (ev.gamma !== null && ev.beta !== null) {
+                            targetGlobalX = Math.max(-1, Math.min(1, ev.gamma / 28));
+                            targetGlobalY = Math.max(-1, Math.min(1, (ev.beta - 45) / 28));
+                        }
+                    }, { passive: true });
+                }
+
+                // ── Live Telemetry Audio Waveform ──
+                let waveStep = 0;
+                function drawWave() {
+                    if (!waveCtx) return;
+                    waveCtx.clearRect(0, 0, 44, 12);
+                    waveCtx.beginPath();
+                    waveCtx.strokeStyle = '#f2d400';
+                    waveCtx.lineWidth = 1.3;
+
+                    for (let x = 0; x < 44; x++) {
+                        const freq = isStageHovered ? 0.38 : 0.2;
+                        const amp = isStageHovered ? 4.5 : 2.5;
+                        const y = 6 + Math.sin(x * freq + waveStep) * amp * Math.cos(x * 0.1);
+                        if (x === 0) waveCtx.moveTo(x, y);
+                        else waveCtx.lineTo(x, y);
+                    }
+                    waveCtx.stroke();
+                    waveStep += (isStageHovered ? 0.22 : 0.08) + mouseSpeed * 0.02;
+                }
+
+                // ── High Performance Physics & Render Loop (60-120 FPS) ──
+                let idleAngle = 0;
+                const SPRING = 0.075;     // Elastic return stiffness
+                const DAMPING = 0.82;     // Zero-G oscillation friction
+
+                function render() {
+                    // Continuous subtle space breathing if idle
+                    if (!isStageHovered && Math.abs(targetGlobalX) < 0.04 && Math.abs(targetGlobalY) < 0.04) {
+                        idleAngle += 0.018;
+                        targetGlobalX = Math.sin(idleAngle) * 0.14;
+                        targetGlobalY = Math.cos(idleAngle * 0.7) * 0.09;
+                    }
+
+                    currentGlobalX += (targetGlobalX - currentGlobalX) * 0.08;
+                    currentGlobalY += (targetGlobalY - currentGlobalY) * 0.08;
+
+                    mouseSpeed *= 0.92;
+                    const shiftX = (currentGlobalX * 6 + mouseSpeed * 0.45).toFixed(1);
+                    numerals.style.setProperty('--s404-shift-x', shiftX + 'px');
+
+                    // Global 3D Numerals Assembly Tilt
+                    const stageScale = isStageHovered ? 1.05 : 1.0;
+                    const rotX = currentGlobalY * -16;
+                    const rotY = currentGlobalX * 22;
+                    const transX = currentGlobalX * 20;
+                    const transY = currentGlobalY * 14;
+
+                    numerals.style.transform =
+                        'translate3d(' + transX.toFixed(2) + 'px, ' + transY.toFixed(2) + 'px, 0) ' +
+                        'rotateX(' + rotX.toFixed(2) + 'deg) ' +
+                        'rotateY(' + rotY.toFixed(2) + 'deg) ' +
+                        'scale(' + stageScale + ')';
+
+                    if (aura) {
+                        aura.style.transform = 'translate3d(' + (currentGlobalX * 55).toFixed(2) + 'px, ' + (currentGlobalY * 42).toFixed(2) + 'px, -100px)';
+                    }
+
+                    // ── Update Each Physical Digit Body ──
+                    bodies.forEach((b) => {
+                        if (!b.isDragging) {
+                            // Target gravitational slot
+                            let slotTargetX = 0;
+                            let slotTargetY = 0;
+
+                            // Singularity gravity: Center 0 draws 4s inward
+                            if (isCenterHovered) {
+                                if (b.index === 0) slotTargetX = 32;
+                                if (b.index === 2) slotTargetX = -32;
+                            }
+
+                            // Magnetic cursor lean
+                            const mouseLeanX = currentGlobalX * 25 * b.depth;
+                            const mouseLeanY = currentGlobalY * 18 * b.depth;
+
+                            // Spring acceleration towards home slot
+                            const forceX = (slotTargetX + mouseLeanX - b.x) * SPRING;
+                            const forceY = (slotTargetY + mouseLeanY - b.y) * SPRING;
+                            const forceRot = (0 - b.rotZ) * SPRING;
+
+                            b.vx = (b.vx + forceX) * DAMPING;
+                            b.vy = (b.vy + forceY) * DAMPING;
+                            b.rotVx = (b.rotVx + forceRot) * DAMPING;
+
+                            b.x += b.vx;
+                            b.y += b.vy;
+                            b.rotZ += b.rotVx;
+                            b.scale += (1 - b.scale) * 0.1;
+                        }
+
+                        // Parallax Z depth
+                        const zDepth = (b.depth * 65) + (b.isDragging ? 60 : 0);
+
+                        b.el.style.transform =
+                            'translate3d(' + b.x.toFixed(2) + 'px, ' + b.y.toFixed(2) + 'px, ' + zDepth.toFixed(1) + 'px) ' +
+                            'rotateZ(' + b.rotZ.toFixed(2) + 'deg) ' +
+                            'scale(' + b.scale.toFixed(3) + ')';
+                    });
+
+                    drawWave();
+
+                    requestAnimationFrame(render);
+                }
+
+                render();
+            })();
+        </script>
     </main>
     <footer class="site-footer">
         <figure class="footer-blob footer-blob--right" aria-hidden="true">
