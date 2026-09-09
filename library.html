@@ -997,9 +997,15 @@
         height: 100%;
         border-radius: 16px;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, .05);
+        border: 1px solid #000000 !important;
+        outline: none !important;
+        background: #080808;
         cursor: pointer;
-        transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        will-change: box-shadow;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        box-shadow: 0 4px 22px rgba(0, 0, 0, .45);
+        transition: box-shadow .4s cubic-bezier(0.16, 1, 0.3, 1), border-color .3s ease;
       }
 
       .bento-ar--portrait {
@@ -1014,9 +1020,36 @@
       }
 
       .bento-item:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, .5);
-        border-color: rgba(242, 212, 0, .45);
+        transform: none !important;
+        border: 1px solid #000000 !important;
+        outline: none !important;
+        box-shadow: 0 24px 55px -16px rgba(0, 0, 0, .95), 0 10px 24px -8px rgba(0, 0, 0, .85);
+      }
+
+      .bento-item img,
+      .bento-item video {
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        width: calc(100% + 4px) !important;
+        height: calc(100% + 4px) !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        will-change: transform, filter;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        transition: transform .85s cubic-bezier(0.16, 1, 0.3, 1), filter .6s ease;
+        filter: brightness(0.97) contrast(1.02);
+      }
+
+      .bento-item:hover img,
+      .bento-item:hover video {
+        transform: scale(1.045) translateZ(0);
+        filter: brightness(1.03) contrast(1.04);
       }
 
       .bento-item:focus-visible {
@@ -1025,7 +1058,21 @@
       }
 
       .bento-item__overlay {
-        background: linear-gradient(to top, rgba(0, 0, 0, .92) 0%, rgba(0, 0, 0, .35) 45%, rgba(0, 0, 0, .08) 100%);
+        position: absolute;
+        top: 0;
+        left: -2px;
+        right: -2px;
+        bottom: -4px;
+        pointer-events: none;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.94) 0%,
+          rgba(0, 0, 0, 0.82) 16%,
+          rgba(0, 0, 0, 0.58) 32%,
+          rgba(0, 0, 0, 0.32) 48%,
+          rgba(0, 0, 0, 0.12) 64%,
+          rgba(0, 0, 0, 0) 80%
+        );
       }
 
       .bento-item__badge {
@@ -2069,7 +2116,8 @@
                     innerHtml = `<iframe src="https://player.vimeo.com/video/${vId}?background=1&autoplay=1&loop=1&muted=1&autopause=0" frameborder="0" allow="autoplay; fullscreen" style="${iframeStyle}"></iframe>`;
                   } else if (firstVideoSrc.type === 'youtube') {
                     const yId = getYouTubeId(firstVideoSrc.src);
-                    innerHtml = `<iframe src="https://www.youtube.com/embed/${yId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${yId}&playsinline=1&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" style="${iframeStyle}"></iframe>`;
+                    const ytOrigin = (window.location.origin && window.location.origin.startsWith('http')) ? window.location.origin : 'https://www.synkynstudios.com';
+                    innerHtml = `<iframe src="https://www.youtube-nocookie.com/embed/${yId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${yId}&playsinline=1&modestbranding=1&enablejsapi=1&origin=${encodeURIComponent(ytOrigin)}" title="Preview" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" style="${iframeStyle}"></iframe>`;
                   } else if (firstVideoSrc.type === 'video') {
                     innerHtml = `<video src="${firstVideoSrc.src}" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover pointer-events-none"></video>`;
                   }
@@ -2327,7 +2375,8 @@
               mediaHtml = `<video src="${srcObj.src}" loop playsinline controls controlslist="nodownload" ${idx === 0 ? 'autoplay' : ''} preload="auto"></video>`;
             } else if (srcObj.type === 'youtube') {
               const ytId = getYouTubeId(srcObj.src);
-              mediaHtml = `<iframe src="https://www.youtube.com/embed/${ytId}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=0&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="iframe-swipe-overlay" onclick="this.style.pointerEvents='none'"></div>`;
+              const ytOrigin = (window.location.origin && window.location.origin.startsWith('http')) ? window.location.origin : 'https://www.synkynstudios.com';
+              mediaHtml = `<iframe src="https://www.youtube-nocookie.com/embed/${ytId}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=0&playsinline=1&origin=${encodeURIComponent(ytOrigin)}" title="${work.title}" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="iframe-swipe-overlay" onclick="this.style.pointerEvents='none'"></div>`;
             } else if (srcObj.type === 'vimeo') {
               const vid = getVimeoId(srcObj.src);
               mediaHtml = `
