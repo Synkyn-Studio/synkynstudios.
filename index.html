@@ -317,7 +317,7 @@
     <link rel="preload" as="image" href="./images/hero-poster.webp" fetchpriority="high" />
     <link href="./assets/main.css?v=9" rel="stylesheet" />
     <link href="./assets/loader.css?v=4" rel="stylesheet" />
-    <link href="./assets/navbar.css?v=15" rel="stylesheet" />
+    <link href="./assets/navbar.css?v=17" rel="stylesheet" />
     <link href="./assets/home-theme.css?v=1" rel="stylesheet" />
     <link href="./assets/footer.css?v=12" rel="stylesheet" />
     <link href="./assets/home.css?v=1" rel="stylesheet" />
@@ -639,14 +639,14 @@
                 <div class="container">
                     <div class="bg-area"></div>
                     <div class="space-earth-container group cursor-pointer relative z-10" style="perspective: 1000px;">
-                        <h2 class="font-perfectgirl section-title text-heading-1 transition-all duration-1000 ease-out transform group-hover:scale-105 group-hover:-translate-y-2 drop-shadow-[0_0_15px_#f2c20080]"
+                        <h2 class="font-perfectgirl section-title text-heading-1 space-earth-title ease-out transform group-hover:scale-105 group-hover:-translate-y-2"
                             id="space-earth-text"
                             style="background-image: linear-gradient(to right, #facc15 0%, #eab308 20%, #ffffff 40%, #ffffff 100%); background-size: 300% 100%; background-position: 100% 0; color: transparent; -webkit-background-clip: text; background-clip: text;">
                             AI Generated.<br />
                             Human Directed.
                         </h2>
                         <div
-                            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-yellow-500/0 group-hover:bg-yellow-500/10 blur-[60px] rounded-full transition-all duration-1000 pointer-events-none -z-10">
+                            class="space-earth-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-full pointer-events-none -z-10">
                         </div>
                     </div>
                 </div>
@@ -1770,12 +1770,11 @@
                 }
                 if (window.lenis) return;
 
-                const isMobile = window.innerWidth <= 768;
                 const lenis = new Lenis({
                     lerp: 0.12,
                     duration: 0.9,
                     wheelMultiplier: 1.0,
-                    touchMultiplier: 1.5,
+                    touchMultiplier: 1.0,
                     smoothWheel: true,
                     smoothTouch: false,
                     orientation: 'vertical',
@@ -1789,11 +1788,12 @@
                 // Clean single-hook sync with GSAP ScrollTrigger or fallback RAF
                 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                     gsap.registerPlugin(ScrollTrigger);
+                    ScrollTrigger.config({ ignoreMobileResize: true });
                     lenis.on('scroll', ScrollTrigger.update);
                     gsap.ticker.add((time) => {
                         lenis.raf(time * 1000);
                     });
-                    gsap.ticker.lagSmoothing(0);
+                    gsap.ticker.lagSmoothing(500, 33);
                 } else {
                     function raf(time) {
                         lenis.raf(time);
@@ -1802,25 +1802,27 @@
                     requestAnimationFrame(raf);
                 }
 
-                // const progressBar = document.getElementById('scroll-progress-bar');
+                const progressBar = document.getElementById('scroll-progress-bar');
                 const backToTopBtn = document.getElementById('back-to-top-btn');
 
                 lenis.on('scroll', (e) => {
-                    const scrollY = e.scroll || window.scrollY || document.documentElement.scrollTop || 0;
-                    const maxScroll = Math.max(1, (e.limit || (document.documentElement.scrollHeight - window.innerHeight)));
-                    const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
+                    try {
+                        const scrollY = e.scroll || window.scrollY || document.documentElement.scrollTop || 0;
+                        const maxScroll = Math.max(1, (e.limit || (document.documentElement.scrollHeight - window.innerHeight)));
+                        const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
 
-                    if (progressBar) {
-                        progressBar.style.transform = `scaleX(${progress})`;
-                    }
-
-                    if (backToTopBtn) {
-                        if (scrollY > 450) {
-                            backToTopBtn.classList.add('is-visible');
-                        } else {
-                            backToTopBtn.classList.remove('is-visible');
+                        if (progressBar) {
+                            progressBar.style.transform = `scaleX(${progress})`;
                         }
-                    }
+
+                        if (backToTopBtn) {
+                            if (scrollY > 450) {
+                                backToTopBtn.classList.add('is-visible');
+                            } else {
+                                backToTopBtn.classList.remove('is-visible');
+                            }
+                        }
+                    } catch (err) { /* never let one frame break scrolling */ }
                 });
 
                 if (backToTopBtn) {
@@ -1869,8 +1871,9 @@
                         trigger: ".space-earth-container",
                         start: "top 85%",
                         end: "bottom 15%",
-                        scrub: window.innerWidth <= 768 ? 0.3 : 1,
-                        fastScrollEnd: true
+                        scrub: 0.35,
+                        fastScrollEnd: true,
+                        invalidateOnRefresh: true
                     }
                 });
             }
@@ -2229,21 +2232,32 @@
             var progress = document.getElementById('roadway-progress');
             var stops = roadway.querySelectorAll('.roadway-stop');
             var dots = roadway.querySelectorAll('.roadway-dot');
-            function onScroll() {
+            var ticking = false;
+
+            function updateRoadway() {
                 var rect = roadway.getBoundingClientRect();
                 var viewH = window.innerHeight;
                 var scrolled = (viewH * 0.5 - rect.top) / rect.height;
                 scrolled = Math.max(0, Math.min(1, scrolled));
                 if (progress) progress.style.height = (scrolled * 100) + '%';
-                dots.forEach(function (dot, i) {
+                for (var i = 0; i < dots.length; i++) {
                     var stopRect = stops[i].getBoundingClientRect();
                     var stopCenter = stopRect.top + stopRect.height / 2;
-                    if (stopCenter < viewH * 0.65) dot.classList.add('active');
-                    else dot.classList.remove('active');
-                });
+                    if (stopCenter < viewH * 0.65) dots[i].classList.add('active');
+                    else dots[i].classList.remove('active');
+                }
+                ticking = false;
             }
+
+            function onScroll() {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(updateRoadway);
+                }
+            }
+
             window.addEventListener('scroll', onScroll, { passive: true });
-            onScroll();
+            updateRoadway();
         })();
     </script>
 
@@ -2255,6 +2269,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
             gsap.registerPlugin(ScrollTrigger);
+            ScrollTrigger.config({ ignoreMobileResize: true });
             if (typeof MotionPathPlugin !== 'undefined') gsap.registerPlugin(MotionPathPlugin);
 
             const isMobile = () => window.innerWidth < 1024;

@@ -682,3 +682,69 @@ header .header-two,
 #desktop-navbar a.is-current>span {
     opacity: .95;
 }
+
+/* ==========================================================================
+   FULL-BLEED VIEWPORT & HIDDEN SCROLLBAR (ALL PAGES)
+   --------------------------------------------------------------------------
+   Removes the vertical scrollbar track ("sidebar") so every page spans
+   edge-to-edge full screen without the side scrollbar moving up and down.
+   Wheel, trackpad, touch, keyboard and smooth scrolling remain 100% functional.
+   ========================================================================== */
+html {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+body {
+    scrollbar-width: none !important;
+    margin: 0 !important;
+    overscroll-behavior-x: none;
+    -webkit-overflow-scrolling: touch !important;
+    overflow-x: clip !important;
+    max-width: 100% !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
+
+/* Inner scrollers (mobile menu, dropdowns) keep a slim visible bar */
+.sidebar::-webkit-scrollbar,
+.dropdown-menu::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+    display: block !important;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET BUTTER-SMOOTH SCROLLING (ZERO JITTER)
+   --------------------------------------------------------------------------
+   Promotes major page sections to their own composited GPU layers so the
+   compositor thread renders them at 60-120 FPS without layout thrashing.
+   ========================================================================== */
+@media (max-width: 1024px) {
+    html,
+    body {
+        -webkit-overflow-scrolling: touch !important;
+        scroll-behavior: auto !important;
+        touch-action: pan-y pinch-zoom;
+    }
+
+    /* Hardware accelerate heavy animated elements without breaking fixed coordinate contexts */
+    .hero-video-bg,
+    .pipeline-wrapper,
+    #hero-video {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+}

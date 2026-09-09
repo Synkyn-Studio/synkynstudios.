@@ -112,7 +112,7 @@
     <link href="./assets/main.js" rel="modulepreload" />
     <link as="style" href="./assets/main.css" rel="preload" />
     <link href="./assets/main.css" rel="stylesheet" />
-    <link href="./assets/navbar.css?v=8" rel="stylesheet" />
+    <link href="./assets/navbar.css?v=17" rel="stylesheet" />
     <style id="synkyn-theme">
         /* Synkyn Studios — yellow / dark-yellow / black theme (overrides main.css) */
         :root,
@@ -532,8 +532,7 @@
     </button>
 
     <header>
-        <div class="header-two header-two-at-rest lp:!max-w-[1290px] header-home fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0"
-            data-direction="up" data-ns-animate="" data-offset="20">
+        <div class="header-two header-two-at-rest lp:!max-w-[1290px] header-home fixed top-14 left-1/2 z-50 mx-auto flex w-full max-w-[350px] -translate-x-1/2 items-center justify-between rounded-full px-2.5 py-2.5 backdrop-blur-[25px] max-md:!top-8 min-[425px]:max-w-[380px] min-[500px]:max-w-[450px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xl:py-0">
             <div>
                 <a class="flex min-w-0 shrink-0 items-center gap-2" href="./">
                     <figure class="m-0 hidden lg:block lg:max-w-[112px]">
@@ -1244,11 +1243,11 @@
                 }
                 if (window.lenis) return;
 
-                const isMobile = window.innerWidth <= 768;
                 const lenis = new Lenis({
-                    lerp: isMobile ? 0.11 : 0.085,
-                    wheelMultiplier: 1.15,
-                    touchMultiplier: 1.8,
+                    lerp: 0.12,
+                    duration: 0.9,
+                    wheelMultiplier: 1.0,
+                    touchMultiplier: 1.0,
                     smoothWheel: true,
                     smoothTouch: false,
                     orientation: 'vertical',
@@ -1259,29 +1258,21 @@
 
                 window.lenis = lenis;
 
-                // Sync Lenis with GSAP ScrollTrigger if available, avoiding duplicate RAF loops
-                let rafId = null;
-                function fallbackRaf(time) {
-                    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                        gsap.registerPlugin(ScrollTrigger);
-                        lenis.on('scroll', ScrollTrigger.update);
-                        gsap.ticker.add((t) => lenis.raf(t * 1000));
-                        gsap.ticker.lagSmoothing(0);
-                        return;
-                    }
-                    lenis.raf(time);
-                    rafId = requestAnimationFrame(fallbackRaf);
-                }
-
+                // Clean single-hook sync with GSAP ScrollTrigger or fallback RAF
                 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                     gsap.registerPlugin(ScrollTrigger);
+                    ScrollTrigger.config({ ignoreMobileResize: true });
                     lenis.on('scroll', ScrollTrigger.update);
                     gsap.ticker.add((time) => {
                         lenis.raf(time * 1000);
                     });
-                    gsap.ticker.lagSmoothing(0);
+                    gsap.ticker.lagSmoothing(500, 33);
                 } else {
-                    rafId = requestAnimationFrame(fallbackRaf);
+                    function raf(time) {
+                        lenis.raf(time);
+                        requestAnimationFrame(raf);
+                    }
+                    requestAnimationFrame(raf);
                 }
 
                 // Top scroll progress bar & back to top button

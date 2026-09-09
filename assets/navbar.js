@@ -401,3 +401,167 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
+/* ==========================================================================
+   BACK-TO-TOP — NATIVE FALLBACK
+   The primary toggle lives inside a lenis.on('scroll') handler in
+   index.html. If Lenis fails to initialise, that handler never runs and the
+   button can never appear. This listens to native scroll as well; both
+   paths set the same class, so they cannot disagree.
+   ========================================================================== */
+(function () {
+    'use strict';
+    var btn = document.getElementById('back-to-top-btn');
+    if (!btn) return;
+
+    var ticking = false;
+    function read() {
+        return (window.lenis && typeof window.lenis.scroll === 'number')
+            ? window.lenis.scroll
+            : (window.pageYOffset || document.documentElement.scrollTop || 0);
+    }
+    function update() {
+        ticking = false;
+        btn.classList.toggle('is-visible', read() > 450);
+    }
+    function onScroll() {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('pageshow', update);
+    update();
+
+    // Click works with or without Lenis.
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+            window.lenis.scrollTo(0, { duration: 1.2 });
+            return;
+        }
+        var reduce = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+})();
+
+/* ==========================================================================
+   SAME-PAGE LINK GUARD — every page, every nav link
+   --------------------------------------------------------------------------
+   Clicking a link for the page you are already on used to do a full
+   document navigation: tear down and rebuild everything, replay the hero
+   reveal, re-boot the Vimeo player, all to land exactly where you already
+   were.
+
+   This lives in navbar.js rather than desktop-navbar.js so it covers the
+   desktop menu, the mobile panel and the footer on every page from one
+   place. The listener is delegated on document, so it works no matter when
+   the menu markup is injected.
+
+   Paths are normalised because "/", "/index.html" and "./" all address the
+   same document and a plain string compare would miss it.
+   ========================================================================== */
+(function () {
+    'use strict';
+
+    var suppressUntil = 0;
+
+    function normalise(href) {
+        try {
+            var u = new URL(href, window.location.href);
+            var p = u.pathname.replace(/\/index\.html?$/i, '/').replace(/\/{2,}/g, '/');
+            if (p.length > 1 && p.charAt(p.length - 1) === '/') p = p.slice(0, -1);
+            return u.origin + (p || '/');
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function closeDesktopMenus() {
+        document.querySelectorAll('.mega-menu.active, .dropdown-menu.active')
+            .forEach(function (m) { m.classList.remove('active'); });
+        document.querySelectorAll('.nav-item.active, .nav-item.menu-active')
+            .forEach(function (n) { n.classList.remove('active', 'menu-active'); });
+        document.querySelectorAll('.mega-menu-bridge, .dropdown-menu-bridge')
+            .forEach(function (b) { b.style.opacity = '0'; b.style.pointerEvents = 'none'; });
+        // The pointer is still inside the panel, so main.js would happily
+        // re-open it. Hold it shut briefly.
+        suppressUntil = Date.now() + 700;
+    }
+
+    // main.js dispatches menu:show; veto it while suppressed.
+    document.addEventListener('menu:show', function (e) {
+        if (Date.now() > suppressUntil) return;
+        var d = e.detail || {};
+        if (d.menu) d.menu.classList.remove('active');
+        if (d.navItem) d.navItem.classList.remove('active', 'menu-active');
+    });
+
+    function closeMobilePanel() {
+        var sidebar = document.querySelector('.sidebar.show-sidebar');
+        if (!sidebar) return;
+        sidebar.classList.remove('show-sidebar');
+        var ov = document.querySelector('.nav-overlay.show-overlay');
+        if (ov) ov.classList.remove('show-overlay');
+        document.body.classList.remove('overflow-hidden', 'mobile-menu-active');
+        if (window.lenis && typeof window.lenis.start === 'function') window.lenis.start();
+    }
+
+    document.addEventListener('click', function (e) {
+        // Leave modified clicks alone — Ctrl/Cmd/middle open a new tab.
+        if (e.defaultPrevented || e.button !== 0 ||
+            e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        var link = e.target.closest ? e.target.closest('a[href]') : null;
+        if (!link) return;
+        if (link.target && link.target !== '_self') return;
+        if (link.hasAttribute('download')) return;
+
+        var href = link.getAttribute('href') || '';
+        if (!href || href.charAt(0) === '#') return;
+        if (/^(mailto:|tel:|javascript:)/i.test(href)) return;
+
+        var hash = '';
+        try { hash = new URL(href, window.location.href).hash; } catch (err) { return; }
+        // A hash for this page means "scroll to that section" — let it through.
+        if (hash && hash !== window.location.hash) return;
+
+        var target = normalise(href);
+        if (target === null || target !== normalise(window.location.href)) return;
+
+        e.preventDefault();
+        closeDesktopMenus();
+        closeMobilePanel();
+
+        if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+            window.lenis.scrollTo(0, { duration: 1.1 });
+        } else {
+            var reduce = window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        }
+    }, false);
+
+    /* Mark the current page's link for styling and for screen readers. */
+    function markCurrent() {
+        var here = normalise(window.location.href);
+        document.querySelectorAll('a[href]').forEach(function (a) {
+            if (!a.closest('.header-two, #desktop-navbar, .sidebar, footer')) return;
+            var h = a.getAttribute('href') || '';
+            if (!h || h.charAt(0) === '#' || /^(mailto:|tel:|javascript:)/i.test(h)) return;
+            try { if (new URL(h, location.href).hash) return; } catch (err) { return; }
+            if (normalise(h) === here) {
+                a.classList.add('is-current');
+                a.setAttribute('aria-current', 'page');
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', markCurrent, { once: true });
+    } else {
+        markCurrent();
+    }
+})();
