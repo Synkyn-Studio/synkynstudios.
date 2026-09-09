@@ -79,27 +79,38 @@
         try {
             sessionStorage.setItem(WARM_KEY, 'true');
         } catch (e) { }
+        try {
+            document.dispatchEvent(new CustomEvent('synkyn:vimeoready'));
+        } catch (e) { }
     }
 
     function boot() {
-        // The single most important line in this file: if a src already
-        // exists, the player is live. Never touch it, never recreate it.
-        if (frame.src) {
-            reveal();
-            return;
-        }
-        var src = frame.getAttribute('data-src');
-        if (!src) return;
-
-        frame.addEventListener('load', function () {
+        var onLoaded = function () {
             setTimeout(reveal, SETTLE_MS);
-        }, { once: true });
+        };
 
-        frame.src = src;
+        frame.addEventListener('load', onLoaded, { once: true });
 
-        // Safety net: if Vimeo never fires load (blocked, offline, ad
-        // blocker), reveal anyway so we don't sit on the poster forever.
-        setTimeout(reveal, 4000);
+        // Listen for Vimeo player postMessage events (ready, play, playing)
+        function onMessage(e) {
+            if (!e || !e.data) return;
+            try {
+                var data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+                if (data && (data.event === 'play' || data.event === 'ready' || data.event === 'playing')) {
+                    reveal();
+                    window.removeEventListener('message', onMessage);
+                }
+            } catch (err) { }
+        }
+        window.addEventListener('message', onMessage);
+
+        var src = frame.getAttribute('src') || frame.getAttribute('data-src');
+        if (!frame.src && src) {
+            frame.src = src;
+        }
+
+        // Guaranteed reveal before the 4-second loading curtain opens
+        setTimeout(reveal, 2200);
     }
 
     /* ------------------------------------------------------------------

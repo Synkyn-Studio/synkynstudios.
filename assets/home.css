@@ -738,8 +738,6 @@ html {
     transform: translate(-50%, -50%);
     border: 0;
     pointer-events: none;
-    opacity: 1 !important;
-    filter: none !important;
 }
 
 .hero-bg-mobile {

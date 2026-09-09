@@ -3,7 +3,7 @@
   Copyright (c) 2026 Synkyn Studios. All rights reserved.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="show-loader">
 
 <head>
     <!-- Google Tag Manager -->
@@ -20,22 +20,206 @@
         (function () {
             var d = document.documentElement;
             try {
-                var shown = sessionStorage.getItem('synkyn_loader_shown') === 'true';
+                var nav = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+                var isReload = nav ? nav.type === 'reload' : (window.performance && performance.navigation && performance.navigation.type === 1);
                 var ref = document.referrer;
                 var internal = !!ref && ref.indexOf(location.origin) === 0;
                 var reduce = window.matchMedia &&
                     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-                if (!shown && !internal && !reduce) {
-                    d.className += ' show-loader';
-                    sessionStorage.setItem('synkyn_loader_shown', 'true');
+                // Internal page-to-page link navigation (and not page reload) or reduced motion skips loader
+                if ((internal && !isReload) || reduce) {
+                    d.classList.remove('show-loader');
+                    d.classList.add('hide-loader');
                 }
             } catch (e) { }
         })();
     </script>
-    <style>
-        html.hide-loader .loader {
+    <style id="synkyn-loader-critical">
+        :root {
+            --loader-ink: #080808;
+            --loader-line: #232323;
+            --loader-bone-dim: #8f8f88;
+            --loader-volt: #f2d400;
+            --loader-ease-film: cubic-bezier(.76, 0, .24, 1);
+            --loader-ease-out: cubic-bezier(.16, 1, .3, 1);
+            --loader-split-ms: 760ms;
+        }
+        .loader { display: none; }
+        html.show-loader, html.show-loader body { overflow: hidden; }
+        html.show-loader .loader {
+            --loader-progress: 0;
+            display: block;
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            z-index: 9999999;
+            overflow: hidden;
+            touch-action: none;
+            background: transparent;
+            pointer-events: all;
+        }
+        html:not(.show-loader) .loader, html.hide-loader .loader, .loader[hidden], .loader.is-hidden {
             display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        .loader-panel {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50.05%;
+            background: var(--loader-ink);
+            z-index: 2;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+        }
+        .loader-top { top: 0; }
+        .loader-bottom { bottom: 0; }
+        .loader-top::after, .loader-bottom::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120% 100% at 50% 100%, rgba(242, 212, 0, .05), transparent 70%);
+            pointer-events: none;
+        }
+        .loader-bottom::after {
+            background: radial-gradient(120% 100% at 50% 0%, rgba(242, 212, 0, .05), transparent 70%);
+        }
+        .loader.open .loader-panel {
+            transition: transform var(--loader-split-ms) var(--loader-ease-film);
+            transition-delay: 140ms;
+        }
+        .loader.open .loader-top { transform: translate3d(0, -100.5%, 0); }
+        .loader.open .loader-bottom { transform: translate3d(0, 100.5%, 0); }
+        .loader-seam {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            margin-top: -0.5px;
+            z-index: 5;
+            background: linear-gradient(90deg, transparent 0%, rgba(242, 212, 0, .35) 18%, var(--loader-volt) 50%, rgba(242, 212, 0, .35) 82%, transparent 100%);
+            transform: scaleX(calc(var(--loader-progress) * 0.55));
+            transform-origin: 50% 50%;
+            opacity: calc(.25 + var(--loader-progress) * .75);
+            will-change: transform, opacity;
+            pointer-events: none;
+        }
+        .loader.is-complete .loader-seam {
+            transition: transform 320ms var(--loader-ease-out), opacity 320ms ease, box-shadow 320ms ease;
+            transform: scaleX(1);
+            box-shadow: 0 0 18px rgba(242, 212, 0, .55), 0 0 46px rgba(242, 212, 0, .28);
+        }
+        .loader.open .loader-seam {
+            transition: opacity 240ms ease 200ms;
+            opacity: 0;
+        }
+        .loader-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            opacity: .25;
+            pointer-events: none;
+        }
+        .loader.open .loader-canvas {
+            opacity: 0;
+            transition: opacity 260ms ease;
+        }
+        .loader-stack {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            will-change: transform, opacity;
+        }
+        .loader-stack>* {
+            animation: loaderRise .4s var(--loader-ease-out) both;
+        }
+        @keyframes loaderRise {
+            from { opacity: 0.6; transform: translate3d(0, 6px, 0); }
+            to { opacity: 1; transform: none; }
+        }
+        .loader.open .loader-stack {
+            opacity: 0;
+            transform: translate3d(0, -10px, 0) scale(.985);
+            transition: opacity 240ms ease, transform 320ms var(--loader-ease-film);
+        }
+        .loader-tag {
+            font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: clamp(.6rem, 1.5vw, .72rem);
+            letter-spacing: .34em;
+            text-transform: uppercase;
+            color: var(--loader-bone-dim);
+            transition: color .3s ease, letter-spacing .45s var(--loader-ease-out);
+        }
+        .loader.is-complete .loader-tag {
+            color: var(--loader-volt);
+            letter-spacing: .46em;
+        }
+        .loader-logo {
+            display: inline-flex;
+            transform-origin: center;
+            filter: drop-shadow(0 0 38px rgba(242, 212, 0, .18));
+            transition: filter .4s ease;
+        }
+        .loader-logo img {
+            width: min(340px, 46vw);
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+        .loader.is-complete .loader-logo {
+            filter: drop-shadow(0 0 46px rgba(242, 212, 0, .45));
+        }
+        .loader-bar {
+            width: min(220px, 60vw);
+            height: 2px;
+            background: var(--loader-line);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            transition: box-shadow .3s ease;
+        }
+        .loader-bar i {
+            position: absolute;
+            inset: 0;
+            transform-origin: 0 50%;
+            transform: scaleX(var(--loader-progress));
+            background: linear-gradient(90deg, rgba(242, 212, 0, .55), var(--loader-volt));
+            will-change: transform;
+        }
+        .loader.is-complete .loader-bar {
+            box-shadow: 0 0 16px rgba(242, 212, 0, .8), 0 0 32px rgba(242, 212, 0, .4);
+        }
+        .loader-pct {
+            font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: .82rem;
+            letter-spacing: .22em;
+            color: var(--loader-volt);
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum" 1;
+            transition: color .25s ease, text-shadow .25s ease, transform .3s var(--loader-ease-out);
+        }
+        .loader.is-complete .loader-pct {
+            color: #fff;
+            text-shadow: 0 0 16px var(--loader-volt), 0 0 32px var(--loader-volt);
+            transform: scale(1.1);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .loader-stack, .loader-stack>* { animation: none !important; }
+            .loader-canvas { display: none; }
+            .loader.open .loader-panel { transition-duration: 1ms; transition-delay: 0ms; }
+            .loader.open .loader-stack, .loader.open .loader-seam { transition-duration: 1ms; }
         }
     </style>
     <script>
@@ -316,11 +500,10 @@
     <link rel="preload" as="image" href="./images/logo.png" fetchpriority="high" />
     <link rel="preload" as="image" href="./images/hero-poster.webp" fetchpriority="high" />
     <link href="./assets/main.css?v=9" rel="stylesheet" />
-    <link href="./assets/loader.css?v=4" rel="stylesheet" />
     <link href="./assets/navbar.css?v=17" rel="stylesheet" />
     <link href="./assets/home-theme.css?v=1" rel="stylesheet" />
     <link href="./assets/footer.css?v=12" rel="stylesheet" />
-    <link href="./assets/home.css?v=1" rel="stylesheet" />
+    <link href="./assets/home.css?v=14" rel="stylesheet" />
 
     <meta name="google-site-verification" content="U6ECGq1OyJuADOEHcX9TC1W24aWH9jZQienHQgxDD1s" />
 
@@ -354,13 +537,13 @@
             <div class="loader-logo">
                 <img src="./images/logo.png" alt="Synkyn Studios" />
             </div>
-            <div class="loader-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i>
+            <div class="loader-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="1"><i></i>
             </div>
-            <div class="loader-pct">00%</div>
+            <div class="loader-pct">01%</div>
         </div>
     </div>
 
-    <script src="./assets/loader.js?v=4"></script>
+    <script src="./assets/loader.js?v=7"></script>
 
     <header>
         <div
@@ -488,9 +671,10 @@
                         <img class="hero-video-poster" src="./images/hero-poster.webp" alt="" aria-hidden="true"
                             fetchpriority="high" decoding="async" />
                         <iframe class="hero-bg-iframe"
+                            src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
                             data-src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
                             title="Synkyn Studios background" tabindex="-1" frameborder="0"
-                            referrerpolicy="strict-origin-when-cross-origin"
+                            loading="eager" referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                     </div>
 
@@ -2288,7 +2472,7 @@
         })();
     </script>
 
-    <script defer="" src="./assets/hero-video.js?v=1"></script>
+    <script defer="" src="./assets/hero-video.js?v=3"></script>
     <script defer="" src="./assets/navbar.js?v=8"></script>
     <script defer="" src="./assets/footer.js?v=2"></script>
 
