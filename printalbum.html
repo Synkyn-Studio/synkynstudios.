@@ -636,14 +636,19 @@
             position: relative;
             overflow: hidden;
             border-radius: var(--pf-radius);
-            border: 1px solid var(--pf-line);
+            border: 1px solid #000000 !important;
+            outline: none !important;
             cursor: pointer;
             padding: 0;
             font: inherit;
             color: inherit;
             text-align: left;
-            background: var(--pf-surface);
-            transition: transform .5s var(--pf-ease), border-color .4s ease, box-shadow .5s var(--pf-ease);
+            background: #080808;
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            box-shadow: 0 4px 22px rgba(0, 0, 0, .45);
+            transition: transform .55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .55s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .pf-feat-card.s-row1-land {
@@ -663,17 +668,17 @@
         }
 
         .pf-feat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--pf-line-strong);
-            box-shadow: 0 30px 60px -28px rgba(0, 0, 0, .9);
+            transform: none;
+            border: 1px solid #000000 !important;
+            outline: none !important;
+            box-shadow: 0 28px 65px -18px rgba(0, 0, 0, .95), 0 12px 28px -10px rgba(0, 0, 0, .85);
         }
 
         .pf-media {
             position: relative;
             width: 100%;
             height: 100%;
-            background:
-                linear-gradient(135deg, #1c1c1c 0%, #0c0c0c 100%);
+            background: #080808;
             overflow: hidden;
         }
 
@@ -695,12 +700,21 @@
 
         .pf-media img {
             position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            max-width: none;
+            max-height: none;
             object-fit: cover;
             z-index: 1;
-            transition: transform .8s var(--pf-ease), opacity .6s ease, filter .6s ease;
+            will-change: transform, filter;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            transition: transform .85s cubic-bezier(0.16, 1, 0.3, 1), opacity .6s ease, filter .7s ease;
+            filter: brightness(0.97) contrast(1.02);
             opacity: 0;
         }
 
@@ -710,15 +724,43 @@
 
         .pf-feat-card:hover .pf-media img,
         .pf-card:hover .pf-media img {
-            transform: scale(1.07);
+            transform: scale(1.045) translateZ(0);
+            filter: brightness(1.03) contrast(1.04);
         }
 
         .pf-media__shade {
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: -2px;
+            right: -2px;
+            bottom: -4px;
             z-index: 2;
-            background: linear-gradient(to top, rgba(0, 0, 0, .82) 0%, rgba(0, 0, 0, .25) 42%, rgba(0, 0, 0, 0) 72%);
-            transition: opacity .4s ease;
+            pointer-events: none;
+            background: linear-gradient(
+                to top,
+                rgba(4, 4, 4, 0.94) 0%,
+                rgba(4, 4, 4, 0.84) 14%,
+                rgba(4, 4, 4, 0.62) 28%,
+                rgba(4, 4, 4, 0.38) 42%,
+                rgba(4, 4, 4, 0.18) 56%,
+                rgba(4, 4, 4, 0.05) 70%,
+                rgba(4, 4, 4, 0) 84%
+            );
+            transition: background .55s cubic-bezier(0.16, 1, 0.3, 1), opacity .4s ease;
+        }
+
+        .pf-feat-card:hover .pf-media__shade,
+        .pf-card:hover .pf-media__shade {
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.98) 0%,
+                rgba(0, 0, 0, 0.88) 16%,
+                rgba(0, 0, 0, 0.66) 30%,
+                rgba(0, 0, 0, 0.42) 46%,
+                rgba(0, 0, 0, 0.20) 60%,
+                rgba(0, 0, 0, 0.06) 74%,
+                rgba(0, 0, 0, 0) 88%
+            );
         }
 
         .pf-badge {
@@ -827,14 +869,37 @@
 
         .pf-feat-card:hover .pf-arrow,
         .pf-card:hover .pf-arrow {
-            background: var(--pf-accent);
-            color: #0a0a0a;
-            transform: rotate(-2deg);
+            background: #ffd633;
+            color: #080808;
+            border-color: transparent;
+            transform: scale(1.08) rotate(-4deg);
+            box-shadow: 0 4px 18px rgba(255, 214, 51, .38);
         }
 
         .pf-feat-card:hover .pf-arrow svg,
         .pf-card:hover .pf-arrow svg {
-            transform: translate(3px, -3px);
+            transform: translate(2.5px, -2.5px);
+        }
+
+        .pf-cap__title {
+            transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1), color .3s ease;
+        }
+
+        .pf-feat-card:hover .pf-cap__title,
+        .pf-card:hover .pf-cap__title {
+            color: #ffffff;
+            transform: none;
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+        }
+
+        .pf-feat-card:hover .pf-badge,
+        .pf-card:hover .pf-badge,
+        .pf-feat-card:hover .pf-count,
+        .pf-card:hover .pf-count {
+            background: rgba(12, 12, 12, 0.72);
+            border-color: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
 
         .pf-card .pf-cap__desc {
@@ -1019,16 +1084,22 @@
             text-align: left;
             border-radius: 16px;
             overflow: hidden;
-            border: 1px solid var(--pf-line);
-            background: var(--pf-surface);
+            border: 1px solid #000000 !important;
+            outline: none !important;
+            background: #080808;
             cursor: pointer;
-            transition: transform .45s var(--pf-ease), border-color .4s ease, box-shadow .45s var(--pf-ease);
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            box-shadow: 0 4px 22px rgba(0, 0, 0, .45);
+            transition: transform .55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .55s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .pf-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--pf-line-strong);
-            box-shadow: 0 24px 50px -26px rgba(0, 0, 0, .9), 0 0 0 1px rgba(242, 212, 0, .12);
+            transform: none;
+            border: 1px solid #000000 !important;
+            outline: none !important;
+            box-shadow: 0 28px 65px -18px rgba(0, 0, 0, .95), 0 12px 28px -10px rgba(0, 0, 0, .85);
         }
 
         .pf-empty {
