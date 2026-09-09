@@ -68,8 +68,7 @@
     // A warm session means Vimeo's assets are in the HTTP cache, so the
     // player paints almost immediately and we can reveal without the
     // settle delay a cold first load needs.
-    var SETTLE_MS = warm ? 60 : 320;
-
+    var SETTLE_MS = 0;
     var revealed = false;
 
     function reveal() {
@@ -86,7 +85,7 @@
 
     function boot() {
         var onLoaded = function () {
-            setTimeout(reveal, SETTLE_MS);
+            reveal();
         };
 
         frame.addEventListener('load', onLoaded, { once: true });
@@ -109,8 +108,8 @@
             frame.src = src;
         }
 
-        // Guaranteed reveal before the 4-second loading curtain opens
-        setTimeout(reveal, 2200);
+        // Fast reliable fallback
+        setTimeout(reveal, 1200);
     }
 
     /* ------------------------------------------------------------------

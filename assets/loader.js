@@ -58,8 +58,8 @@
     var pctEl = loader.querySelector('.loader-pct');
     var barEl = loader.querySelector('.loader-bar');
 
-    var MIN_MS = 1500;   // natural baseline to ensure smooth progression is observed
-    var MAX_MS = 6000;   // hard ceiling — prevents getting trapped on slow/blocked external CDNs
+    var MIN_MS = 1400;   // allows smooth sequential progression to 100%
+    var MAX_MS = 3800;   // hard ceiling — prevents getting trapped on slow/blocked external CDNs
     var startTime = performance.now();
     var lastNow = startTime;
     var finished = false;
@@ -200,23 +200,30 @@
     }
 
     /* ======================================================================
-       SMOOTH CONTINUOUS RENDER LOOP (01% -> 100%)
+       SMOOTH CONTINUOUS RENDER LOOP (01% -> 100% STRICT SEQUENTIAL)
        ====================================================================== */
     var shown = 0.01;
+    var displayedPct = 1;
 
     function paint(v) {
         // Synchronized CSS custom property for bar & seam
         loader.style.setProperty('--loader-progress', v.toFixed(4));
         
-        // Formatted integer percentage (always 01% to 100%)
-        var pct = Math.max(1, Math.min(100, Math.floor(v * 100)));
-        var pctStr = (pct < 10 ? '0' : '') + pct + '%';
+        // Target integer from progress
+        var targetPct = Math.max(1, Math.min(100, Math.floor(v * 100)));
+
+        // Strict sequential increment: NEVER skip or jump numbers
+        if (targetPct > displayedPct) {
+            displayedPct += 1;
+        }
+
+        var pctStr = (displayedPct < 10 ? '0' : '') + displayedPct + '%';
 
         if (pctEl && pctEl.textContent !== pctStr) {
             pctEl.textContent = pctStr;
         }
         if (barEl) {
-            barEl.setAttribute('aria-valuenow', String(pct));
+            barEl.setAttribute('aria-valuenow', String(displayedPct));
         }
     }
 
@@ -239,29 +246,30 @@
             var timeScale = dt / 16.67;
 
             // Proportional step + gentle baseline creep to never freeze
-            var step = diff * 0.038 * timeScale + 0.00015 * timeScale;
+            var step = (diff * 0.05 + 0.0004) * timeScale;
 
-            // Strict maximum rate limiting: avoids skips or sudden jumping
-            var maxStep = allDone ? (0.012 * timeScale) : (0.0055 * timeScale);
-            var minStep = 0.0007 * timeScale;
+            // Fluid rate limiting: smoothly glide without sudden spikes
+            var maxStep = allDone ? (0.024 * timeScale) : (0.010 * timeScale);
+            var minStep = (allDone ? 0.003 : 0.001) * timeScale;
 
             step = Math.max(minStep, Math.min(maxStep, step));
             shown += step;
 
-            if (!allDone && shown > 0.99) {
+            if (allDone && shown >= 0.992) {
+                shown = 1.0;
+            } else if (!allDone && shown > 0.99) {
                 shown = 0.99;
             }
         }
 
-        // Completion trigger once 100% is reached and critical readiness confirmed
-        if (allDone && elapsed >= MIN_MS && shown >= 0.997) {
-            shown = 1.0;
-            paint(1.0);
+        paint(shown);
+
+        // Completion trigger once displayed percentage has smoothly traversed all the way to 100%
+        if (allDone && displayedPct >= 100 && elapsed >= MIN_MS) {
             complete();
             return;
         }
 
-        paint(shown);
         requestAnimationFrame(frame);
     }
 
@@ -269,25 +277,41 @@
         if (finished) return;
         finished = true;
 
-        paint(1.0);
+        // Force exactly 100% state
+        displayedPct = 100;
+        loader.style.setProperty('--loader-progress', '1');
+        if (pctEl) pctEl.textContent = '100%';
+        if (barEl) barEl.setAttribute('aria-valuenow', '100');
+
         loader.classList.add('is-complete');
 
-        // Briefly show the completed state before executing split panel reveal
+        // Confidently showcase the 100% completed state (gold bloom, full seam & bar)
+        // so the user clearly registers and sees 100% before the split panels reveal the page
         setTimeout(function () {
             loader.classList.add('open');
             setTimeout(kill, 950);
-        }, 360);
+        }, 700);
     }
 
     requestAnimationFrame(frame);
 
-    // Absolute backstop to ensure user is never trapped
+    // Absolute backstop to ensure user is never trapped, but still smoothly completes to 100%
     setTimeout(function () {
         if (!finished) {
-            paint(1.0);
-            complete();
+            var stepInterval = setInterval(function () {
+                if (displayedPct < 100) {
+                    displayedPct += 1;
+                    var pctStr = (displayedPct < 10 ? '0' : '') + displayedPct + '%';
+                    if (pctEl) pctEl.textContent = pctStr;
+                    if (barEl) barEl.setAttribute('aria-valuenow', String(displayedPct));
+                    loader.style.setProperty('--loader-progress', (displayedPct / 100).toFixed(4));
+                } else {
+                    clearInterval(stepInterval);
+                    complete();
+                }
+            }, 16);
         }
-    }, MAX_MS + 200);
+    }, MAX_MS);
 
     /* ======================================================================
        AMBIENT GOLD PARTICLES

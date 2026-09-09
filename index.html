@@ -22,15 +22,18 @@
             try {
                 var nav = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
                 var isReload = nav ? nav.type === 'reload' : (window.performance && performance.navigation && performance.navigation.type === 1);
-                var ref = document.referrer;
-                var internal = !!ref && ref.indexOf(location.origin) === 0;
+                var hasVisited = sessionStorage.getItem('synkyn_visited') === 'true';
+                var ref = document.referrer || '';
+                var isInternal = hasVisited || (ref && (ref.indexOf(location.host) !== -1 || ref.indexOf('.html') !== -1));
                 var reduce = window.matchMedia &&
                     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-                // Internal page-to-page link navigation (and not page reload) or reduced motion skips loader
-                if ((internal && !isReload) || reduce) {
+                // When coming from any other page in this session (and not a manual page refresh), load instantly!
+                if ((isInternal && !isReload) || reduce) {
                     d.classList.remove('show-loader');
                     d.classList.add('hide-loader');
+                } else {
+                    sessionStorage.setItem('synkyn_visited', 'true');
                 }
             } catch (e) { }
         })();
@@ -671,10 +674,10 @@
                         <img class="hero-video-poster" src="./images/hero-poster.webp" alt="" aria-hidden="true"
                             fetchpriority="high" decoding="async" />
                         <iframe class="hero-bg-iframe"
-                            src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
-                            data-src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071"
+                            src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071&quality=720p"
+                            data-src="https://player.vimeo.com/video/1208143871?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&h=54d20a4071&quality=720p"
                             title="Synkyn Studios background" tabindex="-1" frameborder="0"
-                            loading="eager" referrerpolicy="strict-origin-when-cross-origin"
+                            loading="eager" fetchpriority="high" referrerpolicy="strict-origin-when-cross-origin"
                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                     </div>
 
@@ -740,8 +743,9 @@
                                         style="aspect-ratio: 16 / 9;">
                                         <iframe
                                             class="absolute inset-0 w-full h-full object-cover pointer-events-none transition-all duration-500 group-hover:blur-sm"
-                                            id="hero-thumbnail-video" fetchpriority="low" loading="lazy"
-                                            data-src="https://player.vimeo.com/video/1210886734?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&quality=540p"
+                                            id="hero-thumbnail-video" fetchpriority="high" loading="eager"
+                                            src="https://player.vimeo.com/video/1210886734?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&quality=360p"
+                                            data-src="https://player.vimeo.com/video/1210886734?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1&quality=360p"
                                             title="Synkyn Studios SHOWREEL 2026 preview" tabindex="-1" frameborder="0"
                                             allow="autoplay; fullscreen; picture-in-picture"></iframe>
                                         <div
@@ -822,8 +826,8 @@
             <div class="actually-area-inner section-spacing">
                 <div class="container">
                     <div class="bg-area"></div>
-                    <div class="space-earth-container group cursor-pointer relative z-10" style="perspective: 1000px;">
-                        <h2 class="font-perfectgirl section-title text-heading-1 space-earth-title ease-out transform group-hover:scale-105 group-hover:-translate-y-2"
+                    <div class="space-earth-container group cursor-pointer relative z-10">
+                        <h2 class="font-perfectgirl section-title text-heading-1 space-earth-title"
                             id="space-earth-text"
                             style="background-image: linear-gradient(to right, #facc15 0%, #eab308 20%, #ffffff 40%, #ffffff 100%); background-size: 300% 100%; background-position: 100% 0; color: transparent; -webkit-background-clip: text; background-clip: text;">
                             AI Generated.<br />
@@ -2105,17 +2109,12 @@
             var thumbIframe = document.getElementById("hero-thumbnail-video");
             var vTitle = document.getElementById("v-title");
 
-            // Defer loading the Vimeo hero preview iframe until after critical load
             function initThumbVideo() {
                 if (thumbIframe && !thumbIframe.src && thumbIframe.getAttribute("data-src")) {
                     thumbIframe.src = thumbIframe.getAttribute("data-src");
                 }
             }
-            if ("requestIdleCallback" in window) {
-                window.requestIdleCallback(function () { setTimeout(initThumbVideo, 600); }, { timeout: 2500 });
-            } else {
-                window.addEventListener("load", function () { setTimeout(initThumbVideo, 600); });
-            }
+            initThumbVideo();
 
             if (!videoModal || !modalContent || !iframe) return;
 
