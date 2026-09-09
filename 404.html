@@ -520,7 +520,7 @@
     </style>
 </head>
 
-<body class="bg-background-2 dark:bg-helix-blue-dark-2">
+<body class="bg-black text-white" style="background-color: #000000 !important;">
     <!-- Global Smooth Scroll UX: Reading Progress Bar -->
     <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
     <!-- Back to Top Button -->
@@ -648,14 +648,13 @@
     <main class="s404-main" id="s404Main">
         <style id="s404-styles">
             /* ============================================================
-               PLAYFUL, AWARD-WINNING CINEMATIC 404 EXPERIENCE — SYNKYN STUDIOS
-               Features:
-               - Fully transparent background letting fx.js golden crystals shine
-               - Physical drag-and-throw zero-G physics on each digit
-               - Gravitational singularity pull on center '0'
-               - Kinetic Shatter & Magnetic Reassembly on click/tap
-               - Specular light sweep, chromatic aberration & holographic depth
-               - Live audio waveform telemetry and magnetic home action
+               SYNKYN STUDIOS — THEME-MATCHED INTERACTIVE 404 EXPERIENCE
+               - Pitch-black #000000 backdrop allowing fx.js crystals to float unobstructed
+               - All lines above and below removed
+               - 404 rendered in signature Synkyn Gold & White metallic gradient
+               - High-definition live Frequency Oscilloscope Visualizer
+               - Zero-G drag-and-throw physics with spring damping
+               - Kinetic Shatter & Magnetic Reassembly
                ============================================================ */
             .s404-main {
                 position: relative;
@@ -664,132 +663,13 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                background: transparent !important;
-                /* CRITICAL: Allows fx.js crystals to be 100% visible */
+                background-color: transparent !important; /* Fully transparent to let fx.js crystals shine over pure black */
                 overflow: hidden;
-                padding: clamp(110px, 14vh, 160px) 24px clamp(50px, 8vh, 80px);
+                padding: clamp(120px, 15vh, 170px) 20px clamp(60px, 9vh, 90px);
                 box-sizing: border-box;
                 perspective: 1200px;
                 user-select: none;
                 -webkit-user-select: none;
-            }
-
-            /* Ambient Volumetric Nebula Glow (semi-transparent, additive) */
-            .s404-nebula {
-                position: absolute;
-                inset: 0;
-                pointer-events: none;
-                z-index: 0;
-                background:
-                    radial-gradient(900px circle at var(--s404-mx, 50%) var(--s404-my, 45%), rgba(242, 212, 0, 0.065) 0%, rgba(6, 182, 212, 0.03) 35%, transparent 72%),
-                    radial-gradient(1200px circle at 50% 60%, rgba(20, 20, 30, 0.25) 0%, transparent 80%);
-                mix-blend-mode: screen;
-            }
-
-            /* Retro-Futuristic 3D Horizon Grid (faint, additive) */
-            .s404-grid-floor {
-                position: absolute;
-                bottom: -60px;
-                left: -20%;
-                right: -20%;
-                height: 400px;
-                background-image:
-                    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-                background-size: 50px 50px;
-                transform: perspective(450px) rotateX(72deg) translateZ(0);
-                transform-origin: center bottom;
-                mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 85%);
-                -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 85%);
-                pointer-events: none;
-                z-index: 0;
-                opacity: 0.55;
-            }
-
-            /* Hairline Horizon Accents */
-            .s404-hairline-top,
-            .s404-hairline-bottom {
-                position: absolute;
-                left: 4%;
-                right: 4%;
-                height: 1px;
-                background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 20%, rgba(242, 212, 0, 0.22) 50%, rgba(255, 255, 255, 0.06) 80%, transparent 100%);
-                pointer-events: none;
-                z-index: 1;
-            }
-
-            .s404-hairline-top {
-                top: clamp(80px, 11vh, 110px);
-            }
-
-            .s404-hairline-bottom {
-                bottom: clamp(24px, 5vh, 48px);
-            }
-
-            /* Corner Studio HUD Telemetry */
-            .s404-hud {
-                position: absolute;
-                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-                font-size: 11px;
-                letter-spacing: 0.16em;
-                color: rgba(255, 255, 255, 0.38);
-                text-transform: uppercase;
-                pointer-events: none;
-                z-index: 3;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .s404-hud-tl {
-                top: clamp(90px, 12.5vh, 120px);
-                left: clamp(18px, 4vw, 44px);
-            }
-
-            .s404-hud-tr {
-                top: clamp(90px, 12.5vh, 120px);
-                right: clamp(18px, 4vw, 44px);
-                text-align: right;
-            }
-
-            .s404-hud-bl {
-                bottom: clamp(30px, 6vh, 56px);
-                left: clamp(18px, 4vw, 44px);
-            }
-
-            .s404-hud-br {
-                bottom: clamp(30px, 6vh, 56px);
-                right: clamp(18px, 4vw, 44px);
-                text-align: right;
-            }
-
-            .s404-hud-dot {
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: #f2d400;
-                box-shadow: 0 0 10px #f2d400;
-                animation: s404Blink 2.2s ease-in-out infinite;
-            }
-
-            .s404-wave-canvas {
-                width: 44px;
-                height: 12px;
-                opacity: 0.8;
-            }
-
-            @keyframes s404Blink {
-
-                0%,
-                100% {
-                    opacity: 0.35;
-                    transform: scale(0.9);
-                }
-
-                50% {
-                    opacity: 1;
-                    transform: scale(1.2);
-                }
             }
 
             /* Container */
@@ -797,7 +677,7 @@
                 position: relative;
                 z-index: 3;
                 width: 100%;
-                max-width: 1140px;
+                max-width: 1100px;
                 margin: 0 auto;
                 display: flex;
                 flex-direction: column;
@@ -805,59 +685,106 @@
                 text-align: center;
             }
 
-            /* Interactive Invitation Badge */
-            .s404-badge {
-                display: inline-flex;
+            /* ── PERFECT FREQUENCY OSCILLOSCOPE MODULE ── */
+            .s404-freq-capsule {
+                display: flex;
+                flex-direction: column;
                 align-items: center;
-                gap: 10px;
-                padding: 7px 22px;
-                border-radius: 999px;
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid rgba(255, 255, 255, 0.12);
+                gap: 8px;
+                padding: 12px 24px;
+                border-radius: 20px;
+                background: rgba(18, 18, 22, 0.65);
+                border: 1px solid rgba(242, 212, 0, 0.28);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
-                font-family: inherit;
-                font-size: 0.76rem;
-                font-weight: 500;
-                letter-spacing: 0.2em;
-                text-transform: uppercase;
-                color: rgba(255, 255, 255, 0.82);
-                margin-bottom: clamp(18px, 3vh, 28px);
-                box-shadow: 0 6px 28px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-                transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 20px rgba(242, 212, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+                margin-bottom: clamp(22px, 3.8vh, 34px);
+                transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
                 cursor: pointer;
             }
 
-            .s404-badge:hover {
-                border-color: rgba(242, 212, 0, 0.45);
-                transform: translateY(-2px) scale(1.02);
-                box-shadow: 0 10px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(242, 212, 0, 0.18);
+            .s404-freq-capsule:hover {
+                border-color: rgba(242, 212, 0, 0.55);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 28px rgba(242, 212, 0, 0.25);
+                transform: translateY(-2px);
             }
 
-            .s404-badge-pulse {
+            .s404-freq-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 14px;
+                width: 100%;
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+            }
+
+            .s404-freq-beacon {
                 width: 7px;
                 height: 7px;
                 border-radius: 50%;
                 background: #f2d400;
-                box-shadow: 0 0 12px 2px rgba(242, 212, 0, 0.8);
-                animation: s404Pulse 2.2s ease-in-out infinite;
+                box-shadow: 0 0 12px 2px #f2d400;
+                animation: s404BeaconPulse 2s ease-in-out infinite;
             }
 
-            @keyframes s404Pulse {
-
-                0%,
-                100% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-
-                50% {
-                    transform: scale(1.4);
-                    opacity: 0.65;
-                }
+            @keyframes s404BeaconPulse {
+                0%, 100% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.35); opacity: 0.55; }
             }
 
-            /* ── Interactive 3D Playable Stage ── */
+            .s404-freq-title {
+                color: rgba(255, 255, 255, 0.78);
+            }
+
+            .s404-freq-val {
+                color: #f2d400;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-shadow: 0 0 10px rgba(242, 212, 0, 0.5);
+            }
+
+            .s404-freq-tag {
+                padding: 2px 8px;
+                border-radius: 999px;
+                background: rgba(242, 212, 0, 0.12);
+                border: 1px solid rgba(242, 212, 0, 0.3);
+                color: #ffd84d;
+                font-size: 0.62rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+            }
+
+            .s404-freq-display {
+                width: 100%;
+                max-width: 320px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #s404FreqCanvas {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            .s404-freq-footer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.12em;
+                color: rgba(255, 255, 255, 0.45);
+                text-transform: uppercase;
+            }
+
+            /* ── 3D Interactive Playable 404 Stage ── */
             .s404-stage {
                 position: relative;
                 width: 100%;
@@ -867,14 +794,14 @@
                 transform-style: preserve-3d;
             }
 
-            /* Dynamic Cosmic Aura */
+            /* Ambient Gold & Cyan Cosmic Aura behind Numerals */
             .s404-aura {
                 position: absolute;
-                width: clamp(380px, 62vw, 700px);
-                height: clamp(200px, 32vw, 360px);
+                width: clamp(380px, 65vw, 750px);
+                height: clamp(200px, 35vw, 400px);
                 border-radius: 50%;
-                background: radial-gradient(circle, rgba(242, 212, 0, 0.15) 0%, rgba(6, 182, 212, 0.08) 40%, transparent 75%);
-                filter: blur(75px);
+                background: radial-gradient(circle, rgba(242, 212, 0, 0.2) 0%, rgba(6, 182, 212, 0.08) 45%, transparent 75%);
+                filter: blur(80px);
                 pointer-events: none;
                 z-index: 0;
                 transform: translateZ(-100px);
@@ -888,13 +815,13 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: clamp(16px, 4.5vw, 48px);
+                gap: clamp(16px, 4.5vw, 50px);
                 transform-style: preserve-3d;
                 will-change: transform;
                 line-height: 0.82;
             }
 
-            /* ── PLAYABLE INDIVIDUAL DIGIT WITH ZERO-G DRAG & THROW ── */
+            /* ── THEME-MATCHED NUMERALS (SYNKYN METALLIC GOLD & WHITE) ── */
             .s404-char {
                 position: relative;
                 display: inline-block;
@@ -912,33 +839,33 @@
             .s404-char.is-dragging {
                 cursor: grabbing !important;
                 z-index: 20;
-                filter: drop-shadow(0 0 40px rgba(242, 212, 0, 0.6)) drop-shadow(0 0 60px rgba(6, 182, 212, 0.4));
+                filter: drop-shadow(0 0 45px rgba(242, 212, 0, 0.75)) drop-shadow(0 0 70px rgba(6, 182, 212, 0.5));
             }
 
             .s404-char:active {
                 cursor: grabbing;
             }
 
-            /* Base Layer: Deep Void Shadow */
+            /* Base Layer: Warm Obsidian-Gold Shadow */
             .s404-char-shadow {
                 position: absolute;
                 inset: 0;
-                color: #000;
-                filter: blur(34px);
-                opacity: 0.9;
-                transform: translateZ(-40px) translateY(18px);
+                color: rgba(242, 212, 0, 0.35);
+                filter: blur(36px);
+                opacity: 0.85;
+                transform: translateZ(-35px) translateY(18px);
                 pointer-events: none;
                 z-index: -1;
             }
 
-            /* Sculpted Liquid-Metal Chrome Core */
+            /* Sculpted Theme-Matched Gold & Chrome Metallic Core */
             .s404-char-core {
                 display: block;
-                background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 20%, #a1a1aa 55%, #3f3f46 80%, #18181b 100%);
+                background: linear-gradient(180deg, #ffffff 0%, #fff4b8 24%, #ffd84d 50%, #f2c200 75%, #caa000 100%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                text-shadow: 0 6px 40px rgba(0, 0, 0, 0.7);
-                transform: translateZ(12px);
+                text-shadow: 0 4px 40px rgba(242, 212, 0, 0.4), 0 0 80px rgba(242, 212, 0, 0.2);
+                transform: translateZ(14px);
                 pointer-events: none;
             }
 
@@ -948,76 +875,75 @@
                 inset: 0;
                 pointer-events: none;
                 mix-blend-mode: screen;
-                opacity: var(--s404-rgb-opacity, 0.4);
+                opacity: var(--s404-rgb-opacity, 0.45);
                 transform: translateZ(20px);
                 transition: opacity 0.25s ease;
-                background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+                background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,216,77,0));
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                text-shadow:
-                    calc(var(--s404-shift-x, 0px) * -1.2) 0 6px rgba(6, 182, 212, 0.8),
-                    calc(var(--s404-shift-x, 0px) * 1.2) 0 6px rgba(242, 212, 0, 0.8);
+                text-shadow: 
+                    calc(var(--s404-shift-x, 0px) * -1.2) 0 6px rgba(6, 182, 212, 0.85),
+                    calc(var(--s404-shift-x, 0px) * 1.2) 0 6px rgba(242, 212, 0, 0.95);
             }
 
-            /* Specular Studio Spotlight Reflection */
+            /* Specular Studio Spotlight Highlight Sweep */
             .s404-char-light {
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(circle 420px at var(--s404-char-x, 50%) var(--s404-char-y, 50%), rgba(255, 255, 255, 1) 0%, rgba(255, 225, 77, 0.55) 25%, transparent 72%);
+                background: radial-gradient(circle 420px at var(--s404-char-x, 50%) var(--s404-char-y, 50%), rgba(255, 255, 255, 1) 0%, rgba(255, 235, 128, 0.6) 28%, transparent 72%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 pointer-events: none;
                 mix-blend-mode: screen;
-                opacity: var(--s404-light-opacity, 0.65);
+                opacity: var(--s404-light-opacity, 0.7);
                 transform: translateZ(30px);
                 transition: opacity 0.3s ease;
             }
 
-            /* Ultra-crisp Laser Stroke Edge */
+            /* Ultra-crisp Theme Gold Stroke Edge */
             .s404-char-stroke {
                 position: absolute;
                 inset: 0;
-                -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.3);
+                -webkit-text-stroke: 1.5px rgba(242, 212, 0, 0.55);
                 -webkit-text-fill-color: transparent;
                 pointer-events: none;
-                transform: translateZ(22px);
+                transform: translateZ(24px);
                 transition: -webkit-text-stroke-color 0.3s ease;
             }
-
             .s404-char:hover .s404-char-stroke,
             .s404-char.is-dragging .s404-char-stroke {
-                -webkit-text-stroke-color: rgba(242, 212, 0, 0.7);
+                -webkit-text-stroke-color: #ffd84d;
             }
 
-            /* ── Glorious Ambient Zero Inner Core Glow ── */
+            /* ── PERFECT CENTER ZERO WITH LUMINOUS CORE GLOW ── */
             .s404-zero-glow {
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                width: 60%;
-                height: 70%;
+                width: 65%;
+                height: 75%;
                 transform: translate(-50%, -50%) translateZ(-15px);
                 border-radius: 50%;
-                background: radial-gradient(ellipse at center, rgba(242, 212, 0, 0.6) 0%, rgba(6, 182, 212, 0.25) 45%, transparent 75%);
-                filter: blur(24px);
+                background: radial-gradient(ellipse at center, rgba(242, 212, 0, 0.7) 0%, rgba(255, 216, 77, 0.4) 40%, rgba(6, 182, 212, 0.2) 65%, transparent 80%);
+                filter: blur(28px);
                 pointer-events: none;
-                opacity: 0.75;
+                opacity: 0.85;
                 transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, filter 0.35s ease;
             }
 
             .s404-char-2:hover .s404-zero-glow,
             .s404-char-2.is-dragging .s404-zero-glow {
-                transform: translate(-50%, -50%) translateZ(-15px) scale(1.35);
+                transform: translate(-50%, -50%) translateZ(-15px) scale(1.4);
                 opacity: 1;
-                filter: blur(30px);
+                filter: blur(34px);
             }
 
-            /* ── Interactive Shockwave Pulse Rings ── */
+            /* ── Shockwave Pulse Rings ── */
             .s404-pulse-ring {
                 position: absolute;
                 border-radius: 50%;
                 border: 1.5px solid rgba(242, 212, 0, 0.85);
-                box-shadow: 0 0 20px rgba(242, 212, 0, 0.5), inset 0 0 15px rgba(242, 212, 0, 0.3);
+                box-shadow: 0 0 24px rgba(242, 212, 0, 0.55), inset 0 0 16px rgba(242, 212, 0, 0.3);
                 pointer-events: none;
                 z-index: 10;
                 transform: translate(-50%, -50%) scale(0);
@@ -1026,15 +952,8 @@
             }
 
             @keyframes s404Shockwave {
-                0% {
-                    transform: translate(-50%, -50%) scale(0.1);
-                    opacity: 1;
-                }
-
-                100% {
-                    transform: translate(-50%, -50%) scale(2.8);
-                    opacity: 0;
-                }
+                0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; }
             }
 
             /* ── Content Details & Typography ── */
@@ -1164,33 +1083,21 @@
 
             /* Mobile & Tablet Responsiveness */
             @media (max-width: 860px) {
-                .s404-hud {
-                    display: none;
-                }
-
                 .s404-numerals {
                     gap: clamp(10px, 3.5vw, 24px);
                 }
-
                 .s404-char {
                     font-size: clamp(6.4rem, 26vw, 11rem);
                 }
-
-                .s404-portal {
-                    width: clamp(62px, 20vw, 96px);
-                    height: clamp(62px, 20vw, 96px);
+                .s404-freq-capsule {
+                    padding: 10px 16px;
+                    max-width: 92vw;
                 }
-
-                .s404-portal-flare {
-                    width: clamp(120px, 42vw, 210px);
-                }
-
                 .s404-actions {
                     flex-direction: column;
                     width: 100%;
                     max-width: 320px;
                 }
-
                 .s404-btn-primary,
                 .s404-btn-ghost {
                     width: 100%;
@@ -1198,15 +1105,9 @@
             }
 
             @media (prefers-reduced-motion: reduce) {
-
-                .s404-portal-ring-1,
-                .s404-portal-ring-2,
-                .s404-portal-ring-3,
-                .s404-hud-dot,
-                .s404-badge-pulse {
+                .s404-freq-beacon {
                     animation: none !important;
                 }
-
                 .s404-numerals,
                 .s404-char {
                     transform: none !important;
@@ -1214,42 +1115,30 @@
             }
         </style>
 
-        <!-- Dynamic Ambient Nebula Glow & Grid Floor (Transparent to allow fx.js crystals) -->
-        <div class="s404-nebula" id="s404Nebula" aria-hidden="true"></div>
-        <div class="s404-grid-floor" aria-hidden="true"></div>
-        <div class="s404-hairline-top" aria-hidden="true"></div>
-        <div class="s404-hairline-bottom" aria-hidden="true"></div>
-
-        <!-- Corner Studio HUD Telemetry -->
-        <div class="s404-hud s404-hud-tl" aria-hidden="true">
-            <span class="s404-hud-dot"></span>
-            <span>FREQ // 404.00 MHz</span>
-            <canvas class="s404-wave-canvas" id="s404Wave" width="44" height="12"></canvas>
-        </div>
-        <div class="s404-hud-tr" aria-hidden="true">
-            <span>SYNKYN ENGINE // V3.2</span>
-        </div>
-        <div class="s404-hud-bl" aria-hidden="true">
-            <span>LAT 12.9716° N · LON 77.5946° E</span>
-        </div>
-        <div class="s404-hud-br" aria-hidden="true">
-            <span>STATUS // INTERACTIVE ORBIT</span>
-        </div>
-
         <!-- Main Content Container -->
         <div class="s404-container">
-            <!-- Interactive Instruction Badge -->
-            <button class="s404-badge" id="s404ShatterBtn" aria-label="Trigger kinetic reassembly">
-                <span class="s404-badge-pulse" aria-hidden="true"></span>
-                <span>DRAG · TOSS · EXPLORE // ERROR 404</span>
-            </button>
+            <!-- Perfectly Engineered Live Frequency Oscilloscope Module -->
+            <div class="s404-freq-capsule" id="s404FreqCapsule" role="region" aria-label="Frequency visualizer">
+                <div class="s404-freq-header">
+                    <span class="s404-freq-beacon" aria-hidden="true"></span>
+                    <span class="s404-freq-title">CARRIER FREQ // <span class="s404-freq-val">404.00 MHz</span></span>
+                    <span class="s404-freq-tag">LOST BEACON</span>
+                </div>
+                <div class="s404-freq-display">
+                    <canvas id="s404FreqCanvas" width="320" height="40" aria-hidden="true"></canvas>
+                </div>
+                <div class="s404-freq-footer">
+                    <span>SECTOR // [ 04 : 04 ]</span>
+                    <span>ATTENUATION: -40.4 dB</span>
+                </div>
+            </div>
 
             <!-- 3D Interactive Playable 404 Stage -->
             <div class="s404-stage" id="s404Stage" aria-label="Error 404: Playable Interactive Numerals">
                 <div class="s404-aura" id="s404Aura" aria-hidden="true"></div>
 
                 <div class="s404-numerals" id="s404Numerals">
-                    <!-- Left Digit: '4' -->
+                    <!-- Left Digit: '4' in Synkyn Theme Gold -->
                     <div class="s404-char s404-char-1" id="s404Char1" data-index="0" data-depth="0.22">
                         <span class="s404-char-shadow" aria-hidden="true">4</span>
                         <span class="s404-char-core">4</span>
@@ -1258,7 +1147,7 @@
                         <span class="s404-char-stroke" aria-hidden="true">4</span>
                     </div>
 
-                    <!-- Center Digit: '0' with Glorious Luminous Core Glow -->
+                    <!-- Center Digit: '0' with Radiant Core Glow -->
                     <div class="s404-char s404-char-2" id="s404Char2" data-index="1" data-depth="0.42">
                         <div class="s404-zero-glow" aria-hidden="true"></div>
                         <span class="s404-char-shadow" aria-hidden="true">0</span>
@@ -1268,7 +1157,7 @@
                         <span class="s404-char-stroke" aria-hidden="true">0</span>
                     </div>
 
-                    <!-- Right Digit: '4' -->
+                    <!-- Right Digit: '4' in Synkyn Theme Gold -->
                     <div class="s404-char s404-char-3" id="s404Char3" data-index="2" data-depth="0.28">
                         <span class="s404-char-shadow" aria-hidden="true">4</span>
                         <span class="s404-char-core">4</span>
@@ -1291,8 +1180,7 @@
 
                 <div class="s404-actions">
                     <a href="./" class="s404-btn-primary" id="s404HomeBtn">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M19 12H5M12 19l-7-7 7-7" />
                         </svg>
                         <span>Return to Studio</span>
@@ -1300,18 +1188,17 @@
 
                     <a href="./library.html" class="s404-btn-ghost">
                         <span>Explore Library</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- ── ZERO-GRAVITY PHYSICS, DRAG-AND-THROW & MAGNETIC REASSEMBLY ENGINE ── -->
+        <!-- ── ZERO-GRAVITY PHYSICS & HIGH-DEFINITION FREQUENCY ENGINE ── -->
         <script>
-            (function init404Playground() {
+            (function init404PerfectEngine() {
                 const stage = document.getElementById('s404Stage');
                 const numerals = document.getElementById('s404Numerals');
                 const charEls = [
@@ -1320,14 +1207,27 @@
                     document.getElementById('s404Char3')
                 ];
                 const aura = document.getElementById('s404Aura');
-                const nebula = document.getElementById('s404Nebula');
                 const homeBtn = document.getElementById('s404HomeBtn');
-                const shatterBtn = document.getElementById('s404ShatterBtn');
-                const waveCanvas = document.getElementById('s404Wave');
+                const freqCapsule = document.getElementById('s404FreqCapsule');
+                const freqCanvas = document.getElementById('s404FreqCanvas');
 
-                if (!stage || !numerals || !charEls[0]) return;
+                if (!stage || !numerals || !charEls[0] || !freqCanvas) return;
 
-                const waveCtx = waveCanvas ? waveCanvas.getContext('2d') : null;
+                // ── High-DPI Oscilloscope Setup ──
+                const fCtx = freqCanvas.getContext('2d');
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                let canvasW = 320;
+                let canvasH = 40;
+
+                function resizeFreqCanvas() {
+                    const rect = freqCanvas.getBoundingClientRect();
+                    canvasW = Math.max(200, Math.floor(rect.width || 320));
+                    canvasH = Math.max(30, Math.floor(rect.height || 40));
+                    freqCanvas.width = canvasW * dpr;
+                    freqCanvas.height = canvasH * dpr;
+                    fCtx.scale(dpr, dpr);
+                }
+                resizeFreqCanvas();
 
                 let winW = window.innerWidth;
                 let winH = window.innerHeight;
@@ -1335,13 +1235,13 @@
                 window.addEventListener('resize', () => {
                     winW = window.innerWidth;
                     winH = window.innerHeight;
+                    resizeFreqCanvas();
                 }, { passive: true });
 
                 // ── Physical Bodies for Each Digit ──
                 const bodies = charEls.map((el, index) => ({
                     el: el,
                     index: index,
-                    // Current position offset from home
                     x: 0,
                     y: 0,
                     z: 0,
@@ -1350,7 +1250,6 @@
                     rotZ: 0,
                     rotVx: 0,
                     scale: 1,
-                    // Drag state
                     isDragging: false,
                     pointerId: null,
                     startX: 0,
@@ -1360,7 +1259,6 @@
                     depth: parseFloat(el.dataset.depth) || 0.3
                 }));
 
-                // Global Pointer & Tilt Coordinates
                 let targetGlobalX = 0;
                 let targetGlobalY = 0;
                 let currentGlobalX = 0;
@@ -1370,15 +1268,16 @@
                 let lastPointerY = winH / 2;
                 let isStageHovered = false;
                 let isCenterHovered = false;
+                let burstEnergy = 0;
 
-                // ── Interactive Shockwave Burst Generator ──
+                // ── Shockwave Pulse Generator ──
                 function createShockwave(x, y) {
                     const ring = document.createElement('div');
                     ring.className = 's404-pulse-ring';
                     ring.style.left = x + 'px';
                     ring.style.top = y + 'px';
-                    ring.style.width = '120px';
-                    ring.style.height = '120px';
+                    ring.style.width = '130px';
+                    ring.style.height = '130px';
                     document.body.appendChild(ring);
                     setTimeout(() => ring.remove(), 900);
                 }
@@ -1386,11 +1285,11 @@
                 // ── Kinetic Shatter & Magnetic Reassembly ──
                 function triggerKineticShatter(originX, originY) {
                     createShockwave(originX || winW / 2, originY || winH / 2);
+                    burstEnergy = 1.0;
 
-                    // Scatter each digit in opposing trajectories with rotational momentum
                     bodies.forEach((b, idx) => {
                         const angle = (idx === 0) ? -2.4 : (idx === 1) ? -1.57 : -0.7;
-                        const force = 180 + Math.random() * 90;
+                        const force = 190 + Math.random() * 90;
                         b.vx = Math.cos(angle) * force;
                         b.vy = Math.sin(angle) * force - 60;
                         b.rotVx = (Math.random() - 0.5) * 45;
@@ -1398,14 +1297,12 @@
                     });
                 }
 
-                if (shatterBtn) {
-                    shatterBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
+                if (freqCapsule) {
+                    freqCapsule.addEventListener('click', (e) => {
                         triggerKineticShatter(e.clientX, e.clientY);
                     });
                 }
 
-                // Double click anywhere on numerals to shatter
                 numerals.addEventListener('dblclick', (e) => {
                     triggerKineticShatter(e.clientX, e.clientY);
                 });
@@ -1424,6 +1321,7 @@
                         b.vx = 0;
                         b.vy = 0;
                         b.scale = 1.18;
+                        burstEnergy = 0.65;
 
                         createShockwave(e.clientX, e.clientY);
 
@@ -1437,7 +1335,6 @@
                         b.x = e.clientX - b.startX;
                         b.y = e.clientY - b.startY;
 
-                        // Calculate throw release velocity
                         b.vx = (e.clientX - b.lastPointerX) * 0.85;
                         b.vy = (e.clientY - b.lastPointerY) * 0.85;
                         b.rotZ = (b.x * 0.08);
@@ -1453,13 +1350,13 @@
                         b.scale = 1.0;
 
                         if (b.el.releasePointerCapture && b.pointerId !== null) {
-                            try { b.el.releasePointerCapture(b.pointerId); } catch (_) { }
+                            try { b.el.releasePointerCapture(b.pointerId); } catch(_) {}
                         }
                         b.pointerId = null;
 
-                        // If release was an intentional throw, send shockwave
                         if (Math.hypot(b.vx, b.vy) > 8) {
                             createShockwave(e.clientX, e.clientY);
+                            burstEnergy = 0.8;
                         }
                     }
 
@@ -1469,15 +1366,11 @@
                     window.addEventListener('pointercancel', onPointerUp);
                 });
 
-                // Singularity Gravitational Pull: Center '0' pulls '4's inward when hovered
-                charEls[1].addEventListener('mouseenter', () => {
-                    isCenterHovered = true;
-                });
-                charEls[1].addEventListener('mouseleave', () => {
-                    isCenterHovered = false;
-                });
+                // Singularity Gravitational Pull: Center 0 draws flanking 4s inward
+                charEls[1].addEventListener('mouseenter', () => { isCenterHovered = true; });
+                charEls[1].addEventListener('mouseleave', () => { isCenterHovered = false; });
 
-                // ── Global Mouse Movement & Light Tracking ──
+                // ── Global Pointer & Specular Light Tracking ──
                 window.addEventListener('mousemove', (e) => {
                     const cx = e.clientX;
                     const cy = e.clientY;
@@ -1487,14 +1380,9 @@
 
                     const dx = cx - lastPointerX;
                     const dy = cy - lastPointerY;
-                    mouseSpeed = Math.min(16, Math.hypot(dx, dy));
+                    mouseSpeed = Math.min(18, Math.hypot(dx, dy));
                     lastPointerX = cx;
                     lastPointerY = cy;
-
-                    if (nebula) {
-                        nebula.style.setProperty('--s404-mx', ((cx / winW) * 100).toFixed(1) + '%');
-                        nebula.style.setProperty('--s404-my', ((cy / winH) * 100).toFixed(1) + '%');
-                    }
 
                     const rect = numerals.getBoundingClientRect();
                     const numX = ((cx - rect.left) / rect.width) * 100;
@@ -1527,8 +1415,8 @@
 
                 stage.addEventListener('mouseleave', () => {
                     isStageHovered = false;
-                    numerals.style.setProperty('--s404-light-opacity', '0.65');
-                    numerals.style.setProperty('--s404-rgb-opacity', '0.4');
+                    numerals.style.setProperty('--s404-light-opacity', '0.7');
+                    numerals.style.setProperty('--s404-rgb-opacity', '0.45');
                     targetGlobalX = 0;
                     targetGlobalY = 0;
                     if (homeBtn) homeBtn.style.transform = '';
@@ -1544,33 +1432,71 @@
                     }, { passive: true });
                 }
 
-                // ── Live Telemetry Audio Waveform ──
-                let waveStep = 0;
-                function drawWave() {
-                    if (!waveCtx) return;
-                    waveCtx.clearRect(0, 0, 44, 12);
-                    waveCtx.beginPath();
-                    waveCtx.strokeStyle = '#f2d400';
-                    waveCtx.lineWidth = 1.3;
+                // ── LIVE HIGH-DEFINITION OSCILLOSCOPE OSCILLATOR ──
+                let wavePhase = 0;
 
-                    for (let x = 0; x < 44; x++) {
-                        const freq = isStageHovered ? 0.38 : 0.2;
-                        const amp = isStageHovered ? 4.5 : 2.5;
-                        const y = 6 + Math.sin(x * freq + waveStep) * amp * Math.cos(x * 0.1);
-                        if (x === 0) waveCtx.moveTo(x, y);
-                        else waveCtx.lineTo(x, y);
+                function drawOscilloscope() {
+                    fCtx.clearRect(0, 0, canvasW, canvasH);
+
+                    const midY = canvasH / 2;
+                    const activity = (isStageHovered ? 1.6 : 1.0) + (mouseSpeed * 0.08) + (burstEnergy * 2.5);
+                    const ampBase = 8 * activity;
+
+                    // 1. Draw subtle background audio equalizer bars
+                    const barCount = 24;
+                    const barSpacing = canvasW / barCount;
+                    for (let i = 0; i < barCount; i++) {
+                        const bx = i * barSpacing + barSpacing * 0.5;
+                        const distToCenter = Math.abs(i - barCount / 2) / (barCount / 2);
+                        const barHeight = Math.max(3, Math.sin(i * 0.5 + wavePhase * 1.5) * ampBase * (1 - distToCenter * 0.5) * 0.7);
+
+                        fCtx.fillStyle = (i % 2 === 0) ? 'rgba(242, 212, 0, 0.18)' : 'rgba(6, 182, 212, 0.14)';
+                        fCtx.fillRect(bx - 1.5, midY - barHeight, 3, barHeight * 2);
                     }
-                    waveCtx.stroke();
-                    waveStep += (isStageHovered ? 0.22 : 0.08) + mouseSpeed * 0.02;
+
+                    // 2. Secondary Cyan Sub-Harmonic Wave
+                    fCtx.beginPath();
+                    fCtx.strokeStyle = 'rgba(6, 182, 212, 0.65)';
+                    fCtx.lineWidth = 1.2;
+                    for (let x = 0; x <= canvasW; x += 3) {
+                        const nx = x / canvasW;
+                        const y = midY + Math.sin(nx * Math.PI * 4 + wavePhase * 1.2) * (ampBase * 0.65) * Math.sin(nx * Math.PI);
+                        if (x === 0) fCtx.moveTo(x, y);
+                        else fCtx.lineTo(x, y);
+                    }
+                    fCtx.stroke();
+
+                    // 3. Primary Golden Carrier Wave with Glow
+                    fCtx.beginPath();
+                    fCtx.strokeStyle = '#ffd84d';
+                    fCtx.lineWidth = 1.8;
+                    fCtx.shadowColor = '#f2d400';
+                    fCtx.shadowBlur = 8;
+                    for (let x = 0; x <= canvasW; x += 2) {
+                        const nx = x / canvasW;
+                        const y = midY + (
+                            Math.sin(nx * Math.PI * 6 + wavePhase * 2.0) * ampBase * 0.7 +
+                            Math.sin(nx * Math.PI * 12 + wavePhase * 3.5) * (ampBase * 0.35)
+                        ) * Math.sin(nx * Math.PI);
+
+                        if (x === 0) fCtx.moveTo(x, y);
+                        else fCtx.lineTo(x, y);
+                    }
+                    fCtx.stroke();
+                    fCtx.shadowBlur = 0; // Reset shadow
+
+                    // Advance wave phase & decay burst energy
+                    wavePhase += (isStageHovered ? 0.12 : 0.05) + mouseSpeed * 0.01;
+                    burstEnergy *= 0.94;
                 }
 
                 // ── High Performance Physics & Render Loop (60-120 FPS) ──
                 let idleAngle = 0;
-                const SPRING = 0.075;     // Elastic return stiffness
-                const DAMPING = 0.82;     // Zero-G oscillation friction
+                const SPRING = 0.075;
+                const DAMPING = 0.82;
 
                 function render() {
-                    // Continuous subtle space breathing if idle
+                    // Continuous subtle space drift if idle
                     if (!isStageHovered && Math.abs(targetGlobalX) < 0.04 && Math.abs(targetGlobalY) < 0.04) {
                         idleAngle += 0.018;
                         targetGlobalX = Math.sin(idleAngle) * 0.14;
@@ -1591,7 +1517,7 @@
                     const transX = currentGlobalX * 20;
                     const transY = currentGlobalY * 14;
 
-                    numerals.style.transform =
+                    numerals.style.transform = 
                         'translate3d(' + transX.toFixed(2) + 'px, ' + transY.toFixed(2) + 'px, 0) ' +
                         'rotateX(' + rotX.toFixed(2) + 'deg) ' +
                         'rotateY(' + rotY.toFixed(2) + 'deg) ' +
@@ -1604,7 +1530,6 @@
                     // ── Update Each Physical Digit Body ──
                     bodies.forEach((b) => {
                         if (!b.isDragging) {
-                            // Target gravitational slot
                             let slotTargetX = 0;
                             let slotTargetY = 0;
 
@@ -1614,11 +1539,9 @@
                                 if (b.index === 2) slotTargetX = -32;
                             }
 
-                            // Magnetic cursor lean
                             const mouseLeanX = currentGlobalX * 25 * b.depth;
                             const mouseLeanY = currentGlobalY * 18 * b.depth;
 
-                            // Spring acceleration towards home slot
                             const forceX = (slotTargetX + mouseLeanX - b.x) * SPRING;
                             const forceY = (slotTargetY + mouseLeanY - b.y) * SPRING;
                             const forceRot = (0 - b.rotZ) * SPRING;
@@ -1633,16 +1556,15 @@
                             b.scale += (1 - b.scale) * 0.1;
                         }
 
-                        // Parallax Z depth
                         const zDepth = (b.depth * 65) + (b.isDragging ? 60 : 0);
 
-                        b.el.style.transform =
+                        b.el.style.transform = 
                             'translate3d(' + b.x.toFixed(2) + 'px, ' + b.y.toFixed(2) + 'px, ' + zDepth.toFixed(1) + 'px) ' +
                             'rotateZ(' + b.rotZ.toFixed(2) + 'deg) ' +
                             'scale(' + b.scale.toFixed(3) + ')';
                     });
 
-                    drawWave();
+                    drawOscilloscope();
 
                     requestAnimationFrame(render);
                 }
