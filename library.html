@@ -6,13 +6,16 @@
 <html lang="en">
 
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KLBKS7TM');</script>
-    <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KLBKS7TM');</script>
+  <!-- End Google Tag Manager -->
   <meta name="msvalidate.01" content="41DF851FCE84360A9074BDC7D98E6FE8" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PST0K7RG3R"></script>
@@ -394,151 +397,172 @@
     }
   </style>
 
-    <style id="synkyn-smooth-scroll-styles">
-        /* Apple (macOS & iOS Safari) ProMotion, Retina & Safe Area Optimizations */
-        /* Mobile Touch & Cross-Platform Instant Tap */
-        a, button, input, textarea, select, [role="button"] {
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-        }
+  <style id="synkyn-smooth-scroll-styles">
+    /* Apple (macOS & iOS Safari) ProMotion, Retina & Safe Area Optimizations */
+    /* Mobile Touch & Cross-Platform Instant Tap */
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    [role="button"] {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        html, body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            overscroll-behavior-x: none;
-        }
+    html,
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overscroll-behavior-x: none;
+    }
 
-        /* Lenis buttery-smooth scroll engine */
-        html.lenis, html.lenis body {
-            height: auto;
-        }
-        .lenis.lenis-smooth {
-            scroll-behavior: auto !important;
-        }
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
-        /* Eliminate hover recalculations and repaints during active scroll for 60-120 FPS */
-        /* pointer-events on * removed to prevent scroll-stop jitter */
-        html.lenis-scrolling iframe,
-        html.lenis-scrolling .hero-video-bg,
-        .lenis.lenis-scrolling iframe,
-        .lenis.lenis-scrolling .hero-video-bg {
-            pointer-events: none !important;
-        }
-        html.lenis-scrolling input,
-        html.lenis-scrolling textarea,
-        html.lenis-scrolling select {
-            pointer-events: auto !important;
-        }
+    /* Lenis buttery-smooth scroll engine */
+    html.lenis,
+    html.lenis body {
+      height: auto;
+    }
 
-        /* Minimalist premium dark scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #080808;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.16);
-            border-radius: 999px;
-            border: 2px solid #080808;
-            transition: background 0.25s ease;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(242, 212, 0, 0.7);
-        }
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.16) #080808;
-        }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
 
-        /* Reading / Scroll progress indicator at top edge */
-        .scroll-progress-bar {
-            position: fixed;
-            top: 0;
-            top: env(safe-area-inset-top, 0px);
-            left: 0;
-            width: 100%;
-            height: 2.5px;
-            background: linear-gradient(90deg, #f2d400 0%, #ffb700 50%, #ffe45c 100%);
-            box-shadow: 0 0 10px rgba(242, 212, 0, 0.6), 0 0 20px rgba(242, 212, 0, 0.25);
-            z-index: 1000000;
-            pointer-events: none;
-            transform: scaleX(0);
-            transform-origin: left center;
-            will-change: transform;
-            transition: transform 0.05s linear;
-        }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
 
-        /* Floating back-to-top button */
-        .back-to-top-btn {
-            position: fixed;
-            bottom: max(32px, calc(env(safe-area-inset-bottom, 0px) + 20px));
-            right: max(32px, calc(env(safe-area-inset-right, 0px) + 20px));
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: rgba(14, 14, 14, 0.78);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ffd633;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 9000;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px) scale(0.85);
-            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s, background-color 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(242, 212, 0, 0.12);
-        }
-        .back-to-top-btn.is-visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-        .back-to-top-btn:hover {
-            background: rgba(26, 26, 26, 0.92);
-            border-color: rgba(242, 212, 0, 0.6);
-            color: #ffffff;
-            transform: translateY(-3px) scale(1.06);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(242, 212, 0, 0.35);
-        }
-        .back-to-top-btn:active {
-            transform: translateY(0) scale(0.96);
-        }
-        @media (max-width: 768px) {
-            .back-to-top-btn {
-                bottom: max(20px, calc(env(safe-area-inset-bottom, 0px) + 12px));
-                right: max(20px, calc(env(safe-area-inset-right, 0px) + 12px));
-                width: 42px;
-                height: 42px;
-            }
-        }
-    </style>
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+
+    /* Eliminate hover recalculations and repaints during active scroll for 60-120 FPS */
+    /* pointer-events on * removed to prevent scroll-stop jitter */
+    html.lenis-scrolling iframe,
+    html.lenis-scrolling .hero-video-bg,
+    .lenis.lenis-scrolling iframe,
+    .lenis.lenis-scrolling .hero-video-bg {
+      pointer-events: none !important;
+    }
+
+    html.lenis-scrolling input,
+    html.lenis-scrolling textarea,
+    html.lenis-scrolling select {
+      pointer-events: auto !important;
+    }
+
+    /* Minimalist premium dark scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #080808;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      border: 2px solid #080808;
+      transition: background 0.25s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(242, 212, 0, 0.7);
+    }
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.16) #080808;
+    }
+
+    /* Reading / Scroll progress indicator at top edge */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      top: env(safe-area-inset-top, 0px);
+      left: 0;
+      width: 100%;
+      height: 2.5px;
+      background: linear-gradient(90deg, #f2d400 0%, #ffb700 50%, #ffe45c 100%);
+      box-shadow: 0 0 10px rgba(242, 212, 0, 0.6), 0 0 20px rgba(242, 212, 0, 0.25);
+      z-index: 1000000;
+      pointer-events: none;
+      transform: scaleX(0);
+      transform-origin: left center;
+      will-change: transform;
+      transition: transform 0.05s linear;
+    }
+
+    /* Floating back-to-top button */
+    .back-to-top-btn {
+      position: fixed;
+      bottom: max(32px, calc(env(safe-area-inset-bottom, 0px) + 20px));
+      right: max(32px, calc(env(safe-area-inset-right, 0px) + 20px));
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(14, 14, 14, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffd633;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 9000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.85);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s, background-color 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(242, 212, 0, 0.12);
+    }
+
+    .back-to-top-btn.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .back-to-top-btn:hover {
+      background: rgba(26, 26, 26, 0.92);
+      border-color: rgba(242, 212, 0, 0.6);
+      color: #ffffff;
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(242, 212, 0, 0.35);
+    }
+
+    .back-to-top-btn:active {
+      transform: translateY(0) scale(0.96);
+    }
+
+    @media (max-width: 768px) {
+      .back-to-top-btn {
+        bottom: max(20px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+        right: max(20px, calc(env(safe-area-inset-right, 0px) + 12px));
+        width: 42px;
+        height: 42px;
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-background-3 dark:bg-helix-blue-dark-2">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLBKS7TM"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <!-- Global Smooth Scroll UX: Reading Progress Bar -->
-    <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
-    <!-- Back to Top Button -->
-    <button id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLBKS7TM" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- Global Smooth Scroll UX: Reading Progress Bar -->
+  <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
+  <!-- Back to Top Button -->
+  <button id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top">
     <svg class="back-to-top-icon" width="20" height="20" viewBox="0 0 52 52" fill="currentColor" aria-hidden="true">
-        <path d="M41.4,21c0.8-0.8,0.8-1.9,0-2.7l-15-14.7c-0.8-0.8-2-0.8-2.8,0L8.6,18.3c-0.8,0.8-0.8,1.9,0,2.7l2.8,2.7 c0.8,0.8,2,0.8,2.8,0l4.7-4.6c0.8-0.8,2.2-0.2,2.2,0.9v27c0,1,0.9,2,2,2h4c1.1,0,2-1.1,2-2V20c0-1.2,1.4-1.7,2.2-0.9l4.7,4.6 c0.8,0.8,2,0.8,2.8,0L41.4,21z"/>
+      <path
+        d="M41.4,21c0.8-0.8,0.8-1.9,0-2.7l-15-14.7c-0.8-0.8-2-0.8-2.8,0L8.6,18.3c-0.8,0.8-0.8,1.9,0,2.7l2.8,2.7 c0.8,0.8,2,0.8,2.8,0l4.7-4.6c0.8-0.8,2.2-0.2,2.2,0.9v27c0,1,0.9,2,2,2h4c1.1,0,2-1.1,2-2V20c0-1.2,1.4-1.7,2.2-0.9l4.7,4.6 c0.8,0.8,2,0.8,2.8,0L41.4,21z" />
     </svg>
-</button>
+  </button>
 
   <header>
     <div
@@ -818,7 +842,8 @@
             <h1
               class="text-accent pointer-events-auto w-fit max-w-full mx-auto max-md:text-[38px] max-md:leading-[1.1] pf-reveal"
               data-delay="0.2" data-ns-animate="" data-orion-obstacle="">
-              AI Film &amp; Creative Projects <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-helix-blue">Crafted
+              AI Film &amp; Creative Projects <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-helix-blue">Crafted
                 by Synkyn Studios</span>
             </h1>
             <p class="text-accent/60 pointer-events-auto w-fit text-base md:w-[700px] max-w-full mx-auto md:text-lg pf-reveal"
@@ -858,7 +883,8 @@
       aria-labelledby="modal-title">
       <div class="media-modal__card" id="modal-content-wrapper">
         <button id="close-modal" class="media-modal__close" aria-label="Close">
-          <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 5L5 15M5 5l10 10" />
           </svg>
         </button>
@@ -1063,15 +1089,13 @@
         right: -2px;
         bottom: -4px;
         pointer-events: none;
-        background: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.94) 0%,
-          rgba(0, 0, 0, 0.82) 16%,
-          rgba(0, 0, 0, 0.58) 32%,
-          rgba(0, 0, 0, 0.32) 48%,
-          rgba(0, 0, 0, 0.12) 64%,
-          rgba(0, 0, 0, 0) 80%
-        );
+        background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.94) 0%,
+            rgba(0, 0, 0, 0.82) 16%,
+            rgba(0, 0, 0, 0.58) 32%,
+            rgba(0, 0, 0, 0.32) 48%,
+            rgba(0, 0, 0, 0.12) 64%,
+            rgba(0, 0, 0, 0) 80%);
       }
 
       .bento-item__badge {
@@ -1930,7 +1954,7 @@
             category: 'Dragon Glimpse',
             tag: 'Youtube',
             ratio: '16:9',
-            description: 'Dragon Glimpse - Telugu | NTR | Anil Kapoor | Rukmini Vasanth | Ravi Basrur | Prashanth Neel',
+            description: '<strong>Dragon Glimpse – Telugu</strong><br><br><strong>Featuring:</strong> NTR, Anil Kapoor & Rukmini Vasanth<br><strong>Music:</strong> Ravi Basrur<br><strong>Directed by:</strong> Prashanth Neel',
             sources: [
               { type: 'youtube', src: 'https://youtu.be/FlOzIM7Yov4?si=pdGIj50dAFhKnGQ5' }
             ]
@@ -1940,7 +1964,7 @@
             title: 'NBK111',
             category: 'NBK111 Glimpse',
             tag: 'YouTube',
-            description: 'NBK 111 - Opening Shot',
+            description: '<strong>NBK 111 – Entry of an Era</strong><br><br><strong>Starring:</strong> Nandamuri Balakrishna<br><strong>Directed by:</strong> Gopichand Malineni<br><strong>Cinematography:</strong> Arvind S. Kashyap<br><strong>Music:</strong> S. Thaman<br><strong>Production:</strong> Vriddhi Cinemas',
             sources: [
               { type: 'youtube', src: 'https://youtu.be/3u_wE0ocFus?si=JHUwwCjkXAab_VFG' }
             ]
@@ -1951,7 +1975,7 @@
             category: 'Crayons',
             tag: 'Film',
             thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/For%20Album/Album%20Covers/hf_20260303_194843_2dc8f410-cfc2-417f-9dbd-b15e9bdd28c6.png?updatedAt=1784389455208',
-            description: 'Camel - Spec AI ad',
+            description: '<strong>Camel – Spec AI Film</strong><br><br><strong>Concept:</strong> Reimagining the world of Camel Crayons through AI-driven visual storytelling.',
             sources: [
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1208876567' }
             ]
@@ -1962,7 +1986,7 @@
             category: 'Ad Film',
             tag: 'Film',
             thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/For%20Album/Tata%20Cover%20for%20web.png?updatedAt=1783526676609',
-            description: 'Tata - Dal Product Window',
+            description: '<strong>Tata Sampann – Dal Product Window</strong><br><br><strong>Brand:</strong> Tata Sampann<br><strong>Crafted through:</strong> Product-focused visual storytelling<br><strong>Focus:</strong> Texture, richness and the everyday appeal of premium dals.',
             sources: [
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1211044048' },
               { type: 'image', src: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/For%20Album/pw%20dal%202.png?updatedAt=1783526325276' },
@@ -1975,7 +1999,7 @@
             category: 'Ad Film',
             tag: 'Film',
             thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/For%20Album/Album%20Covers/redbuss.png?updatedAt=1784389746357',
-            description: 'Redbus - Gen AI Cleanups',
+            description: '<strong>RedBus – GenAI Cleanups</strong><br><br><strong>Craft:</strong> Generative AI · VFX<br><strong>Focus:</strong> Seamless cleanups, frame refinement and photorealistic visual enhancement.',
             sources: [
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1208148385' },
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1208148389' },
@@ -1983,15 +2007,13 @@
               { type: 'vimeo', src: 'https://player.vimeo.com/video/1208148386' }
             ]
           },
-
-
           {
             id: 'work-skroman',
             title: 'skroman automation',
             category: 'Ad Film',
             tag: 'Insta',
             thumbnail: 'https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/skorman_web.png',
-            description: 'Your home should be as smart as your smartphone ✨<br><br>Imagine controlling your lights, security, curtains & appliances with just one tap or voice command.<br><br>Welcome to the future with Skroman Smart Home Automation.<br><br>🔥 Smart Lighting<br>🔐 Advanced Home Security<br>🎙 Voice & App Control<br>⚡ Energy Saving Automation<br>🏠 Luxury Smart Living Experience<br><br>Turn your ordinary home into an intelligent lifestyle.<br><br>Comfort. Security. Convenience. All automated.',
+            description: '<strong>Skroman Smart Home Automation</strong><br><br><strong>Concept:</strong> Intelligent living, reimagined.<br><strong>Focus:</strong> Smart lighting · Home security · Voice & App Control · Energy Automation<br><br><strong>Experience:</strong> A sleek lifestyle film showcasing the seamless intersection of technology, comfort and modern living.',
             sources: [
 
               { type: 'instagram', src: 'https://www.instagram.com/reel/DZCmDTOhcIK/' }
@@ -2604,7 +2626,8 @@
       <div class="main-container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="https://www.synkynstudios.com/images/logo.png" alt="Synkyn Studios Logo - AI Film Studio Bengaluru" class="footer-logo"
+            <img src="https://www.synkynstudios.com/images/logo.png"
+              alt="Synkyn Studios Logo - AI Film Studio Bengaluru" class="footer-logo"
               onerror="this.style.display='none'" />
             <p class="footer-brand-title">About the studio</p>
             <p class="footer-tagline">
@@ -2710,109 +2733,109 @@
   <script src="./assets/main.js" type="module"></script>
   <script src="./assets/fx.js?v=3"></script>
 
-  
-    <script>
-        (function initSmoothScroll() {
-            function startLenis() {
-                if (typeof Lenis === 'undefined') {
-                    setTimeout(startLenis, 30);
-                    return;
-                }
-                if (window.lenis) return;
 
-                const isMobile = window.innerWidth <= 768;
-                const lenis = new Lenis({
-                    lerp: 0.12,
-                    duration: 0.9,
-                    wheelMultiplier: 1.0,
-                    touchMultiplier: 1.0,
-                    smoothWheel: true,
-                    smoothTouch: false,
-                    orientation: 'vertical',
-                    gestureOrientation: 'vertical',
-                    infinite: false,
-                    prevent: (node) => node.classList?.contains('scroll-bar') || node.hasAttribute?.('data-lenis-prevent')
-                });
+  <script>
+    (function initSmoothScroll() {
+      function startLenis() {
+        if (typeof Lenis === 'undefined') {
+          setTimeout(startLenis, 30);
+          return;
+        }
+        if (window.lenis) return;
 
-                window.lenis = lenis;
+        const isMobile = window.innerWidth <= 768;
+        const lenis = new Lenis({
+          lerp: 0.12,
+          duration: 0.9,
+          wheelMultiplier: 1.0,
+          touchMultiplier: 1.0,
+          smoothWheel: true,
+          smoothTouch: false,
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          infinite: false,
+          prevent: (node) => node.classList?.contains('scroll-bar') || node.hasAttribute?.('data-lenis-prevent')
+        });
 
-                // Clean single-hook sync with GSAP ScrollTrigger or fallback RAF
-                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                    gsap.registerPlugin(ScrollTrigger);
-                    ScrollTrigger.config({ ignoreMobileResize: true });
-                    lenis.on('scroll', ScrollTrigger.update);
-                    gsap.ticker.add((time) => {
-                        lenis.raf(time * 1000);
-                    });
-                    gsap.ticker.lagSmoothing(500, 33);
-                } else {
-                    function raf(time) {
-                        lenis.raf(time);
-                        requestAnimationFrame(raf);
-                    }
-                    requestAnimationFrame(raf);
-                }
+        window.lenis = lenis;
 
-                // Top scroll progress bar & back to top button
-                const progressBar = document.getElementById('scroll-progress-bar');
-                const backToTopBtn = document.getElementById('back-to-top-btn');
+        // Clean single-hook sync with GSAP ScrollTrigger or fallback RAF
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+          ScrollTrigger.config({ ignoreMobileResize: true });
+          lenis.on('scroll', ScrollTrigger.update);
+          gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+          });
+          gsap.ticker.lagSmoothing(500, 33);
+        } else {
+          function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
+        }
 
-                lenis.on('scroll', (e) => {
-                    const scrollY = e.scroll || window.scrollY || document.documentElement.scrollTop || 0;
-                    const maxScroll = Math.max(1, (e.limit || (document.documentElement.scrollHeight - window.innerHeight)));
-                    const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
+        // Top scroll progress bar & back to top button
+        const progressBar = document.getElementById('scroll-progress-bar');
+        const backToTopBtn = document.getElementById('back-to-top-btn');
 
-                    if (progressBar) {
-                        progressBar.style.transform = `scaleX(${progress})`;
-                    }
+        lenis.on('scroll', (e) => {
+          const scrollY = e.scroll || window.scrollY || document.documentElement.scrollTop || 0;
+          const maxScroll = Math.max(1, (e.limit || (document.documentElement.scrollHeight - window.innerHeight)));
+          const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
 
-                    if (backToTopBtn) {
-                        if (scrollY > 450) {
-                            backToTopBtn.classList.add('is-visible');
-                        } else {
-                            backToTopBtn.classList.remove('is-visible');
-                        }
-                    }
-                });
+          if (progressBar) {
+            progressBar.style.transform = `scaleX(${progress})`;
+          }
 
-                if (backToTopBtn) {
-                    backToTopBtn.addEventListener('click', (ev) => {
-                        ev.preventDefault();
-                        lenis.scrollTo(0, {
-                            duration: 1.2,
-                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-                        });
-                    });
-                }
-
-                // Smooth scrolling for all internal hash anchor links
-                document.addEventListener('click', (ev) => {
-                    const a = ev.target.closest('a[href^="#"]');
-                    if (!a) return;
-                    const targetId = a.getAttribute('href');
-                    if (targetId && targetId.length > 1) {
-                        const targetEl = document.querySelector(targetId);
-                        if (targetEl) {
-                            ev.preventDefault();
-                            lenis.scrollTo(targetEl, {
-                                offset: -80,
-                                duration: 1.2,
-                                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-                            });
-                        }
-                    }
-                });
-            }
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', startLenis);
+          if (backToTopBtn) {
+            if (scrollY > 450) {
+              backToTopBtn.classList.add('is-visible');
             } else {
-                startLenis();
+              backToTopBtn.classList.remove('is-visible');
             }
-        })();
-    </script>
+          }
+        });
 
-<script defer="" src="./assets/navbar.js?v=7"></script>
+        if (backToTopBtn) {
+          backToTopBtn.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            lenis.scrollTo(0, {
+              duration: 1.2,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
+          });
+        }
+
+        // Smooth scrolling for all internal hash anchor links
+        document.addEventListener('click', (ev) => {
+          const a = ev.target.closest('a[href^="#"]');
+          if (!a) return;
+          const targetId = a.getAttribute('href');
+          if (targetId && targetId.length > 1) {
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+              ev.preventDefault();
+              lenis.scrollTo(targetEl, {
+                offset: -80,
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+              });
+            }
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startLenis);
+      } else {
+        startLenis();
+      }
+    })();
+  </script>
+
+  <script defer="" src="./assets/navbar.js?v=7"></script>
   <script defer="" src="./assets/footer.js?v=2"></script>
 </body>
 
