@@ -58,7 +58,11 @@ if (desktopNav) {
                             <div class="flex items-center gap-4">
                                 <div class="flex size-[44px] shrink-0 items-center justify-center rounded-[12px] bg-[#2a2a2a] transition-colors duration-300 group-hover:bg-[#333]">
                                     <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path class="stroke-white" d="M2.5 14.166l7.5 3.334 7.5-3.334M2.5 9.166l7.5 3.334 7.5-3.334M10 2.5L2.5 5.833l7.5 3.334 7.5-3.334L10 2.5z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <rect class="stroke-white" x="3" y="2.5" width="14" height="15" rx="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></rect>
+                                        <line class="stroke-white" x1="6.5" y1="2.5" x2="6.5" y2="17.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></line>
+                                        <circle class="stroke-white" cx="12" cy="7" r="1.3" stroke-width="1.3"></circle>
+                                        <path class="stroke-white" d="M9 13.5l2.5-2.5 2.5 2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"></path>
+                                        <path class="stroke-white" d="M13 12.5l1.5-1.5 2.2 2.2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"></path>
                                     </svg>
                                 </div>
                                 <div class="flex flex-col text-left">
@@ -134,7 +138,9 @@ if (desktopNav) {
                             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-background-3 dark:bg-background-7 opacity-0 group-hover:opacity-100 rounded-[10px] z-0 transition-all duration-400"></div>
                             <div class="border-stroke-1 relative z-10 mt-1 flex size-7 shrink-0 items-center justify-center rounded-lg border p-1 dark:border-white/10">
                                 <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                    <path class="stroke-secondary dark:stroke-accent" d="M3 18h14M5 18V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12M8 8h4M8 12h4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle class="stroke-secondary dark:stroke-accent" cx="10" cy="10" r="7.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle>
+                                    <line class="stroke-secondary dark:stroke-accent" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="10" x2="10" y1="9" y2="13.5"></line>
+                                    <circle class="fill-secondary dark:fill-accent" cx="10" cy="6.25" r="0.9"></circle>
                                 </svg>
                             </div>
                             <div class="relative z-10">
