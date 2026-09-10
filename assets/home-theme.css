@@ -105,4 +105,47 @@ body {
     color: #fff;
     overflow-x: clip !important;
     max-width: 100% !important;
+    /* macOS & iOS Retina Crisp Subpixel Font Smoothing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Eliminate iOS Safari tap delay & unwanted gray highlight flash */
+a, button, input, select, textarea, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Hardware-accelerated momentum touch scrolling on iOS */
+body, [data-lenis-prevent], .scroll-container {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Apple GPU (Metal) hardware layer promotion: prevents layer thrashing & scroll stutter on macOS/iOS */
+.hero-video-bg,
+.hero-video-bg iframe,
+.header-two,
+#desktop-navbar,
+.logo-carousel-track,
+.logo-carousel-item,
+.bento-item,
+.back-to-top-btn,
+.sidebar {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+}
+
+/* Dynamic Viewport height fallback for iOS Safari */
+@supports (height: 100dvh) {
+    .h-screen {
+        height: 100dvh !important;
+    }
+    .min-h-screen {
+        min-height: 100dvh !important;
+    }
 }

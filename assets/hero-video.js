@@ -169,6 +169,24 @@
     });
 
     /* ------------------------------------------------------------------
+       Viewport visibility (macOS & iOS Battery / GPU Throttling)
+       Pause video decoding & compositing when scrolled away from hero.
+       ------------------------------------------------------------------ */
+    if ('IntersectionObserver' in window) {
+        var heroObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var p = getPlayer();
+                if (!entry.isIntersecting) {
+                    if (p) p.pause().catch(function () { });
+                } else if (!document.hidden) {
+                    if (p) p.play().catch(function () { });
+                }
+            });
+        }, { threshold: 0.05 });
+        heroObserver.observe(wrap);
+    }
+
+    /* ------------------------------------------------------------------
        Poster fallback
        If the poster image is missing the CSS gradient underneath carries
        the hero, so there is still no black flash.

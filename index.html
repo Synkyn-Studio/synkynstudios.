@@ -541,7 +541,7 @@
     <link rel="preload" as="image" href="./images/hero-poster.webp" fetchpriority="high" />
     <link href="./assets/main.css?v=9" rel="stylesheet" />
     <link href="./assets/navbar.css?v=17" rel="stylesheet" />
-    <link href="./assets/home-theme.css?v=1" rel="stylesheet" />
+    <link href="./assets/home-theme.css?v=2" rel="stylesheet" />
     <link href="./assets/footer.css?v=12" rel="stylesheet" />
     <link href="./assets/home.css?v=16" rel="stylesheet" />
     <link href="./assets/logo-showcase.css?v=7" rel="stylesheet" />
@@ -2260,12 +2260,18 @@
                 }
                 if (window.lenis) return;
 
+                // Precision OS & Device detection for targeted Apple ecosystem tuning
+                const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
                 const lenis = new Lenis({
-                    lerp: 0.12,
-                    duration: 0.9,
-                    wheelMultiplier: 1.0,
+                    // On macOS Trackpads, snappier lerp prevents double-momentum rubber-banding; Windows/Android retain 0.12
+                    lerp: isMac ? 0.16 : 0.12,
+                    duration: isMac ? 0.7 : 0.9,
+                    wheelMultiplier: isMac ? 0.95 : 1.0,
                     touchMultiplier: 1.0,
-                    smoothWheel: true,
+                    // Native momentum touch on iPhone/iPad; buttery smooth wheel on desktop
+                    smoothWheel: !isIOS,
                     smoothTouch: false,
                     orientation: 'vertical',
                     gestureOrientation: 'vertical',
@@ -2283,7 +2289,8 @@
                     gsap.ticker.add((time) => {
                         lenis.raf(time * 1000);
                     });
-                    gsap.ticker.lagSmoothing(500, 33);
+                    // On Apple 120Hz ProMotion displays (Mac & iPhone Pro), prevent 30fps stutter
+                    gsap.ticker.lagSmoothing(500, (isMac || isIOS) ? 16 : 33);
                 } else {
                     function raf(time) {
                         lenis.raf(time);

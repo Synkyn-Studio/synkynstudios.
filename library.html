@@ -2743,13 +2743,15 @@
         }
         if (window.lenis) return;
 
-        const isMobile = window.innerWidth <= 768;
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
         const lenis = new Lenis({
-          lerp: 0.12,
-          duration: 0.9,
-          wheelMultiplier: 1.0,
+          lerp: isMac ? 0.16 : 0.12,
+          duration: isMac ? 0.7 : 0.9,
+          wheelMultiplier: isMac ? 0.95 : 1.0,
           touchMultiplier: 1.0,
-          smoothWheel: true,
+          smoothWheel: !isIOS,
           smoothTouch: false,
           orientation: 'vertical',
           gestureOrientation: 'vertical',
@@ -2767,7 +2769,7 @@
           gsap.ticker.add((time) => {
             lenis.raf(time * 1000);
           });
-          gsap.ticker.lagSmoothing(500, 33);
+          gsap.ticker.lagSmoothing(500, (isMac || isIOS) ? 16 : 33);
         } else {
           function raf(time) {
             lenis.raf(time);
