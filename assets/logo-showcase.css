@@ -5,7 +5,7 @@
 #research-sponsors {
     --logo-size: clamp(84px, 23vw, 104px);
     --logo-gap: clamp(12px, 3.2vw, 16px);
-    --logo-border: 0.8mm;
+    --logo-border: 1px;
     --logo-radius: 14px;
     position: relative;
     overflow: hidden;
@@ -18,7 +18,7 @@
     #research-sponsors {
         --logo-size: clamp(105px, 13vw, 125px);
         --logo-gap: clamp(15px, 1.8vw, 20px);
-        --logo-border: 1.0mm;
+        --logo-border: 1.2px;
         --logo-radius: 16px;
     }
 }
@@ -27,7 +27,7 @@
     #research-sponsors {
         --logo-size: clamp(125px, 9.5vw, 150px);
         --logo-gap: clamp(18px, 1.5vw, 24px);
-        --logo-border: 1.2mm;
+        --logo-border: 1.25px;
         --logo-radius: 18px;
     }
 }
@@ -215,7 +215,7 @@
     }
 }
 
-/* Full Square Image Cards with Refined Yellow Tint Border & Glassmorphism */
+/* Full Square Image Cards with Refined Subtle Yellow Tint Border & Glassmorphism */
 #research-sponsors .logo-carousel-item {
     flex-shrink: 0;
     display: flex;
@@ -226,7 +226,7 @@
     margin-right: var(--logo-gap);
     aspect-ratio: 1 / 1;
     padding: 0 !important;
-    border: var(--logo-border) solid rgba(242, 212, 0, 0.32);
+    border: var(--logo-border) solid rgba(242, 212, 0, 0.18);
     border-radius: var(--logo-radius);
     position: relative;
     overflow: hidden;
@@ -235,36 +235,36 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55),
-                0 0 10px rgba(242, 212, 0, 0.08),
-                inset 0 0 10px rgba(242, 212, 0, 0.04);
+                0 0 8px rgba(242, 212, 0, 0.05),
+                inset 0 0 8px rgba(242, 212, 0, 0.03);
     transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     transform: none !important;
 }
 
-/* Transparent Glassmorphism Yellow Tint Overlay on the image */
+/* Transparent Glassmorphism Subtle Gold Overlay on the image */
 #research-sponsors .logo-carousel-item::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(242, 212, 0, 0.05) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(242, 212, 0, 0.03) 100%);
+    background: linear-gradient(135deg, rgba(242, 212, 0, 0.03) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(242, 212, 0, 0.02) 100%);
     pointer-events: none;
     transition: background 0.45s ease;
     z-index: 1;
 }
 
-/* Card Hover State — Grounded (no vertical jump/lift), soft luminous yellow outline */
+/* Card Hover State — Grounded (no vertical jump/lift), soft delicate luminous yellow outline */
 #research-sponsors .logo-carousel-item:hover {
     transform: none !important;
-    border-color: rgba(242, 212, 0, 0.68);
-    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.7),
-                0 0 18px rgba(242, 212, 0, 0.24),
-                inset 0 0 14px rgba(242, 212, 0, 0.1);
+    border-color: rgba(242, 212, 0, 0.46);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7),
+                0 0 14px rgba(242, 212, 0, 0.14),
+                inset 0 0 10px rgba(242, 212, 0, 0.05);
 }
 
 #research-sponsors .logo-carousel-item:hover::after {
-    background: linear-gradient(135deg, rgba(242, 212, 0, 0.12) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(242, 212, 0, 0.07) 100%);
+    background: linear-gradient(135deg, rgba(242, 212, 0, 0.08) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(242, 212, 0, 0.05) 100%);
 }
 
 /* The Image Fills 100% Edge-to-Edge with Zero Inset / No Letterboxing */

@@ -637,11 +637,15 @@ html {
 
 .actually-area {
     position: relative;
-    height: auto !important;
-    min-height: clamp(480px, 70vh, 750px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
+    background-color: transparent !important;
+    overflow: hidden;
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     transition: opacity 0.85s cubic-bezier(.16, 1, .3, 1),
@@ -652,6 +656,22 @@ html {
 .actually-area.is-in-view {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+}
+
+.actually-area-inner {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.space-earth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
 }
 
 .actually-area::before,
@@ -2120,28 +2140,17 @@ html.fx-failsafe .hero-tagline {
    at once without either touching layout or paint.
    ========================================================================== */
 .space-earth-title {
-    /* Explicit list. Never `all` on an element another engine animates. */
     display: inline-block;
-    transition-property: transform !important;
-    transition-duration: 750ms !important;
-    transition-timing-function: cubic-bezier(.16, 1, .3, 1) !important;
+    text-align: center;
     transform-origin: center center;
-
-    /* GSAP writes background-position; keep transform on its own GPU compositor layer */
-    will-change: background-position, transform;
+    transition: none !important;
+    will-change: background-position, transform, opacity;
     transform: translate3d(0, 0, 0) scale(1);
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    /* drop-shadow on live text repaints the glyphs every frame. text-shadow
-       is far cheaper and visually equivalent at this radius. */
-    text-shadow: 0 0 15px rgba(242, 194, 0, .5);
+    text-shadow: 0 0 20px rgba(242, 194, 0, 0.45);
     filter: none !important;
-}
-
-.space-earth-container:hover .space-earth-title {
-    transform: translate3d(0, -6px, 0) scale(1.045);
 }
 
 .space-earth-glow {

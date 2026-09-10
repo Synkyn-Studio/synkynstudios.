@@ -549,8 +549,8 @@
     <link href="./assets/navbar.css?v=17" rel="stylesheet" />
     <link href="./assets/home-theme.css?v=1" rel="stylesheet" />
     <link href="./assets/footer.css?v=12" rel="stylesheet" />
-    <link href="./assets/home.css?v=14" rel="stylesheet" />
-    <link href="./assets/logo-showcase.css?v=5" rel="stylesheet" />
+    <link href="./assets/home.css?v=15" rel="stylesheet" />
+    <link href="./assets/logo-showcase.css?v=6" rel="stylesheet" />
 
     <meta name="google-site-verification" content="U6ECGq1OyJuADOEHcX9TC1W24aWH9jZQienHQgxDD1s" />
 
@@ -1917,12 +1917,6 @@
                                                 loading="lazy" decoding="async" />
                                         </figure>
                                         <figure class="logo-carousel-item" tabindex="0"
-                                            aria-label="Leo Burnett agency collaborator">
-                                            <img alt="Leo Burnett logo" class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png"
-                                                loading="lazy" decoding="async" />
-                                        </figure>
-                                        <figure class="logo-carousel-item" tabindex="0"
                                             aria-label="Ogilvy agency collaborator">
                                             <img alt="Ogilvy logo" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png"
@@ -2015,11 +2009,6 @@
                                         <figure class="logo-carousel-item" aria-hidden="true">
                                             <img alt="" class="logo-carousel-item-img"
                                                 src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png"
-                                                loading="lazy" decoding="async" />
-                                        </figure>
-                                        <figure class="logo-carousel-item" aria-hidden="true">
-                                            <img alt="" class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png"
                                                 loading="lazy" decoding="async" />
                                         </figure>
                                     </div>
@@ -2369,21 +2358,45 @@
         })();
 
         document.addEventListener("DOMContentLoaded", function () {
-            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
-                gsap.to("#space-earth-text", {
-                    backgroundPosition: "0% 0",
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: ".space-earth-container",
-                        start: "top 85%",
-                        end: "bottom 15%",
-                        scrub: 0.35,
-                        fastScrollEnd: true,
-                        invalidateOnRefresh: true
-                    }
-                });
-            }
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+            gsap.registerPlugin(ScrollTrigger);
+
+            const actuallySection = document.querySelector(".actually-area");
+            const spaceEarthText = document.getElementById("space-earth-text");
+
+            if (!actuallySection || !spaceEarthText) return;
+
+            actuallySection.classList.add("is-in-view");
+
+            const isMobile = window.innerWidth < 768;
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: actuallySection,
+                    pin: true,
+                    scrub: 0.8,
+                    start: "top top",
+                    end: "+=110%",
+                    anticipatePin: 1,
+                    fastScrollEnd: true,
+                    invalidateOnRefresh: true
+                }
+            });
+
+            // 1. Luminous gold gradient sweep across text
+            tl.to(spaceEarthText, {
+                backgroundPosition: "0% 0",
+                ease: "none",
+                duration: 0.45
+            });
+
+            // 2. Cinematic zoom out / scale through
+            tl.to(spaceEarthText, {
+                scale: isMobile ? 18 : 28,
+                opacity: 0,
+                ease: "power2.inOut",
+                duration: 0.55
+            }, "+=0.08");
         });
     </script>
 
