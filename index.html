@@ -19,23 +19,17 @@
     <script>
         (function () {
             var d = document.documentElement;
-            try {
-                var nav = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
-                var isReload = nav ? nav.type === 'reload' : (window.performance && performance.navigation && performance.navigation.type === 1);
-                var hasVisited = sessionStorage.getItem('synkyn_visited') === 'true';
-                var ref = document.referrer || '';
-                var isInternal = hasVisited || (ref && (ref.indexOf(location.host) !== -1 || ref.indexOf('.html') !== -1));
-                var reduce = window.matchMedia &&
-                    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // Always display the loading screen every time index.html is loaded
+            d.classList.add('show-loader');
+            d.classList.remove('hide-loader');
 
-                // When coming from any other page in this session (and not a manual page refresh), load instantly!
-                if ((isInternal && !isReload) || reduce) {
-                    d.classList.remove('show-loader');
-                    d.classList.add('hide-loader');
-                } else {
-                    sessionStorage.setItem('synkyn_visited', 'true');
+            // Handle browser Back/Forward cache (bfcache) restore
+            // When returning to index.html via Back/Forward buttons, force a fresh load to show the loader
+            window.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    window.location.reload();
                 }
-            } catch (e) { }
+            });
         })();
     </script>
     <style id="synkyn-loader-critical">
@@ -589,7 +583,7 @@
         </div>
     </div>
 
-    <script src="./assets/loader.js?v=7"></script>
+    <script src="./assets/loader.js?v=8"></script>
 
     <header>
         <div

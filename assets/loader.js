@@ -43,17 +43,16 @@
         } catch (e) { }
     }
 
-    // The head script did not opt in — internal navigation, repeat visit, or
-    // reduced motion. The CSS already has this at display:none.
-    if (!loader || !root.classList.contains('show-loader')) {
+    if (!loader) {
         kill();
         return;
     }
 
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        kill();
-        return;
-    }
+    // Ensure loader and root are in active loading state
+    root.classList.add('show-loader');
+    root.classList.remove('hide-loader');
+    if (loader.hidden) loader.hidden = false;
+    loader.classList.remove('is-hidden', 'open', 'is-complete');
 
     var pctEl = loader.querySelector('.loader-pct');
     var barEl = loader.querySelector('.loader-bar');
@@ -212,9 +211,11 @@
         // Target integer from progress
         var targetPct = Math.max(1, Math.min(100, Math.floor(v * 100)));
 
-        // Strict sequential increment: NEVER skip or jump numbers
-        if (targetPct > displayedPct) {
-            displayedPct += 1;
+        // Strict sequential increment: smooth count-up with responsive catch-up if needed
+        var delta = targetPct - displayedPct;
+        if (delta > 0) {
+            var step = delta > 10 ? Math.ceil(delta / 5) : 1;
+            displayedPct = Math.min(100, displayedPct + step);
         }
 
         var pctStr = (displayedPct < 10 ? '0' : '') + displayedPct + '%';
@@ -290,7 +291,7 @@
         setTimeout(function () {
             loader.classList.add('open');
             setTimeout(kill, 950);
-        }, 700);
+        }, 380);
     }
 
     requestAnimationFrame(frame);
@@ -299,6 +300,10 @@
     setTimeout(function () {
         if (!finished) {
             var stepInterval = setInterval(function () {
+                if (finished) {
+                    clearInterval(stepInterval);
+                    return;
+                }
                 if (displayedPct < 100) {
                     displayedPct += 1;
                     var pctStr = (displayedPct < 10 ? '0' : '') + displayedPct + '%';
