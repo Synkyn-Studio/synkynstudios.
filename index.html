@@ -97,30 +97,6 @@
         }
         .loader.open .loader-top { transform: translate3d(0, -100.5%, 0); }
         .loader.open .loader-bottom { transform: translate3d(0, 100.5%, 0); }
-        .loader-seam {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            margin-top: -0.5px;
-            z-index: 5;
-            background: linear-gradient(90deg, transparent 0%, rgba(242, 212, 0, .35) 18%, var(--loader-volt) 50%, rgba(242, 212, 0, .35) 82%, transparent 100%);
-            transform: scaleX(calc(var(--loader-progress) * 0.55));
-            transform-origin: 50% 50%;
-            opacity: calc(.25 + var(--loader-progress) * .75);
-            will-change: transform, opacity;
-            pointer-events: none;
-        }
-        .loader.is-complete .loader-seam {
-            transition: transform 320ms var(--loader-ease-out), opacity 320ms ease, box-shadow 320ms ease;
-            transform: scaleX(1);
-            box-shadow: 0 0 18px rgba(242, 212, 0, .55), 0 0 46px rgba(242, 212, 0, .28);
-        }
-        .loader.open .loader-seam {
-            transition: opacity 240ms ease 200ms;
-            opacity: 0;
-        }
         .loader-canvas {
             position: absolute;
             inset: 0;
@@ -222,7 +198,7 @@
             .loader-stack, .loader-stack>* { animation: none !important; }
             .loader-canvas { display: none; }
             .loader.open .loader-panel { transition-duration: 1ms; transition-delay: 0ms; }
-            .loader.open .loader-stack, .loader.open .loader-seam { transition-duration: 1ms; }
+            .loader.open .loader-stack { transition-duration: 1ms; }
         }
     </style>
     <script>
@@ -533,7 +509,6 @@
         <canvas class="loader-canvas" aria-hidden="true"></canvas>
         <div class="loader-panel loader-top"></div>
         <div class="loader-panel loader-bottom"></div>
-        <div class="loader-seam" aria-hidden="true"></div>
         <div class="loader-stack">
             <div class="loader-tag">AI-NATIVE PRODUCTION</div>
             <div class="loader-logo">

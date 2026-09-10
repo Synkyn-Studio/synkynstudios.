@@ -127,42 +127,6 @@ html.hide-loader .loader,
 }
 
 /* ==========================================================================
-   THE SEAM — the hinge the split opens from
-   Grows outward from the centre in step with real progress.
-   ========================================================================== */
-.loader-seam {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    margin-top: -0.5px;
-    z-index: 5;
-    background: linear-gradient(90deg,
-            transparent 0%,
-            rgba(242, 212, 0, .35) 18%,
-            var(--loader-volt) 50%,
-            rgba(242, 212, 0, .35) 82%,
-            transparent 100%);
-    transform: scaleX(calc(var(--loader-progress) * 0.55));
-    transform-origin: 50% 50%;
-    opacity: calc(.25 + var(--loader-progress) * .75);
-    will-change: transform, opacity;
-    pointer-events: none;
-}
-
-.loader.is-complete .loader-seam {
-    transition: transform 320ms var(--loader-ease-out), opacity 320ms ease, box-shadow 320ms ease;
-    transform: scaleX(1);
-    box-shadow: 0 0 18px rgba(242, 212, 0, .55), 0 0 46px rgba(242, 212, 0, .28);
-}
-
-.loader.open .loader-seam {
-    transition: opacity 240ms ease 200ms;
-    opacity: 0;
-}
-
-/* ==========================================================================
    PARTICLE CANVAS
    ========================================================================== */
 .loader-canvas {
@@ -314,8 +278,7 @@ html.hide-loader .loader,
         transition-delay: 0ms;
     }
 
-    .loader.open .loader-stack,
-    .loader.open .loader-seam {
+    .loader.open .loader-stack {
         transition-duration: 1ms;
     }
 }
