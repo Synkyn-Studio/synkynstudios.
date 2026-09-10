@@ -483,6 +483,7 @@
     <link href="./assets/home-theme.css?v=1" rel="stylesheet" />
     <link href="./assets/footer.css?v=12" rel="stylesheet" />
     <link href="./assets/home.css?v=14" rel="stylesheet" />
+    <link href="./assets/logo-showcase.css?v=5" rel="stylesheet" />
 
     <meta name="google-site-verification" content="U6ECGq1OyJuADOEHcX9TC1W24aWH9jZQienHQgxDD1s" />
 
@@ -1536,7 +1537,9 @@
                     }
                     const rect = journey.getBoundingClientRect();
                     const vh = window.innerHeight;
-                    const raw = (vh * 0.5 - rect.top) / rect.height;
+                    // Smooth, natural onset as journey enters the viewport
+                    const startThreshold = vh * 0.62;
+                    const raw = (startThreshold - rect.top) / (rect.height * 0.96);
                     target = Math.max(0, Math.min(1, raw));
                     if (!isTicking && isVisible) {
                         isTicking = true;
@@ -1551,7 +1554,7 @@
                     }
                     const diff = target - current;
                     const isMobile = isMobileDevice();
-                    const lerpSpeed = isMobile ? 0.30 : 0.25;
+                    const lerpSpeed = isMobile ? 0.35 : 0.38;
 
                     if (Math.abs(diff) > 0.0005) {
                         current += diff * lerpSpeed;
@@ -1600,178 +1603,216 @@
             })();
         </script>
 
-        <section class="py-10 sm:py-12 md:py-16 lg:py-22 xl:py-28" id="research-sponsors">
+        <section class="py-12 sm:py-16 md:py-20 lg:py-24" id="research-sponsors" aria-labelledby="showcase-heading">
             <div class="main-container w-full min-w-0 max-w-full">
-                <div
-                    class="mx-auto flex w-full min-w-0 max-w-full flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14">
-                    <div class="w-full min-w-0 max-w-full space-y-5 sm:space-y-6 md:space-y-8 lg:space-y-10">
-                        <p class="text-heading-5 text-secondary dark:text-accent px-1 text-center font-normal sm:text-balance"
-                            data-delay="0.6" data-ns-animate="">
-                            Brands
-                        </p>
-                        <div class="w-full min-w-0" data-delay="0.7" data-ns-animate="">
-                            <div class="logo-carousel-row logo-carousel-row--left mx-auto w-full min-w-0">
+                <!-- Section Header -->
+                <div class="showcase-header" data-delay="0.2" data-ns-animate="">
+                    <div class="showcase-badge">
+                        <span class="showcase-badge-dot" aria-hidden="true"></span>
+                        Trusted Collaborations
+                    </div>
+                    <h2 id="showcase-heading" class="showcase-title">
+                        Trusted by <span class="showcase-title-gold">Visionary Brands</span> &amp; Studios
+                    </h2>
+                    <p class="showcase-subtitle">
+                        Collaborating with forward-thinking enterprises, iconic brands, and creative powerhouses worldwide.
+                    </p>
+                </div>
+
+                <div class="mx-auto flex w-full min-w-0 max-w-full flex-col items-center gap-6 sm:gap-8 md:gap-10">
+                    <!-- Row 1: Brands -->
+                    <div class="w-full min-w-0">
+                        <div class="showcase-category-label" data-delay="0.3" data-ns-animate="">
+                            <span class="showcase-category-tag">Brands</span>
+                        </div>
+                        <div class="w-full min-w-0" data-delay="0.4" data-ns-animate="">
+                            <div class="logo-carousel-row logo-carousel-row--left mx-auto w-full min-w-0" role="region" aria-label="Partner Brands Carousel">
                                 <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--left"></div>
                                 <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--right"></div>
                                 <div class="logo-carousel-track-wrap">
                                     <div class="logo-carousel-track">
-                                        <figure class="logo-carousel-item">
-                                            <img alt="TATA brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png"
-                                                loading="lazy" decoding="async" />
+                                        <!-- Primary Set (12 items: 4x 3 brands) -->
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="TATA brand partner">
+                                            <img alt="TATA logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="RedBus brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="RedBus brand partner">
+                                            <img alt="RedBus logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="SKROMAN brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="SKROMAN brand partner">
+                                            <img alt="SKROMAN logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="TATA brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="TATA brand partner">
+                                            <img alt="TATA logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="RedBus brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="RedBus brand partner">
+                                            <img alt="RedBus logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="SKROMAN brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="SKROMAN brand partner">
+                                            <img alt="SKROMAN logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="TATA brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="TATA brand partner">
+                                            <img alt="TATA logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="RedBus brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="RedBus brand partner">
+                                            <img alt="RedBus logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="SKROMAN brand logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="SKROMAN brand partner">
+                                            <img alt="SKROMAN logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="TATA brand partner">
+                                            <img alt="TATA logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="RedBus brand partner">
+                                            <img alt="RedBus logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="SKROMAN brand partner">
+                                            <img alt="SKROMAN logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <!-- Seamless Duplicate Set (12 items) -->
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/8.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/3.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/7.png" loading="lazy" decoding="async" />
                                         </figure>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <p class="text-heading-5 text-secondary dark:text-accent px-1 text-center font-normal sm:text-balance"
-                            data-delay="0.6" data-ns-animate="">
-                            Agency &amp; Production House
-                        </p>
-                        <div class="w-full min-w-0" data-delay="0.7" data-ns-animate="">
-                            <div class="logo-carousel-row logo-carousel-row--right mx-auto w-full min-w-0">
+                    </div>
+
+                    <!-- Row 2: Agencies & Production Houses -->
+                    <div class="w-full min-w-0">
+                        <div class="showcase-category-label" data-delay="0.4" data-ns-animate="">
+                            <span class="showcase-category-tag">Agencies &amp; Production Houses</span>
+                        </div>
+                        <div class="w-full min-w-0" data-delay="0.5" data-ns-animate="">
+                            <div class="logo-carousel-row logo-carousel-row--right mx-auto w-full min-w-0" role="region" aria-label="Agency Partners Carousel">
                                 <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--left"></div>
                                 <div aria-hidden="true" class="logo-carousel-fade logo-carousel-fade--right"></div>
                                 <div class="logo-carousel-track-wrap">
                                     <div class="logo-carousel-track">
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Leo Burnett agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png"
-                                                loading="lazy" decoding="async" />
+                                        <!-- Primary Set (15 items: 3x 5 agencies) -->
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Leo Burnett agency collaborator">
+                                            <img alt="Leo Burnett logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Minikin agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Minikin agency collaborator">
+                                            <img alt="Minikin logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Mythri Movie Makers collaborator logo - Synkyn Studios"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Mythri Movie Makers collaborator">
+                                            <img alt="Mythri Movie Makers logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Ogilvy agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Ogilvy agency collaborator">
+                                            <img alt="Ogilvy logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Vriddhi agency collaborator logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Vriddhi agency collaborator">
+                                            <img alt="Vriddhi logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Leo Burnett agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Leo Burnett agency collaborator">
+                                            <img alt="Leo Burnett logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Minikin agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Minikin agency collaborator">
+                                            <img alt="Minikin logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Mythri Movie Makers collaborator logo - Synkyn Studios"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Mythri Movie Makers collaborator">
+                                            <img alt="Mythri Movie Makers logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Ogilvy agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Ogilvy agency collaborator">
+                                            <img alt="Ogilvy logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Vriddhi agency collaborator logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Vriddhi agency collaborator">
+                                            <img alt="Vriddhi logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Leo Burnett agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Leo Burnett agency collaborator">
+                                            <img alt="Leo Burnett logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Minikin agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Minikin agency collaborator">
+                                            <img alt="Minikin logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Mythri Movie Makers collaborator logo - Synkyn Studios"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Mythri Movie Makers collaborator">
+                                            <img alt="Mythri Movie Makers logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Ogilvy agency partner logo - Synkyn Studios collaborator"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Ogilvy agency collaborator">
+                                            <img alt="Ogilvy logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" loading="lazy" decoding="async" />
                                         </figure>
-                                        <figure class="logo-carousel-item">
-                                            <img alt="Vriddhi agency collaborator logo - Synkyn Studios partner"
-                                                class="logo-carousel-item-img"
-                                                src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png"
-                                                loading="lazy" decoding="async" />
+                                        <figure class="logo-carousel-item" tabindex="0" aria-label="Vriddhi agency collaborator">
+                                            <img alt="Vriddhi logo" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <!-- Seamless Duplicate Set (15 items) -->
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/6.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/5.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/2.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/4.png" loading="lazy" decoding="async" />
+                                        </figure>
+                                        <figure class="logo-carousel-item" aria-hidden="true">
+                                            <img alt="" class="logo-carousel-item-img" src="https://ik.imagekit.io/mkzeqs9lt/For-Website-Synkyn/Logos/1.png" loading="lazy" decoding="async" />
                                         </figure>
                                     </div>
                                 </div>
@@ -1781,6 +1822,75 @@
                 </div>
             </div>
         </section>
+
+        <!-- Silky Flywheel Inertia Deceleration on Hover -->
+        <script>
+            (function initShowcaseHoverInertia() {
+                function setupSmoothCarouselHover() {
+                    var rows = document.querySelectorAll("#research-sponsors .logo-carousel-row");
+                    if (!rows.length) return;
+
+                    rows.forEach(function (row) {
+                        var track = row.querySelector(".logo-carousel-track");
+                        if (!track) return;
+
+                        function getAnim() {
+                            if (typeof track.getAnimations === "function") {
+                                var anims = track.getAnimations();
+                                if (anims && anims.length) return anims[0];
+                            }
+                            return null;
+                        }
+
+                        var rafId = null;
+                        var currentRate = 1.0;
+                        var targetRate = 1.0;
+
+                        function tick() {
+                            var a = getAnim();
+                            if (!a) {
+                                rafId = null;
+                                return;
+                            }
+
+                            var diff = targetRate - currentRate;
+                            if (Math.abs(diff) > 0.003) {
+                                // Silky inertia deceleration curve (flywheel glide)
+                                currentRate += diff * (targetRate === 0 ? 0.065 : 0.055);
+                                try {
+                                    a.playbackRate = Math.max(0, Math.min(1, currentRate));
+                                } catch (err) {}
+                                rafId = requestAnimationFrame(tick);
+                            } else {
+                                currentRate = targetRate;
+                                try {
+                                    a.playbackRate = currentRate;
+                                } catch (err) {}
+                                rafId = null;
+                            }
+                        }
+
+                        function setTarget(rate) {
+                            targetRate = rate;
+                            if (!rafId) {
+                                rafId = requestAnimationFrame(tick);
+                            }
+                        }
+
+                        row.addEventListener("mouseenter", function () { setTarget(0); });
+                        row.addEventListener("mouseleave", function () { setTarget(1); });
+                        row.addEventListener("touchstart", function () { setTarget(0); }, { passive: true });
+                        row.addEventListener("touchend", function () { setTarget(1); }, { passive: true });
+                    });
+                }
+
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", setupSmoothCarouselHover);
+                } else {
+                    setupSmoothCarouselHover();
+                }
+            })();
+        </script>
 
 
         <!-- ===================== FINAL CALL TO ACTION ===================== -->
