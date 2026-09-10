@@ -856,7 +856,7 @@ html {
     display: grid;
     place-content: center;
     text-align: center;
-    padding: clamp(70px, 12vh, 130px) 24px clamp(40px, 6vh, 60px);
+    padding: clamp(140px, 20vh, 220px) 24px clamp(40px, 6vh, 60px);
     background: transparent;
 }
 

@@ -549,7 +549,7 @@
     <link href="./assets/navbar.css?v=17" rel="stylesheet" />
     <link href="./assets/home-theme.css?v=1" rel="stylesheet" />
     <link href="./assets/footer.css?v=12" rel="stylesheet" />
-    <link href="./assets/home.css?v=15" rel="stylesheet" />
+    <link href="./assets/home.css?v=16" rel="stylesheet" />
     <link href="./assets/logo-showcase.css?v=6" rel="stylesheet" />
 
     <meta name="google-site-verification" content="U6ECGq1OyJuADOEHcX9TC1W24aWH9jZQienHQgxDD1s" />
@@ -2255,7 +2255,7 @@
     <script defer="" src="./vendor/motionpathplugin.min.js"></script>
     <script defer="" src="./vendor/lenis.min.js"></script>
     <script defer="" src="./vendor/springer.min.js"></script>
-    <script src="./assets/main.js" type="module"></script>
+    <script src="./assets/main.js?v=2" type="module"></script>
     <script src="./assets/fx.js?v=3"></script>
     <script>
         (function initSmoothScroll() {
@@ -2374,9 +2374,9 @@
                 scrollTrigger: {
                     trigger: actuallySection,
                     pin: true,
-                    scrub: 0.8,
+                    scrub: 0.6,
                     start: "top top",
-                    end: "+=110%",
+                    end: "+=170%",
                     anticipatePin: 1,
                     fastScrollEnd: true,
                     invalidateOnRefresh: true
@@ -2387,16 +2387,28 @@
             tl.to(spaceEarthText, {
                 backgroundPosition: "0% 0",
                 ease: "none",
-                duration: 0.45
+                duration: 0.35
             });
 
-            // 2. Cinematic zoom out / scale through
+            // 2. Cinematic zoom out / scale through & complete fade out
             tl.to(spaceEarthText, {
                 scale: isMobile ? 18 : 28,
                 opacity: 0,
                 ease: "power2.inOut",
-                duration: 0.55
-            }, "+=0.08");
+                duration: 0.40
+            }, "+=0.05");
+
+            // Ensure complete invisibility once zoomed
+            tl.set(spaceEarthText, {
+                visibility: "hidden"
+            });
+
+            // 3. Generous empty dark-space hold buffer
+            // Keeps Section 2 pinned in clean dark cosmic space so Section 3 arrives late,
+            // only after Section 2 has completely zoomed away and vanished
+            tl.to({}, {
+                duration: 0.35
+            });
         });
     </script>
 
